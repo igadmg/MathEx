@@ -7,7 +7,9 @@ namespace MathEx
 {
 	public class AaBb2
 	{
-		public static readonly AaBb2 empty = new AaBb2(VectorEx.Empty2, VectorEx.Empty2);
+		public static readonly AaBb2 empty = new AaBb2(VectorEx.empty2, VectorEx.empty2);
+		public static readonly AaBb2 zero = new AaBb2(Vector2.zero, Vector2.zero);
+		public static readonly AaBb2 one = new AaBb2(Vector2.zero, Vector2.one);
 
 		public Vector2 a;
 		public Vector2 b;
