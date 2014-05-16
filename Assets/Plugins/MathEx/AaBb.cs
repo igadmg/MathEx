@@ -35,6 +35,14 @@ namespace MathEx
 			return new AaBb2(min, max);
 		}
 
+		public Vector2[] ToArray()
+		{
+			return new Vector2[4] {
+				a, new Vector2(a.x, b.y),
+				b, new Vector2(b.x, a.y)
+			};
+		}
+
 		public override string ToString()
 		{
 			return string.Format("({0}, {1})", a, b);
