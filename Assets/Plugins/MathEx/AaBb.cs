@@ -47,6 +47,11 @@ namespace MathEx
 		{
 			return string.Format("({0}, {1})", a, b);
 		}
+
+		public string ToString(string f)
+		{
+			return string.Format("({0}, {1})", a.ToString(f), b.ToString(f));
+		}
 	}
 
 	public class AaBb3
