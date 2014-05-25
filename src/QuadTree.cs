@@ -5,22 +5,22 @@ namespace MathEx
 {
 	public class QuadTree
 	{
-		Vector2 center;
-		Vector2 size;
+		vec2 center;
+		vec2 size;
 		QuadTreeIterator root = null;
 
-		public QuadTreeIterator put(Vector2 i, object o)
+		public QuadTreeIterator put(vec2 i, object o)
 		{
 			if (root == null) {
 				center = i;
-				size = new Vector2(128, 128);
+				size = new vec2(128, 128);
 				root = new QuadTreeIterator(new QuadTreeNode(null), center, size);
 			}
 
 			return root.prepare(i).put(o);
 		}
 
-		public object get(Vector2 i)
+		public object get(vec2 i)
 		{
 			return root.get(i);
 		}
@@ -28,11 +28,11 @@ namespace MathEx
 
 	public class QuadTreeNode
 	{
-		static Vector2[] tr = new Vector2[4] {
-			new Vector2(-0.25f, -0.25f),
-			new Vector2(-0.25f,  0.25f),
-			new Vector2( 0.25f,  0.25f),
-			new Vector2( 0.25f, -0.25f),
+		static vec2[] tr = new vec2[4] {
+			new vec2(-0.25f, -0.25f),
+			new vec2(-0.25f,  0.25f),
+			new vec2( 0.25f,  0.25f),
+			new vec2( 0.25f, -0.25f),
 		};
 
 		QuadTreeNode p;
@@ -44,7 +44,7 @@ namespace MathEx
 			p = parent;
 		}
 
-		public object search(Vector2 i, int depth)
+		public object search(vec2 i, int depth)
 		{
 			if (depth == 0)
 				return o;
@@ -60,7 +60,7 @@ namespace MathEx
 			return null;
 		}
 
-		public QuadTreeNode allocate(Vector2 i, int depth)
+		public QuadTreeNode allocate(vec2 i, int depth)
 		{
 			if (depth == 0) {
 				return this;
@@ -79,31 +79,31 @@ namespace MathEx
 	public class QuadTreeIterator
 	{
 		QuadTreeNode n;
-		Vector2 c;
-		Vector2 d;
+		vec2 c;
+		vec2 d;
 
 		public QuadTreeNode node { get { return n; } }
 
-		public QuadTreeIterator(QuadTreeNode node, Vector2 center, Vector2 dimensions)
+		public QuadTreeIterator(QuadTreeNode node, vec2 center, vec2 dimensions)
 		{
 			n = node;
 			c = center;
 			d = dimensions;
 		}
 
-		public QuadTreeIterator(QuadTreeIterator node, Vector2 center, Vector2 dimensions)
+		public QuadTreeIterator(QuadTreeIterator node, vec2 center, vec2 dimensions)
 		{
 			n = node.node;
 			c = center;
 			d = dimensions;
 		}
 
-		Vector2 normalize(Vector2 i)
+		vec2 normalize(vec2 i)
 		{
-			return (i - c).Div(d).Clamp(-Vector2.one, Vector2.one);
+			return (i - c).Div(d).Clamp(-vec2.one, vec2.one);
 		}
 
-		public QuadTreeIterator prepare(Vector2 i)
+		public QuadTreeIterator prepare(vec2 i)
 		{
 			n.allocate(normalize(i), 2);
 
@@ -112,7 +112,7 @@ namespace MathEx
 			return this;
 		}
 
-		public object get(Vector2 i)
+		public object get(vec2 i)
 		{
 			return node.search(normalize(i), -1);
 		}

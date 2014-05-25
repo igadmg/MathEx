@@ -3,18 +3,18 @@ using System.Collections.Generic;
 
 namespace MathEx
 {
-	public class AaBb2
+	public class aabb2
 	{
-		public static readonly AaBb2 empty = new AaBb2(Vector2.empty, Vector2.empty);
-		public static readonly AaBb2 zero = new AaBb2(Vector2.zero, Vector2.zero);
-		public static readonly AaBb2 one = new AaBb2(Vector2.zero, Vector2.one);
+		public static readonly aabb2 empty = new aabb2(vec2.empty, vec2.empty);
+		public static readonly aabb2 zero = new aabb2(vec2.zero, vec2.zero);
+		public static readonly aabb2 one = new aabb2(vec2.zero, vec2.one);
 
-		public Vector2 a;
-		public Vector2 b;
+		public vec2 a;
+		public vec2 b;
 
-		public Vector2 size { get { return b - a; } }
+		public vec2 size { get { return b - a; } }
 		
-		public AaBb2(Vector2 a, Vector2 b)
+		public aabb2(vec2 a, vec2 b)
 		{
 			this.a = a;
 			this.b = b;
@@ -22,22 +22,22 @@ namespace MathEx
 
 		public bool IsEmpty { get { return a.IsEmpty || b.IsEmpty; } }
 
-		public AaBb2 Extend(Vector2 p)
+		public aabb2 Extend(vec2 p)
 		{
 			if (IsEmpty)
-				return new AaBb2(p, p);
+				return new aabb2(p, p);
 
-			var min = Vector2.Min(a, p);
-			var max = Vector2.Max(b, p);
+			var min = vec2.Min(a, p);
+			var max = vec2.Max(b, p);
 
-			return new AaBb2(min, max);
+			return new aabb2(min, max);
 		}
 
-		public Vector2[] ToArray()
+		public vec2[] ToArray()
 		{
-			return new Vector2[4] {
-				a, new Vector2(a.x, b.y),
-				b, new Vector2(b.x, a.y)
+			return new vec2[4] {
+				a, new vec2(a.x, b.y),
+				b, new vec2(b.x, a.y)
 			};
 		}
 
@@ -54,7 +54,7 @@ namespace MathEx
 
 	public class AaBb3
 	{
-		public Vector3 a;
-		public Vector3 b;
+		public vec3 a;
+		public vec3 b;
 	}
 }

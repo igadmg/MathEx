@@ -5,25 +5,25 @@ namespace MathEx
 {
 	public class Bezier
 	{
-		Vector3[] P;
+		vec3[] P;
 		
 		
 		public Bezier()
 		{
-			P = new Vector3[] {
-				Vector3.zero, new Vector3(0, 0, 1), new Vector3(1, 0, 1), new Vector3(1, 0, 0)
+			P = new vec3[] {
+				vec3.zero, new vec3(0, 0, 1), new vec3(1, 0, 1), new vec3(1, 0, 0)
 			};
 		}
 
-		public Bezier(ICollection<Vector3> p)
+		public Bezier(ICollection<vec3> p)
 		{
 			System.Diagnostics.Debug.Assert(p.Count == 4);
 
-			P = new Vector3[p.Count];
+			P = new vec3[p.Count];
 			p.CopyTo(P, 0);
 		}
 
-		public Vector3 Evaluate(float t)
+		public vec3 Evaluate(float t)
 		{
 			float t1 = 1 - t;
 			return P[0] * t1 * t1 * t1

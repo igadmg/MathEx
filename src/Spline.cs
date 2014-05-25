@@ -5,18 +5,18 @@ namespace MathEx
 {
 	public class Spline
 	{
-		Vector3[] P;
+		vec3[] P;
 		float[] T;
 		Tuple<float, float>[] Q;
 
 
-		public Spline(ICollection<Vector3> p)
+		public Spline(ICollection<vec3> p)
 		{
 			int i = 0;
 			
 			T = new float[p.Count];
 			Q = new Tuple<float, float>[p.Count - 1];
-			P = new Vector3[p.Count];
+			P = new vec3[p.Count];
 			p.CopyTo(P, 0);
 
 
@@ -69,7 +69,7 @@ namespace MathEx
 			}
 		}
 
-		public Vector3 Evaluate(float t)
+		public vec3 Evaluate(float t)
 		{
 			if (t <= 0) return P[0];
 			if (t >= 1) return P[1];
@@ -84,11 +84,11 @@ namespace MathEx
 					float x = (P[i + 1].x - P[i].x) * t0 + P[i].x;
 					float y = t1 * P[i].y + t0 * P[i+1].y + t0 * t1 * (ab.Item1 * t1 + ab.Item2 * t0);
 
-					return new Vector3(x, y, 0);
+					return new vec3(x, y, 0);
 				}
 			}
 
-			return Vector3.zero;
+			return vec3.zero;
 		}
 
 

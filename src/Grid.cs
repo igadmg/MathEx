@@ -9,12 +9,12 @@ namespace MathEx
 	{
 		List<T>[,] cells_ = null;
 
-		public Grid(Vector2i size)
+		public Grid(vec2i size)
 		{
 			cells_ = new List<T>[size.x, size.y];
 		}
 
-		public List<T> this[Vector2i p]
+		public List<T> this[vec2i p]
 		{
 			get { return cells_[p.x, p.y]; }
 		}

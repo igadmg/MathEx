@@ -5,9 +5,9 @@ namespace MathEx
 {
 	public class Polygon2
 	{
-		public Vector2[] p;
+		public vec2[] p;
 
-		public Polygon2(params Vector2[] ps)
+		public Polygon2(params vec2[] ps)
 		{
 			p = ps;
 		}
@@ -16,11 +16,11 @@ namespace MathEx
 	public class Triangle2 : Polygon2
 	{
 		public Triangle2()
-			: base(Vector2.zero, Vector2.zero, Vector2.zero)
+			: base(vec2.zero, vec2.zero, vec2.zero)
 		{
 		}
 
-		public Triangle2(Vector2 a, Vector2 b, Vector2 c)
+		public Triangle2(vec2 a, vec2 b, vec2 c)
 			: base(a, b, c)
 		{
 		}
@@ -28,9 +28,9 @@ namespace MathEx
 
 	public class Polygon3
 	{
-		public Vector3[] p;
+		public vec3[] p;
 
-		public Polygon3(params Vector3[] ps)
+		public Polygon3(params vec3[] ps)
 		{
 			p = ps;
 		}
@@ -39,11 +39,11 @@ namespace MathEx
 	public class Triangle3 : Polygon3
 	{
 		public Triangle3()
-			: base(Vector3.zero, Vector3.zero, Vector3.zero)
+			: base(vec3.zero, vec3.zero, vec3.zero)
 		{
 		}
 
-		public Triangle3(Vector3 a, Vector3 b, Vector3 c)
+		public Triangle3(vec3 a, vec3 b, vec3 c)
 			: base(a, b, c)
 		{
 		}

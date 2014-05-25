@@ -13,7 +13,7 @@ namespace MathEx
 
 	public static class IntersectEx
 	{
-		public static IntersectResult Intersect(this AaBb2 aabb, Vector2 v)
+		public static IntersectResult Intersect(this aabb2 aabb, vec2 v)
 		{
 			if (v.x < aabb.a.x && v.x > aabb.b.x)
 				return IntersectResult.None;
@@ -25,7 +25,7 @@ namespace MathEx
 			return IntersectResult.Contain1;
 		}
 
-		public static IntersectResult Intersect(this AaBb2 aabb, Triangle2 tri)
+		public static IntersectResult Intersect(this aabb2 aabb, Triangle2 tri)
 		{
 			int siflags = 0x000000;
 			for (int i = 0; i < tri.p.Length; i++) {
