@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngineEx;
 
 namespace MathEx
 {
@@ -54,7 +52,7 @@ namespace MathEx
 			if (child == null)
 				return o;
 
-			var iq = i.quad();
+			var iq = i.quad;
 			var c = child[iq];
 			if (c != null)
 				return c.search((i + tr[iq]) * 2.0f, depth - 1);
@@ -71,7 +69,7 @@ namespace MathEx
 			if (child == null)
 				child = new QuadTreeNode[4] { null, null, null, null };
 
-			var iq = i.quad();
+			var iq = i.quad;
 			child[iq] = child[iq] ?? new QuadTreeNode(this);
 
 			return child[iq].allocate((i + tr[iq]) * 2.0f, depth - 1);

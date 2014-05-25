@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
-using UnityEngineEx;
 
 namespace MathEx
 {
 	public class AaBb2
 	{
-		public static readonly AaBb2 empty = new AaBb2(VectorEx.empty2, VectorEx.empty2);
+		public static readonly AaBb2 empty = new AaBb2(Vector2.empty, Vector2.empty);
 		public static readonly AaBb2 zero = new AaBb2(Vector2.zero, Vector2.zero);
 		public static readonly AaBb2 one = new AaBb2(Vector2.zero, Vector2.one);
 
@@ -22,11 +20,11 @@ namespace MathEx
 			this.b = b;
 		}
 
-		public bool IsEmpty() { return a.IsEmpty() || b.IsEmpty(); }
+		public bool IsEmpty { get { return a.IsEmpty || b.IsEmpty; } }
 
 		public AaBb2 Extend(Vector2 p)
 		{
-			if (IsEmpty())
+			if (IsEmpty)
 				return new AaBb2(p, p);
 
 			var min = Vector2.Min(a, p);
