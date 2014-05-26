@@ -151,55 +151,28 @@ namespace MathEx
 			return new Vector3(l.x - r.x, l.y - r.y, l.z);
 		}
 
-		public static Vector2 Mul(this Vector2 l, Vector2 r)
-		{
-			return new Vector2(l.x * r.x, l.y * r.y);
-		}
 
-		public static Vector3 Mul(this Vector3 l, Vector2 r)
-		{
-			return new Vector3(l.x * r.x, l.y * r.y, l.z);
-		}
+		public static Vector2 Mul(this Vector2 l, vec2i r) { return new Vector2(l.x * r.x, l.y * r.y); }
+		public static Vector2 Mul(this Vector2 l, vec2 r) { return new Vector2(l.x * r.x, l.y * r.y); }
+		public static Vector3 Mul(this Vector3 l, vec2 r) { return new Vector3(l.x * r.x, l.y * r.y, l.z); }
+		public static Vector3 Mul(this Vector3 l, vec3 r) { return new Vector3(l.x * r.x, l.y * r.y, l.z * r.z); }
 
-		public static Vector3 Mul(this Vector3 l, Vector3 r)
-		{
-			return new Vector3(l.x * r.x, l.y * r.y, l.z * r.z);
-		}
+		public static Vector2 Mul(this Vector2 l, Vector2 r) { return new Vector2(l.x * r.x, l.y * r.y); }
+		public static Vector3 Mul(this Vector3 l, Vector2 r) { return new Vector3(l.x * r.x, l.y * r.y, l.z); }
+		public static Vector3 Mul(this Vector3 l, Vector3 r) { return new Vector3(l.x * r.x, l.y * r.y, l.z * r.z); }
 
-		public static Vector2 Div(this Vector2 l, Vector2 r)
-		{
-			return new Vector2(l.x / r.x, l.y / r.y);
-		}
+		public static Vector2 Div(this Vector2 l, vec2i r) { return new Vector2(l.x / r.x, l.y / r.y); }
+		public static Vector2 Div(this Vector2 l, vec2 r) { return new Vector2(l.x / r.x, l.y / r.y); }
+		public static Vector3 Div(this Vector3 l, vec2 r) { return new Vector3(l.x / r.x, l.y / r.y, l.z); }
+		public static Vector3 Div(this Vector3 l, vec3 r) { return new Vector3(l.x / r.x, l.y / r.y, l.z / r.z); }
 
-		public static Vector2 Div(this Vector2 l, vec2i r)
-		{
-			return new Vector2(l.x / r.x, l.y / r.y);
-		}
+		public static Vector2 Div(this Vector2 l, Vector2 r) { return new Vector2(l.x / r.x, l.y / r.y); }
+		public static Vector3 Div(this Vector3 l, Vector2 r) { return new Vector3(l.x / r.x, l.y / r.y, l.z); }
+		public static Vector3 Div(this Vector3 l, Vector3 r) { return new Vector3(l.x / r.x, l.y / r.y, l.z / r.z); }
 
-		public static Vector2 Div(this Vector2 l, float x, float y)
-		{
-			return new Vector2(l.x / x, l.y / y);
-		}
-
-		public static Vector3 Div(this Vector3 l, Vector2 r)
-		{
-			return new Vector3(l.x / r.x, l.y / r.y, l.z);
-		}
-
-		public static Vector3 Div(this Vector3 l, float x, float y)
-		{
-			return new Vector3(l.x / x, l.y / y, l.z);
-		}
-
-		public static Vector3 Div(this Vector3 l, Vector3 r)
-		{
-			return new Vector3(l.x / r.x, l.y / r.y, l.z / r.z);
-		}
-
-		public static Vector3 Div(this Vector3 l, float x, float y, float z)
-		{
-			return new Vector3(l.x / x, l.y / y, l.z / z);
-		}
+		public static Vector2 Div(this Vector2 l, float x, float y) { return new Vector2(l.x / x, l.y / y); }
+		public static Vector3 Div(this Vector3 l, float x, float y) { return new Vector3(l.x / x, l.y / y, l.z); }
+		public static Vector3 Div(this Vector3 l, float x, float y, float z) { return new Vector3(l.x / x, l.y / y, l.z / z); }
 
 		#region Boolean operation
 
@@ -437,10 +410,10 @@ namespace MathEx
 
 		public static IEnumerable<Vector3> Bezier(this ICollection<Vector3> ps, int steps)
 		{
-			Bezier b = new Bezier(new List<Vector3>(ps).ConvertAll(x => Convert.ToVec3(x)));
+			Bezier b = new Bezier(new List<Vector3>(ps).ConvertAll(x => x.ToVec3()));
 
 			for (int i = 0; i < steps; i++) {
-				yield return Convert.ToVector3(b.Evaluate((float)(i) / (steps - 1)));
+				yield return (b.Evaluate((float)(i) / (steps - 1))).ToVector3();
 			}
 
 			yield break;

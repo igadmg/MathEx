@@ -22,6 +22,9 @@ namespace MathEx
 
 		public bool IsEmpty { get { return float.IsNaN(x) || float.IsNaN(y); } }
 
+		public float length { get { return MathEx.Sqrt(magnitude); } }
+		public float magnitude { get { return x*x + y*y ; } }
+		public vec2 normalized { get { return this / length; } }
 
 		public int quad
 		{
@@ -43,10 +46,15 @@ namespace MathEx
 		// Operators
 		//
 
-		public static vec2 operator *(vec2 a, float d)
-		{
-			return new vec2(a.x * d, a.y * d);
-		}
+		public static vec2 operator *(vec2 a, int d) { return new vec2(a.x * d, a.y * d); }
+		public static vec2 operator /(vec2 a, int d) { return new vec2(a.x / d, a.y / d); }
+		public static vec2 operator *(vec2 a, float d) { return new vec2(a.x * d, a.y * d); }
+		public static vec2 operator /(vec2 a, float d) { return new vec2(a.x / d, a.y / d); }
+		public static vec2 operator *(int d, vec2 a) { return new vec2(a.x * d, a.y * d); }
+		public static vec2 operator /(int d, vec2 a) { return new vec2(a.x / d, a.y / d); }
+		public static vec2 operator *(float d, vec2 a) { return new vec2(a.x * d, a.y * d); }
+		public static vec2 operator /(float d, vec2 a) { return new vec2(a.x / d, a.y / d); }
+
 
 		public static vec2 operator -(vec2 a) { return new vec2(-a.x, -a.y); }
 		public static vec2 operator +(vec2 a, vec2 b) { return new vec2(a.x + b.x, a.y + b.y); }
@@ -69,28 +77,8 @@ namespace MathEx
 			return new vec2(Math.Max(a.x, b.x), Math.Max(a.y, b.y));
 		}
 
-		internal object ToString(string f)
-		{
-			return string.Format("({0},{1})", x.ToString(f), y.ToString(f));
-		}
-
-		public int Clamp(int f)
-		{
-			return MathEx.Clamp(f, (int)x, (int)y);
-		}
-
-		public float Clamp(float f)
-		{
-			return MathEx.Clamp(f, x, y);
-		}
-
-		public vec2 Clamp(vec2 min, vec2 max)
-		{
-			return MathEx.Clamp(this, min, max);
-		}
-
-		public vec2 Mul(vec2 r) { return new vec2(x * r.x, y * r.y); }
-		public vec2 Div(vec2 r) { return new vec2(x / r.x, y / r.y); }
+		public override string ToString() { return string.Format("({0},{1})", x, y); }
+		public string ToString(string f) { return string.Format("({0},{1})", x.ToString(f), y.ToString(f)); }
 	}
 }
 

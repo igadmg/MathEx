@@ -22,6 +22,14 @@ namespace MathEx
 			return false;
 		}
 
+		public static bool Intersect(this Plane plane, vec3 a, vec3 b, out vec3 r, out float d)
+		{
+			Vector3 or = new Vector3();
+			var pr = plane.Intersect(a.ToVector3(), b.ToVector3(), out or, out d);
+			r = or.ToVec3();
+			return pr;
+		}
+
 		public static Vector3 Project(this Plane plane, Vector3 p)
 		{
 			if (plane.normal.z == 1)

@@ -40,10 +40,9 @@ namespace MathEx
 		// Operators
 		//
 
-		public static vec2i operator *(vec2i a, int d)
-		{
-			return new vec2i(a.x * d, a.y * d);
-		}
+		public static vec2i operator *(vec2i a, int d) { return new vec2i(a.x * d, a.y * d); }
+		public static vec2i operator /(vec2i a, int d) { return new vec2i(a.x / d, a.y / d); }
+
 
 		public vec2i(int x, int y)
 		{
@@ -51,24 +50,8 @@ namespace MathEx
 			this.y = y;
 		}
 
-
-		public int Clamp(int f)
-		{
-			return MathEx.Clamp(f, x, y);
-		}
-
-		public vec2i Clamp(vec2i min, vec2i max)
-		{
-			return MathEx.Clamp(this, min, max);
-		}
-	}
-
-	public static class vec2iEx
-	{
-		public static vec2 Div(this vec2 l, vec2i r)
-		{
-			return new vec2(l.x / r.x, l.y / r.y);
-		}
+		public override string ToString() { return string.Format("({0},{1})", x, y); }
+		public string ToString(string f) { return string.Format("({0},{1})", x.ToString(f), y.ToString(f)); }
 	}
 }
 
