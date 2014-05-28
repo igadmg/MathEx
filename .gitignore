@@ -10,4 +10,4 @@ bin/
 /*.userprefs
 /*.pidb
 /*.booproj
-bin/
+.project
