@@ -1,0 +1,3 @@
+[submodule "Libraries/SystemEx"]
+	path = Libraries/SystemEx
+	url = git@lufthansa:yatagarasu/systemex.git

@@ -59,7 +59,7 @@
     <Compile Include="src\vecEx.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SystemEx\SystemEx.csproj">
+    <ProjectReference Include="$(SolutionDir)\Libraries\SystemEx\SystemEx.csproj">
       <Project>{0271e27f-e614-4b0f-af16-05d2d2781b7f}</Project>
       <Name>SystemEx</Name>
     </ProjectReference>
