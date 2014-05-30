@@ -12,6 +12,8 @@ namespace MathEx
 		public vec2 a;
 		public vec2 b;
 
+        public float x { get { return b.x - a.x; } }
+        public float y { get { return b.y - a.y; } }
 		public vec2 size { get { return b - a; } }
 		
 		public aabb2(vec2 a, vec2 b)
@@ -21,6 +23,10 @@ namespace MathEx
 		}
 
 		public bool IsEmpty { get { return a.IsEmpty || b.IsEmpty; } }
+
+
+        public static aabb2 operator *(aabb2 a, vec2 v) { return new aabb2(a.a * v, a.b * v); }
+
 
 		public aabb2 Extend(vec2 p)
 		{
