@@ -46,6 +46,7 @@
     <Compile Include="src\Bezier.cs" />
     <Compile Include="src\BinaryTree.cs" />
     <Compile Include="src\CoordinateSystem.cs" />
+    <Compile Include="src\Foreach.cs" />
     <Compile Include="src\Graph.cs" />
     <Compile Include="src\Grid.cs" />
     <Compile Include="src\Intersect.cs" />
