@@ -10,6 +10,8 @@ namespace MathEx
 		public static float Clamp(this vec2i v, float f) { return MathEx.Clamp(f, v.x, v.y); }
 		public static vec2i Clamp(this vec2i v, vec2i min, vec2i max) { return MathEx.Clamp(v, min, max); }
 
+		public static vec2 Adc(this vec2 v, float th) { return new vec2(MathEx.Abs(v.x) < th ? 0 : MathEx.Sign(v.x), MathEx.Abs(v.y) < th ? 0 : MathEx.Sign(v.y)); }
+
 		public static vec2 Add(this vec2 l, float x, float y) { return new vec2(l.x + x, l.y + y); }
 		public static vec2 Add(this vec2 l, vec2 r) { return new vec2(l.x + r.x, l.y + r.y); }
 		public static vec2 Sub(this vec2 l, float x, float y) { return new vec2(l.x - x, l.y - y); }

@@ -7,6 +7,9 @@ namespace MathEx
 {
 	public static class MathEx
 	{
+		public static float Abs(float v) { return v > 0 ? v : -v; }
+		public static float Sign(float v) { return v > 0 ? 1.0f : -1.0f; }
+
 		public static int Clamp(int f, int p1, int p2)
 		{
 			return (int)UnityEngine.Mathf.Clamp(f, p1, p2);

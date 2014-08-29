@@ -7,6 +7,7 @@ namespace MathEx
 	{
 		#region Conversion to Unity3D Math library
 		public static Vector2 ToVector2(this vec2 v) { return new Vector2(v.x, v.y); }
+		public static Vector3 ToVector3(this vec2 v) { return new Vector3(v.x, v.y, 0); }
 		public static Vector3 ToVector3(this vec3 v) { return new Vector3(v.x, v.y, v.z); }
 		public static Vector4 ToVector4(this vec4 v) { return new Vector4(v.x, v.y, v.z, v.w); }
 

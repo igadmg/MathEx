@@ -22,6 +22,7 @@ namespace MathEx
 
 
 		public bool IsEmpty { get { return float.IsNaN(x) || float.IsNaN(y); } }
+		public bool IsZero { get { return x == 0 && y == 0; } }
 
 		public float length { get { return MathEx.Sqrt(magnitude); } }
 		public float magnitude { get { return x*x + y*y ; } }
