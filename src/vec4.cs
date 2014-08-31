@@ -27,7 +27,7 @@ namespace MathEx
 
 		public float length { get { return MathEx.Sqrt(magnitude); } }
 		public float magnitude { get { return x*x + y*y + z*z + w*w; } }
-		public vec4 normalized { get { return this / length; } }
+		public vec4 normalized { get { return IsZero ? this : this / length; } }
 
 		//
 		// Operators

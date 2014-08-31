@@ -18,7 +18,9 @@ namespace MathEx
 		public static readonly vec2 empty = new vec2(float.NaN, float.NaN);
 		public static readonly vec2 one = new vec2(1, 1);
 		public static readonly vec2 right = new vec2(1, 0);
+		public static readonly vec2 left = new vec2(-1, 0);
 		public static readonly vec2 up = new vec2(0, 1);
+		public static readonly vec2 down = new vec2(0, -1);
 
 
 		public bool IsEmpty { get { return float.IsNaN(x) || float.IsNaN(y); } }
@@ -26,7 +28,7 @@ namespace MathEx
 
 		public float length { get { return MathEx.Sqrt(magnitude); } }
 		public float magnitude { get { return x*x + y*y ; } }
-		public vec2 normalized { get { return this / length; } }
+		public vec2 normalized { get { return IsZero ? this : this / length; } }
 
 		public int quad
 		{
