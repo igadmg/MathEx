@@ -23,6 +23,7 @@ namespace MathEx
 		public static readonly vec4 forward = new vec4(0, 0, 1, 0);
 
 
+		public bool IsZero { get { return x == 0 && y == 0 && z == 0 && w == 0; } }
 		public bool IsEmpty { get { return float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z) || float.IsNaN(w); } }
 
 		public float length { get { return MathEx.Sqrt(magnitude); } }
