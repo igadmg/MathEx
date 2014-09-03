@@ -34,6 +34,10 @@ namespace MathEx
 		// Operators
 		//
 
+		public static bool operator ==(vec4 a, vec4 b) { return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w; }
+		public static bool operator !=(vec4 a, vec4 b) { return a.x != b.x && a.y != b.y && a.z != b.z && a.w != b.w; }
+
+
 		public static vec4 operator *(vec4 a, int d) { return new vec4(a.x * d, a.y * d, a.z * d, a.w * d); }
 		public static vec4 operator /(vec4 a, int d) { return new vec4(a.x / d, a.y / d, a.z / d, a.w / d); }
 		public static vec4 operator *(vec4 a, float d) { return new vec4(a.x * d, a.y * d, a.z * d, a.w * d); }

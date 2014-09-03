@@ -49,6 +49,9 @@ namespace MathEx
 		//
 		// Operators
 		//
+		public static bool operator ==(vec2 a, vec2 b) { return a.x == b.x && a.y == b.y; }
+		public static bool operator !=(vec2 a, vec2 b) { return a.x != b.x && a.y != b.y; }
+
 
 		public static vec2 operator *(vec2 a, int d) { return new vec2(a.x * d, a.y * d); }
 		public static vec2 operator /(vec2 a, int d) { return new vec2(a.x / d, a.y / d); }

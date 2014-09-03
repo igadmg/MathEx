@@ -33,6 +33,10 @@ namespace MathEx
 		// Operators
 		//
 
+		public static bool operator ==(vec3 a, vec3 b) { return a.x == b.x && a.y == b.y && a.z == b.z; }
+		public static bool operator !=(vec3 a, vec3 b) { return a.x != b.x && a.y != b.y && a.z != b.z; }
+
+
 		public static vec3 operator *(vec3 a, int d) { return new vec3(a.x * d, a.y * d, a.z * d); }
 		public static vec3 operator /(vec3 a, int d) { return new vec3(a.x / d, a.y / d, a.z / d); }
 		public static vec3 operator *(vec3 a, float d) { return new vec3(a.x * d, a.y * d, a.z * d); }
