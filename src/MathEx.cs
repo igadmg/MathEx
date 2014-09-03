@@ -143,6 +143,16 @@ namespace MathEx
 			return new vec2(v.x, v.y + dy);
 		}
 
+		public static vec2 iX(this vec2 v)
+		{
+			return new vec2(-v.x, v.y);
+		}
+
+		public static vec2 iY(this vec2 v)
+		{
+			return new vec2(v.x, -v.y);
+		}
+
 		public static vec3 dX(this vec3 v, float dx)
 		{
 			return new vec3(v.x + dx, v.y, v.z);
