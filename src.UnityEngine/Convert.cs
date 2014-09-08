@@ -18,6 +18,7 @@ namespace MathEx
 		public static vec2 ToVec2(this Vector2 v) { return new vec2(v.x, v.y); }
 		public static vec2 ToVec2(this Vector3 v) { return new vec2(v.x, v.y); }
 		public static vec3 ToVec3(this Vector3 v) { return new vec3(v.x, v.y, v.z); }
+		public static ray ToRay(this Ray r) { return new ray { origin = r.origin.ToVec3(), direction = r.direction.ToVec3() }; }
 		public static aabb2 ToAaBb2(this Rect rect) { return new aabb2(rect.GetMin().ToVec2(), rect.GetMax().ToVec2()); }
 		#endregion
 	}

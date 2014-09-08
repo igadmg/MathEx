@@ -49,6 +49,8 @@ namespace MathEx
 		public static vec3 operator -(vec3 a) { return new vec3(-a.x, -a.y, -a.z); }
 		public static vec3 operator +(vec3 a, vec3 b) { return new vec3(a.x + b.x, a.y + b.y, a.z + b.z); }
 		public static vec3 operator -(vec3 a, vec3 b) { return new vec3(a.x - b.x, a.y - b.y, a.z - b.z); }
+		public static float operator *(vec3 a, vec3 b) { return Dot(a, b); }
+		public static vec3 operator %(vec3 a, vec3 b) { return Cross(a, b); }
 
 		public vec3(float x, float y, float z)
 		{
@@ -57,6 +59,7 @@ namespace MathEx
 			this.z = z;
 		}
 
+		public static float Dot(vec3 l, vec3 r) { return l.x * r.x + l.y * r.y + l.z * r.z; }
 		public static vec3 Cross(vec3 l, vec3 r) { return new vec3(l.y * r.z - l.z * r.y, l.z * r.x - l.x * r.z, l.x * r.y - l.y * r.x); }
 
 

@@ -38,5 +38,19 @@ namespace MathEx
 
 			return IntersectResult.None;
 		}
+
+		public static vec3 Intersect(this plane pl, ray r)
+		{
+			float d = pl.normal * r.direction;
+
+			if (d == 0)
+				return vec3.empty;
+
+			float t = -(r.origin * pl.normal + pl.d)/d;
+			if (t < 0)
+				return vec3.empty;
+
+			return r.origin + t * r.direction;
+		}
 	}
 }
