@@ -152,6 +152,14 @@ namespace MathEx
 		}
 
 
+		public static Vector2 Add(this Vector2 l, vec2 r) { return new Vector2(l.x + r.x, l.y + r.y); }
+		public static Vector3 Add(this Vector3 l, vec2 r) { return new Vector3(l.x + r.x, l.y + r.y, l.z); }
+		public static Vector3 Add(this Vector3 l, vec3 r) { return new Vector3(l.x + r.x, l.y + r.y, l.z + r.z); }
+
+		public static Vector2 Sub(this Vector2 l, vec2 r) { return new Vector2(l.x - r.x, l.y - r.y); }
+		public static Vector3 Sub(this Vector3 l, vec2 r) { return new Vector3(l.x - r.x, l.y - r.y, l.z); }
+		public static Vector3 Sub(this Vector3 l, vec3 r) { return new Vector3(l.x - r.x, l.y - r.y, l.z - r.z); }
+
 		public static Vector2 Mul(this Vector2 l, vec2i r) { return new Vector2(l.x * r.x, l.y * r.y); }
 		public static Vector2 Mul(this Vector2 l, vec2 r) { return new Vector2(l.x * r.x, l.y * r.y); }
 		public static Vector3 Mul(this Vector3 l, vec2 r) { return new Vector3(l.x * r.x, l.y * r.y, l.z); }
