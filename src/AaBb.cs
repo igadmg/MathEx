@@ -25,6 +25,11 @@ namespace MathEx
 		public bool IsEmpty { get { return a.IsEmpty || b.IsEmpty; } }
 
 
+		//
+		// Operators
+		//
+		public static aabb2 operator +(aabb2 a, vec2 v) { return new aabb2(a.a + v, a.b + v); }
+		public static aabb2 operator -(aabb2 a, vec2 v) { return new aabb2(a.a - v, a.b - v); }
         public static aabb2 operator *(aabb2 a, vec2 v) { return new aabb2(a.a * v, a.b * v); }
 
 

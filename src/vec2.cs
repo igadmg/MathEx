@@ -89,6 +89,8 @@ namespace MathEx
 
 		public override string ToString() { return string.Format("({0},{1})", x, y); }
 		public string ToString(string f) { return string.Format("({0},{1})", x.ToString(f), y.ToString(f)); }
+
+		public vec2i ToVec2i() { return new vec2i((int)x, (int)y); }
 	}
 }
 

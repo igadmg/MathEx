@@ -17,5 +17,10 @@ namespace MathEx
 
 			yield break;
 		}
+
+		public static IEnumerable<vec2> Cell(vec2 d, aabb2 s)
+		{
+			yield break;
+		}
 	}
 }

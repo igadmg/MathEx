@@ -58,7 +58,7 @@ namespace MathEx
 		/// <param name="t"></param>
 		/// <param name="length"></param>
 		/// <returns></returns>
-		public static int Repeat(int t, int length)
+		public static int Repeat(this int t, int length)
 		{
 			while (t < 0)
 				t += length;
@@ -72,7 +72,7 @@ namespace MathEx
 		/// <param name="t"></param>
 		/// <param name="length"></param>
 		/// <returns></returns>
-		public static float Repeat(float t, float length)
+		public static float Repeat(this float t, float length)
 		{
 			while (t < 0)
 				t += length;
@@ -106,6 +106,11 @@ namespace MathEx
 			return (int)(f + 0.5f);
 		}
 
+
+		public static vec2 Floor(this vec2 v)
+		{
+			return new vec2(UnityEngine.Mathf.Floor(v.x), UnityEngine.Mathf.Floor(v.y));
+		}
 
 
 		public static vec2 X(this vec2 v, float x)
