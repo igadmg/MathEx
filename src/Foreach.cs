@@ -18,8 +18,12 @@ namespace MathEx
 			yield break;
 		}
 
-		public static IEnumerable<vec2> Cell(vec2 d, aabb2 s)
+		public static IEnumerable<vec2> Cell(vec2 d, aabb2i s)
 		{
+			for (int y = s.a.y; y < s.b.y; y++)
+				for (int x = s.a.x; x < s.b.x; x++)
+					yield return d.Mul(x, y);
+
 			yield break;
 		}
 	}

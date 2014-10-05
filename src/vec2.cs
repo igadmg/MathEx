@@ -87,6 +87,19 @@ namespace MathEx
 			return new vec2(Math.Max(a.x, b.x), Math.Max(a.y, b.y));
 		}
 
+
+		public override int GetHashCode()
+		{
+			return x.GetHashCode() | y.GetHashCode();
+		}
+		public override bool Equals(object obj)
+		{
+			return (obj is vec2) ? Equals((vec2) obj) : false;
+		}
+		public bool Equals(vec2 obj)
+		{
+			return x == obj.x && y == obj.y;
+		}
 		public override string ToString() { return string.Format("({0},{1})", x, y); }
 		public string ToString(string f) { return string.Format("({0},{1})", x.ToString(f), y.ToString(f)); }
 

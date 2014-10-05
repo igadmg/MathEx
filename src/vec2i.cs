@@ -22,6 +22,9 @@ namespace MathEx
 		public static vec2i up       { get { return new vec2i(0, 1); } }
 
 
+		public bool IsEmpty { get { return x == int.MinValue && y == int.MinValue; } }
+		public bool IsZero { get { return x == 0 && y == 0; } }
+
 		public int product { get { return x * y; } }
 		public float length { get { return MathEx.Sqrt(magnitude); } }
 		public float magnitude { get { return x * x + y * y; } }
@@ -53,12 +56,30 @@ namespace MathEx
 
 		public static vec2i operator *(vec2i a, int d) { return new vec2i(a.x * d, a.y * d); }
 		public static vec2i operator /(vec2i a, int d) { return new vec2i(a.x / d, a.y / d); }
+		public static vec2i operator *(int d, vec2i a) { return new vec2i(a.x * d, a.y * d); }
+		public static vec2i operator /(int d, vec2i a) { return new vec2i(a.x / d, a.y / d); }
+		public static vec2i operator *(vec2i a, vec2i b) { return new vec2i(a.x * b.x, a.y * b.y); }
+		public static vec2i operator /(vec2i a, vec2i b) { return new vec2i(a.x / b.x, a.y / b.y); }
+
+		public static vec2i operator -(vec2i a) { return new vec2i(-a.x, -a.y); }
+		public static vec2i operator +(vec2i a, vec2i b) { return new vec2i(a.x + b.x, a.y + b.y); }
+		public static vec2i operator -(vec2i a, vec2i b) { return new vec2i(a.x - b.x, a.y - b.y); }
 
 
 		public vec2i(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
+		}
+
+		public static vec2i Min(vec2i a, vec2i b)
+		{
+			return new vec2i(Math.Min(a.x, b.x), Math.Min(a.y, b.y));
+		}
+
+		public static vec2i Max(vec2i a, vec2i b)
+		{
+			return new vec2i(Math.Max(a.x, b.x), Math.Max(a.y, b.y));
 		}
 
 		public override string ToString() { return "({0},{1})".format(x, y); }

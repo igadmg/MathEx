@@ -63,7 +63,7 @@ namespace MathEx
 		}
 	}
 
-	public class AaBb3
+	public class aabb3
 	{
 		public vec3 a;
 		public vec3 b;
