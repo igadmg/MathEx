@@ -2,6 +2,7 @@
 
 namespace MathEx
 {
+	[Serializable]
 	public struct vec3
 	{
 		//

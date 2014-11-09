@@ -28,5 +28,11 @@ namespace MathEx
 			pc = n.z;
 			pd = -(o * n);
 		}
+
+		public vec3 project(vec3 v)
+		{
+			var n = normal;
+			return v - (v * n) * n;
+		}
 	}
 }

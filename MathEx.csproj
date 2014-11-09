@@ -47,6 +47,7 @@
     <Compile Include="src\Bezier.cs" />
     <Compile Include="src\BinaryTree.cs" />
     <Compile Include="src\CoordinateSystem.cs" />
+    <Compile Include="src\ellipse.cs" />
     <Compile Include="src\Foreach.cs" />
     <Compile Include="src\Graph.cs" />
     <Compile Include="src\Grid.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="src\plane.cs" />
     <Compile Include="src\Polygon.cs" />
     <Compile Include="src\QuadTree.cs" />
+    <Compile Include="src\random.cs" />
     <Compile Include="src\ray.cs" />
     <Compile Include="src\Set.cs" />
     <Compile Include="src\Spline.cs" />

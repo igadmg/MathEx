@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D707C31E-1C84-42A1-9790-3EBBF75EA645}</ProjectGuid>
+    <ProjectGuid>{9C881F96-03F5-4D67-A9B3-55D8D42B27F4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MathEx.UnityEngine</RootNamespace>
-    <AssemblyName>MathEx.UnityEngine</AssemblyName>
+    <RootNamespace>MathEx.UnityEditor</RootNamespace>
+    <AssemblyName>MathEx.UnityEditor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug.UnityEngine\</OutputPath>
+    <OutputPath>bin\Debug.UnityEditor\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -25,7 +25,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release.UnityEngine\</OutputPath>
+    <OutputPath>bin\Release.UnityEditor\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -35,27 +35,32 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnityEditor">
+      <HintPath>C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEditor.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>C:/Program Files (x86)/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Unity\Editor\Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.UnityEngine.cs" />
-    <Compile Include="src.UnityEngine\BoundsEx.cs" />
-    <Compile Include="src.UnityEngine\Convert.cs" />
-    <Compile Include="src.UnityEngine\MathfEx.cs" />
-    <Compile Include="src.UnityEngine\Matrix4x4Ex.cs" />
-    <Compile Include="src.UnityEngine\PlaneEx.cs" />
-    <Compile Include="src.UnityEngine\PolarVector.cs" />
-    <Compile Include="src.UnityEngine\QuaternionEx.cs" />
-    <Compile Include="src.UnityEngine\RectEx.cs" />
-    <Compile Include="src.UnityEngine\VectorEx.cs" />
+    <Compile Include="Properties\AssemblyInfo.UnityEditor.cs" />
+    <Compile Include="src.UnityEditor\PropertyDrawer_vec3.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SystemEx\SystemEx.csproj">
+      <Project>{0271e27f-e614-4b0f-af16-05d2d2781b7f}</Project>
+      <Name>SystemEx</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="MathEx.csproj">
       <Project>{8d8a06e5-abfb-49a8-851a-070fcf5339aa}</Project>
       <Name>MathEx</Name>
+      <Private>False</Private>
+    </ProjectReference>
+    <ProjectReference Include="MathEx.UnityEngine.csproj">
+      <Project>{d707c31e-1c84-42a1-9790-3ebbf75ea645}</Project>
+      <Name>MathEx.UnityEngine</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>

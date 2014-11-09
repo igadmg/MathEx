@@ -101,6 +101,11 @@ namespace MathEx
 			}
 		}
 
+		public static float Log(float v)
+		{
+			return UnityEngine.Mathf.Log(v);
+		}
+
 		public static int Round(float f)
 		{
 			return (int)(f + 0.5f);
