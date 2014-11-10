@@ -193,7 +193,7 @@ namespace MathEx
 
 		public static bool IsEmpty(this Vector2 v)
 		{
-			return float.IsNaN(v.x) && float.IsNaN(v.y);
+			return float.IsNaN(v.x) || float.IsNaN(v.y);
 		}
 
 		public static bool IsZero(this Vector2 v)
@@ -203,7 +203,7 @@ namespace MathEx
 
 		public static bool IsEmpty(this Vector3 v)
 		{
-			return float.IsNaN(v.x) && float.IsNaN(v.y) && float.IsNaN(v.z);
+			return float.IsNaN(v.x) || float.IsNaN(v.y) || float.IsNaN(v.z);
 		}
 
 		public static bool IsZero(this Vector3 v)
@@ -213,7 +213,7 @@ namespace MathEx
 
 		public static bool IsEmpty(this Vector4 v)
 		{
-			return float.IsNaN(v.x) && float.IsNaN(v.y) && float.IsNaN(v.z) && float.IsNaN(v.w);
+			return float.IsNaN(v.x) || float.IsNaN(v.y) || float.IsNaN(v.z) || float.IsNaN(v.w);
 		}
 
 		public static bool IsZero(this Vector4 v)
