@@ -54,6 +54,7 @@
     <Compile Include="src\Intersect.cs" />
     <Compile Include="src\MathEx.cs" />
     <Compile Include="src\plane.cs" />
+    <Compile Include="src\svec3.cs" />
     <Compile Include="src\Polygon.cs" />
     <Compile Include="src\QuadTree.cs" />
     <Compile Include="src\random.cs" />

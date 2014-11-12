@@ -15,11 +15,13 @@ namespace MathEx
 		//
 		// Static Properties
 		//
+		public static readonly vec2i zero = new vec2i(0, 0);
 		public static readonly vec2i empty = new vec2i(int.MinValue, int.MinValue);
-		public static vec2i zero     { get { return new vec2i(0, 0); } }
-		public static vec2i one      { get { return new vec2i(1, 1); } }
-		public static vec2i right    { get { return new vec2i(1, 0); } }
-		public static vec2i up       { get { return new vec2i(0, 1); } }
+		public static readonly vec2i one = new vec2i(1, 1);
+		public static readonly vec2i right = new vec2i(1, 0);
+		public static readonly vec2i left = new vec2i(-1, 0);
+		public static readonly vec2i up = new vec2i(0, 1);
+		public static readonly vec2i down = new vec2i(0, -1);
 
 
 		public bool IsEmpty { get { return x == int.MinValue && y == int.MinValue; } }
