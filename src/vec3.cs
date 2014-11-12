@@ -19,8 +19,11 @@ namespace MathEx
 		public static readonly vec3 empty = new vec3(float.NaN, float.NaN, float.NaN);
 		public static readonly vec3 one = new vec3(1, 1, 1);
 		public static readonly vec3 right = new vec3(1, 0, 0);
+		public static readonly vec3 left = new vec3(-1, 0, 0);
 		public static readonly vec3 up = new vec3(0, 1, 0);
+		public static readonly vec3 down = new vec3(0, -1, 0);
 		public static readonly vec3 forward = new vec3(0, 0, 1);
+		public static readonly vec3 backward = new vec3(0, 0, -1);
 
 
 		public bool IsZero { get { return x == 0 && y == 0 && z == 0; } }
