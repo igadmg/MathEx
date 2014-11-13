@@ -34,5 +34,20 @@ namespace MathEx
 			var n = normal;
 			return v - (v * n) * n;
 		}
+
+		public vec3 cast(ray r, out float d)
+		{
+			d = normal * r.direction;
+
+			if (d == 0)
+				return vec3.empty;
+
+			d = -(r.origin * normal + pd) / d;
+
+			if (d < 0)
+				return vec3.empty;
+
+			return r.origin + d * r.direction;
+		}
 	}
 }

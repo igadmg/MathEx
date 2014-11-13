@@ -28,6 +28,7 @@ namespace MathEx
 		public static vec2 Div(this vec2 l, int x, int y) { return new vec2(l.x / x, l.y / y); }
 		public static vec2 Div(this vec2 l, vec2i r) { return new vec2(l.x / r.x, l.y / r.y); }
 
+		public static vec3 Mul(this vec3 l, vec3 r) { return new vec3(l.x * r.x, l.y * r.y, l.z * r.z); }
 		public static vec3 Div(this vec3 l, vec3 r) { return new vec3(l.x / r.x, l.y / r.y, l.z / r.z); }
 
 		public static vec4 Div(this vec4 l, vec4 r) { return new vec4(l.x / r.x, l.y / r.y, l.z / r.z, l.w / r.w); }

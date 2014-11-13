@@ -21,5 +21,15 @@ namespace MathEx
 			this.origin = origin;
 			this.direction = direction;
 		}
+
+		public float distance(vec3 point)
+		{
+			return (direction % (point - origin)).magnitude;
+		}
+
+		public vec3 projection(vec3 point)
+		{
+			return origin + direction * (direction * (point - origin));
+		}
 	}
 }

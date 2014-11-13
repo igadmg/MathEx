@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.UnityEditor.cs" />
+    <Compile Include="src.UnityEditor\PropertyDrawer_vec2.cs" />
     <Compile Include="src.UnityEditor\PropertyDrawer_vec3.cs" />
   </ItemGroup>
   <ItemGroup>

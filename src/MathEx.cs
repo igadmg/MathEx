@@ -201,6 +201,11 @@ namespace MathEx
 			return new vec3(z, v.x, v.y);
 		}
 
+		public static vec3 yxz(this vec2 v, float z)
+		{
+			return new vec3(v.y, v.x, z);
+		}
+
 		public static vec3 xzy(this vec3 v)
 		{
 			return new vec3(v.x, v.z, v.y);
