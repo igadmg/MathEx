@@ -7,8 +7,12 @@ namespace MathEx
 {
 	public class ray
 	{
+		public static readonly ray empty = new ray(vec3.empty, vec3.empty);
+
 		public vec3 origin;
 		public vec3 direction;
+
+		public bool IsEmpty { get { return origin.IsEmpty || direction.IsEmpty; } }
 
 		public ray()
 		{

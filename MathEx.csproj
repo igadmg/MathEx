@@ -54,13 +54,14 @@
     <Compile Include="src\Intersect.cs" />
     <Compile Include="src\MathEx.cs" />
     <Compile Include="src\plane.cs" />
+    <Compile Include="src\polygon.cs" />
     <Compile Include="src\svec3.cs" />
-    <Compile Include="src\Polygon.cs" />
     <Compile Include="src\QuadTree.cs" />
     <Compile Include="src\random.cs" />
     <Compile Include="src\ray.cs" />
     <Compile Include="src\Set.cs" />
     <Compile Include="src\Spline.cs" />
+    <Compile Include="src\triangle.cs" />
     <Compile Include="src\vec2.cs" />
     <Compile Include="src\vec2i.cs" />
     <Compile Include="src\vec3.cs" />

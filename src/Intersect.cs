@@ -25,7 +25,7 @@ namespace MathEx
 			return IntersectResult.Contain1;
 		}
 
-		public static IntersectResult Intersect(this aabb2 aabb, Triangle2 tri)
+		public static IntersectResult Intersect(this aabb2 aabb, triangle<vec2> tri)
 		{
 			int siflags = 0x000000;
 			for (int i = 0; i < tri.p.Length; i++) {
