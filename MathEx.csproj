@@ -53,6 +53,7 @@
     <Compile Include="src\Grid.cs" />
     <Compile Include="src\Intersect.cs" />
     <Compile Include="src\MathEx.cs" />
+    <Compile Include="src\Noize.cs" />
     <Compile Include="src\plane.cs" />
     <Compile Include="src\polygon.cs" />
     <Compile Include="src\svec3.cs" />

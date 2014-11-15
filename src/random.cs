@@ -7,6 +7,13 @@ namespace MathEx
 {
 	public static class random
 	{
+		static Random rnd = new Random();
+
+		public static float Next
+		{
+			get { return (float)rnd.NextDouble(); }
+		}
+
 		public static IEnumerable<float> NormalDistribution()
 		{
 			bool ready = false;
