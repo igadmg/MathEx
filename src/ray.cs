@@ -12,7 +12,7 @@ namespace MathEx
 		public vec3 origin;
 		public vec3 direction;
 
-		public bool IsEmpty { get { return origin.IsEmpty || direction.IsEmpty; } }
+		public bool IsEmpty { get { return origin.isEmpty || direction.isEmpty; } }
 
 		public ray()
 		{

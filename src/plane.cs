@@ -69,7 +69,7 @@ namespace MathEx
 		{
 			vec3 dir = p.normal % p.normal;
 
-			if (dir.IsZero)
+			if (dir.isZero)
 				return ray.empty;
 
 			float d = (p.pb * pc - p.pc);

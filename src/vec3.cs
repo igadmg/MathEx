@@ -26,12 +26,12 @@ namespace MathEx
 		public static readonly vec3 backward = new vec3(0, 0, -1);
 
 
-		public bool IsZero { get { return x == 0 && y == 0 && z == 0; } }
-		public bool IsEmpty { get { return float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z); } }
+		public bool isZero { get { return x == 0 && y == 0 && z == 0; } }
+		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z); } }
 
 		public float length { get { return MathEx.Sqrt(magnitude); } }
 		public float magnitude { get { return x*x + y*y + z*z; } }
-		public vec3 normalized { get { return IsZero ? this : this / length; } }
+		public vec3 normalized { get { return isZero ? this : this / length; } }
 
 		//
 		// Operators

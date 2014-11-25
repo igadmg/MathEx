@@ -24,8 +24,8 @@ namespace MathEx
 		public static readonly vec2i down = new vec2i(0, -1);
 
 
-		public bool IsEmpty { get { return x == int.MinValue && y == int.MinValue; } }
-		public bool IsZero { get { return x == 0 && y == 0; } }
+		public bool isEmpty { get { return x == int.MinValue && y == int.MinValue; } }
+		public bool isZero { get { return x == 0 && y == 0; } }
 
 		public int product { get { return x * y; } }
 		public float length { get { return MathEx.Sqrt(magnitude); } }

@@ -22,7 +22,7 @@ namespace MathEx
 			this.b = b;
 		}
 
-		public bool IsEmpty { get { return a.IsEmpty || b.IsEmpty; } }
+		public bool IsEmpty { get { return a.isEmpty || b.isEmpty; } }
 
 
 		//
@@ -30,7 +30,7 @@ namespace MathEx
 		//
 		public static aabb2 operator +(aabb2 a, vec2 v) { return new aabb2(a.a + v, a.b + v); }
 		public static aabb2 operator -(aabb2 a, vec2 v) { return new aabb2(a.a - v, a.b - v); }
-        public static aabb2 operator *(aabb2 a, vec2 v) { return new aabb2(a.a * v, a.b * v); }
+        public static aabb2 operator *(aabb2 a, vec2 v) { return new aabb2(a.a.Mul(v), a.b.Mul(v)); }
 
 
 		public aabb2 Extend(vec2 p)

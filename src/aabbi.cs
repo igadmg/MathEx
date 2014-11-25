@@ -22,7 +22,7 @@ namespace MathEx
 			this.b = b;
 		}
 
-		public bool IsEmpty { get { return a.IsEmpty || b.IsEmpty; } }
+		public bool IsEmpty { get { return a.isEmpty || b.isEmpty; } }
 
 
 		//

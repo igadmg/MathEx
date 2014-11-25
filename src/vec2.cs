@@ -23,12 +23,12 @@ namespace MathEx
 		public static readonly vec2 down = new vec2(0, -1);
 
 
-		public bool IsEmpty { get { return float.IsNaN(x) || float.IsNaN(y); } }
-		public bool IsZero { get { return x == 0 && y == 0; } }
+		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y); } }
+		public bool isZero { get { return x == 0 && y == 0; } }
 
 		public float length { get { return MathEx.Sqrt(magnitude); } }
 		public float magnitude { get { return x*x + y*y ; } }
-		public vec2 normalized { get { return IsZero ? this : this / length; } }
+		public vec2 normalized { get { return isZero ? this : this / length; } }
 
 		public int quad
 		{
@@ -61,8 +61,9 @@ namespace MathEx
 		public static vec2 operator /(int d, vec2 a) { return new vec2(a.x / d, a.y / d); }
 		public static vec2 operator *(float d, vec2 a) { return new vec2(a.x * d, a.y * d); }
 		public static vec2 operator /(float d, vec2 a) { return new vec2(a.x / d, a.y / d); }
-        public static vec2 operator *(vec2 a, vec2 b) { return new vec2(a.x * b.x, a.y * b.y); }
-        public static vec2 operator /(vec2 a, vec2 b) { return new vec2(a.x / b.x, a.y / b.y); }
+
+
+        public static float operator *(vec2 a, vec2 b) { return Dot(a, b); }
 
 
 
@@ -86,6 +87,8 @@ namespace MathEx
 		{
 			return new vec2(Math.Max(a.x, b.x), Math.Max(a.y, b.y));
 		}
+
+		public static float Dot(vec2 l, vec2 r) { return l.x * r.x + l.y * r.y; }
 
 
 		public override int GetHashCode()

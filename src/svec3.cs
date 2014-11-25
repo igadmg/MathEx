@@ -16,10 +16,10 @@ namespace MathEx
 			this.a = a;
 		}
 
-		public static implicit operator svec3(Vector3 v)
+		public static implicit operator svec3(vec3 v)
 		{
 			float u = v.magnitude;
-			return new svec3(u, Mathf.Acos(v.z / u), Mathf.Atan2(v.x, v.y));
+			return new svec3(u, Mathf.Acos(v.z / u), Mathf.Atan2(v.y, v.x));
 		}
 
 		public static implicit operator vec3(svec3 v)
