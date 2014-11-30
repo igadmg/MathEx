@@ -14,9 +14,10 @@ namespace MathEx
 
 		public ellipse2(vec2 focus, vec2 direction, float apo, float peri)
 		{
-			major = (apo + peri) / 2;
-			minor = MathEx.Sqrt(apo * peri);
-			center = focus + direction * ((apo - peri) / 2);
+			this.major = (apo + peri) / 2;
+			this.minor = MathEx.Sqrt(apo * peri);
+			this.center = focus + direction * ((apo - peri) / 2);
+			this.direction = direction;
 		}
 	}
 }

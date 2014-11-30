@@ -54,6 +54,9 @@ namespace MathEx
 		//
 		public static bool operator ==(vec2i a, vec2i b) { return a.x == b.x && a.y == b.y; }
 		public static bool operator !=(vec2i a, vec2i b) { return a.x != b.x && a.y != b.y; }
+		public bool Equals(vec2i obj) { return obj == this; }
+		public override bool Equals(object obj) { return obj is vec2i ? Equals((vec2i)obj) : false; }
+		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode(); }
 
 
 		public static vec2i operator *(vec2i a, int d) { return new vec2i(a.x * d, a.y * d); }

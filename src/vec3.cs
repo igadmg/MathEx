@@ -39,6 +39,9 @@ namespace MathEx
 
 		public static bool operator ==(vec3 a, vec3 b) { return a.x == b.x && a.y == b.y && a.z == b.z; }
 		public static bool operator !=(vec3 a, vec3 b) { return a.x != b.x && a.y != b.y && a.z != b.z; }
+		public bool Equals(vec3 obj) { return obj == this; }
+		public override bool Equals(object obj) { return obj is vec3 ? Equals((vec3)obj) : false; }
+		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode(); }
 
 
 		public static vec3 operator *(vec3 a, int d) { return new vec3(a.x * d, a.y * d, a.z * d); }

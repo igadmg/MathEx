@@ -51,6 +51,10 @@ namespace MathEx
 		//
 		public static bool operator ==(vec2 a, vec2 b) { return a.x == b.x && a.y == b.y; }
 		public static bool operator !=(vec2 a, vec2 b) { return a.x != b.x && a.y != b.y; }
+		public bool Equals(vec2 obj) { return obj == this; }
+		public override bool Equals(object obj) { return obj is vec2 ? Equals((vec2)obj) : false; }
+		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode(); }
+
 
 
 		public static vec2 operator *(vec2 a, int d) { return new vec2(a.x * d, a.y * d); }
@@ -91,18 +95,6 @@ namespace MathEx
 		public static float Dot(vec2 l, vec2 r) { return l.x * r.x + l.y * r.y; }
 
 
-		public override int GetHashCode()
-		{
-			return x.GetHashCode() | y.GetHashCode();
-		}
-		public override bool Equals(object obj)
-		{
-			return (obj is vec2) ? Equals((vec2) obj) : false;
-		}
-		public bool Equals(vec2 obj)
-		{
-			return x == obj.x && y == obj.y;
-		}
 		public override string ToString() { return string.Format("({0},{1})", x, y); }
 		public string ToString(string f) { return string.Format("({0},{1})", x.ToString(f), y.ToString(f)); }
 
