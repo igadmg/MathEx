@@ -16,13 +16,20 @@ namespace MathEx
 			this.a = a;
 		}
 
-		public static implicit operator svec3(vec3 v)
+		public svec3(vec3 v)
 		{
-			float u = v.magnitude;
+			this.r = v.length;
+			this.i = Mathf.Acos(v.z / r);
+			this.a = Mathf.Atan2(v.y, v.x);
+		}
+
+		public static explicit operator svec3(vec3 v)
+		{
+			float u = v.length;
 			return new svec3(u, Mathf.Acos(v.z / u), Mathf.Atan2(v.y, v.x));
 		}
 
-		public static implicit operator vec3(svec3 v)
+		public static explicit operator vec3(svec3 v)
 		{
 			float sI = Mathf.Sin(v.i);
 			float cI = Mathf.Cos(v.i);
@@ -31,7 +38,7 @@ namespace MathEx
 			return new vec3(v.r * sI * cA, v.r * sI * sA, v.r * cI);
 		}
 
-		public vec3 ToVec3() { return this; }
+		public vec3 ToVec3() { return (vec3)this; }
 
 		public override string ToString() { return string.Format("({0},{1},{2})", r, i, a); }
 		public string ToString(string f) { return string.Format("({0},{1},{2})", r.ToString(f), i.ToString(f), a.ToString(f)); }

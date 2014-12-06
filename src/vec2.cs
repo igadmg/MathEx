@@ -46,6 +46,11 @@ namespace MathEx
 			}
 		}
 
+		public float middle
+		{
+			get { return (x + y)/2.0f; }
+		}
+
 		//
 		// Operators
 		//
