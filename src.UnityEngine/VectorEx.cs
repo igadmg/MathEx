@@ -182,6 +182,7 @@ namespace MathEx
 		public static Vector3 Div(this Vector3 l, float x, float y) { return new Vector3(l.x / x, l.y / y, l.z); }
 		public static Vector3 Div(this Vector3 l, float x, float y, float z) { return new Vector3(l.x / x, l.y / y, l.z / z); }
 
+
 		#region Boolean operation
 
 		public static Vector3 Or(this Vector3 l, Vector3 r)

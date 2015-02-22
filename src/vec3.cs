@@ -72,6 +72,18 @@ namespace MathEx
 
 		public override string ToString() { return string.Format("({0},{1},{2})", x, y, z); }
 		public string ToString(string f) { return string.Format("({0},{1},{2})", x.ToString(f), y.ToString(f), z.ToString(f)); }
-	}                                                                 
+
+#if UNITY_ENGINE
+		public static implicit operator UnityEngine.Vector3(vec3 v)
+		{
+			return new UnityEngine.Vector3(v.x, v.y, v.z);
+		}
+
+		public static implicit operator vec3(UnityEngine.Vector3 v)
+		{
+			return new vec3(v.x, v.y, v.z);
+		}
+#endif
+	}
 }
 
