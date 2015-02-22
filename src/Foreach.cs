@@ -7,6 +7,16 @@ namespace MathEx
 {
 	public static class Foreach
 	{
+		public static IEnumerable<aabb2> Cell(vec2i s)
+		{
+			vec2 sp = -((vec2)s).Div(2.0f);
+			for (int y = 0; y < s.y; y++)
+				for (int x = 0; x < s.x; x++)
+					yield return new aabb2(sp + new vec2(x, y), sp + new vec2(x + 1, y + 1));
+
+			yield break;
+		}
+
 		public static IEnumerable<vec2> Cell(vec2 d, vec2i s)
 		{
 			vec2 sp = -d.Mul(s).Div(2.0f).Sub(d.Div(2));

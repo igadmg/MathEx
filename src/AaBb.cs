@@ -15,6 +15,7 @@ namespace MathEx
         public float x { get { return b.x - a.x; } }
         public float y { get { return b.y - a.y; } }
 		public vec2 size { get { return b - a; } }
+		public vec2[] vertices { get { return new vec2[] { a, new vec2(a.x, b.y), b, new vec2(b.x, a.y) }; } }
 		
 		public aabb2(vec2 a, vec2 b)
 		{

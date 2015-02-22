@@ -87,6 +87,11 @@ namespace MathEx
 			this.y = y;
 		}
 
+		public static explicit operator vec2(vec2i v)
+		{
+			return new vec2(v.x, v.y);
+		}
+
 		public static vec2 Min(vec2 a, vec2 b)
 		{
 			return new vec2(Math.Min(a.x, b.x), Math.Min(a.y, b.y));
