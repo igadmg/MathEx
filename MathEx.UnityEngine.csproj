@@ -36,7 +36,7 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>$(UNITY_PATH)/Data/Managed/UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\Libraries\MathEx\Libraries\UnityEngine\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

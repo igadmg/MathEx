@@ -1,3 +1,6 @@
 [submodule "Libraries/SystemEx"]
 	path = Libraries/SystemEx
 	url = git@lufthansa:yatagarasu/systemex.git
+[submodule "Libraries/UnityEngine"]
+	path = Libraries/UnityEngine
+	url = git@lufthansa:yatagarasu/unityengine.git
