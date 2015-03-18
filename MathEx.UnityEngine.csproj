@@ -51,6 +51,11 @@
     <Compile Include="src.UnityEngine\VectorEx.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SystemEx\SystemEx.csproj">
+      <Project>{0271e27f-e614-4b0f-af16-05d2d2781b7f}</Project>
+      <Name>SystemEx</Name>
+      <Private>False</Private>
+    </ProjectReference>
     <ProjectReference Include="MathEx.csproj">
       <Project>{8d8a06e5-abfb-49a8-851a-070fcf5339aa}</Project>
       <Name>MathEx</Name>
