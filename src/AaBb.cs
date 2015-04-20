@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MathEx
 {
-	public class aabb2
+	public struct aabb2
 	{
 		public static readonly aabb2 empty = new aabb2(vec2.empty, vec2.empty);
 		public static readonly aabb2 zero = new aabb2(vec2.zero, vec2.zero);
@@ -23,7 +23,7 @@ namespace MathEx
 			this.b = b;
 		}
 
-		public bool IsEmpty { get { return a.isEmpty || b.isEmpty; } }
+		public bool isEmpty { get { return a.isEmpty || b.isEmpty; } }
 
 
 		//
@@ -36,7 +36,7 @@ namespace MathEx
 
 		public aabb2 Extend(vec2 p)
 		{
-			if (IsEmpty)
+			if (isEmpty)
 				return new aabb2(p, p);
 
 			var min = vec2.Min(a, p);
@@ -64,9 +64,36 @@ namespace MathEx
 		}
 	}
 
-	public class aabb3
+	public struct aabb3
 	{
 		public vec3 a;
 		public vec3 b;
+
+		public float x { get { return b.x - a.x; } }
+		public float y { get { return b.y - a.y; } }
+		public float z { get { return b.z - a.z; } }
+		public vec3 size { get { return b - a; } }
+
+		public aabb3(vec3 a, vec3 b)
+		{
+			this.a = a;
+			this.b = b;
+		}
+
+		public aabb3(vec3 r)
+		{
+			this.a = -r;
+			this.b = r;
+		}
+
+		public bool isEmpty { get { return a.isEmpty || b.isEmpty; } }
+
+
+		//
+		// Operators
+		//
+		public static aabb3 operator +(aabb3 a, vec3 v) { return new aabb3(a.a + v, a.b + v); }
+		public static aabb3 operator -(aabb3 a, vec3 v) { return new aabb3(a.a - v, a.b - v); }
+		public static aabb3 operator *(aabb3 a, vec3 v) { return new aabb3(a.a.Mul(v), a.b.Mul(v)); }
 	}
 }

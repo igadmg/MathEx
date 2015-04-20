@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SystemEx;
+﻿using SystemEx;
 using UnityEditor;
 using UnityEngine;
 
 namespace MathEx.UnityEditor
 {
 	[CustomPropertyDrawer(typeof(vec3))]
-	class PropertyDrawer_vec3 : PropertyDrawer
+	public class PropertyDrawer_vec3 : PropertyDrawer
 	{
-		public override void OnGUI (Rect position, SerializedProperty property, GUIContent label) {
-			vec3 obj = (vec3) fieldInfo.GetValue(property.serializedObject.targetObject);
-			
+		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+		{
+			vec3 obj = (vec3)fieldInfo.GetValue(property.serializedObject.targetObject);
+
 			Rect contentPosition = EditorGUI.PrefixLabel(position, label);
 			contentPosition.width *= .25f;
 			EditorGUIUtility.labelWidth = 14f;
@@ -25,7 +22,13 @@ namespace MathEx.UnityEditor
 			EditorGUIUtility.labelWidth = 14f;
 			EditorGUI.PropertyField(contentPosition, property.FindPropertyRelative("z"), new GUIContent("Z"));
 			contentPosition.x += contentPosition.width;
-			EditorGUI.TextField(contentPosition, "m", obj.magnitude.ToString());
+
+			float magnitude = obj.magnitude;
+			float new_magnitude;
+			if (float.TryParse(EditorGUI.TextField(contentPosition, "m", magnitude.ToString()), out new_magnitude)) {
+				if (!magnitude.eq(new_magnitude))
+					obj.magnitude = new_magnitude;
+			}
 		}
 	}
 }

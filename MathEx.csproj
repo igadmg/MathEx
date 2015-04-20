@@ -30,11 +30,29 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Unity|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug Unity\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;UNITY</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Unity|AnyCPU'">
+    <OutputPath>bin\Release Unity\</OutputPath>
+    <DefineConstants>TRACE;UNITY</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\Libraries\MathEx\Libraries\UnityEngine\UnityEngine.dll</HintPath>
+      <HintPath>Libraries\UnityEngine\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -44,10 +62,12 @@
     <Compile Include="src\aabbi.cs" />
     <Compile Include="src\Bezier.cs" />
     <Compile Include="src\BinaryTree.cs" />
+    <Compile Include="src\color.cs" />
     <Compile Include="src\CoordinateSystem.cs" />
     <Compile Include="src\ellipse.cs" />
     <Compile Include="src\Foreach.cs" />
     <Compile Include="src\Graph.cs" />
+    <Compile Include="src\grid3.cs" />
     <Compile Include="src\Grid.cs" />
     <Compile Include="src\Intersect.cs" />
     <Compile Include="src\kalman1d.cs" />
@@ -63,13 +83,14 @@
     <Compile Include="src\Spline.cs" />
     <Compile Include="src\triangle.cs" />
     <Compile Include="src\vec2.cs" />
+    <Compile Include="src\vec3i.cs" />
     <Compile Include="src\vec2i.cs" />
     <Compile Include="src\vec3.cs" />
     <Compile Include="src\vec4.cs" />
     <Compile Include="src\vecEx.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)\Libraries\SystemEx\SystemEx.csproj">
+    <ProjectReference Include="..\SystemEx\SystemEx.csproj">
       <Project>{0271e27f-e614-4b0f-af16-05d2d2781b7f}</Project>
       <Name>SystemEx</Name>
       <Private>False</Private>

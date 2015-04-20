@@ -4,6 +4,7 @@ using SystemEx;
 
 namespace MathEx
 {
+	[Serializable]
 	public struct vec2i
 	{
 		//
@@ -32,6 +33,12 @@ namespace MathEx
 		public float magnitude { get { return x * x + y * y; } }
 		//public vec2 normalized { get { return this / length; } }
 
+		/// <summary>
+		///  Quads:
+		///  1 | 0
+		/// ---+---
+		///  2 | 3
+		/// </summary>
 		public int quad
 		{
 			get {
@@ -39,12 +46,55 @@ namespace MathEx
 					if (y > 0)
 						return 0;
 					else
-						return 1;
-				else
-					if (y < 0)
-						return 2;
-					else
 						return 3;
+				else
+					if (y > 0)
+						return 1;
+					else
+						return 2;
+			}
+		}
+
+		/// <summary>
+		///  Octants:
+		///  \2|1/
+		///  3\|/0
+		/// ---+---
+		///  4/|\7
+		///  /5|6\
+		/// </summary>
+		public int oct
+		{
+			get
+			{
+				if (x > 0) {
+					if (y > 0) {
+						if (x > y)
+							return 0;
+						else
+							return 1;
+					}
+					else {
+						if (x > -y)
+							return 7;
+						else
+							return 6;
+					}
+				}
+				else {
+					if (y > 0) {
+						if (-x > y)
+							return 3;
+						else
+							return 2;
+					}
+					else {
+						if (-x > -y)
+							return 4;
+						else
+							return 5;
+					}
+				}
 			}
 		}
 
@@ -63,12 +113,16 @@ namespace MathEx
 		public static vec2i operator /(vec2i a, int d) { return new vec2i(a.x / d, a.y / d); }
 		public static vec2i operator *(int d, vec2i a) { return new vec2i(a.x * d, a.y * d); }
 		public static vec2i operator /(int d, vec2i a) { return new vec2i(a.x / d, a.y / d); }
-		public static vec2i operator *(vec2i a, vec2i b) { return new vec2i(a.x * b.x, a.y * b.y); }
-		public static vec2i operator /(vec2i a, vec2i b) { return new vec2i(a.x / b.x, a.y / b.y); }
+		public static vec2 operator *(vec2i a, float d) { return new vec2(a.x * d, a.y * d); }
+		public static vec2 operator /(vec2i a, float d) { return new vec2(a.x / d, a.y / d); }
+		public static vec2 operator *(float d, vec2i a) { return new vec2(a.x * d, a.y * d); }
+		public static vec2 operator /(float d, vec2i a) { return new vec2(a.x / d, a.y / d); }
 
 		public static vec2i operator -(vec2i a) { return new vec2i(-a.x, -a.y); }
 		public static vec2i operator +(vec2i a, vec2i b) { return new vec2i(a.x + b.x, a.y + b.y); }
 		public static vec2i operator -(vec2i a, vec2i b) { return new vec2i(a.x - b.x, a.y - b.y); }
+		public static vec2i operator *(vec2i a, vec2i b) { return new vec2i(a.x * b.x, a.y * b.y); }
+		public static vec2i operator /(vec2i a, vec2i b) { return new vec2i(a.x / b.x, a.y / b.y); }
 
 
 		public vec2i(int x, int y)

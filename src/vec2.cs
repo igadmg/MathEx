@@ -27,7 +27,7 @@ namespace MathEx
 		public bool isZero { get { return x == 0 && y == 0; } }
 
 		public float length { get { return MathEx.Sqrt(magnitude); } }
-		public float magnitude { get { return x*x + y*y ; } }
+		public float magnitude { get { return x * x + y * y; } set { float dm = value / magnitude; x *= dm; y *= dm; } }
 		public vec2 normalized { get { return isZero ? this : this / length; } }
 
 		public int quad
@@ -109,6 +109,19 @@ namespace MathEx
 		public string ToString(string f) { return string.Format("({0},{1})", x.ToString(f), y.ToString(f)); }
 
 		public vec2i ToVec2i() { return new vec2i((int)x, (int)y); }
+
+
+#if UNITY
+		public static implicit operator UnityEngine.Vector2(vec2 v)
+		{
+			return new UnityEngine.Vector2(v.x, v.y);
+		}
+
+		public static implicit operator vec2(UnityEngine.Vector2 v)
+		{
+			return new vec2(v.x, v.y);
+		}
+#endif
 	}
 }
 

@@ -7,8 +7,10 @@ namespace MathEx
 {
 	public static class MathEx
 	{
-		public static float Abs(float v) { return v > 0 ? v : -v; }
-		public static float Sign(float v) { return v > 0 ? 1.0f : -1.0f; }
+		public static int Sign(this int v) { return v > 0 ? 1 : v < 0 ? -1 : 0; }
+
+		public static float Abs(this float v) { return v > 0 ? v : -v; }
+		public static float Sign(this float v) { return v > 0 ? 1.0f : v < 0 ? -1.0f : 0; }
 
 		public static int Clamp(int f, int p1, int p2)
 		{
@@ -45,6 +47,20 @@ namespace MathEx
 				);
 		}
 
+		public static float Lerp(this float t, float a, float b)
+		{
+			return a + (b - a) * t;
+		}
+
+		public static color_hsv Lerp(this float t, color_hsv a, color_hsv b)
+		{
+			return new color_hsv(t.Lerp(a.h, b.h), t.Lerp(a.s, b.s), t.Lerp(a.v, b.v), t.Lerp(a.a, b.a));
+		}
+
+		public static color_hsl Lerp(this float t, color_hsl a, color_hsl b)
+		{
+			return new color_hsl(t.Lerp(a.h, b.h), t.Lerp(a.s, b.s), t.Lerp(a.l, b.l), t.Lerp(a.a, b.a));
+		}
 
 		public static vec3 Slerp(vec3 a, vec3 b, float t)
 		{
@@ -110,136 +126,5 @@ namespace MathEx
 		{
 			return (int)(f + 0.5f);
 		}
-
-
-		public static vec2 Floor(this vec2 v)
-		{
-			return new vec2(UnityEngine.Mathf.Floor(v.x), UnityEngine.Mathf.Floor(v.y));
-		}
-
-
-		public static vec2 X(this vec2 v, float x)
-		{
-			return new vec2(x, v.y);
-		}
-
-		public static vec2 Y(this vec2 v, float y)
-		{
-			return new vec2(v.x, y);
-		}
-
-		public static vec3 X(this vec3 v, float x)
-		{
-			return new vec3(x, v.y, v.z);
-		}
-
-		public static vec3 Y(this vec3 v, float y)
-		{
-			return new vec3(v.x, y, v.z);
-		}
-
-		public static vec3 Z(this vec3 v, float z)
-		{
-			return new vec3(v.x, v.y, z);
-		}
-
-		public static vec2 dX(this vec2 v, float dx)
-		{
-			return new vec2(v.x + dx, v.y);
-		}
-
-		public static vec2 dY(this vec2 v, float dy)
-		{
-			return new vec2(v.x, v.y + dy);
-		}
-
-		public static vec2 iX(this vec2 v)
-		{
-			return new vec2(-v.x, v.y);
-		}
-
-		public static vec2 iY(this vec2 v)
-		{
-			return new vec2(v.x, -v.y);
-		}
-
-		public static vec3 dX(this vec3 v, float dx)
-		{
-			return new vec3(v.x + dx, v.y, v.z);
-		}
-
-		public static vec3 dY(this vec3 v, float dy)
-		{
-			return new vec3(v.x, v.y + dy, v.z);
-		}
-
-		public static vec3 dZ(this vec3 v, float dz)
-		{
-			return new vec3(v.x, v.y, v.z + dz);
-		}
-
-		public static vec3 xyz(this vec2 v, float z)
-		{
-			return new vec3(v.x, v.y, z);
-		}
-
-		public static vec3[] xyz(this vec2[] vs, float z)
-		{
-			var r = new vec3[vs.Length];
-			for (int i = 0; i < vs.Length; i++)
-				r[i] = vs[i].xyz(z);
-			return r;
-		}
-
-		public static vec3 xzy(this vec2 v, float z)
-		{
-			return new vec3(v.x, z, v.y);
-		}
-
-		public static vec3 zxy(this vec2 v, float z)
-		{
-			return new vec3(z, v.x, v.y);
-		}
-
-		public static vec3 yxz(this vec2 v, float z)
-		{
-			return new vec3(v.y, v.x, z);
-		}
-
-		public static vec3 xzy(this vec3 v)
-		{
-			return new vec3(v.x, v.z, v.y);
-		}
-		
-		public static vec2 xy(this vec3 v)
-		{
-			return new vec2(v.x, v.y);
-		}
-
-		public static vec2 xy(this vec4 v)
-		{
-			return new vec2(v.x, v.y);
-		}
-
-		public static vec2 xz(this vec3 v)
-		{
-			return new vec2(v.x, v.z);
-		}
-
-		public static vec2 zx(this vec3 v)
-		{
-			return new vec2(v.z, v.x);
-		}
-
-		public static vec2 yz(this vec3 v)
-		{
-			return new vec2(v.y, v.z);
-		}
-
-		public static vec2 zy(this vec3 v)
-		{
-			return new vec2(v.z, v.y);
-		}
-
 	}
 }

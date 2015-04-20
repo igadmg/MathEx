@@ -22,7 +22,7 @@ namespace MathEx
 			this.b = b;
 		}
 
-		public bool IsEmpty { get { return a.isEmpty || b.isEmpty; } }
+		public bool isEmpty { get { return a.isEmpty || b.isEmpty; } }
 
 
 		//
@@ -35,7 +35,7 @@ namespace MathEx
 
 		public aabb2i Extend(vec2i p)
 		{
-			if (IsEmpty)
+			if (isEmpty)
 				return new aabb2i(p, p);
 
 			var min = vec2i.Min(a, p);
@@ -65,7 +65,20 @@ namespace MathEx
 
 	public class aabb3i
 	{
-		//public vec3i a;
-		//public vec3i b;
+		public vec3i a;
+		public vec3i b;
+
+		public int x { get { return b.x - a.x; } }
+        public int y { get { return b.y - a.y; } }
+		public int z { get { return b.z - a.z; } }
+		public vec3i size { get { return b - a; } }
+		
+		public aabb3i(vec3i a, vec3i b)
+		{
+			this.a = a;
+			this.b = b;
+		}
+
+		public bool isEmpty { get { return a.isEmpty || b.isEmpty; } }
 	}
 }

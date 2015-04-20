@@ -34,13 +34,14 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\Libraries\MathEx\Libraries\UnityEngine\UnityEngine.dll</HintPath>
+      <HintPath>Libraries\UnityEngine\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.UnityEngine.cs" />
     <Compile Include="src.UnityEngine\BoundsEx.cs" />
+    <Compile Include="src.UnityEngine\ColorEx.cs" />
     <Compile Include="src.UnityEngine\Convert.cs" />
     <Compile Include="src.UnityEngine\MathfEx.cs" />
     <Compile Include="src.UnityEngine\Matrix4x4Ex.cs" />

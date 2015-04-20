@@ -456,6 +456,11 @@ namespace MathEx
 				rect.a.y / v.y
 				);
 		}
+
+		public static Ray ScreenPointToRay(this Vector3 v)
+		{
+			return Camera.main.ScreenPointToRay(v);
+		}
 	}
 }
 

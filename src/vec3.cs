@@ -3,7 +3,7 @@
 namespace MathEx
 {
 	[Serializable]
-	public struct vec3
+	public struct vec3 : IFormattable
 	{
 		//
 		// Fields
@@ -30,7 +30,7 @@ namespace MathEx
 		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z); } }
 
 		public float length { get { return MathEx.Sqrt(magnitude); } }
-		public float magnitude { get { return x*x + y*y + z*z; } }
+		public float magnitude { get { return x * x + y * y + z * z; } set { float dm = value / magnitude; x *= dm; y *= dm; z *= dm; } }
 		public vec3 normalized { get { return isZero ? this : this / length; } }
 
 		//
@@ -56,6 +56,8 @@ namespace MathEx
 		public static vec3 operator -(vec3 a) { return new vec3(-a.x, -a.y, -a.z); }
 		public static vec3 operator +(vec3 a, vec3 b) { return new vec3(a.x + b.x, a.y + b.y, a.z + b.z); }
 		public static vec3 operator -(vec3 a, vec3 b) { return new vec3(a.x - b.x, a.y - b.y, a.z - b.z); }
+		public static vec3 operator *(vec3 a, vec3i b) { return new vec3(a.x * b.x, a.y * b.y, a.z * b.z); }
+		public static vec3 operator *(vec3i a, vec3 b) { return new vec3(a.x * b.x, a.y * b.y, a.z * b.z); }
 		public static float operator *(vec3 a, vec3 b) { return Dot(a, b); }
 		public static vec3 operator %(vec3 a, vec3 b) { return Cross(a, b); }
 
@@ -72,8 +74,9 @@ namespace MathEx
 
 		public override string ToString() { return string.Format("({0},{1},{2})", x, y, z); }
 		public string ToString(string f) { return string.Format("({0},{1},{2})", x.ToString(f), y.ToString(f), z.ToString(f)); }
+		public string ToString(string f, IFormatProvider p) { return string.Format("({0},{1},{2})", x.ToString(f, p), y.ToString(f, p), z.ToString(f, p)); }
 
-#if UNITY_ENGINE
+#if UNITY
 		public static implicit operator UnityEngine.Vector3(vec3 v)
 		{
 			return new UnityEngine.Vector3(v.x, v.y, v.z);
