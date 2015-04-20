@@ -1,14 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MathEx
 {
 	[Serializable]
-	public class Set<T>
+	public class Set<T> : IEnumerable<Tuple<int, T>>
 	{
-		protected List<T> nodes_ = new List<T>();
+		protected List<T> nodes_;
+
+		public Set()
+		{
+			nodes_ = new List<T>();
+		}
+
+		public Set(List<T> nodes)
+		{
+			nodes_ = nodes;
+		}
 
 		public virtual void Add(T item)
 		{
@@ -22,6 +30,19 @@ namespace MathEx
 
 			nodes_.RemoveAt(i);
 			return i;
+		}
+
+		public IEnumerator<Tuple<int, T>> GetEnumerator()
+		{
+			for (int i = 0; i < nodes_.Count; i++)
+				yield return Tuple.Create(i, nodes_[i]);
+
+			yield break;
+		}
+
+		System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
+		{
+			return this.GetEnumerator();
 		}
 	}
 }

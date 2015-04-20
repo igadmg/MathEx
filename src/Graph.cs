@@ -1,47 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MathEx
 {
 	[Serializable]
-	public class Graph<T, U> : Set<T>
+	public class Graph<T> : Set<T>
 	{
-		public class Edge : Tuple<long, long, float>
-		{
-			public long a { get { return Item1; } }
-			public long b { get { return Item2; } }
-
-			U o_;
-
-
-			public Edge(long a, long b)
-				: base(a, b, float.NaN)
-			{ }
-
-			public Edge(long a, long b, float f)
-				: base(a, b, f)
-			{ }
-
-			public Edge(long a, long b, float f, U o)
-				: base(a, b, f)
-			{ o_ = o; }
-
-			public override bool Equals(object obj)
-			{
-				var e = obj as Edge;
-				return e != null ? (e.a == a) && (e.b == b) : base.Equals(obj);
-			}
-
-			public override int GetHashCode()
-			{
-				return a.GetHashCode() ^ b.GetHashCode();
-			}
-		}
-
 		protected HashSet<Edge> edges_ = new HashSet<Edge>();
 
+		public Graph()
+			: base()
+		{
+		}
+
+		public Graph(List<T> nodes)
+			: base(nodes)
+		{
+		}
 
 		public override int Remove(T item)
 		{
@@ -61,16 +36,72 @@ namespace MathEx
 			return ri;
 		}
 
-
-		public virtual bool Link(long a, long b, float d, U o)
+		public virtual Edge Link(long a, long b)
 		{
-			if (edges_.Contains(new Edge(a, b)) || edges_.Contains(new Edge(b, a)))
+			Edge e = new Edge(a, b);
+
+			if (edges_.Contains(e))
+				return e;
+
+			edges_.Add(e);
+
+			return e;
+		}
+
+		public virtual Edge Link(T a, T b)
+		{
+			int ai = nodes_.IndexOf(a);
+			int bi = nodes_.IndexOf(b);
+
+			if (ai < 0 || bi < 0)
+				return null;
+
+			return Link(ai, bi);
+		}
+
+		public virtual bool Unlink(Edge e)
+		{
+			return edges_.Remove(e);
+		}
+
+		public virtual bool Unlink(long a, long b)
+		{
+			Edge e = new Edge(a, b);
+
+			return Unlink(e);
+		}
+
+		public virtual bool Unlink(T a, T b)
+		{
+			int ai = nodes_.IndexOf(a);
+			int bi = nodes_.IndexOf(b);
+
+			if (ai < 0 || bi < 0)
 				return false;
 
-			edges_.Add(new Edge(a, b, d, o));
-			edges_.Add(new Edge(b, a, d, o));
+			return Unlink(ai, bi);
+		}
+	}
 
-			return true;
+	public class Edge : Tuple<long, long>
+	{
+		public long a { get { return Item1; } }
+
+		public long b { get { return Item2; } }
+
+		public Edge(long a, long b)
+			: base(a, b)
+		{ }
+
+		public override bool Equals(object obj)
+		{
+			var e = obj as Edge;
+			return e != null ? (e.a == a) && (e.b == b) : base.Equals(obj);
+		}
+
+		public override int GetHashCode()
+		{
+			return a.GetHashCode() ^ b.GetHashCode();
 		}
 	}
 }
