@@ -34,11 +34,11 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEditor">
-      <HintPath>..\..\..\..\Libraries\MathEx\Libraries\UnityEngine\UnityEditor.dll</HintPath>
+      <HintPath>$(ProjectDir)\Libraries\UnityEngine\UnityEditor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\Libraries\MathEx\Libraries\UnityEngine\UnityEngine.dll</HintPath>
+      <HintPath>$(ProjectDir)\Libraries\UnityEngine\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
