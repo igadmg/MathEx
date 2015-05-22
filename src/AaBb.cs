@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace MathEx
 {
 	public struct aabb2
@@ -12,6 +9,7 @@ namespace MathEx
 		public vec2 a;
 		public vec2 b;
 
+		public vec2 o { get { return (a + b) / 2; } }
         public float x { get { return b.x - a.x; } }
         public float y { get { return b.y - a.y; } }
 		public vec2 size { get { return b - a; } }
@@ -33,6 +31,23 @@ namespace MathEx
 		public static aabb2 operator -(aabb2 a, vec2 v) { return new aabb2(a.a - v, a.b - v); }
         public static aabb2 operator *(aabb2 a, vec2 v) { return new aabb2(a.a.Mul(v), a.b.Mul(v)); }
 
+
+		public int Position(vec2 v)
+		{
+			int res = 0;
+
+			if (v.x < a.x)
+				res |= 0x01;
+			else if (v.x > b.x)
+				res |= 0x02;
+
+			if (v.y < a.y)
+				res |= 0x08;
+			else if (v.y > b.y)
+				res |= 0x04;
+
+			return res;
+		}
 
 		public aabb2 Extend(vec2 p)
 		{
