@@ -34,11 +34,11 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEditor">
-      <HintPath>$(ProjectDir)\Libraries\UnityEngine\UnityEditor.dll</HintPath>
+      <HintPath>$(SolutionDir)Libraries\UnityAssemblies\UnityEditor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine">
-      <HintPath>$(ProjectDir)\Libraries\UnityEngine\UnityEngine.dll</HintPath>
+      <HintPath>$(SolutionDir)Libraries\UnityAssemblies\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
@@ -50,7 +50,7 @@
     <Compile Include="src.UnityEditor\PropertyDrawer_vec3.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SystemEx\SystemEx.csproj">
+    <ProjectReference Include="$(SolutionDir)Libraries\SystemEx\SystemEx.csproj">
       <Project>{0271e27f-e614-4b0f-af16-05d2d2781b7f}</Project>
       <Name>SystemEx</Name>
       <Private>False</Private>

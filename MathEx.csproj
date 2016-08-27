@@ -52,7 +52,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEngine">
-      <HintPath>$(ProjectDir)\Libraries\UnityEngine\UnityEngine.dll</HintPath>
+      <HintPath>$(SolutionDir)Libraries\UnityAssemblies\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
