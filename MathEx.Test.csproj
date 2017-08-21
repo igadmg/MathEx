@@ -41,7 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEngine">
-      <HintPath>$(SolutionDir)Libraries\UnityAssemblies\UnityEngine.dll</HintPath>
+      <HintPath>$(UNITYEDITOR_PATH)\Data\Managed\UnityEngine.dll</HintPath>
       <Private>True</Private>
     </Reference>
   </ItemGroup>
