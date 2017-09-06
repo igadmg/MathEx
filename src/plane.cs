@@ -40,12 +40,6 @@ namespace MathEx
 			pd = d;
 		}
 
-		public vec3 project(vec3 v)
-		{
-			var n = normal;
-			return v - (v * n) * n;
-		}
-
 		public vec3 cast(ray r)
 		{
 			float d;

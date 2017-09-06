@@ -2,15 +2,20 @@ namespace MathEx
 {
 	public static class ProjectEx	
 	{
-		static vec3 project(this plane pl, vec3 p)
+		public static vec3 project(this plane pl, vec3 p)
 		{
 			return p - (pl.normal * p + pl.d) * pl.normal;
 		}
 
-		static vec2 project(this plane pl, vec3 v, vec3 origin, vec3[] basis)
+		public static vec2 project(this plane pl, vec3 v, vec3 origin, vec3[] basis)
 		{
-			vec3 pv = pl.project(v);
+			vec3 pv = pl.project(v) - origin;
 			return new vec2(pv * basis[0], pv * basis[1]);
+		}
+
+		public static vec3 project(this plane pl, vec2 v, vec3 origin, vec3[] basis)
+		{
+			return origin + basis[0] * v.x + basis[1] * v.y;
 		}
 	}
 }
