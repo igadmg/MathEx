@@ -130,12 +130,21 @@ namespace MathEx
 		}
 
 #if UNITY
+		public static UnityEngine.Vector3 Clamp(this UnityEngine.Vector3 v, UnityEngine.Vector3 min, UnityEngine.Vector3 max)
+		{
+			return new UnityEngine.Vector3(
+				Clamp(v.x, min.x, max.x),
+				Clamp(v.y, min.y, max.y),
+				Clamp(v.z, min.z, max.z)
+				);
+		}
+
 		public static UnityEngine.Vector3 GetCenteredEulerAngles(this UnityEngine.Vector3 v)
 		{
 			return new UnityEngine.Vector3(
 				v.x > 180 ? -(360 - v.x) : v.x,
 				v.y > 180 ? -(360 - v.y) : v.y,
-				v.y > 180 ? -(360 - v.y) : v.y
+				v.z > 180 ? -(360 - v.z) : v.z
 				);
 		}
 
