@@ -14,6 +14,9 @@ namespace MathEx
 		float pa, pb, pc, pd;
 
 		public vec3 normal { get { return new vec3(pa, pb, pc); } }
+		public float a { get { return pa; } }
+		public float b { get { return pb; } }
+		public float c { get { return pc; } }
 		public float d { get { return pd; } }
 
 		public plane()
@@ -63,37 +66,6 @@ namespace MathEx
 				return vec3.empty;
 
 			return r.origin + d * r.direction;
-		}
-
-		public ray intersect(plane p)
-		{
-			vec3 dir = p.normal % p.normal;
-
-			if (dir.isZero)
-				return ray.empty;
-
-			float d = (p.pb * pc - p.pc);
-			if (pb != 0 && d != 0) {
-				float z = (p.pd - p.pb * pd) / (p.pb * pc - p.pc);
-				float y = (pd - pc * z) / pb;
-				return new ray(new vec3(0, y, z), dir);
-			}
-
-			d = (p.pc * pa - p.pa);
-			if (pc != 0 && d != 0) {
-				float x = (p.pd - p.pc * pd) / (p.pc * pa - p.pa);
-				float z = (pd - pa * x) / pc;
-				return new ray(new vec3(x, 0, z), dir);
-			}
-
-			d = (p.pa * pb - p.pb);
-			if (pa != 0 && d != 0) {
-				float y = (p.pd - p.pa * pd) / (p.pa * pb - p.pb);
-				float x = (pd - pb * y) / pa;
-				return new ray(new vec3(x, y, 0), dir);
-			}
-
-			return new ray(vec3.empty, dir);
 		}
 	}
 }

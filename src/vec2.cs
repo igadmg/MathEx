@@ -72,7 +72,8 @@ namespace MathEx
 		public static vec2 operator /(float d, vec2 a) { return new vec2(a.x / d, a.y / d); }
 
 
-        public static float operator *(vec2 a, vec2 b) { return Dot(a, b); }
+
+		public static float operator *(vec2 a, vec2 b) { return Dot(a, b); }
 
 
 

@@ -11,7 +11,8 @@
     <AssemblyName>MathEx</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -69,12 +70,15 @@
     <Compile Include="src\Graph.cs" />
     <Compile Include="src\grid3.cs" />
     <Compile Include="src\Grid.cs" />
+    <Compile Include="src\interpolate.cs" />
     <Compile Include="src\Intersect.cs" />
     <Compile Include="src\kalman1d.cs" />
+    <Compile Include="src\line3.cs" />
     <Compile Include="src\MathEx.cs" />
     <Compile Include="src\Noize.cs" />
     <Compile Include="src\plane.cs" />
     <Compile Include="src\polygon.cs" />
+    <Compile Include="src\project.cs" />
     <Compile Include="src\svec3.cs" />
     <Compile Include="src\QuadTree.cs" />
     <Compile Include="src\random.cs" />
@@ -90,7 +94,7 @@
     <Compile Include="src\vecEx.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SystemEx\SystemEx.csproj">
+    <ProjectReference Include="$(SolutionDir)Libraries\SystemEx\SystemEx.csproj">
       <Project>{0271e27f-e614-4b0f-af16-05d2d2781b7f}</Project>
       <Name>SystemEx</Name>
       <Private>False</Private>

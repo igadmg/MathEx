@@ -109,11 +109,13 @@ namespace MathEx
 
 		public static float Cbrt(float v)
 		{
-			if (v >= 0) {
-				return Pow(v, 1/3.0f);
+			if (v >= 0)
+			{
+				return Pow(v, 1 / 3.0f);
 			}
-			else {
-				return -Pow(-v, 1/3.0f);
+			else
+			{
+				return -Pow(-v, 1 / 3.0f);
 			}
 		}
 
@@ -126,5 +128,69 @@ namespace MathEx
 		{
 			return (int)(f + 0.5f);
 		}
+
+#if UNITY
+		public static UnityEngine.Vector3 GetCenteredEulerAngles(this UnityEngine.Vector3 v)
+		{
+			return new UnityEngine.Vector3(
+				v.x > 180 ? -(360 - v.x) : v.x,
+				v.y > 180 ? -(360 - v.y) : v.y,
+				v.y > 180 ? -(360 - v.y) : v.y
+				);
+		}
+
+		public static UnityEngine.Quaternion GetRotation(this UnityEngine.Matrix4x4 m)
+		{
+			UnityEngine.Quaternion q = new UnityEngine.Quaternion();
+			q.w = Sqrt(UnityEngine.Mathf.Max(0, 1 + m[0, 0] + m[1, 1] + m[2, 2])) / 2;
+			q.x = Sqrt(UnityEngine.Mathf.Max(0, 1 + m[0, 0] - m[1, 1] - m[2, 2])) / 2;
+			q.y = Sqrt(UnityEngine.Mathf.Max(0, 1 - m[0, 0] + m[1, 1] - m[2, 2])) / 2;
+			q.z = Sqrt(UnityEngine.Mathf.Max(0, 1 - m[0, 0] - m[1, 1] + m[2, 2])) / 2;
+			q.x *= Sign(q.x * (m[2, 1] - m[1, 2]));
+			q.y *= Sign(q.y * (m[0, 2] - m[2, 0]));
+			q.z *= Sign(q.z * (m[1, 0] - m[0, 1]));
+			return q;
+		}
+
+		public static UnityEngine.Quaternion Pow(this UnityEngine.Quaternion q, float n)
+		{
+			return q.Ln().Scale(n).Exp();
+		}
+
+		public static UnityEngine.Quaternion Ln(this UnityEngine.Quaternion q)
+		{
+			float l = q.x * q.x + q.y * q.y + q.z * q.z;
+			float r = Sqrt(l);
+			float t = r > 0.00001f ? UnityEngine.Mathf.Atan2(r, q.w) / r : 0.0f;
+			
+			return new UnityEngine.Quaternion(
+				q.x * t,
+				q.y * t,
+				q.z * t,
+				0.5f * Log(q.w * q.w + l));
+		}
+
+		public static UnityEngine.Quaternion Exp(this UnityEngine.Quaternion q)
+		{
+			float r = Sqrt(q.x * q.x + q.y * q.y + q.z * q.z);
+			float et = UnityEngine.Mathf.Exp(q.w);
+			float s = r >= 0.00001f ? et * UnityEngine.Mathf.Sin(r) / r : 0f;
+
+			return new UnityEngine.Quaternion(
+				q.x * s,
+				q.y * s,
+				q.z * s,
+				et * UnityEngine.Mathf.Cos(r));
+		}
+
+		public static UnityEngine.Quaternion Scale(this UnityEngine.Quaternion q, float s)
+		{
+			return new UnityEngine.Quaternion(
+				q.x * s,
+				q.y * s,
+				q.z * s,
+				q.w * s);
+		}
+#endif
 	}
 }
