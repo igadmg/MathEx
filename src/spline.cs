@@ -3,46 +3,50 @@ using System.Collections.Generic;
 
 namespace MathEx
 {
-	public class Spline
+	public class spline
 	{
-		vec3[] P;
-		float[] T;
-		Tuple<float, float>[] Q;
+		public vec3[] ps;
+		float[] ts;
+		Tuple<float, float>[] q;
 
 
-		public Spline(ICollection<vec3> p)
+		public spline(ICollection<vec3> p)
+		{
+			ts = new float[p.Count];
+			q = new Tuple<float, float>[p.Count - 1];
+			ps = new vec3[p.Count];
+			p.CopyTo(ps, 0);
+
+			init();
+		}
+
+		protected void init()
 		{
 			int i = 0;
-			
-			T = new float[p.Count];
-			Q = new Tuple<float, float>[p.Count - 1];
-			P = new vec3[p.Count];
-			p.CopyTo(P, 0);
 
-
-			T[0] = 0;
-			for (i = 1; i < p.Count - 1; i++) {
-				T[i] = i / (p.Count - 1);
+			ts[0] = 0;
+			for (i = 1; i < ps.Length - 1; i++) {
+				ts[i] = i / (ps.Length - 1);
 			}
-			T[p.Count - 1] = 1;
+			ts[ps.Length - 1] = 1;
 
 
-			float[] a = new float[p.Count];
-			float[] b = new float[p.Count];
-			float[] c = new float[p.Count];
-			float[] k = new float[p.Count];
+			float[] a = new float[ps.Length];
+			float[] b = new float[ps.Length];
+			float[] c = new float[ps.Length];
+			float[] k = new float[ps.Length];
 
 			i = 0;
-			float dx = P[i + 1].x - P[i].x;
-			float dy = P[i + 1].y - P[i].y;
+			float dx = ps[i + 1].x - ps[i].x;
+			float dy = ps[i + 1].y - ps[i].y;
 
 			a[i] = 0;
 			b[i] = 2 / dx;
 			c[i] = 1 / dx;
 			k[i] = 3 * dy / (dx * dx);
-			for (i = 1; i < p.Count - 1; i++) {
-				dx = P[i + 1].x - P[i].x;
-				dy = P[i + 1].y - P[i].y;
+			for (i = 1; i < ps.Length - 1; i++) {
+				dx = ps[i + 1].x - ps[i].x;
+				dy = ps[i + 1].y - ps[i].y;
 				//float dx1 = 
 
 				a[i] = 1 / dx;
@@ -52,8 +56,8 @@ namespace MathEx
 				k[i] = 3 * dy / (dx * dx);
 			}
 
-			dx = P[i + 1].x - P[i].x;
-			dy = P[i + 1].y - P[i].y;
+			dx = ps[i + 1].x - ps[i].x;
+			dy = ps[i + 1].y - ps[i].y;
 
 			a[i] = 1 / dx;
 			b[i] = 2 / dx;
@@ -62,27 +66,27 @@ namespace MathEx
 
 			solve_tridiagonal_in_place_destructive(k, a, b, c);
 
-			for (i = 0; i < Q.Length; i++) {
-				dx = P[i + 1].x - P[i].x;
-				dy = P[i + 1].y - P[i].y;
-				Q[i] = Tuple.Create(k[i - 1] * dx - dy, dy - k[i] * dx);
+			for (i = 0; i < q.Length; i++) {
+				dx = ps[i + 1].x - ps[i].x;
+				dy = ps[i + 1].y - ps[i].y;
+				q[i] = Tuple.Create(k[i - 1] * dx - dy, dy - k[i] * dx);
 			}
 		}
 
 		public vec3 Evaluate(float t)
 		{
-			if (t <= 0) return P[0];
-			if (t >= 1) return P[1];
+			if (t <= 0) return ps[0];
+			if (t >= 1) return ps[1];
 
 			int i = 0;
-			for (i = 0; i < T.Length - 1; i++) {
-				if (i > T[i] && i < T[i + 1]) {
-					var ab = Q[i];
-					float t0 = t - T[i];
+			for (i = 0; i < ts.Length - 1; i++) {
+				if (i > ts[i] && i < ts[i + 1]) {
+					var ab = q[i];
+					float t0 = t - ts[i];
 					float t1 = 1 - t0;
 
-					float x = (P[i + 1].x - P[i].x) * t0 + P[i].x;
-					float y = t1 * P[i].y + t0 * P[i+1].y + t0 * t1 * (ab.Item1 * t1 + ab.Item2 * t0);
+					float x = (ps[i + 1].x - ps[i].x) * t0 + ps[i].x;
+					float y = t1 * ps[i].y + t0 * ps[i + 1].y + t0 * t1 * (ab.Item1 * t1 + ab.Item2 * t0);
 
 					return new vec3(x, y, 0);
 				}

@@ -252,7 +252,32 @@ namespace MathEx
 			return Mathf.Clamp(f, v.x, v.y);
 		}
 
+		public static Vector2 Clamp01(this Vector2 v)
+		{
+			return MathfEx.Clamp01(v);
+		}
+
+		public static Vector2 Clamp11(this Vector2 v)
+		{
+			return MathfEx.Clamp11(v);
+		}
+
 		public static Vector2 Clamp(this Vector2 v, Vector2 min, Vector2 max)
+		{
+			return MathfEx.Clamp(v, min, max);
+		}
+
+		public static Vector3 Clamp01(this Vector3 v)
+		{
+			return MathfEx.Clamp01(v);
+		}
+
+		public static Vector3 Clamp11(this Vector3 v)
+		{
+			return MathfEx.Clamp11(v);
+		}
+
+		public static Vector3 Clamp(this Vector3 v, Vector3 min, Vector3 max)
 		{
 			return MathfEx.Clamp(v, min, max);
 		}
@@ -419,7 +444,7 @@ namespace MathEx
 
 		public static IEnumerable<Vector3> Bezier(this ICollection<Vector3> ps, int steps)
 		{
-			Bezier b = new Bezier(new List<Vector3>(ps).ConvertAll(x => x.ToVec3()));
+			bezier b = new bezier(new List<Vector3>(ps).ConvertAll(x => x.ToVec3()));
 
 			for (int i = 0; i < steps; i++) {
 				yield return (b.Evaluate((float)(i) / (steps - 1))).ToVector3();

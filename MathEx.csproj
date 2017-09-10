@@ -61,7 +61,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\aabb.cs" />
     <Compile Include="src\aabbi.cs" />
-    <Compile Include="src\Bezier.cs" />
+    <Compile Include="src\bezier.cs" />
     <Compile Include="src\BinaryTree.cs" />
     <Compile Include="src\color.cs" />
     <Compile Include="src\CoordinateSystem.cs" />
@@ -84,7 +84,7 @@
     <Compile Include="src\random.cs" />
     <Compile Include="src\ray.cs" />
     <Compile Include="src\Set.cs" />
-    <Compile Include="src\Spline.cs" />
+    <Compile Include="src\spline.cs" />
     <Compile Include="src\triangle.cs" />
     <Compile Include="src\vec2.cs" />
     <Compile Include="src\vec3i.cs" />
