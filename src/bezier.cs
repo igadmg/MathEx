@@ -30,23 +30,27 @@ namespace MathEx
 			p.CopyTo(this.p, 0);
 		}
 
+		public vec3 Derivative2(float t)
+		{
+			return Derivative2(p, 0, t);
+		}
+
 		public vec3 Derivative(float t)
 		{
-			float t1 = 1f - t;
-			return
-				(p[1] - p[0]) * 3f * t1 * t1
-				+ (p[2] - p[1]) * 6f * t1 * t
-				+ (p[3] - p[2]) * 3f * t * t;
+			return Derivative(p, 0, t);
 		}
 
 		public vec3 Evaluate(float t)
 		{
+			return Evaluate(p, 0, t);
+		}
+
+		public static vec3 Derivative2(vec3[] p, int i, float t)
+		{
 			float t1 = 1f - t;
-			return 
-				p[0] * t1 * t1 * t1
-				+ p[1] * 3f * t * t1 * t1
-				+ p[2] * 3f * t * t * t1
-				+ p[3] * t * t * t;
+			return
+				(p[i + 2] - 2 * p[i + 1] + p[i + 0]) * 6f * t1
+				+ (p[i + 3] - 2 * p[i + 2] + p[i + 1]) * 6f * t;
 		}
 
 		public static vec3 Derivative(vec3[] p, int i, float t)

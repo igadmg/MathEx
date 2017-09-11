@@ -2,16 +2,155 @@ using System;
 
 namespace MathEx
 {
-	public static class CubicHermiteSpline
+	public abstract class Interpolator
 	{
-		private static float hermite_30(float t) { return 1 - 3 * t * t + 2 * t * t * t; }
-		private static float hermite_31(float t) { return t - 2 * t * t + t * t * t; }
-		private static float hermite_32(float t) { return -t * t + t * t * t; }
-		private static float hermite_33(float t) { return 3 * t * t - 2 * t * t * t; }
+		public abstract int size { get; }
 
-		public static float Interpolate(float p0, float v0, float p1, float v1, float t)
+		public abstract float integral(float t, params float[] p);
+		public abstract float value(float t, params float[] p);
+		public abstract float derivative(float t, params float[] p);
+	}
+
+	// based on https://www.rose-hulman.edu/~finn/CCLI/Notes/day09.pdf
+	public class CubicHermiteSpline : Interpolator
+	{
+		private static float hermite_p30(float t) { return  1f/2f * t*t*t*t - 1f/2f * t*t*t               + t; }
+		private static float hermite_p31(float t) { return  1f/4f * t*t*t*t - 2f/3f * t*t*t + 1f/2f * t*t; }
+		private static float hermite_p32(float t) { return  1f/4f * t*t*t*t - 1f/3f * t*t*t; }
+		private static float hermite_p33(float t) { return -1f/2f * t*t*t*t +         t*t*t; }
+
+		private static float hermite_30(float t) { return  2 * t*t*t - 3 * t*t     + 1; }
+		private static float hermite_31(float t) { return      t*t*t - 2 * t*t + t; }
+		private static float hermite_32(float t) { return      t*t*t -     t*t; }
+		private static float hermite_33(float t) { return -2 * t*t*t + 3 * t*t; }
+
+		private static float hermite_d30(float t) { return  6 * t*t - 6 * t; }
+		private static float hermite_d31(float t) { return  3 * t*t - 4 * t + 1; }
+		private static float hermite_d32(float t) { return  3 * t*t - 2 * t; }
+		private static float hermite_d33(float t) { return -6 * t*t + 6 * t; }
+
+
+		public static int Size = 4;
+
+		public static float Integral(float p0, float v0, float p1, float v1, float t)
+		{
+			return hermite_p30(t) * p0 + hermite_p31(t) * v0 + hermite_p32(t) * v1 + hermite_p33(t) * p1;
+		}
+
+		public static float Value(float p0, float v0, float p1, float v1, float t)
 		{
 			return hermite_30(t) * p0 + hermite_31(t) * v0 + hermite_32(t) * v1 + hermite_33(t) * p1;
+		}
+
+		public static float Derivative(float p0, float v0, float p1, float v1, float t)
+		{
+			return hermite_d30(t) * p0 + hermite_d31(t) * v0 + hermite_d32(t) * v1 + hermite_d33(t) * p1;
+		}
+
+		public override int size { get { return Size; } }
+
+		public override float integral(float t, params float[] p)
+		{
+			return Integral(p[0], p[1], p[3], p[2], t);
+		}
+
+		public override float value(float t, params float[] p)
+		{
+			return Value(p[0], p[1], p[3], p[2], t);
+		}
+
+		public override float derivative(float t, params float[] p)
+		{
+			return Derivative(p[0], p[1], p[3], p[2], t);
+		}
+	}
+
+	public class QuinticHermiteSpline : Interpolator
+	{
+		private static float hermite_50(float t) { return    -6f * t*t*t*t*t +   15f * t*t*t*t -   10f * t*t*t                   + 1; }
+		private static float hermite_51(float t) { return    -3f * t*t*t*t*t +    8f * t*t*t*t -    6f * t*t*t               + t; }
+		private static float hermite_52(float t) { return -1f/2f * t*t*t*t*t + 3f/2f * t*t*t*t - 3f/2f * t*t*t + 1f/2f * t*t; }
+		private static float hermite_53(float t) { return  1f/2f * t*t*t*t*t -         t*t*t*t + 1f/2f * t*t*t; }
+		private static float hermite_54(float t) { return    -3f * t*t*t*t*t +    7f * t*t*t*t -    4f * t*t*t; }
+		private static float hermite_55(float t) { return     6f * t*t*t*t*t -   15f * t*t*t*t +   10f * t*t*t; }
+
+
+
+		public static int Size = 6;
+
+		private static float Value(float p0, float v0, float a0, float p1, float v1, float a1, float t)
+		{
+			return hermite_50(t) * p0 + hermite_51(t) * v0 + hermite_52(t) * a0 + hermite_53(t) * a1 + hermite_54(t) * v1 + hermite_55(t) * p1;
+		}
+
+		public override int size { get { return Size; } }
+
+		public override float integral(float t, params float[] p)
+		{
+			return 0;// Integral(p[0], p[1], p[2], p[5], p[4], p[3], t);
+		}
+
+		public override float value(float t, params float[] p)
+		{
+			return Value(p[0], p[1], p[2], p[5], p[4], p[3], t);
+		}
+
+		public override float derivative(float t, params float[] p)
+		{
+			return 0;// Derivative(p[0], p[1], p[2], p[5], p[4], p[3], t);
+		}
+	}
+
+	public class CubicBezierSpline : Interpolator
+	{
+		private static float bezier_p30(float t) { return -1f/4f * t*t*t*t +      t*t*t - 3f/2f * t*t + t; }
+		private static float bezier_p31(float t) { return  3f/4f * t*t*t*t - 2f * t*t*t + 3f/2f * t*t; }
+		private static float bezier_p32(float t) { return -3f/4f * t*t*t*t +      t*t*t; }
+		private static float bezier_p33(float t) { return  1f/4f * t*t*t*t; }
+
+		private static float bezier_30(float t) { return -1f * t*t*t + 3f * t*t - 3f * t + 1f; } // (1-t)^3
+		private static float bezier_31(float t) { return  3f * t*t*t - 6f * t*t + 3f * t; }      // 3 * t * (1-t)^2
+		private static float bezier_32(float t) { return -3f * t*t*t + 3f * t*t; }               // 3 * t^2 * (1-t)
+		private static float bezier_33(float t) { return       t*t*t; }                          // t^3
+
+		private static float bezier_d30(float t) { return -3f * t*t +  6f * t - 3f; }
+		private static float bezier_d31(float t) { return  9f * t*t - 12f * t + 3f; }
+		private static float bezier_d32(float t) { return -9f * t*t +  6f * t; }
+		private static float bezier_d33(float t) { return  3f * t*t; }
+
+
+		public static int Size = 4;
+
+		public static float Integral(float p0, float p1, float p2, float p3, float t)
+		{
+			return bezier_p30(t) * p0 + bezier_p31(t) * p1 + bezier_p32(t) * p2 + bezier_p33(t) * p3;
+		}
+
+		public static float Value(float p0, float p1, float p2, float p3, float t)
+		{
+			return bezier_30(t) * p0 + bezier_31(t) * p1 + bezier_32(t) * p2 + bezier_33(t) * p3;
+		}
+
+		public static float Derivative(float p0, float p1, float p2, float p3, float t)
+		{
+			return bezier_d30(t) * p0 + bezier_d31(t) * p1 + bezier_d32(t) * p2 + bezier_d33(t) * p3;
+		}
+
+		public override int size { get { return Size; } }
+
+		public override float integral(float t, params float[] p)
+		{
+			return Integral(p[0], p[1], p[2], p[3], t);
+		}
+
+		public override float value(float t, params float[] p)
+		{
+			return Value(p[0], p[1], p[2], p[3], t);
+		}
+
+		public override float derivative(float t, params float[] p)
+		{
+			return Derivative(p[0], p[1], p[2], p[3], t);
 		}
 	}
 
@@ -60,22 +199,5 @@ namespace MathEx
 
 			}
 		}
-	}
-
-	public static class QuinticHermiteSpline
-	{
-		private static float hermite_50(float t) { return 1 - 10 * t * t * t + 15 * t * t * t * t - 6 * t * t * t * t * t; }
-		private static float hermite_51(float t) { return t - 6 * t * t * t + 8 * t * t * t * t - 3 * t * t * t * t * t; }
-		private static float hermite_52(float t) { return 0.5f * t * t - 1.5f * t * t * t + 1.5f * t * t * t * t - 0.5f * t * t * t * t * t; }
-		private static float hermite_53(float t) { return 0.5f * t * t * t - t * t * t * t + 0.5f * t * t * t * t * t; }
-		private static float hermite_54(float t) { return -4 * t * t * t + 7 * t * t * t * t - 3 * t * t * t * t * t; }
-		private static float hermite_55(float t) { return 10 * t * t * t - 15 * t * t * t * t + 6 * t * t * t * t * t; }
-
-
-
-		private static float Interpolate(float p0, float v0, float a0, float p1, float v1, float a1, float t)
-		{
-			return hermite_50(t) * p0 + hermite_51(t) * v0 + hermite_52(t) * a0 + hermite_53(t) * a1 + hermite_54(t) * v1 + hermite_55(t) * p1;
-		}
-	}
+	}	
 }
