@@ -3,6 +3,55 @@ using System.Collections.Generic;
 
 namespace MathEx
 {
+	public class spline_curve<I> where I : Interpolator, new()
+	{
+		static I interpolator = new I();
+
+		public bool loop = false;
+		public vec3[] p;
+
+
+		// return length of spline curve in segments.
+		public int length
+		{
+			get { return p.Length / (interpolator.size - 1); }
+		}
+
+		protected int calculateT(ref float t)
+		{
+			int i;
+
+			if (t >= 1f)
+			{
+				t = 1f;
+				i = p.Length - 4;
+			}
+			else
+			{
+				t = MathEx.Clamp(t, 0, 1) * length;
+				i = (int)t;
+				t -= i;
+				i *= 3;
+			}
+
+			return i;
+		}
+
+		public vec3 Evaluate(float t)
+		{
+			int i = calculateT(ref t);
+
+			return bezier.Evaluate(p, i, t);
+		}
+
+		public vec3 Derivative(float t)
+		{
+			int i = calculateT(ref t);
+
+			return bezier.Derivative(p, i, t);
+		}
+	}
+
 	public class spline
 	{
 		public vec3[] ps;
