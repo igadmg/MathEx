@@ -442,6 +442,7 @@ namespace MathEx
 
 		#region Vector collection enumrators
 
+		/*
 		public static IEnumerable<Vector3> Bezier(this ICollection<Vector3> ps, int steps)
 		{
 			bezier b = new bezier(new List<Vector3>(ps).ConvertAll(x => x.ToVec3()));
@@ -452,6 +453,7 @@ namespace MathEx
 
 			yield break;
 		}
+		*/
 
 		public static IEnumerable<Vector3> Spline(this ICollection<Vector3> ps, int steps)
 		{

@@ -101,6 +101,56 @@ namespace MathEx
 		}
 	}
 
+	public class QuadricBezierSpline : Interpolator
+	{
+		private static float bezier_p20(float t) { return  1f/3f * t*t*t - t*t + t; }
+		private static float bezier_p21(float t) { return -2f/3f * t*t*t + t*t; }
+		private static float bezier_p22(float t) { return  1f/3f * t*t*t; }
+		
+		private static float bezier_20(float t) { return       t*t - 2f * t + 1f; }  // (1-t)^2
+		private static float bezier_21(float t) { return -2f * t*t + 2f * t; }       // 2 * t * (1-t)
+		private static float bezier_22(float t) { return       t*t; }                // t^2
+		
+		private static float bezier_d20(float t) { return  2f * t - 2f; }
+		private static float bezier_d21(float t) { return -4f * t + 2f; }
+		private static float bezier_d22(float t) { return  2f * t; }
+		
+
+		public static int Size = 3;
+
+		public static float Integral(float p0, float p1, float p2, float t)
+		{
+			return bezier_p20(t) * p0 + bezier_p21(t) * p1 + bezier_p22(t) * p2;
+		}
+
+		public static float Value(float p0, float p1, float p2, float t)
+		{
+			return bezier_20(t) * p0 + bezier_21(t) * p1 + bezier_22(t) * p2;
+		}
+
+		public static float Derivative(float p0, float p1, float p2, float t)
+		{
+			return bezier_d20(t) * p0 + bezier_d21(t) * p1 + bezier_d22(t) * p2;
+		}
+
+		public override int size { get { return Size; } }
+
+		public override float integral(float t, params float[] p)
+		{
+			return Integral(p[0], p[1], p[2], t);
+		}
+
+		public override float value(float t, params float[] p)
+		{
+			return Value(p[0], p[1], p[2], t);
+		}
+
+		public override float derivative(float t, params float[] p)
+		{
+			return Derivative(p[0], p[1], p[2], t);
+		}
+	}
+
 	public class CubicBezierSpline : Interpolator
 	{
 		private static float bezier_p30(float t) { return -1f/4f * t*t*t*t +      t*t*t - 3f/2f * t*t + t; }
