@@ -8,6 +8,7 @@ namespace MathEx
 		protected static Dictionary<Type, MathTypeTag> specs = new Dictionary<Type, MathTypeTag>
 		{
 			{ typeof(float), new MathTypeTagFloat() },
+			{ typeof(vec2), new MathTypeTagVec2() },
 			{ typeof(vec3), new MathTypeTagVec3() },
 		};
 	}
@@ -51,6 +52,27 @@ namespace MathEx
 		}
 
 		public override float mul(float a, float b)
+		{
+			return a * b;
+		}
+	}
+
+	public class MathTypeTagVec2 : MathTypeTag<vec2>
+	{
+		public override vec2 zero()
+		{
+			return vec2.zero;
+		}
+
+		public override vec2 add(params vec2[] v)
+		{
+			vec2 result = vec2.zero;
+			for (int i = 0; i < v.Length; i++)
+				result += v[i];
+			return result;
+		}
+
+		public override vec2 mul(float a, vec2 b)
 		{
 			return a * b;
 		}
