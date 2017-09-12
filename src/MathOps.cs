@@ -22,17 +22,22 @@ namespace MathEx
 
 		public virtual T zero()
 		{
-			throw new System.Exception("Operation is not defined.");
+			throw new NotImplementedException();
 		}
 
 		public virtual T add(params T[] v)
 		{
-			throw new System.Exception("Operation is not defined.");
+			throw new NotImplementedException();
 		}
 
 		public virtual T mul(float a, T b)
 		{
-			throw new System.Exception("Operation is not defined.");
+			throw new NotImplementedException();
+		}
+
+		public virtual float distance(T p0, T p1)
+		{
+			throw new NotImplementedException();
 		}
 	}
 
@@ -55,6 +60,11 @@ namespace MathEx
 		{
 			return a * b;
 		}
+
+		public override float distance(float p0, float p1)
+		{
+			return p1 - p0;
+		}
 	}
 
 	public class MathTypeTagVec2 : MathTypeTag<vec2>
@@ -76,6 +86,11 @@ namespace MathEx
 		{
 			return a * b;
 		}
+
+		public override float distance(vec2 p0, vec2 p1)
+		{
+			return (p1 - p0).length;
+		}
 	}
 
 	public class MathTypeTagVec3 : MathTypeTag<vec3>
@@ -96,6 +111,11 @@ namespace MathEx
 		public override vec3 mul(float a, vec3 b)
 		{
 			return a * b;
+		}
+
+		public override float distance(vec3 p0, vec3 p1)
+		{
+			return (p1 - p0).length;
 		}
 	}
 }

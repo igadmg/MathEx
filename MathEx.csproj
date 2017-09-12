@@ -34,7 +34,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Unity|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
     <OutputPath>bin\Debug Unity\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;UNITY</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;UNITY_STANDALONE</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
@@ -42,7 +42,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Unity|AnyCPU'">
     <OutputPath>bin\Release Unity\</OutputPath>
-    <DefineConstants>TRACE;UNITY</DefineConstants>
+    <DefineConstants>TRACE;UNITY_STANDALONE</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>

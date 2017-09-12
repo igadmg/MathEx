@@ -112,7 +112,7 @@ namespace MathEx
 		public vec2i ToVec2i() { return new vec2i((int)x, (int)y); }
 
 
-#if UNITY
+#if UNITY_EDITOR || UNITY_STANDALONE
 		public static implicit operator UnityEngine.Vector2(vec2 v)
 		{
 			return new UnityEngine.Vector2(v.x, v.y);

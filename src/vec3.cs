@@ -76,7 +76,7 @@ namespace MathEx
 		public string ToString(string f) { return string.Format("({0},{1},{2})", x.ToString(f), y.ToString(f), z.ToString(f)); }
 		public string ToString(string f, IFormatProvider p) { return string.Format("({0},{1},{2})", x.ToString(f, p), y.ToString(f, p), z.ToString(f, p)); }
 
-#if UNITY
+#if UNITY_EDITOR || UNITY_STANDALONE
 		public static implicit operator UnityEngine.Vector3(vec3 v)
 		{
 			return new UnityEngine.Vector3(v.x, v.y, v.z);

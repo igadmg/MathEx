@@ -1,36 +1,39 @@
-﻿using MathEx;
-using System;
+﻿using System;
 using UnityEngine;
 
 
 
-public class Spline : MonoBehaviour
+namespace MathEx
 {
-	[Serializable]
-	public class CubicBezierCurve : spline_curve<vec3, CubicBezierSpline<vec3>>
+	public class Spline : MonoBehaviour
 	{
-		public CubicBezierCurve() : base()
+		[Serializable]
+		public class CubicBezierCurve : spline_curve<vec3, CubicBezierSpline<vec3>>
+		{
+			public CubicBezierCurve() : base()
+			{
+			}
+
+			public CubicBezierCurve(int length) : base(length)
+			{
+			}
+		}
+
+		[SerializeField]
+		protected CubicBezierCurve m_Spline = new CubicBezierCurve(3);
+
+
+
+		public CubicBezierCurve spline { get { return m_Spline; } }
+
+
+
+		void Start()
 		{
 		}
 
-		public CubicBezierCurve(int length) : base(length)
+		void Update()
 		{
 		}
-	}
-
-	[SerializeField]
-	vec3 start;
-
-	[SerializeField]
-	CubicBezierCurve spline = new CubicBezierCurve(3);
-
-	// Use this for initialization
-	void Start()
-	{
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
 	}
 }

@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug.UnityEngine\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>UNITY_STANDALONE;DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -27,7 +27,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release.UnityEngine\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>UNITY_STANDALONE;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -50,6 +50,7 @@
     <Compile Include="src.UnityEngine\PolarVector.cs" />
     <Compile Include="src.UnityEngine\QuaternionEx.cs" />
     <Compile Include="src.UnityEngine\RectEx.cs" />
+    <Compile Include="src.UnityEngine\Spline.cs" />
     <Compile Include="src.UnityEngine\VectorEx.cs" />
   </ItemGroup>
   <ItemGroup>

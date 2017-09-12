@@ -117,7 +117,7 @@ namespace MathEx
 			return this;
 		}
 
-#if UNITY
+#if UNITY_EDITOR || UNITY_STANDALONE
 		public static implicit operator UnityEngine.Color(color c)
 		{
 			return new UnityEngine.Color(c.r, c.g, c.b, c.a);

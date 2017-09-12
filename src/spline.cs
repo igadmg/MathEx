@@ -9,8 +9,9 @@ namespace MathEx
 	public abstract class Curve
 	{
 		public abstract Type type { get; }
-		public abstract int length { get; }
+		public abstract int numberOfNodes { get; }
 		public abstract int chunkSize { get; }
+		public abstract float length { get; }
 	}
 
 	public abstract class Curve<T> : Curve
@@ -47,7 +48,7 @@ namespace MathEx
 		}
 
 		// return length of spline curve in segments.
-		public override int length
+		public override int numberOfNodes
 		{
 			get { return 1 + p.Length / (interpolator.size - 1); }
 		}
@@ -55,6 +56,32 @@ namespace MathEx
 		public override int chunkSize
 		{
 			get { return interpolator.size; }
+		}
+
+		public override float length
+		{
+			get
+			{
+				float result = 0;
+				for (int i = 0; i < numberOfNodes - 1; i++)
+				{
+					int i0 = i * (interpolator.size - 1);
+					int i1 = (i + 1) * (interpolator.size - 1);
+
+					T p0 = p[i0];
+					T p1 = p[i1];
+
+					float chunkLength = mtt.distance(p0, p1);
+					for (int j = i0; j < i1 - 1; j++)
+					{
+						chunkLength += mtt.distance(p[j], p[j + 1]);
+					}
+
+					result += chunkLength / 2;
+				}
+
+				return result;
+			}
 		}
 
 		protected int calculateT(ref float t)
@@ -68,7 +95,7 @@ namespace MathEx
 			}
 			else
 			{
-				t = MathEx.Clamp(t, 0, 1) * length;
+				t = MathEx.Clamp(t, 0, 1) * (numberOfNodes - 1);
 				i = (int)t;
 				t -= i;
 				i *= 3;

@@ -21,7 +21,7 @@ namespace MathEx.UnityEditor
 			Rect contentPosition = EditorGUI.PrefixLabel(position, label);
 			contentPosition.width *= .25f;
 			EditorGUIUtility.labelWidth = 14f;
-			EditorGUI.TextField(contentPosition, "l:", obj.length.ToString());
+			EditorGUI.TextField(contentPosition, "l:", obj.numberOfNodes.ToString());
 			contentPosition.y += contentPosition.height;
 			EditorGUILayout.BeginVertical();
 			pointsFoldoutState = EditorGUILayout.Foldout(pointsFoldoutState, "Curve Points:");
