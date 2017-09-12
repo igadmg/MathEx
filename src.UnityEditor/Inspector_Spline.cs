@@ -7,8 +7,6 @@ using UnityEngine;
 [CustomEditor(typeof(Spline))]
 public class Inspector_Spline : Editor
 {
-	float splineStep = 0.5f;
-
 	private void OnSceneGUI()
 	{
 		Spline spline = target as Spline;
@@ -33,11 +31,18 @@ public class Inspector_Spline : Editor
 			}
 		}
 
-		Handles.color = Color.white;
-		float dt = splineStep / spline.spline.length;
-		for (float t = 0; t < 1; t += dt)
+		float sl = spline.spline.length;
+		for (float t = 0; t < 1;)
 		{
-			Handles.DrawLine(spline.spline.value(t), spline.spline.value(Mathf.Clamp01(t+dt)));
+			vec3 p = spline.spline.value(t);
+			vec3 v = spline.spline.velocity(t);
+			float dt = v.length / sl / sl;
+
+			Handles.color = Color.white;
+			Handles.DrawLine(p, spline.spline.value(Mathf.Clamp01(t+dt)));
+			Handles.color = Color.green;
+			Handles.DrawLine(p, p + v / sl);
+			t += dt;
 		}
 	}
 }
