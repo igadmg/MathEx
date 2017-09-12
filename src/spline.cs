@@ -3,16 +3,41 @@ using System.Collections.Generic;
 
 namespace MathEx
 {
-	public class spline_curve<I> where I : Interpolator, new()
+	public abstract class Curve<T>
 	{
-		static I interpolator = new I();
+		public abstract int length { get; }
+
+		public abstract T value(float t);
+		public abstract T velocity(float t);
+	}
+
+	public class spline_curve<T, I> : Curve<T>
+		where I : Interpolator<T>, new()
+	{
+		protected static MathTypeTag<T> mtt = MathTypeTag<T>.Get();
+		protected static I interpolator = new I();
 
 		public bool loop = false;
-		public vec3[] p;
+		public T[] p = null;
 
+
+		public spline_curve()
+		{
+		}
+
+		public spline_curve(int length)
+		{
+			p = new T[length * (interpolator.size - 1) + 1];
+		}
+
+		public spline_curve(int length, bool loop)
+		{
+			this.loop = loop;
+			p = new T[length * (interpolator.size - 1) + 1];
+		}
 
 		// return length of spline curve in segments.
-		public int length
+		public override int length
 		{
 			get { return p.Length / (interpolator.size - 1); }
 		}
@@ -37,18 +62,24 @@ namespace MathEx
 			return i;
 		}
 
-		public vec3 Evaluate(float t)
+		public override T value(float t)
 		{
+			if (p == null)
+				return mtt.zero();
+
 			int i = calculateT(ref t);
 
-			return bezier.Evaluate(p, i, t);
+			return interpolator.value(t, p, i);
 		}
 
-		public vec3 Derivative(float t)
+		public override T velocity(float t)
 		{
+			if (p == null)
+				return mtt.zero();
+
 			int i = calculateT(ref t);
 
-			return bezier.Derivative(p, i, t);
+			return interpolator.derivative(t, p, i);
 		}
 	}
 

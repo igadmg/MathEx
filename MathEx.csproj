@@ -75,6 +75,7 @@
     <Compile Include="src\kalman1d.cs" />
     <Compile Include="src\line3.cs" />
     <Compile Include="src\MathEx.cs" />
+    <Compile Include="src\MathOps.cs" />
     <Compile Include="src\Noize.cs" />
     <Compile Include="src\plane.cs" />
     <Compile Include="src\polygon.cs" />

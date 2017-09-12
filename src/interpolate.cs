@@ -2,17 +2,23 @@ using System;
 
 namespace MathEx
 {
-	public abstract class Interpolator
+	public abstract class Interpolator<T>
 	{
+		protected static MathTypeTag<T> mtt = MathTypeTag<T>.Get();
+
 		public abstract int size { get; }
 
-		public abstract float integral(float t, params float[] p);
-		public abstract float value(float t, params float[] p);
-		public abstract float derivative(float t, params float[] p);
+		public abstract T integral(float t, params T[] p);
+		public abstract T value(float t, params T[] p);
+		public abstract T derivative(float t, params T[] p);
+
+		public abstract T integral(float t, T[] p, int i);
+		public abstract T value(float t, T[] p, int i);
+		public abstract T derivative(float t, T[] p, int i);
 	}
 
 	// based on https://www.rose-hulman.edu/~finn/CCLI/Notes/day09.pdf
-	public class CubicHermiteSpline : Interpolator
+	public class CubicHermiteSpline<T> : Interpolator<T>
 	{
 		private static float hermite_p30(float t) { return  1f/2f * t*t*t*t - 1f/2f * t*t*t               + t; }
 		private static float hermite_p31(float t) { return  1f/4f * t*t*t*t - 2f/3f * t*t*t + 1f/2f * t*t; }
@@ -32,40 +38,67 @@ namespace MathEx
 
 		public static int Size = 4;
 
-		public static float Integral(float p0, float v0, float p1, float v1, float t)
+		public static T Integral(T p0, T v0, T p1, T v1, float t)
 		{
-			return hermite_p30(t) * p0 + hermite_p31(t) * v0 + hermite_p32(t) * v1 + hermite_p33(t) * p1;
+			return mtt.add(
+				mtt.mul(hermite_p30(t), p0)
+				, mtt.mul(hermite_p31(t), v0)
+				, mtt.mul(hermite_p32(t), v1)
+				, mtt.mul(hermite_p33(t), p1));
 		}
 
-		public static float Value(float p0, float v0, float p1, float v1, float t)
+		public static T Value(T p0, T v0, T p1, T v1, float t)
 		{
-			return hermite_30(t) * p0 + hermite_31(t) * v0 + hermite_32(t) * v1 + hermite_33(t) * p1;
+			return mtt.add(
+				mtt.mul(hermite_30(t), p0)
+				, mtt.mul(hermite_31(t), v0)
+				, mtt.mul(hermite_32(t), v1)
+				, mtt.mul(hermite_33(t), p1));
 		}
 
-		public static float Derivative(float p0, float v0, float p1, float v1, float t)
+		public static T Derivative(T p0, T v0, T p1, T v1, float t)
 		{
-			return hermite_d30(t) * p0 + hermite_d31(t) * v0 + hermite_d32(t) * v1 + hermite_d33(t) * p1;
+			return mtt.add(
+				mtt.mul(hermite_d30(t), p0)
+				, mtt.mul(hermite_d31(t), v0)
+				, mtt.mul(hermite_d32(t), v1)
+				, mtt.mul(hermite_d33(t), p1));
 		}
 
 		public override int size { get { return Size; } }
 
-		public override float integral(float t, params float[] p)
+		public override T integral(float t, params T[] p)
 		{
 			return Integral(p[0], p[1], p[3], p[2], t);
 		}
 
-		public override float value(float t, params float[] p)
+		public override T value(float t, params T[] p)
 		{
 			return Value(p[0], p[1], p[3], p[2], t);
 		}
 
-		public override float derivative(float t, params float[] p)
+		public override T derivative(float t, params T[] p)
 		{
 			return Derivative(p[0], p[1], p[3], p[2], t);
 		}
+
+		public override T integral(float t, T[] p, int i)
+		{
+			return integral(t, p[i + 0], p[i + 1], p[i + 2], p[i + 3]);
+		}
+
+		public override T value(float t, T[] p, int i)
+		{
+			return value(t, p[i + 0], p[i + 1], p[i + 2], p[i + 3]);
+		}
+
+		public override T derivative(float t, T[] p, int i)
+		{
+			return derivative(t, p[i + 0], p[i + 1], p[i + 2], p[i + 3]);
+		}
 	}
 
-	public class QuinticHermiteSpline : Interpolator
+	public class QuinticHermiteSpline<T> : Interpolator<T>
 	{
 		private static float hermite_50(float t) { return    -6f * t*t*t*t*t +   15f * t*t*t*t -   10f * t*t*t                   + 1; }
 		private static float hermite_51(float t) { return    -3f * t*t*t*t*t +    8f * t*t*t*t -    6f * t*t*t               + t; }
@@ -78,30 +111,51 @@ namespace MathEx
 
 		public static int Size = 6;
 
-		private static float Value(float p0, float v0, float a0, float p1, float v1, float a1, float t)
+		private static T Value(T p0, T v0, T a0, T p1, T v1, T a1, float t)
 		{
-			return hermite_50(t) * p0 + hermite_51(t) * v0 + hermite_52(t) * a0 + hermite_53(t) * a1 + hermite_54(t) * v1 + hermite_55(t) * p1;
+			return mtt.add(
+					mtt.mul(hermite_50(t), p0)
+					, mtt.mul(hermite_51(t), v0)
+					, mtt.mul(hermite_52(t), a0)
+					, mtt.mul(hermite_53(t), a1)
+					, mtt.mul(hermite_54(t), v1)
+					, mtt.mul(hermite_55(t), p1));
 		}
 
 		public override int size { get { return Size; } }
 
-		public override float integral(float t, params float[] p)
+		public override T integral(float t, params T[] p)
 		{
-			return 0;// Integral(p[0], p[1], p[2], p[5], p[4], p[3], t);
+			throw new Exception(); // Integral(p[0], p[1], p[2], p[5], p[4], p[3], t);
 		}
 
-		public override float value(float t, params float[] p)
+		public override T value(float t, params T[] p)
 		{
 			return Value(p[0], p[1], p[2], p[5], p[4], p[3], t);
 		}
 
-		public override float derivative(float t, params float[] p)
+		public override T derivative(float t, params T[] p)
 		{
-			return 0;// Derivative(p[0], p[1], p[2], p[5], p[4], p[3], t);
+			throw new Exception(); // Derivative(p[0], p[1], p[2], p[5], p[4], p[3], t);
+		}
+
+		public override T integral(float t, T[] p, int i)
+		{
+			return integral(t, p[i + 0], p[i + 1], p[i + 2], p[i + 3], p[i + 4], p[i + 5]);
+		}
+
+		public override T value(float t, T[] p, int i)
+		{
+			return value(t, p[i + 0], p[i + 1], p[i + 2], p[i + 3], p[i + 4], p[i + 5]);
+		}
+
+		public override T derivative(float t, T[] p, int i)
+		{
+			return derivative(t, p[i + 0], p[i + 1], p[i + 2], p[i + 3], p[i + 4], p[i + 5]);
 		}
 	}
 
-	public class QuadricBezierSpline : Interpolator
+	public class QuadricBezierSpline<T> : Interpolator<T>
 	{
 		private static float bezier_p20(float t) { return  1f/3f * t*t*t - t*t + t; }
 		private static float bezier_p21(float t) { return -2f/3f * t*t*t + t*t; }
@@ -118,40 +172,64 @@ namespace MathEx
 
 		public static int Size = 3;
 
-		public static float Integral(float p0, float p1, float p2, float t)
+		public static T Integral(T p0, T p1, T p2, float t)
 		{
-			return bezier_p20(t) * p0 + bezier_p21(t) * p1 + bezier_p22(t) * p2;
+			return mtt.add(
+				mtt.mul(bezier_p20(t), p0)
+				, mtt.mul(bezier_p21(t), p1)
+				, mtt.mul(bezier_p22(t), p2));
 		}
 
-		public static float Value(float p0, float p1, float p2, float t)
+		public static T Value(T p0, T p1, T p2, float t)
 		{
-			return bezier_20(t) * p0 + bezier_21(t) * p1 + bezier_22(t) * p2;
+			return mtt.add(
+				mtt.mul(bezier_20(t), p0)
+				, mtt.mul(bezier_21(t), p1)
+				, mtt.mul(bezier_22(t), p2));
 		}
 
-		public static float Derivative(float p0, float p1, float p2, float t)
+		public static T Derivative(T p0, T p1, T p2, float t)
 		{
-			return bezier_d20(t) * p0 + bezier_d21(t) * p1 + bezier_d22(t) * p2;
+			return mtt.add(
+				mtt.mul(bezier_d20(t), p0)
+				, mtt.mul(bezier_d21(t), p1)
+				, mtt.mul(bezier_d22(t), p2));
 		}
 
 		public override int size { get { return Size; } }
 
-		public override float integral(float t, params float[] p)
+		public override T integral(float t, params T[] p)
 		{
 			return Integral(p[0], p[1], p[2], t);
 		}
 
-		public override float value(float t, params float[] p)
+		public override T value(float t, params T[] p)
 		{
 			return Value(p[0], p[1], p[2], t);
 		}
 
-		public override float derivative(float t, params float[] p)
+		public override T derivative(float t, params T[] p)
 		{
 			return Derivative(p[0], p[1], p[2], t);
 		}
+
+		public override T integral(float t, T[] p, int i)
+		{
+			return integral(t, p[i + 0], p[i + 1], p[i + 2]);
+		}
+
+		public override T value(float t, T[] p, int i)
+		{
+			return value(t, p[i + 0], p[i + 1], p[i + 2]);
+		}
+
+		public override T derivative(float t, T[] p, int i)
+		{
+			return derivative(t, p[i + 0], p[i + 1], p[i + 2]);
+		}
 	}
 
-	public class CubicBezierSpline : Interpolator
+	public class CubicBezierSpline<T> : Interpolator<T>
 	{
 		private static float bezier_p30(float t) { return -1f/4f * t*t*t*t +      t*t*t - 3f/2f * t*t + t; }
 		private static float bezier_p31(float t) { return  3f/4f * t*t*t*t - 2f * t*t*t + 3f/2f * t*t; }
@@ -171,36 +249,63 @@ namespace MathEx
 
 		public static int Size = 4;
 
-		public static float Integral(float p0, float p1, float p2, float p3, float t)
+		public static T Integral(T p0, T p1, T p2, T p3, float t)
 		{
-			return bezier_p30(t) * p0 + bezier_p31(t) * p1 + bezier_p32(t) * p2 + bezier_p33(t) * p3;
+			return mtt.add(
+				mtt.mul(bezier_p30(t), p0)
+				, mtt.mul(bezier_p31(t), p1)
+				, mtt.mul(bezier_p32(t), p2)
+				, mtt.mul(bezier_p33(t), p3));
 		}
 
-		public static float Value(float p0, float p1, float p2, float p3, float t)
+		public static T Value(T p0, T p1, T p2, T p3, float t)
 		{
-			return bezier_30(t) * p0 + bezier_31(t) * p1 + bezier_32(t) * p2 + bezier_33(t) * p3;
+			return mtt.add(
+				mtt.mul(bezier_30(t), p0)
+				, mtt.mul(bezier_31(t), p1)
+				, mtt.mul(bezier_32(t), p2)
+				, mtt.mul(bezier_33(t), p3));
 		}
 
-		public static float Derivative(float p0, float p1, float p2, float p3, float t)
+		public static T Derivative(T p0, T p1, T p2, T p3, float t)
 		{
-			return bezier_d30(t) * p0 + bezier_d31(t) * p1 + bezier_d32(t) * p2 + bezier_d33(t) * p3;
+			return mtt.add(
+				mtt.mul(bezier_d30(t), p0)
+				, mtt.mul(bezier_d31(t), p1)
+				, mtt.mul(bezier_d32(t), p2)
+				, mtt.mul(bezier_d33(t), p3));
 		}
 
 		public override int size { get { return Size; } }
 
-		public override float integral(float t, params float[] p)
+		public override T integral(float t, params T[] p)
 		{
 			return Integral(p[0], p[1], p[2], p[3], t);
 		}
 
-		public override float value(float t, params float[] p)
+		public override T value(float t, params T[] p)
 		{
 			return Value(p[0], p[1], p[2], p[3], t);
 		}
 
-		public override float derivative(float t, params float[] p)
+		public override T derivative(float t, params T[] p)
 		{
 			return Derivative(p[0], p[1], p[2], p[3], t);
+		}
+
+		public override T integral(float t, T[] p, int i)
+		{
+			return integral(t, p[i + 0], p[i + 1], p[i + 2], p[i + 3]);
+		}
+
+		public override T value(float t, T[] p, int i)
+		{
+			return value(t, p[i + 0], p[i + 1], p[i + 2], p[i + 3]);
+		}
+
+		public override T derivative(float t, T[] p, int i)
+		{
+			return derivative(t, p[i + 0], p[i + 1], p[i + 2], p[i + 3]);
 		}
 	}
 
