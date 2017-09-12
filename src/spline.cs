@@ -1,11 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
+
+
 namespace MathEx
 {
-	public abstract class Curve<T>
+	[Serializable]
+	public abstract class Curve
 	{
+		public abstract Type type { get; }
 		public abstract int length { get; }
+	}
+
+	public abstract class Curve<T> : Curve
+	{
+		public override Type type { get { return typeof(T); } }
 
 		public abstract T value(float t);
 		public abstract T velocity(float t);
