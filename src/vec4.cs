@@ -36,7 +36,7 @@ namespace MathEx
 		//
 
 		public static bool operator ==(vec4 a, vec4 b) { return a.x == b.x && a.y == b.y && a.z == b.z && a.w == b.w; }
-		public static bool operator !=(vec4 a, vec4 b) { return a.x != b.x && a.y != b.y && a.z != b.z && a.w != b.w; }
+		public static bool operator !=(vec4 a, vec4 b) { return a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w; }
 		public bool Equals(vec4 obj) { return obj == this; }
 		public override bool Equals(object obj) { return obj is vec4 ? Equals((vec4)obj) : false; }
 		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode() ^ w.GetHashCode(); }

@@ -21,7 +21,8 @@ namespace MathEx.UnityEditor
 			//EditorGUIUtility.labelWidth = 14f;
 			//EditorGUI.PropertyField(contentPosition, property.FindPropertyRelative("z"), new GUIContent("Z"));
 			contentPosition.x += contentPosition.width;
-			EditorGUI.TextField(contentPosition, "m", obj.magnitude.ToString());
+
+			EditorGUI.TextField(contentPosition, "l:", obj.length.ToString());
 		}
 	}
 }

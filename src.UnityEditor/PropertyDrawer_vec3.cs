@@ -23,12 +23,7 @@ namespace MathEx.UnityEditor
 			EditorGUI.PropertyField(contentPosition, property.FindPropertyRelative("z"), new GUIContent("Z"));
 			contentPosition.x += contentPosition.width;
 
-			float magnitude = obj.magnitude;
-			float new_magnitude;
-			if (float.TryParse(EditorGUI.TextField(contentPosition, "m", magnitude.ToString()), out new_magnitude)) {
-				if (!magnitude.eq(new_magnitude))
-					obj.magnitude = new_magnitude;
-			}
+			EditorGUI.TextField(contentPosition, "l:", obj.length.ToString());
 		}
 	}
 }
