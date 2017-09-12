@@ -38,7 +38,7 @@ public static class MathExGUI
 		position.x += position.width;
 		result.y = EditorGUI.FloatField(position, new GUIContent("Y"), value.y);
 		position.x += position.width;
-		result.z = EditorGUI.FloatField(position, new GUIContent("X"), value.z);
+		result.z = EditorGUI.FloatField(position, new GUIContent("Z"), value.z);
 		position.x += position.width;
 
 		if (showLength)

@@ -10,6 +10,7 @@ namespace MathEx
 	{
 		public abstract Type type { get; }
 		public abstract int length { get; }
+		public abstract int chunkSize { get; }
 	}
 
 	public abstract class Curve<T> : Curve
@@ -48,7 +49,12 @@ namespace MathEx
 		// return length of spline curve in segments.
 		public override int length
 		{
-			get { return p.Length / (interpolator.size - 1); }
+			get { return 1 + p.Length / (interpolator.size - 1); }
+		}
+
+		public override int chunkSize
+		{
+			get { return interpolator.size; }
 		}
 
 		protected int calculateT(ref float t)
@@ -69,6 +75,48 @@ namespace MathEx
 			}
 
 			return i;
+		}
+
+		public void insert(int nodeNumber)
+		{
+			int i = nodeNumber * interpolator.size - 1;
+			List<T> pl = new List<T>(p);
+
+			if (i <= 0)
+			{
+				pl.InsertRange(0, new T[interpolator.size - 1]);
+			}
+			else if (i >= p.Length)
+			{
+				pl.InsertRange(p.Length, new T[interpolator.size - 1]);
+			}
+			else
+			{
+				pl.InsertRange(i - (interpolator.size - 1) / 2, new T[interpolator.size - 1]);
+			}
+
+			p = pl.ToArray();
+		}
+
+		public void remove(int nodeNumber)
+		{
+			int i = nodeNumber * interpolator.size - 1;
+			List<T> pl = new List<T>(p);
+
+			if (i < 0)
+			{
+				pl.RemoveRange(0, interpolator.size - 1);
+			}
+			else if (i >= p.Length)
+			{
+				pl.RemoveRange(p.Length - (interpolator.size - 1), interpolator.size - 1);
+			}
+			else
+			{
+				pl.RemoveRange(i - (interpolator.size - 1) / 2, interpolator.size - 1);
+			}
+
+			p = pl.ToArray();
 		}
 
 		public override T value(float t)

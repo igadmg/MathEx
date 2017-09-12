@@ -24,15 +24,29 @@ namespace MathEx.UnityEditor
 			EditorGUI.TextField(contentPosition, "l:", obj.length.ToString());
 			contentPosition.y += contentPosition.height;
 			EditorGUILayout.BeginVertical();
-			pointsFoldoutState = EditorGUILayout.Foldout(pointsFoldoutState, "points");
+			pointsFoldoutState = EditorGUILayout.Foldout(pointsFoldoutState, "Curve Points:");
 			if (pointsFoldoutState)
 			{
 				EditorGUI.indentLevel++;
 
 				for (int i = 0; i < obj.p.Length; i++)
 				{
-					Rect rect = GUILayoutUtility.GetRect(0, float.MaxValue, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
-					vec3 p = MathExGUI.vec3Field(rect, null, obj.p[i], false);
+					Rect dataRect = GUILayoutUtility.GetRect(0, float.MaxValue, EditorGUIUtility.singleLineHeight, EditorGUIUtility.singleLineHeight);
+					Rect leftRect = dataRect;
+					Rect rightRect = dataRect;
+
+					leftRect.xMax = leftRect.xMin + 48f;
+					dataRect.xMin += 48f;
+					dataRect.xMax -= 48f;
+					rightRect.xMin = rightRect.xMax - 48f;
+
+					if (i % (obj.chunkSize - 1) == 0)
+					{
+						GUIStyle s = EditorStyles.label;
+						EditorGUI.LabelField(leftRect, "Node");
+					}
+
+					vec3 p = MathExGUI.vec3Field(dataRect, null, obj.p[i], false);
 					if (obj.p[i] != p)
 					{
 						if (!bIsDirty)
@@ -42,6 +56,29 @@ namespace MathEx.UnityEditor
 
 						obj.p[i] = p;
 						bIsDirty = true;
+					}
+
+					Rect addRect = rightRect;
+					Rect removeRect = rightRect;
+					addRect.xMax -= addRect.width / 2;
+					removeRect.xMin += removeRect.width / 2;
+
+					if (i % (obj.chunkSize - 1) == 0)
+					{
+						if (GUI.Button(addRect, "+"))
+						{
+							bIsDirty = true;
+							Undo.RecordObject(property.serializedObject.targetObject, "Curve Point Added");
+
+							obj.insert(i / (obj.chunkSize - 1));
+						}
+						if (GUI.Button(removeRect, "-"))
+						{
+							bIsDirty = true;
+							Undo.RecordObject(property.serializedObject.targetObject, "Curve Point Removed");
+
+							obj.remove(i / (obj.chunkSize - 1));
+						}
 					}
 				}
 
