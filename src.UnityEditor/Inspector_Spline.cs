@@ -32,11 +32,12 @@ public class Inspector_Spline : Editor
 		}
 
 		float sl = spline.spline.length;
+		float islsl = 1 / (sl * sl);
 		for (float t = 0; t < 1;)
 		{
 			vec3 p = spline.spline.value(t);
 			vec3 v = spline.spline.velocity(t);
-			float dt = v.length / sl / sl;
+			float dt = Mathf.Clamp(v.length * islsl, islsl, 1);
 
 			Handles.SphereHandleCap(-1, p, Quaternion.identity, 0.05f, EventType.Repaint);
 
