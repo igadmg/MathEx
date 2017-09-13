@@ -49,7 +49,17 @@ namespace MathEx
 
 		public static float Lerp(this float t, float a, float b)
 		{
-			return a + (b - a) * t;
+			return a * (1 - t) + b * t;
+		}
+
+		public static vec2 Lerp(this float t, vec2 a, vec2 b)
+		{
+			return a * (1 - t) + b * t;
+		}
+
+		public static vec3 Lerp(this float t, vec3 a, vec3 b)
+		{
+			return a * (1 - t) + b * t;
 		}
 
 		public static color_hsv Lerp(this float t, color_hsv a, color_hsv b)
@@ -62,9 +72,28 @@ namespace MathEx
 			return new color_hsl(t.Lerp(a.h, b.h), t.Lerp(a.s, b.s), t.Lerp(a.l, b.l), t.Lerp(a.a, b.a));
 		}
 
-		public static vec3 Slerp(vec3 a, vec3 b, float t)
+		static vec2 Slerp(this float t, vec2 a, vec2 b)
 		{
-			return vec3.zero;
+			float d = a * b;
+
+			d = Clamp(d, -1, 1);
+
+			float theta = Acos(d) * t;
+			var r = (b - a * d).normalized;
+
+			return ((a * Cos(theta)) + (r * Sin(theta)));
+		}
+
+		public static vec3 Slerp(this float t, vec3 a, vec3 b)
+		{
+			float d = a * b;
+
+			d = Clamp(d, -1, 1);
+
+			float theta = Acos(d) * t;
+			var r = (b - a * d).normalized;
+
+			return ((a * Cos(theta)) + (r * Sin(theta)));
 		}
 
 
@@ -127,6 +156,21 @@ namespace MathEx
 		public static int Round(float f)
 		{
 			return (int)(f + 0.5f);
+		}
+
+		public static float Cos(float ar)
+		{
+			return UnityEngine.Mathf.Cos(ar);
+		}
+
+		public static float Sin(float ar)
+		{
+			return UnityEngine.Mathf.Sin(ar);
+		}
+
+		public static float Acos(float ar)
+		{
+			return UnityEngine.Mathf.Acos(ar);
 		}
 	}
 }
