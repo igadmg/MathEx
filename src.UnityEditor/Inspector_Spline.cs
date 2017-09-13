@@ -38,6 +38,8 @@ public class Inspector_Spline : Editor
 			vec3 v = spline.spline.velocity(t);
 			float dt = v.length / sl / sl;
 
+			Handles.SphereHandleCap(-1, p, Quaternion.identity, 0.05f, EventType.Repaint);
+
 			Handles.color = Color.white;
 			Handles.DrawLine(p, spline.spline.value(Mathf.Clamp01(t+dt)));
 			Handles.color = Color.green;

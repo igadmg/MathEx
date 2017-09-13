@@ -6,7 +6,7 @@ using System.Collections.Generic;
 namespace MathEx
 {
 	[Serializable]
-	public abstract class Curve
+	public abstract class curve
 	{
 		public abstract Type type { get; }
 		public abstract int numberOfNodes { get; }
@@ -14,15 +14,17 @@ namespace MathEx
 		public abstract float length { get; }
 	}
 
-	public abstract class Curve<T> : Curve
+	public abstract class curve<T> : curve
 	{
 		public override Type type { get { return typeof(T); } }
 
 		public abstract T value(float t);
 		public abstract T velocity(float t);
+		public abstract T value(int i, float t);
+		public abstract T velocity(int i, float t);
 	}
 
-	public class spline_curve<T, I> : Curve<T>
+	public class spline_curve<T, I> : curve<T>
 		where I : Interpolator<T>, new()
 	{
 		protected static MathTypeTag<T> mtt = MathTypeTag<T>.Get();
@@ -162,6 +164,22 @@ namespace MathEx
 				return mtt.zero();
 
 			int i = calculateT(ref t);
+
+			return interpolator.derivative(t, p, i);
+		}
+
+		public override T value(int i, float t)
+		{
+			if (p == null || i >= numberOfNodes - 1)
+				return mtt.zero();
+
+			return interpolator.value(t, p, i);
+		}
+
+		public override T velocity(int i, float t)
+		{
+			if (p == null || i >= numberOfNodes - 1)
+				return mtt.zero();
 
 			return interpolator.derivative(t, p, i);
 		}
