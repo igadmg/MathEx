@@ -35,14 +35,14 @@ public class Inspector_Spline : Editor
 		float islsl = 1 / (sl * sl);
 		for (float t = 0; t < 1;)
 		{
-			vec3 p = spline.spline.value(t);
+			vec3 p = handleTransform.TransformPoint(spline.spline.value(t));
 			vec3 v = spline.spline.velocity(t);
 			float dt = Mathf.Clamp(v.length * islsl, islsl, 1);
 
 			Handles.SphereHandleCap(-1, p, Quaternion.identity, 0.05f, EventType.Repaint);
 
 			Handles.color = Color.white;
-			Handles.DrawLine(p, spline.spline.value(Mathf.Clamp01(t+dt)));
+			Handles.DrawLine(p, handleTransform.TransformPoint(spline.spline.value(Mathf.Clamp01(t+dt))));
 			Handles.color = Color.green;
 			Handles.DrawLine(p, p + v / sl);
 			t += dt;

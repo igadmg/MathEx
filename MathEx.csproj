@@ -65,6 +65,7 @@
     <Compile Include="src\BinaryTree.cs" />
     <Compile Include="src\color.cs" />
     <Compile Include="src\CoordinateSystem.cs" />
+    <Compile Include="src\easing.cs" />
     <Compile Include="src\ellipse.cs" />
     <Compile Include="src\Foreach.cs" />
     <Compile Include="src\Graph.cs" />

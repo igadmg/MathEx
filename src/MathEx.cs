@@ -52,6 +52,11 @@ namespace MathEx
 			return a * (1 - t) + b * t;
 		}
 
+		public static float InvLerp(this float v, float a, float b)
+		{
+			return (v - a) / (b - a);
+		}
+
 		public static vec2 Lerp(this float t, vec2 a, vec2 b)
 		{
 			return a * (1 - t) + b * t;
@@ -126,7 +131,7 @@ namespace MathEx
 			return t - length;
 		}
 
-		private static float Pow(float v, float p)
+		public static float Pow(float v, float p)
 		{
 			return UnityEngine.Mathf.Pow(v, p);
 		}
