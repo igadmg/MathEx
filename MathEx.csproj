@@ -61,7 +61,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="src\aabb.cs" />
     <Compile Include="src\aabbi.cs" />
-    <Compile Include="src\bezier.cs" />
     <Compile Include="src\BinaryTree.cs" />
     <Compile Include="src\color.cs" />
     <Compile Include="src\CoordinateSystem.cs" />
