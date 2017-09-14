@@ -31,21 +31,22 @@ public class Inspector_Spline : Editor
 			}
 		}
 
-		float sl = spline.spline.length;
-		float islsl = 1 / (sl * sl);
-		for (float t = 0; t < 1;)
+		vec3 lastPoint = vec3.empty;
+		foreach (var i in spline.spline.Iterate())
 		{
-			vec3 p = handleTransform.TransformPoint(spline.spline.value(t));
-			vec3 v = spline.spline.velocity(t);
-			float dt = Mathf.Clamp(v.length * islsl, islsl, 1);
+			vec3 p = handleTransform.TransformPoint(i.value);
 
-			Handles.SphereHandleCap(-1, p, Quaternion.identity, 0.05f, EventType.Repaint);
+			//Handles.SphereHandleCap(-1, p, Quaternion.identity, 0.05f, EventType.Repaint);
 
-			Handles.color = Color.white;
-			Handles.DrawLine(p, handleTransform.TransformPoint(spline.spline.value(Mathf.Clamp01(t+dt))));
-			Handles.color = Color.green;
-			Handles.DrawLine(p, p + v / sl);
-			t += dt;
+			if (!lastPoint.isEmpty)
+			{
+				Handles.color = Color.white;
+				Handles.DrawLine(lastPoint, p);
+				//Handles.color = Color.green;
+				//Handles.DrawLine(p, p + v / sl);
+			}
+
+			lastPoint = p;
 		}
 	}
 }

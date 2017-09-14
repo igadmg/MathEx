@@ -185,6 +185,25 @@ namespace MathEx
 		}
 	}
 
+	public class curve_distance<C>
+	{
+		public C c;
+		Tuple<float, float>[] d;
+
+		public curve_distance(C c)
+		{
+			this.c = c;
+		}
+
+		public void update()
+		{
+			List<Tuple<float, float>> dl = new List<Tuple<float, float>>();
+
+
+		}
+	}
+
+#if false
 	public class spline
 	{
 		public vec3[] ps;
@@ -308,4 +327,5 @@ namespace MathEx
 				x[i] = x[i] - c[i] * x[i + 1];
 		}
 	}
+#endif
 }

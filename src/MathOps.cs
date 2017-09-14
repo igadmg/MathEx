@@ -35,6 +35,11 @@ namespace MathEx
 			throw new NotImplementedException();
 		}
 
+		public virtual float scalar(T v)
+		{
+			throw new NotImplementedException();
+		}
+
 		public virtual float distance(T p0, T p1)
 		{
 			throw new NotImplementedException();
@@ -59,6 +64,11 @@ namespace MathEx
 		public override float mul(float a, float b)
 		{
 			return a * b;
+		}
+
+		public override float scalar(float v)
+		{
+			return v;
 		}
 
 		public override float distance(float p0, float p1)
@@ -87,6 +97,11 @@ namespace MathEx
 			return a * b;
 		}
 
+		public override float scalar(vec2 v)
+		{
+			return v.length;
+		}
+
 		public override float distance(vec2 p0, vec2 p1)
 		{
 			return (p1 - p0).length;
@@ -111,6 +126,11 @@ namespace MathEx
 		public override vec3 mul(float a, vec3 b)
 		{
 			return a * b;
+		}
+
+		public override float scalar(vec3 v)
+		{
+			return v.length;
 		}
 
 		public override float distance(vec3 p0, vec3 p1)

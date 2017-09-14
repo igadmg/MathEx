@@ -151,5 +151,39 @@ namespace MathEx
 
 			yield break;
 		}
+
+		public struct CurveIterator<T>
+		{
+			public float t;
+			public T value;
+			public T velocity;
+		}
+
+		public static IEnumerable<CurveIterator<T>> Iterate<T>(this curve<T> c)
+		{
+			return c.Iterate(1f);
+		}
+
+		public static IEnumerable<CurveIterator<T>> Iterate<T>(this curve<T> c, float stepMultiplier)
+		{
+			float sl = c.length;
+			float islsl = 1 / (sl * sl);
+
+			float t = 0;
+			while (true)
+			{
+				CurveIterator<T> i;
+				i.t = t;
+				i.value = c.value(t);
+				i.velocity = c.velocity(t);
+				yield return i;
+
+				if (t == 1)
+					yield break;
+
+				float dt = MathEx.Clamp(MathTypeTag<T>.Get().scalar(i.velocity) * islsl * stepMultiplier, islsl, 1);
+				t = MathEx.Clamp01(t + dt);
+			}
+		}
 	}
 }

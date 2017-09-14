@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MathEx
+﻿namespace MathEx
 {
 	public static class MathEx
 	{
@@ -20,6 +15,11 @@ namespace MathEx
 		public static float Clamp(float f, float p1, float p2)
 		{
 			return UnityEngine.Mathf.Clamp(f, p1, p2);
+		}
+
+		public static float Clamp01(float f)
+		{
+			return UnityEngine.Mathf.Clamp01(f);
 		}
 
 		public static vec2 Clamp(vec2 value, vec2 min, vec2 max)
