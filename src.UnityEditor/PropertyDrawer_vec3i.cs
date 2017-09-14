@@ -22,7 +22,7 @@ namespace MathEx.UnityEditor
 			EditorGUI.PropertyField(contentPosition, property.FindPropertyRelative("z"), new GUIContent("Z"));
 			contentPosition.x += contentPosition.width;
 
-			EditorGUI.TextField(contentPosition, "l:", obj.length.ToString());
+			EditorGUI.SelectableLabel(contentPosition, "l: " + obj.length.ToString());
 		}
 	}
 }
