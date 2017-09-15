@@ -40,7 +40,7 @@ namespace MathEx
 
 		public static T Integral(T p0, T v0, T p1, T v1, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 				mtt.mul(hermite_p30(t), p0)
 				, mtt.mul(hermite_p31(t), v0)
 				, mtt.mul(hermite_p32(t), v1)
@@ -49,7 +49,7 @@ namespace MathEx
 
 		public static T Value(T p0, T v0, T p1, T v1, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 				mtt.mul(hermite_30(t), p0)
 				, mtt.mul(hermite_31(t), v0)
 				, mtt.mul(hermite_32(t), v1)
@@ -58,7 +58,7 @@ namespace MathEx
 
 		public static T Derivative(T p0, T v0, T p1, T v1, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 				mtt.mul(hermite_d30(t), p0)
 				, mtt.mul(hermite_d31(t), v0)
 				, mtt.mul(hermite_d32(t), v1)
@@ -113,7 +113,7 @@ namespace MathEx
 
 		private static T Value(T p0, T v0, T a0, T p1, T v1, T a1, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 					mtt.mul(hermite_50(t), p0)
 					, mtt.mul(hermite_51(t), v0)
 					, mtt.mul(hermite_52(t), a0)
@@ -174,7 +174,7 @@ namespace MathEx
 
 		public static T Integral(T p0, T p1, T p2, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 				mtt.mul(bezier_p20(t), p0)
 				, mtt.mul(bezier_p21(t), p1)
 				, mtt.mul(bezier_p22(t), p2));
@@ -182,7 +182,7 @@ namespace MathEx
 
 		public static T Value(T p0, T p1, T p2, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 				mtt.mul(bezier_20(t), p0)
 				, mtt.mul(bezier_21(t), p1)
 				, mtt.mul(bezier_22(t), p2));
@@ -190,7 +190,7 @@ namespace MathEx
 
 		public static T Derivative(T p0, T p1, T p2, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 				mtt.mul(bezier_d20(t), p0)
 				, mtt.mul(bezier_d21(t), p1)
 				, mtt.mul(bezier_d22(t), p2));
@@ -251,7 +251,7 @@ namespace MathEx
 
 		public static T Integral(T p0, T p1, T p2, T p3, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 				mtt.mul(bezier_p30(t), p0)
 				, mtt.mul(bezier_p31(t), p1)
 				, mtt.mul(bezier_p32(t), p2)
@@ -260,7 +260,7 @@ namespace MathEx
 
 		public static T Value(T p0, T p1, T p2, T p3, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 				mtt.mul(bezier_30(t), p0)
 				, mtt.mul(bezier_31(t), p1)
 				, mtt.mul(bezier_32(t), p2)
@@ -269,7 +269,7 @@ namespace MathEx
 
 		public static T Derivative(T p0, T p1, T p2, T p3, float t)
 		{
-			return mtt.add(
+			return mtt.sum(
 				mtt.mul(bezier_d30(t), p0)
 				, mtt.mul(bezier_d31(t), p1)
 				, mtt.mul(bezier_d32(t), p2)

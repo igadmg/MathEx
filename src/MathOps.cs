@@ -10,6 +10,9 @@ namespace MathEx
 			{ typeof(float), new MathTypeTagFloat() },
 			{ typeof(vec2), new MathTypeTagVec2() },
 			{ typeof(vec3), new MathTypeTagVec3() },
+#if UNITY_EDITOR || UNITY_STANDALONE
+			{ typeof(UnityEngine.Vector3), new MathTypeTagVector3() },
+#endif
 		};
 	}
 
@@ -25,7 +28,12 @@ namespace MathEx
 			throw new NotImplementedException();
 		}
 
-		public virtual T add(params T[] v)
+		public virtual T sum(params T[] v)
+		{
+			throw new NotImplementedException();
+		}
+
+		public virtual T diff(T a, T b)
 		{
 			throw new NotImplementedException();
 		}
@@ -44,6 +52,11 @@ namespace MathEx
 		{
 			throw new NotImplementedException();
 		}
+
+		public virtual bool eq(T a, T b)
+		{
+			throw new NotImplementedException();
+		}
 	}
 
 	public class MathTypeTagFloat : MathTypeTag<float>
@@ -53,12 +66,17 @@ namespace MathEx
 			return 0;
 		}
 
-		public override float add(params float[] v)
+		public override float sum(params float[] v)
 		{
 			float result = 0;
 			for (int i = 0; i < v.Length; i++)
 				result += v[i];
 			return result;
+		}
+
+		public override float diff(float a, float b)
+		{
+			return a - b;
 		}
 
 		public override float mul(float a, float b)
@@ -75,6 +93,11 @@ namespace MathEx
 		{
 			return p1 - p0;
 		}
+
+		public override bool eq(float a, float b)
+		{
+			return a == b;
+		}
 	}
 
 	public class MathTypeTagVec2 : MathTypeTag<vec2>
@@ -84,12 +107,17 @@ namespace MathEx
 			return vec2.zero;
 		}
 
-		public override vec2 add(params vec2[] v)
+		public override vec2 sum(params vec2[] v)
 		{
 			vec2 result = vec2.zero;
 			for (int i = 0; i < v.Length; i++)
 				result += v[i];
 			return result;
+		}
+
+		public override vec2 diff(vec2 a, vec2 b)
+		{
+			return a - b;
 		}
 
 		public override vec2 mul(float a, vec2 b)
@@ -106,6 +134,11 @@ namespace MathEx
 		{
 			return (p1 - p0).length;
 		}
+
+		public override bool eq(vec2 a, vec2 b)
+		{
+			return a == b;
+		}
 	}
 
 	public class MathTypeTagVec3 : MathTypeTag<vec3>
@@ -115,12 +148,17 @@ namespace MathEx
 			return vec3.zero;
 		}
 
-		public override vec3 add(params vec3[] v)
+		public override vec3 sum(params vec3[] v)
 		{
 			vec3 result = vec3.zero;
 			for (int i = 0; i < v.Length; i++)
 				result += v[i];
 			return result;
+		}
+
+		public override vec3 diff(vec3 a, vec3 b)
+		{
+			return a - b;
 		}
 
 		public override vec3 mul(float a, vec3 b)
@@ -137,5 +175,53 @@ namespace MathEx
 		{
 			return (p1 - p0).length;
 		}
+
+		public override bool eq(vec3 a, vec3 b)
+		{
+			return a == b;
+		}
 	}
+
+#if UNITY_EDITOR || UNITY_STANDALONE
+	public class MathTypeTagVector3 : MathTypeTag<UnityEngine.Vector3>
+	{
+		public override UnityEngine.Vector3 zero()
+		{
+			return UnityEngine.Vector3.zero;
+		}
+
+		public override UnityEngine.Vector3 sum(params UnityEngine.Vector3[] v)
+		{
+			UnityEngine.Vector3 result = UnityEngine.Vector3.zero;
+			for (int i = 0; i < v.Length; i++)
+				result += v[i];
+			return result;
+		}
+
+		public override UnityEngine.Vector3 diff(UnityEngine.Vector3 a, UnityEngine.Vector3 b)
+		{
+			return a - b;
+		}
+
+		public override UnityEngine.Vector3 mul(float a, UnityEngine.Vector3 b)
+		{
+			return a * b;
+		}
+
+		public override float scalar(UnityEngine.Vector3 v)
+		{
+			return v.magnitude;
+		}
+
+		public override float distance(UnityEngine.Vector3 p0, UnityEngine.Vector3 p1)
+		{
+			return (p1 - p0).magnitude;
+		}
+
+		public override bool eq(UnityEngine.Vector3 a, UnityEngine.Vector3 b)
+		{
+			return a == b;
+		}
+	}
+#endif
 }

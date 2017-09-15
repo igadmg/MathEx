@@ -7,9 +7,16 @@ using UnityEngine;
 [CustomEditor(typeof(Spline))]
 public class Inspector_Spline : Editor
 {
+	public static Inspector_Spline instance = null;
+
+	public int iChangedNode = -1;
+
 	private void OnSceneGUI()
 	{
-		Spline spline = target as Spline;
+		instance = this;
+		iChangedNode = -1;
+
+		Spline spline = target as Spline; 
 		Transform handleTransform = spline.transform;
 
 		for (int i = 0; i < spline.spline.p.Length; i++)
@@ -17,6 +24,7 @@ public class Inspector_Spline : Editor
 			Vector3 p = handleTransform.TransformPoint(spline.spline.p[i]);
 			EditorGUI.BeginChangeCheck();
 			p = Handles.DoPositionHandle(p, handleTransform.rotation);
+			//Debug.Log(GUIUtility.GetControlID(FocusType.Passive));
 			if (EditorGUI.EndChangeCheck())
 			{
 				Undo.RecordObject(spline, "Curve Point Moved");
@@ -31,22 +39,14 @@ public class Inspector_Spline : Editor
 			}
 		}
 
-		vec3 lastPoint = vec3.empty;
+		//Debug.Log("hotControl: " + GUIUtility.hotControl + ", keyboardControl: " + GUIUtility.keyboardControl);
+
+		polyline_builder<Vector3> points = new polyline_builder<Vector3>();
 		foreach (var i in spline.spline.Iterate())
 		{
-			vec3 p = handleTransform.TransformPoint(i.value);
-
-			//Handles.SphereHandleCap(-1, p, Quaternion.identity, 0.05f, EventType.Repaint);
-
-			if (!lastPoint.isEmpty)
-			{
-				Handles.color = Color.white;
-				Handles.DrawLine(lastPoint, p);
-				//Handles.color = Color.green;
-				//Handles.DrawLine(p, p + v / sl);
-			}
-
-			lastPoint = p;
+			points.add(handleTransform.TransformPoint(i.value), true);
 		}
+		Handles.color = Color.white;
+		Handles.DrawPolyLine(points.points.ToArray());
 	}
 }
