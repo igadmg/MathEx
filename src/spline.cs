@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
-
+using SystemEx;
 
 namespace MathEx
 {
@@ -16,7 +15,10 @@ namespace MathEx
 
 	public abstract class curve<T> : curve
 	{
+		public class distance_type : curve_distance<curve<T>, T> { public distance_type(curve<T> c) : base(c) { } }
+
 		public override Type type { get { return typeof(T); } }
+		public distance_type distance { get { return new distance_type(this); } }
 
 		public abstract T value(float t);
 		public abstract T velocity(float t);
@@ -185,21 +187,65 @@ namespace MathEx
 		}
 	}
 
-	public class curve_distance<C>
+	public class curve_distance<C, T>
+		where C : curve<T>
 	{
+		protected static MathTypeTag<T> mtt = MathTypeTag<T>.Get();
+
 		public C c;
 		Tuple<float, float>[] d;
 
 		public curve_distance(C c)
 		{
 			this.c = c;
+
+			update();
+		}
+
+		public float length
+		{
+			get { return d[d.Length - 1].Item2; }
 		}
 
 		public void update()
 		{
 			List<Tuple<float, float>> dl = new List<Tuple<float, float>>();
 
+			T prevValue = c.value(0);
+			float prevDistance = 0;
+			foreach (var i in c.Iterate())
+			{
+				float dd = mtt.distance(prevValue, i.value);
+				dl.Add(Tuple.Create(i.t, prevDistance + dd));
+				prevDistance += dd;
+				prevValue = i.value;
+			}
 
+			d = dl.ToArray();
+		}
+
+		public float distance(float t)
+		{
+			int i = Array.BinarySearch(d, Tuple.Create(t, 0f)
+				, LambdaComparer.Create((Tuple<float, float> a, Tuple<float, float> b) => Comparer<float>.Default.Compare(a.Item1, b.Item1)));
+
+			if (i >= 0)
+				return d[i].Item2;
+
+			i = -i - 1;
+			return t.InvLerp(d[i - 1].Item1, d[i].Item1).Lerp(d[i - 1].Item2, d[i].Item2);
+		}
+
+		public float time(float d)
+		{
+			int i = Array.BinarySearch(this.d, Tuple.Create(0f, d)
+				, LambdaComparer.Create((Tuple<float, float> a, Tuple<float, float> b) => Comparer<float>.Default.Compare(a.Item2, b.Item2)));
+
+			if (i >= 0)
+				return this.d[i].Item1;
+
+			i = -i - 1;
+			return d.InvLerp(this.d[i - 1].Item2, this.d[i].Item2).Lerp(this.d[i - 1].Item1, this.d[i].Item1);
 		}
 	}
 

@@ -185,5 +185,27 @@ namespace MathEx
 				t = MathEx.Clamp01(t + dt);
 			}
 		}
+
+		public static IEnumerable<CurveIterator<T>> IterateEquidistant<T>(this curve<T> c, float fraction)
+		{
+			var d = c.distance;
+			float length = d.length;
+			float delta = d.length * fraction;
+
+			float cd = 0;
+			while (true)
+			{
+				CurveIterator<T> i;
+				i.t = d.time(cd);
+				i.value = c.value(i.t);
+				i.velocity = c.velocity(i.t);
+				yield return i;
+
+				if (cd == length)
+					yield break;
+
+				cd = MathEx.Clamp(cd + delta, 0, length);
+			}
+		}
 	}
 }
