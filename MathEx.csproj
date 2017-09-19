@@ -79,6 +79,7 @@
     <Compile Include="src\Noize.cs" />
     <Compile Include="src\plane.cs" />
     <Compile Include="src\polygon.cs" />
+    <Compile Include="src\polyline.cs" />
     <Compile Include="src\project.cs" />
     <Compile Include="src\svec3.cs" />
     <Compile Include="src\QuadTree.cs" />
