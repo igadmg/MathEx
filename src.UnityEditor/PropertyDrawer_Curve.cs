@@ -25,6 +25,7 @@ namespace MathEx.UnityEditor
 			if (controllerFieldInfo != null)
 			{
 				objController = (CubicBezierCurveController)controllerFieldInfo.GetValue(property.serializedObject.targetObject);
+				objController.c = obj;
 			}
 
 			Rect contentPosition = EditorGUI.PrefixLabel(position, label);
@@ -88,6 +89,23 @@ namespace MathEx.UnityEditor
 
 					if (i % (obj.chunkSize - 1) == 0)
 					{
+						if (objController != null)
+						{
+							Rect modeRect = rightRect;
+							modeRect.xMax = modeRect.xMin + 40;
+							modeRect.xMin -= 10;
+
+							int currentMode = (int)objController.modes[i / (obj.chunkSize - 1)];
+							int newMode = EditorGUI.Popup(modeRect, currentMode, modeOptions);
+							if (newMode != currentMode)
+							{
+								bIsDirty = true;
+								Undo.RecordObject(property.serializedObject.targetObject, "Curve Point Mode Changed");
+
+								objController.modes[i / (obj.chunkSize - 1)] = (CubicBezierCurveController.CurveMode)newMode;
+							}
+						}
+
 						if (GUI.Button(addRect, "+"))
 						{
 							bIsDirty = true;
@@ -107,23 +125,6 @@ namespace MathEx.UnityEditor
 								objController.remove(i / (obj.chunkSize - 1));
 							else
 								obj.remove(i / (obj.chunkSize - 1));
-						}
-
-						if (objController != null)
-						{
-							Rect modeRect = rightRect;
-							modeRect.xMax = modeRect.xMin + 40;
-							modeRect.xMin -= 10;
-
-							int currentMode = (int)objController.modes[i / (obj.chunkSize - 1)];
-							int newMode = EditorGUI.Popup(modeRect, currentMode, modeOptions);
-							if (newMode != currentMode)
-							{
-								bIsDirty = true;
-								Undo.RecordObject(property.serializedObject.targetObject, "Curve Point Mode Changed");
-
-								objController.modes[i / (obj.chunkSize - 1)] = (CubicBezierCurveController.CurveMode)newMode;
-							}
 						}
 					}
 				}

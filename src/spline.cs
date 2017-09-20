@@ -22,6 +22,8 @@ namespace MathEx
 		public distance_type distance { get { return new distance_type(this); } }
 		public controller_type controller { get { return new controller_type(this); } }
 
+		public abstract T getNodeValue(int nodeIndex);
+
 		public abstract T value(float t);
 		public abstract T velocity(float t);
 		public abstract T value(int i, float t);
@@ -115,14 +117,14 @@ namespace MathEx
 
 		public override int insert(int nodeIndex)
 		{
-			int i = nodeIndex * interpolator.size - 1;
+			int i = nodeIndex * (interpolator.size - 1);
 			List<T> pl = new List<T>(p);
 
 			if (i <= 0)
 			{
 				pl.InsertRange(0, new T[interpolator.size - 1]);
 			}
-			else if (i >= p.Length)
+			else if (i >= p.Length - 1)
 			{
 				pl.InsertRange(p.Length, new T[interpolator.size - 1]);
 			}
@@ -138,14 +140,14 @@ namespace MathEx
 
 		public override int remove(int nodeIndex)
 		{
-			int i = nodeIndex * interpolator.size - 1;
+			int i = nodeIndex * (interpolator.size - 1);
 			List<T> pl = new List<T>(p);
 
-			if (i < 0)
+			if (i <= 0)
 			{
 				pl.RemoveRange(0, interpolator.size - 1);
 			}
-			else if (i >= p.Length)
+			else if (i >= p.Length - 1)
 			{
 				pl.RemoveRange(p.Length - (interpolator.size - 1), interpolator.size - 1);
 			}
@@ -157,6 +159,13 @@ namespace MathEx
 			p = pl.ToArray();
 
 			return nodeIndex;
+		}
+
+		public override T getNodeValue(int nodeIndex)
+		{
+			int i = nodeIndex * (interpolator.size - 1);
+
+			return p[i];
 		}
 
 		public override T value(float t)
