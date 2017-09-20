@@ -15,15 +15,20 @@ namespace MathEx
 
 	public abstract class curve<T> : curve
 	{
-		public class distance_type : curve_distance<curve<T>, T> { public distance_type(curve<T> c) : base(c) { } }
+		[Serializable] public class distance_type : curve_distance<curve<T>, T> { public distance_type(curve<T> c) : base(c) { } }
+		[Serializable] public class controller_type : curve_controller<curve<T>, T> { public controller_type(curve<T> c) : base(c) { } }
 
 		public override Type type { get { return typeof(T); } }
 		public distance_type distance { get { return new distance_type(this); } }
+		public controller_type controller { get { return new controller_type(this); } }
 
 		public abstract T value(float t);
 		public abstract T velocity(float t);
 		public abstract T value(int i, float t);
 		public abstract T velocity(int i, float t);
+
+		public abstract int insert(int nodeIndex);
+		public abstract int remove(int nodeIndex);
 	}
 
 	public class spline_curve<T, I> : curve<T>
@@ -108,9 +113,9 @@ namespace MathEx
 			return i;
 		}
 
-		public void insert(int nodeNumber)
+		public override int insert(int nodeIndex)
 		{
-			int i = nodeNumber * interpolator.size - 1;
+			int i = nodeIndex * interpolator.size - 1;
 			List<T> pl = new List<T>(p);
 
 			if (i <= 0)
@@ -127,11 +132,13 @@ namespace MathEx
 			}
 
 			p = pl.ToArray();
+
+			return nodeIndex;
 		}
 
-		public void remove(int nodeNumber)
+		public override int remove(int nodeIndex)
 		{
-			int i = nodeNumber * interpolator.size - 1;
+			int i = nodeIndex * interpolator.size - 1;
 			List<T> pl = new List<T>(p);
 
 			if (i < 0)
@@ -148,6 +155,8 @@ namespace MathEx
 			}
 
 			p = pl.ToArray();
+
+			return nodeIndex;
 		}
 
 		public override T value(float t)
@@ -187,6 +196,7 @@ namespace MathEx
 		}
 	}
 
+	[Serializable]
 	public class curve_distance<C, T>
 		where C : curve<T>
 	{
@@ -246,6 +256,51 @@ namespace MathEx
 
 			i = -i - 1;
 			return d.InvLerp(this.d[i - 1].Item2, this.d[i].Item2).Lerp(this.d[i - 1].Item1, this.d[i].Item1);
+		}
+	}
+
+	[Serializable]
+	public class curve_controller<C, T>
+		where C : curve<T>
+	{
+		[Flags]
+		public enum CurveMode
+		{
+			Auto,
+			Broken,
+			Curve,
+			CurveSymmetric,
+		}
+
+		public C c;
+		public CurveMode[] modes;
+
+		public curve_controller(C c)
+		{
+			this.c = c;
+			modes = new CurveMode[c.numberOfNodes];
+		}
+
+		public int insert(int nodeIndex)
+		{
+			nodeIndex = c.insert(nodeIndex);
+
+			List<CurveMode> ml = new List<CurveMode>(modes);
+			ml.Insert(nodeIndex, CurveMode.Auto);
+			modes = ml.ToArray();
+
+			return nodeIndex;
+		}
+
+		public int remove(int nodeIndex)
+		{
+			nodeIndex = c.remove(nodeIndex);
+
+			List<CurveMode> ml = new List<CurveMode>(modes);
+			ml.RemoveAt(nodeIndex);
+			modes = ml.ToArray();
+
+			return nodeIndex;
 		}
 	}
 

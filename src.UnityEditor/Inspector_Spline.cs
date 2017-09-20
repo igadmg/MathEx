@@ -19,6 +19,8 @@ public class Inspector_Spline : Editor
 		Spline spline = target as Spline; 
 		Transform handleTransform = spline.transform;
 
+		CubicBezierCurveController splineController = spline.splineController;
+
 		for (int i = 0; i < spline.spline.p.Length; i++)
 		{
 			Vector3 p = handleTransform.TransformPoint(spline.spline.p[i]);

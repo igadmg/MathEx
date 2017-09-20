@@ -57,7 +57,7 @@ namespace MathEx
 				}
 			}
 
-			yield break;
+			// yield break;
 		}
 	}
 
