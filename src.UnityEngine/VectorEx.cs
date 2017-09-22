@@ -484,9 +484,24 @@ namespace MathEx
 				);
 		}
 
+		public static Ray ScreenPointToRay(this Vector2 v)
+		{
+			return Camera.main.ScreenPointToRay(v);
+		}
+
+		public static Ray ScreenPointToRay(this Vector2 v, Camera camera)
+		{
+			return camera.ScreenPointToRay(v);
+		}
+
 		public static Ray ScreenPointToRay(this Vector3 v)
 		{
 			return Camera.main.ScreenPointToRay(v);
+		}
+
+		public static Ray ScreenPointToRay(this Vector3 v, Camera camera)
+		{
+			return camera.ScreenPointToRay(v);
 		}
 	}
 }

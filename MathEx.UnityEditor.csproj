@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>$(SolutionDir)bin\Debug.UnityEditor\</OutputPath>
-    <DefineConstants>UNITY_EDITOR;DEBUG;TRACE</DefineConstants>
+    <DefineConstants>UNITY;UNITY_EDITOR;DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -27,7 +27,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>$(SolutionDir)bin\Release.UnityEditor\</OutputPath>
-    <DefineConstants>UNITY_EDITOR;TRACE</DefineConstants>
+    <DefineConstants>UNITY;UNITY_EDITOR;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>

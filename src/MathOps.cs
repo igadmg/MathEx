@@ -10,7 +10,7 @@ namespace MathEx
 			{ typeof(float), new MathTypeTagFloat() },
 			{ typeof(vec2), new MathTypeTagVec2() },
 			{ typeof(vec3), new MathTypeTagVec3() },
-#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY || UNITY_5_3_OR_NEWER
 			{ typeof(UnityEngine.Vector3), new MathTypeTagVector3() },
 #endif
 		};
@@ -182,7 +182,7 @@ namespace MathEx
 		}
 	}
 
-#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY || UNITY_5_3_OR_NEWER
 	public class MathTypeTagVector3 : MathTypeTag<UnityEngine.Vector3>
 	{
 		public override UnityEngine.Vector3 zero()
