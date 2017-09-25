@@ -61,5 +61,17 @@ namespace MathEx
 
 			return r.origin + d * r.direction;
 		}
+
+#if UNITY || UNITY_5_3_OR_NEWER
+		public static implicit operator UnityEngine.Plane(plane p)
+		{
+			return new UnityEngine.Plane(p.normal, p.d);
+		}
+
+		public static implicit operator plane(UnityEngine.Plane p)
+		{
+			return new plane(p.normal, p.distance);
+		}
+#endif
 	}
 }

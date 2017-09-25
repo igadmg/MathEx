@@ -72,5 +72,17 @@
 		{
 			return origin + direction * projection(point);
 		}
+
+#if UNITY || UNITY_5_3_OR_NEWER
+		public static implicit operator UnityEngine.Ray(ray r)
+		{
+			return new UnityEngine.Ray(r.origin, r.direction);
+		}
+
+		public static implicit operator ray(UnityEngine.Ray r)
+		{
+			return new ray(r.origin, r.direction);
+		}
+#endif
 	}
 }

@@ -11,6 +11,8 @@ namespace MathEx
 		public abstract int numberOfNodes { get; }
 		public abstract int chunkSize { get; }
 		public abstract float length { get; }
+
+		public abstract int getNodeIndex(int nodeIndex);
 	}
 
 	public abstract class curve<T> : curve
@@ -23,6 +25,7 @@ namespace MathEx
 		public controller_type controller { get { return new controller_type(this); } }
 
 		public abstract T getNodeValue(int nodeIndex);
+		public abstract T getNodeTangent(int nodeIndex);
 
 		public abstract T value(float t);
 		public abstract T velocity(float t);
@@ -76,8 +79,8 @@ namespace MathEx
 				float result = 0;
 				for (int i = 0; i < numberOfNodes - 1; i++)
 				{
-					int i0 = i * (interpolator.size - 1);
-					int i1 = (i + 1) * (interpolator.size - 1);
+					int i0 = getNodeIndex(i);
+					int i1 = getNodeIndex(i + 1);
 
 					T p0 = p[i0];
 					T p1 = p[i1];
@@ -117,7 +120,7 @@ namespace MathEx
 
 		public override int insert(int nodeIndex)
 		{
-			int i = nodeIndex * (interpolator.size - 1);
+			int i = getNodeIndex(nodeIndex);
 			List<T> pl = new List<T>(p);
 
 			if (i <= 0)
@@ -140,7 +143,7 @@ namespace MathEx
 
 		public override int remove(int nodeIndex)
 		{
-			int i = nodeIndex * (interpolator.size - 1);
+			int i = getNodeIndex(nodeIndex);
 			List<T> pl = new List<T>(p);
 
 			if (i <= 0)
@@ -161,11 +164,23 @@ namespace MathEx
 			return nodeIndex;
 		}
 
+		public override int getNodeIndex(int nodeIndex)
+		{
+			return nodeIndex * (interpolator.size - 1);
+		}
+
 		public override T getNodeValue(int nodeIndex)
 		{
-			int i = nodeIndex * (interpolator.size - 1);
+			int i = getNodeIndex(nodeIndex);
 
 			return p[i];
+		}
+
+		public override T getNodeTangent(int nodeIndex)
+		{
+			int i = getNodeIndex(nodeIndex);
+
+			return mtt.diff(p[i + 1], p[i]);
 		}
 
 		public override T value(float t)
