@@ -39,6 +39,7 @@ namespace MathEx
 		public CubicBezierCurve spline { get { return m_Spline; } }
 		public CubicBezierCurveController splineController { get { return m_SplineController; } }
 
+		public Vector3 value(float t) { return transform.TransformPoint(spline.value(t)); }
 
 
 		private void Awake()

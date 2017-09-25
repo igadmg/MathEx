@@ -7,17 +7,17 @@
 		public static float Abs(this float v) { return v > 0 ? v : -v; }
 		public static float Sign(this float v) { return v > 0 ? 1.0f : v < 0 ? -1.0f : 0; }
 
-		public static int Clamp(int f, int p1, int p2)
-		{
-			return (int)UnityEngine.Mathf.Clamp(f, p1, p2);
-		}
-
-		public static float Clamp(float f, float p1, float p2)
+		public static int Clamp(this int f, int p1, int p2)
 		{
 			return UnityEngine.Mathf.Clamp(f, p1, p2);
 		}
 
-		public static float Clamp01(float f)
+		public static float Clamp(this float f, float p1, float p2)
+		{
+			return UnityEngine.Mathf.Clamp(f, p1, p2);
+		}
+
+		public static float Clamp01(this float f)
 		{
 			return UnityEngine.Mathf.Clamp01(f);
 		}
