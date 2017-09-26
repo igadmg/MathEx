@@ -26,6 +26,7 @@ namespace MathEx
 
 		public abstract T getNodeValue(int nodeIndex);
 		public abstract T getNodeTangent(int nodeIndex);
+		public abstract float getNodeTime(int nodeIndex, float segmentTime);
 
 		public abstract T value(float t);
 		public abstract T velocity(float t);
@@ -181,6 +182,17 @@ namespace MathEx
 			int i = getNodeIndex(nodeIndex);
 
 			return mtt.diff(p[i + 1], p[i]);
+		}
+
+		public override float getNodeTime(int nodeIndex, float segmentTime)
+		{
+			if (nodeIndex == numberOfNodes - 1)
+				return 1.0f;
+
+			float dt = 1.0f / (numberOfNodes - 1);
+			float ta = nodeIndex * dt;
+			float tb = (nodeIndex + 1) * dt;
+			return segmentTime.Lerp(ta, tb);
 		}
 
 		public override T value(float t)
