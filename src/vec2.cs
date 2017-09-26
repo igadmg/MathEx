@@ -26,8 +26,8 @@ namespace MathEx
 		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y); } }
 		public bool isZero { get { return x == 0 && y == 0; } }
 
-		public float length { get { return MathEx.Sqrt(magnitude); } }
-		public float magnitude { get { return x * x + y * y; } set { float dm = value / magnitude; x *= dm; y *= dm; } }
+		public float length { get { return MathEx.Sqrt(magnitude); } set { float l = value / length; x *= l; y *= l; } }
+		public float magnitude { get { return x * x + y * y; } }
 		public vec2 normalized { get { return isZero ? this : this / length; } }
 
 		public int quad

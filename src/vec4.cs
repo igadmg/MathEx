@@ -27,7 +27,7 @@ namespace MathEx
 		public bool isZero { get { return x == 0 && y == 0 && z == 0 && w == 0; } }
 		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z) || float.IsNaN(w); } }
 
-		public float length { get { return MathEx.Sqrt(magnitude); } }
+		public float length { get { return MathEx.Sqrt(magnitude); } set { float l = value / length; x *= l; y *= l; z *= l; w *= l; } }
 		public float magnitude { get { return x*x + y*y + z*z + w*w; } }
 		public vec4 normalized { get { return isZero ? this : this / length; } }
 
