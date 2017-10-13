@@ -66,6 +66,30 @@ namespace MathEx
 		{
 			return new Vector2((v.x - rect.xMin) / rect.width, (v.y - rect.yMin) / rect.height);
 		}
+
+		public static int Position(this Rect rect, Vector2 v)
+		{
+			if (rect.IsEmpty())
+				return 0x0f;
+			if (v.IsEmpty())
+				return 0x00;
+
+			Vector3 a = rect.min;
+			Vector3 b = rect.max;
+
+			int res = 0;
+			if (v.x < a.x)
+				res |= 0x01;
+			else if (v.x > b.x)
+				res |= 0x02;
+
+			if (v.y < a.y)
+				res |= 0x04;
+			else if (v.y > b.y)
+				res |= 0x08;
+
+			return res;
+		}
 	}
 }
 

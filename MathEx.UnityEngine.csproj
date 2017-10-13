@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.UnityEngine.cs" />
     <Compile Include="src.UnityEngine\BoundsEx.cs" />
+    <Compile Include="src.UnityEngine\BoxColliderEx.cs" />
     <Compile Include="src.UnityEngine\ColorEx.cs" />
     <Compile Include="src.UnityEngine\Convert.cs" />
     <Compile Include="src.UnityEngine\MathfEx.cs" />

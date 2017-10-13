@@ -42,9 +42,9 @@ namespace MathEx
 				res |= 0x02;
 
 			if (v.y < a.y)
-				res |= 0x08;
-			else if (v.y > b.y)
 				res |= 0x04;
+			else if (v.y > b.y)
+				res |= 0x08;
 
 			return res;
 		}
@@ -97,8 +97,8 @@ namespace MathEx
 
 		public aabb3(vec3 r)
 		{
-			this.a = -r;
-			this.b = r;
+			a = -r;
+			b = r;
 		}
 
 		public bool isEmpty { get { return a.isEmpty || b.isEmpty; } }
@@ -110,5 +110,28 @@ namespace MathEx
 		public static aabb3 operator +(aabb3 a, vec3 v) { return new aabb3(a.a + v, a.b + v); }
 		public static aabb3 operator -(aabb3 a, vec3 v) { return new aabb3(a.a - v, a.b - v); }
 		public static aabb3 operator *(aabb3 a, vec3 v) { return new aabb3(a.a.Mul(v), a.b.Mul(v)); }
+
+
+		public int Position(vec3 v)
+		{
+			int res = 0;
+
+			if (v.x < a.x)
+				res |= 0x01;
+			else if (v.x > b.x)
+				res |= 0x02;
+
+			if (v.y < a.y)
+				res |= 0x04;
+			else if (v.y > b.y)
+				res |= 0x08;
+
+			if (v.z < a.z)
+				res |= 0x10;
+			else if (v.z > b.z)
+				res |= 0x12;
+
+			return res;
+		}
 	}
 }

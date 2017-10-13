@@ -466,6 +466,18 @@ namespace MathEx
 
 		#endregion
 
+		public static Vector2 Rotate(this Vector2 v, float degrees)
+		{
+			float sin = Mathf.Sin(degrees * Mathf.Deg2Rad);
+			float cos = Mathf.Cos(degrees * Mathf.Deg2Rad);
+
+			float tx = v.x;
+			float ty = v.y;
+			v.x = (cos * tx) - (sin * ty);
+			v.y = (sin * tx) + (cos * ty);
+			return v;
+		}
+
 		public static Vector2 ToBarycentric(this Vector2 v, Vector2 a, Vector2 b, Vector2 c)
 		{
 			float d = (b.y - c.y)*(a.x - c.x) + (b.x - c.x)*(a.y - c.y);
