@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.UnityEngine.cs" />
+    <Compile Include="src.UnityEngine\CameraEx.cs" />
+    <Compile Include="src.UnityEngine\TransformEx.cs" />
     <Compile Include="src.UnityEngine\BoundsEx.cs" />
     <Compile Include="src.UnityEngine\BoxColliderEx.cs" />
     <Compile Include="src.UnityEngine\ColorEx.cs" />

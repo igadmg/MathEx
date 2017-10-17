@@ -19,6 +19,14 @@ namespace MathEx
 			return RectEx.Empty.Extend(bounds.min).Extend(bounds.max);
 		}
 
+		public static Vector3 Clamp(this Bounds bounds, Vector3 v)
+		{
+			if (bounds.IsEmpty())
+				return VectorEx.empty3;
+			
+			return v.Clamp(bounds.min, bounds.max);
+		}
+
 		public static Bounds Extend(this Bounds bounds, Bounds b)
 		{
 			if (bounds.IsEmpty())
