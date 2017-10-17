@@ -6,6 +6,13 @@ namespace MathEx
 	{
 		public static Matrix4x4 cf2d = Matrix4x4.identity.Columns(Vector3.right, Vector3.forward, Vector3.up);
 
+
+
+		public static Plane[] CalculateFrustumPlanes(float fov, float aspect, float zNear, float zFar)
+		{
+			return GeometryUtility.CalculateFrustumPlanes(Matrix4x4.Perspective(fov, aspect, zNear, zFar));
+		}
+
 		public static Matrix4x4 Column(this Matrix4x4 m4x4, int column, Vector3 v)
 		{
 			m4x4.SetColumn(column, v);

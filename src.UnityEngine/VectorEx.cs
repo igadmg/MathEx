@@ -515,6 +515,21 @@ namespace MathEx
 		{
 			return camera.ScreenPointToRay(v);
 		}
+
+		public static bool IsInFrustum(this Vector3 v, float fov, float aspect, float zNear, float zFar)
+		{
+			float vMagnitude = v.sqrMagnitude;
+			if (vMagnitude < zNear * zNear || vMagnitude > zFar * zFar)
+				return false;
+
+			float vCosX = v.Y(0).normalized.z;
+			float vCosY = v.X(0).normalized.z;
+			fov *= Mathf.Deg2Rad / 2.0f;
+			float xCos = Mathf.Cos(fov * aspect);
+			float yCos = Mathf.Cos(fov);
+
+			return vCosX > xCos && vCosY > yCos;
+		}
 	}
 }
 
