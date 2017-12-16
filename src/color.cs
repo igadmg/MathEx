@@ -1,5 +1,7 @@
 using SystemEx;
 
+
+
 namespace MathEx
 {
 	public struct color

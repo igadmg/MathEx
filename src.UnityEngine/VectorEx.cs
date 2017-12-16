@@ -202,6 +202,11 @@ namespace MathEx
 			return v.x == 0 && v.y == 0;
 		}
 
+		public static bool IsZero(this Vector2 v, float eps)
+		{
+			return Mathf.Abs(v.x) < eps && Mathf.Abs(v.y) < eps;
+		}
+
 		public static bool IsEmpty(this Vector3 v)
 		{
 			return float.IsNaN(v.x) || float.IsNaN(v.y) || float.IsNaN(v.z);
@@ -212,6 +217,11 @@ namespace MathEx
 			return v.x == 0 && v.y == 0 && v.z == 0;
 		}
 
+		public static bool IsZero(this Vector3 v, float eps)
+		{
+			return Mathf.Abs(v.x) < eps && Mathf.Abs(v.y) < eps && Mathf.Abs(v.z) < eps;
+		}
+
 		public static bool IsEmpty(this Vector4 v)
 		{
 			return float.IsNaN(v.x) || float.IsNaN(v.y) || float.IsNaN(v.z) || float.IsNaN(v.w);
@@ -220,6 +230,11 @@ namespace MathEx
 		public static bool IsZero(this Vector4 v)
 		{
 			return v.x == 0 && v.y == 0 && v.z == 0 && v.w == 0;
+		}
+
+		public static bool IsZero(this Vector4 v, float eps)
+		{
+			return Mathf.Abs(v.x) < eps && Mathf.Abs(v.y) < eps && Mathf.Abs(v.z) < eps && Mathf.Abs(v.w) < eps;
 		}
 
 		public static Vector4 ToVector4(this Vector3 v, float w)
@@ -241,6 +256,18 @@ namespace MathEx
 		{
 			return Quaternion.Euler(euler) * v;
 		}
+
+
+		public static float Lerp(this Vector2 ab, float t)
+		{
+			return Mathf.Lerp(ab.x, ab.y, t);
+		}
+
+		public static float InvLerp(this Vector2 ab, float v)
+		{
+			return (v - ab.x) / (ab.y - ab.x);
+		}
+		
 
 		public static int Clamp(this Vector2 v, int f)
 		{
@@ -477,6 +504,14 @@ namespace MathEx
 			v.y = (sin * tx) + (cos * ty);
 			return v;
 		}
+
+        public static float Angle(this Vector2 from, Vector2 to)
+        {
+            float cos = Vector2.Dot(from, to);
+            float sin = -Vector3.Cross(from, to).z;
+
+            return Mathf.Acos(cos) * Mathf.Sign(sin);
+        }
 
 		public static Vector2 ToBarycentric(this Vector2 v, Vector2 a, Vector2 b, Vector2 c)
 		{
