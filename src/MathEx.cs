@@ -2,6 +2,8 @@
 {
 	public static class MathEx
 	{
+		public static readonly float PI = 3.1415927f;
+
 		public static int Sign(this int v) { return v > 0 ? 1 : v < 0 ? -1 : 0; }
 		public static int Signi(this float v) { return v > 0 ? 1 : v < 0 ? -1 : 0; }
 

@@ -159,6 +159,23 @@ namespace MathEx
 			public T velocity;
 		}
 
+		public static IEnumerable<CurveIterator<vec2>> Iterate(this circle c, int sectors)
+		{
+			if (c.isEmpty)
+				yield break;
+
+			float dA0 = 0;
+			float dA = 2f * MathEx.PI / sectors;
+			for (int i = 0; i <= sectors; i++) {
+				Foreach.CurveIterator<vec2> ci = new Foreach.CurveIterator<vec2>();
+				float a = dA0 + i * dA;
+				ci.t = ((float)i) / sectors;
+				ci.value = c.o + c.r * (new vec2(MathEx.Cos(a), MathEx.Sin(a)));
+				yield return ci;
+			}
+			yield break;
+		}
+
 		public static IEnumerable<CurveIterator<T>> Iterate<T>(this curve<T> c)
 		{
 			return c.Iterate(1f);
