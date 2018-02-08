@@ -10,6 +10,9 @@
 		public static float Abs(this float v) { return v > 0 ? v : -v; }
 		public static float Sign(this float v) { return v > 0 ? 1.0f : v < 0 ? -1.0f : 0; }
 
+		public static float Min(this float a, float b) { return UnityEngine.Mathf.Min(a, b); }
+		public static float Max(this float a, float b) { return UnityEngine.Mathf.Max(a, b); }
+
 		public static int Clamp(this int f, int p1, int p2)
 		{
 			return UnityEngine.Mathf.Clamp(f, p1, p2);

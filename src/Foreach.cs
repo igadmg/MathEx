@@ -1,13 +1,37 @@
 ﻿using System;
 using SystemEx;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+
 
 namespace MathEx
 {
 	public static class Foreach
 	{
+		public static IEnumerable<float> Fit(this float distance, int steps, float minDistance)
+		{
+			if (steps == 0)
+			{
+				yield break;
+			}
+
+			if (steps == 1)
+			{
+				yield return distance * 0.5f;
+			}
+			else
+			{
+				float d = minDistance.Min(distance / (steps - 1));
+				float start = (distance - (d * (steps - 1))) * 0.5f;
+				for (int i = 0; i < steps; i++)
+				{
+					yield return start + i * d;
+				}
+			}
+
+			yield break;
+		}
+
 		public static IEnumerable<aabb2> Cell(vec2i s)
 		{
 			vec2 sp = -((vec2)s).Div(2.0f);
