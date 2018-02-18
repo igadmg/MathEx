@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>$(SolutionDir)bin\Debug.UnityEngine\</OutputPath>
+    <OutputPath>$(SolutionDir)bin\Debug.UnityEx\Assemblies\</OutputPath>
     <DefineConstants>UNITY;DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>$(SolutionDir)bin\Release.UnityEngine\</OutputPath>
+    <OutputPath>$(SolutionDir)bin\Release.UnityEx\Assemblies\</OutputPath>
     <DefineConstants>UNITY;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>

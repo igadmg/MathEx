@@ -33,7 +33,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Unity|AnyCPU'">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>$(SolutionDir)bin\Debug.UnityEngine\</OutputPath>
+    <OutputPath>$(SolutionDir)bin\Debug.UnityEx\Assemblies\</OutputPath>
     <DefineConstants>UNITY;TRACE;DEBUG;</DefineConstants>
     <DebugType>full</DebugType>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -41,7 +41,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Unity|AnyCPU'">
-    <OutputPath>$(SolutionDir)bin\Release.UnityEngine\</OutputPath>
+    <OutputPath>$(SolutionDir)bin\Release.UnityEx\Assemblies\</OutputPath>
     <DefineConstants>UNITY;TRACE;</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>

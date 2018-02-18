@@ -45,10 +45,12 @@ namespace MathEx
 
 		public static explicit operator color(color_hsl hsl)
 		{
-			if (hsl.s == 0.0f) {
+			if (hsl.s == 0.0f)
+			{
 				return new color(hsl.l, hsl.l, hsl.l, hsl.a);
 			}
-			else {
+			else
+			{
 				float hue = hsl.h / 60.0f;
 				int i = (int)hue;
 				float f = hue - i;
@@ -70,13 +72,14 @@ namespace MathEx
 					? hsl.l * (1.0f + hsl.s)
 					: hsl.l * (1.0f - hsl.s) + hsl.s;
 
-				switch (i) {
-				case 0: return new color(u, t, p, hsl.a);
-				case 1: return new color(q, u, p, hsl.a);
-				case 2: return new color(p, u, t, hsl.a);
-				case 3: return new color(p, q, u, hsl.a);
-				case 4: return new color(t, p, u, hsl.a);
-				case 5: return new color(u, p, q, hsl.a);
+				switch (i)
+				{
+					case 0: return new color(u, t, p, hsl.a);
+					case 1: return new color(q, u, p, hsl.a);
+					case 2: return new color(p, u, t, hsl.a);
+					case 3: return new color(p, q, u, hsl.a);
+					case 4: return new color(t, p, u, hsl.a);
+					case 5: return new color(u, p, q, hsl.a);
 				}
 			}
 
@@ -85,10 +88,12 @@ namespace MathEx
 
 		public static explicit operator color(color_hsv hsv)
 		{
-			if (hsv.s == 0.0f) {
+			if (hsv.s == 0.0f)
+			{
 				return new color(hsv.v, hsv.v, hsv.v, hsv.a);
 			}
-			else {
+			else
+			{
 				float hue = hsv.h / 60.0f;
 				int i = (int)hue;
 				float f = hue - i;
@@ -97,13 +102,14 @@ namespace MathEx
 				float q = hsv.v * (1.0F - hsv.s * f);
 				float t = hsv.v * (1.0F - hsv.s * (1.0F - f));
 
-				switch (i) {
-				case 0: return new color(hsv.v,     t,     p, hsv.a);
-				case 1: return new color(    q, hsv.v,     p, hsv.a);
-				case 2: return new color(    p, hsv.v,     t, hsv.a);
-				case 3: return new color(    p,     q, hsv.v, hsv.a);
-				case 4: return new color(    t,     p, hsv.v, hsv.a);
-				case 5: return new color(hsv.v,     p,     q, hsv.a);
+				switch (i)
+				{
+					case 0: return new color(hsv.v, t, p, hsv.a);
+					case 1: return new color(q, hsv.v, p, hsv.a);
+					case 2: return new color(p, hsv.v, t, hsv.a);
+					case 3: return new color(p, q, hsv.v, hsv.a);
+					case 4: return new color(t, p, hsv.v, hsv.a);
+					case 5: return new color(hsv.v, p, q, hsv.a);
 				}
 			}
 
@@ -158,26 +164,33 @@ namespace MathEx
 			hsl.a = rgb.a;
 			hsl.l = (uMax + uMin) / 2.0f;
 
-			if (uMax != 0) {
+			if (uMax != 0)
+			{
 				hsl.s = (uMax - uMin) / uMax;
 			}
-			else {
+			else
+			{
 				hsl.s = 0;
 			}
 
-			if (hsl.s == 0) {
+			if (hsl.s == 0)
+			{
 				hsl.s = -1.0f;
 			}
-			else {
+			else
+			{
 				float d = uMax - uMin;
 
-				if (uMax == r) {
+				if (uMax == r)
+				{
 					hsl.h = (g - b) / d;
 				}
-				else if (uMax == g) {
+				else if (uMax == g)
+				{
 					hsl.h = 2.0f + (b - r) / d;
 				}
-				else {
+				else
+				{
 					hsl.h = 4.0f + (r - g) / d;
 				}
 
@@ -229,26 +242,33 @@ namespace MathEx
 			hsv.a = rgb.a;
 			hsv.v = uMax;
 
-			if (uMax != 0) {
+			if (uMax != 0)
+			{
 				hsv.s = (uMax - uMin) / uMax;
 			}
-			else {
+			else
+			{
 				hsv.s = 0;
 			}
 
-			if (hsv.s == 0) {
+			if (hsv.s == 0)
+			{
 				hsv.s = -1.0f;
 			}
-			else {
+			else
+			{
 				float d = uMax - uMin;
 
-				if (uMax == r) {
+				if (uMax == r)
+				{
 					hsv.h = (g - b) / d;
 				}
-				else if (uMax == g) {
+				else if (uMax == g)
+				{
 					hsv.h = 2.0f + (b - r) / d;
 				}
-				else {
+				else
+				{
 					hsv.h = 4.0f + (r - g) / d;
 				}
 

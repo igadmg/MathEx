@@ -23,7 +23,8 @@ namespace MathEx
 			var ri = base.Remove(item);
 
 			var nedges = new HashSet<Edge>();
-			foreach (var edge in edges_) {
+			foreach (var edge in edges_)
+			{
 				if (edge.a == ri || edge.b == ri)
 					continue;
 				if (edge.a > ri) edge.Item1--;

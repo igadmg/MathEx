@@ -10,11 +10,11 @@ namespace MathEx
 		public vec2 b;
 
 		public vec2 o { get { return (a + b) / 2; } }
-        public float x { get { return b.x - a.x; } }
-        public float y { get { return b.y - a.y; } }
+		public float x { get { return b.x - a.x; } }
+		public float y { get { return b.y - a.y; } }
 		public vec2 size { get { return b - a; } }
 		public vec2[] vertices { get { return new vec2[] { a, new vec2(a.x, b.y), b, new vec2(b.x, a.y) }; } }
-		
+
 		public aabb2(vec2 a, vec2 b)
 		{
 			this.a = a;
@@ -29,7 +29,7 @@ namespace MathEx
 		//
 		public static aabb2 operator +(aabb2 a, vec2 v) { return new aabb2(a.a + v, a.b + v); }
 		public static aabb2 operator -(aabb2 a, vec2 v) { return new aabb2(a.a - v, a.b - v); }
-        public static aabb2 operator *(aabb2 a, vec2 v) { return new aabb2(a.a.Mul(v), a.b.Mul(v)); }
+		public static aabb2 operator *(aabb2 a, vec2 v) { return new aabb2(a.a.Mul(v), a.b.Mul(v)); }
 
 
 		public int Position(vec2 v)

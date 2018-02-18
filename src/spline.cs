@@ -37,6 +37,203 @@ namespace MathEx
 		public abstract int remove(int nodeIndex);
 	}
 
+	public class dynamic_spline_curve<T> : curve<T>
+	{
+		protected static MathTypeTag<T> mtt = MathTypeTag<T>.Get();
+
+		protected Interpolator<T> interpolator;
+		public bool loop = false;
+		public T[] p = null;
+
+
+		public dynamic_spline_curve(Interpolator<T> i)
+		{
+			interpolator = i;
+		}
+
+		public dynamic_spline_curve(Interpolator<T> i, int length)
+		{
+			interpolator = i;
+			p = new T[length * (interpolator.size - 1) + 1];
+		}
+
+		public dynamic_spline_curve(Interpolator<T> i, int length, bool loop)
+		{
+			interpolator = i;
+			this.loop = loop;
+			p = new T[length * (interpolator.size - 1) + 1];
+		}
+
+		// return length of spline curve in segments.
+		public override int numberOfNodes
+		{
+			get { return 1 + p.Length / (interpolator.size - 1); }
+		}
+
+		public override int chunkSize
+		{
+			get { return interpolator.size; }
+		}
+
+		public override float length
+		{
+			get
+			{
+				float result = 0;
+				for (int i = 0; i < numberOfNodes - 1; i++)
+				{
+					int i0 = getNodeIndex(i);
+					int i1 = getNodeIndex(i + 1);
+
+					T p0 = p[i0];
+					T p1 = p[i1];
+
+					float chunkLength = mtt.distance(p0, p1);
+					for (int j = i0; j < i1 - 1; j++)
+					{
+						chunkLength += mtt.distance(p[j], p[j + 1]);
+					}
+
+					result += chunkLength / 2;
+				}
+
+				return result;
+			}
+		}
+
+		protected int calculateT(ref float t)
+		{
+			int i;
+
+			if (t >= 1f)
+			{
+				t = 1f;
+				i = p.Length - 4;
+			}
+			else
+			{
+				t = MathEx.Clamp(t, 0, 1) * (numberOfNodes - 1);
+				i = (int)t;
+				t -= i;
+				i *= 3;
+			}
+
+			return i;
+		}
+
+		public override int insert(int nodeIndex)
+		{
+			int i = getNodeIndex(nodeIndex);
+			List<T> pl = new List<T>(p);
+
+			if (i <= 0)
+			{
+				pl.InsertRange(0, new T[interpolator.size - 1]);
+			}
+			else if (i >= p.Length - 1)
+			{
+				pl.InsertRange(p.Length, new T[interpolator.size - 1]);
+			}
+			else
+			{
+				pl.InsertRange(i - (interpolator.size - 1) / 2, new T[interpolator.size - 1]);
+			}
+
+			p = pl.ToArray();
+
+			return nodeIndex;
+		}
+
+		public override int remove(int nodeIndex)
+		{
+			int i = getNodeIndex(nodeIndex);
+			List<T> pl = new List<T>(p);
+
+			if (i <= 0)
+			{
+				pl.RemoveRange(0, interpolator.size - 1);
+			}
+			else if (i >= p.Length - 1)
+			{
+				pl.RemoveRange(p.Length - (interpolator.size - 1), interpolator.size - 1);
+			}
+			else
+			{
+				pl.RemoveRange(i - (interpolator.size - 1) / 2, interpolator.size - 1);
+			}
+
+			p = pl.ToArray();
+
+			return nodeIndex;
+		}
+
+		public override int getNodeIndex(int nodeIndex)
+		{
+			return nodeIndex * (interpolator.size - 1);
+		}
+
+		public override T getNodeValue(int nodeIndex)
+		{
+			int i = getNodeIndex(nodeIndex);
+
+			return p[i];
+		}
+
+		public override T getNodeTangent(int nodeIndex)
+		{
+			int i = getNodeIndex(nodeIndex);
+
+			return mtt.diff(p[i + 1], p[i]);
+		}
+
+		public override float getNodeTime(int nodeIndex, float segmentTime)
+		{
+			if (nodeIndex == numberOfNodes - 1)
+				return 1.0f;
+
+			float dt = 1.0f / (numberOfNodes - 1);
+			float ta = nodeIndex * dt;
+			float tb = (nodeIndex + 1) * dt;
+			return segmentTime.Lerp(ta, tb);
+		}
+
+		public override T value(float t)
+		{
+			if (p == null)
+				return mtt.zero();
+
+			int i = calculateT(ref t);
+
+			return interpolator.value(t, p, i);
+		}
+
+		public override T velocity(float t)
+		{
+			if (p == null)
+				return mtt.zero();
+
+			int i = calculateT(ref t);
+
+			return interpolator.derivative(t, p, i);
+		}
+
+		public override T value(int i, float t)
+		{
+			if (p == null || i >= numberOfNodes - 1)
+				return mtt.zero();
+
+			return interpolator.value(t, p, i);
+		}
+
+		public override T velocity(int i, float t)
+		{
+			if (p == null || i >= numberOfNodes - 1)
+				return mtt.zero();
+
+			return interpolator.derivative(t, p, i);
+		}
+	}
+
 	public class spline_curve<T, I> : curve<T>
 		where I : Interpolator<T>, new()
 	{

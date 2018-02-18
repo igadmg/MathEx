@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace MathEx
 {
 	public class aabb2i
@@ -12,10 +9,10 @@ namespace MathEx
 		public vec2i a;
 		public vec2i b;
 
-        public int x { get { return b.x - a.x; } }
-        public int y { get { return b.y - a.y; } }
+		public int x { get { return b.x - a.x; } }
+		public int y { get { return b.y - a.y; } }
 		public vec2i size { get { return b - a; } }
-		
+
 		public aabb2i(vec2i a, vec2i b)
 		{
 			this.a = a;
@@ -30,7 +27,7 @@ namespace MathEx
 		//
 		public static aabb2i operator +(aabb2i a, vec2i v) { return new aabb2i(a.a + v, a.b + v); }
 		public static aabb2i operator -(aabb2i a, vec2i v) { return new aabb2i(a.a - v, a.b - v); }
-        public static aabb2i operator *(aabb2i a, vec2i v) { return new aabb2i(a.a * v, a.b * v); }
+		public static aabb2i operator *(aabb2i a, vec2i v) { return new aabb2i(a.a * v, a.b * v); }
 
 
 		public aabb2i Extend(vec2i p)
@@ -69,10 +66,10 @@ namespace MathEx
 		public vec3i b;
 
 		public int x { get { return b.x - a.x; } }
-        public int y { get { return b.y - a.y; } }
+		public int y { get { return b.y - a.y; } }
 		public int z { get { return b.z - a.z; } }
 		public vec3i size { get { return b - a; } }
-		
+
 		public aabb3i(vec3i a, vec3i b)
 		{
 			this.a = a;

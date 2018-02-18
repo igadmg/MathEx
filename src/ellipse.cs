@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MathEx
+﻿namespace MathEx
 {
 	public class ellipse2
 	{
@@ -14,9 +9,9 @@ namespace MathEx
 
 		public ellipse2(vec2 focus, vec2 direction, float apo, float peri)
 		{
-			this.major = (apo + peri) / 2;
-			this.minor = MathEx.Sqrt(apo * peri);
-			this.center = focus + direction * ((apo - peri) / 2);
+			major = (apo + peri) / 2;
+			minor = MathEx.Sqrt(apo * peri);
+			center = focus + direction * ((apo - peri) / 2);
 			this.direction = direction;
 		}
 	}

@@ -62,7 +62,7 @@ namespace MathEx
 			yield break;
 		}
 
-		private static Func<vec2i, vec2i>[] octTransforms = new Func<vec2i,vec2i>[] {
+		private static Func<vec2i, vec2i>[] octTransforms = new Func<vec2i, vec2i>[] {
 			(a) => new vec2i( a.x, a.y),
 			(a) => new vec2i( a.y, a.x),
 			(a) => new vec2i(-a.y, a.x),
@@ -77,22 +77,26 @@ namespace MathEx
 		{
 			vec2i d = (b - a);
 
-			if (d.isZero) {
+			if (d.isZero)
+			{
 				yield break;
 			}
-			if (d.x == 0) {
+			if (d.x == 0)
+			{
 				int s = d.y.Sign();
 				for (int i = a.y; i != b.y; i += s)
 					yield return new vec2i(a.x, i);
 				yield break;
 			}
-			if (d.y == 0) {
+			if (d.y == 0)
+			{
 				int s = d.x.Sign();
 				for (int i = a.x; i != b.x; i += s)
 					yield return new vec2i(i, a.y);
 				yield break;
 			}
-			if (d.x.meq(d.y)) {
+			if (d.x.meq(d.y))
+			{
 				int sx = d.x.Sign();
 				int sy = d.y.Sign();
 				for (int xi = a.x, yi = a.y; xi != b.x; xi += sx, yi += sy)
@@ -104,20 +108,22 @@ namespace MathEx
 			b = ot(b);
 			d = ot(d);
 
-			int D = 2*d.y - d.x;
-			int y = a.y;			
+			int D = 2 * d.y - d.x;
+			int y = a.y;
 
 			yield return a;
-			for (int x = a.x + 1; x < b.x; x++) {
-				if (D > 0) {
+			for (int x = a.x + 1; x < b.x; x++)
+			{
+				if (D > 0)
+				{
 					y++;
-					D += 2*d.y - 2*d.x;
+					D += 2 * d.y - 2 * d.x;
 				}
 				else
-					D += 2*d.y;
+					D += 2 * d.y;
 				yield return ot(new vec2i(x, y));
 			}
-			
+
 			yield break;
 		}
 
@@ -125,28 +131,36 @@ namespace MathEx
 		{
 			vec3i d = (b - a);
 
-			if (d.isZero) {
+			if (d.isZero)
+			{
 				yield break;
 			}
-			if (d.x == 0) {
-				foreach (var p in a.yz().Line(b.yz())) {
+			if (d.x == 0)
+			{
+				foreach (var p in a.yz().Line(b.yz()))
+				{
 					yield return p.zxy(a.x);
 				}
 				yield break;
 			}
-			if (d.y == 0) {
-				foreach (var p in a.zx().Line(b.zx())) {
+			if (d.y == 0)
+			{
+				foreach (var p in a.zx().Line(b.zx()))
+				{
 					yield return p.yzx(a.y);
 				}
 				yield break;
 			}
-			if (d.z == 0) {
-				foreach (var p in a.xy().Line(b.xy())) {
+			if (d.z == 0)
+			{
+				foreach (var p in a.xy().Line(b.xy()))
+				{
 					yield return p.xyz(a.z);
 				}
 				yield break;
 			}
-			if (d.x.meq(d.y) && d.x.meq(d.z)) {
+			if (d.x.meq(d.y) && d.x.meq(d.z))
+			{
 				int sx = d.x.Sign();
 				int sy = d.y.Sign();
 				int sz = d.z.Sign();
@@ -190,7 +204,8 @@ namespace MathEx
 
 			float dA0 = 0;
 			float dA = 2f * MathEx.PI / sectors;
-			for (int i = 0; i <= sectors; i++) {
+			for (int i = 0; i <= sectors; i++)
+			{
 				Foreach.CurveIterator<vec2> ci = new Foreach.CurveIterator<vec2>();
 				float a = dA0 + i * dA;
 				ci.t = ((float)i) / sectors;

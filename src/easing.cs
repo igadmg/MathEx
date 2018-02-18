@@ -1,5 +1,7 @@
 using System;
 
+
+
 namespace MathEx
 {
 	public static class Easing
