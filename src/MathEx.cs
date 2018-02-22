@@ -137,17 +137,17 @@
 			return t - length;
 		}
 
-		public static float Pow(float v, float p)
+		public static float Pow(this float v, float p)
 		{
 			return UnityEngine.Mathf.Pow(v, p);
 		}
 
-		public static float Sqrt(float v)
+		public static float Sqrt(this float v)
 		{
 			return UnityEngine.Mathf.Sqrt(v);
 		}
 
-		public static float Cbrt(float v)
+		public static float Cbrt(this float v)
 		{
 			if (v >= 0)
 			{
@@ -159,27 +159,27 @@
 			}
 		}
 
-		public static float Log(float v)
+		public static float Log(this float v)
 		{
 			return UnityEngine.Mathf.Log(v);
 		}
 
-		public static int Round(float f)
+		public static int Round(this float f)
 		{
 			return (int)(f + 0.5f);
 		}
 
-		public static float Cos(float ar)
+		public static float Cos(this float ar)
 		{
 			return UnityEngine.Mathf.Cos(ar);
 		}
 
-		public static float Sin(float ar)
+		public static float Sin(this float ar)
 		{
 			return UnityEngine.Mathf.Sin(ar);
 		}
 
-		public static float Acos(float ar)
+		public static float Acos(this float ar)
 		{
 			return UnityEngine.Mathf.Acos(ar);
 		}

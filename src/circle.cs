@@ -1,8 +1,14 @@
+using System;
+
+
+
 namespace MathEx
 {
+	[Serializable]
 	public class circle
 	{
 		public static readonly circle zero = new circle(vec2.zero, 0f);
+		public static readonly circle one = new circle(vec2.zero, 1f);
 		public static readonly circle empty = new circle(vec2.empty, 0f);
 
 		public vec2 o;
@@ -64,6 +70,12 @@ namespace MathEx
 				o = new vec2((c1 * b2 - b1 * c2) / d, (a1 * c2 - c1 * a2) / d);
 				r = (a - o).length;
 			}
+		}
+
+		public vec2 value(float t)
+		{
+			float a = t * 2 * MathEx.PI;
+			return new vec2(r * a.Cos(), r * a.Sin()) + o;
 		}
 	}
 }

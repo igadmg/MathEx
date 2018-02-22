@@ -47,7 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.UnityEditor.cs" />
     <Compile Include="src.UnityEditor\Inspector_Spline.cs" />
     <Compile Include="src.UnityEditor\MathExGUI.cs" />
+    <Compile Include="src.UnityEditor\PropertyDrawer_circle.cs" />
     <Compile Include="src.UnityEditor\PropertyDrawer_Curve.cs" />
+    <Compile Include="src.UnityEditor\PropertyDrawer_line3_segment.cs" />
     <Compile Include="src.UnityEditor\PropertyDrawer_vec2i.cs" />
     <Compile Include="src.UnityEditor\PropertyDrawer_vec2.cs" />
     <Compile Include="src.UnityEditor\PropertyDrawer_vec3i.cs" />

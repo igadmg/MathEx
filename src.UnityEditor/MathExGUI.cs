@@ -4,11 +4,20 @@ using UnityEngine;
 
 public static class MathExGUI
 {
-	public static float vecLabelWidth = 28f;
+	public static float vecLabelWidth = 12f;
 
 	public static vec2 vec2Field(Rect position, string label, vec2 value, bool showLength)
 	{
+		float oldLabelWidth = EditorGUIUtility.labelWidth;
+
 		vec2 result = value;
+
+		if (!string.IsNullOrEmpty(label))
+		{
+			EditorGUI.LabelField(position, label);
+			position.x += EditorGUIUtility.labelWidth;
+			position.width -= EditorGUIUtility.labelWidth;
+		}
 
 		position.width *= showLength ? 0.25f : 0.33f;
 
@@ -24,12 +33,23 @@ public static class MathExGUI
 			EditorGUI.FloatField(position, new GUIContent("l"), value.length);
 		}
 
+		EditorGUIUtility.labelWidth = oldLabelWidth;
+
 		return result;
 	}
 
 	public static vec3 vec3Field(Rect position, string label, vec3 value, bool showLength)
 	{
+		float oldLabelWidth = EditorGUIUtility.labelWidth;
+
 		vec3 result = value;
+
+		if (!string.IsNullOrEmpty(label))
+		{
+			EditorGUI.LabelField(position, label);
+			position.x += EditorGUIUtility.labelWidth;
+			position.width -= EditorGUIUtility.labelWidth;
+		}
 
 		position.width *= showLength ? 0.25f : 0.33f;
 
@@ -45,6 +65,8 @@ public static class MathExGUI
 		{
 			EditorGUI.FloatField(position, new GUIContent("l"), value.length);
 		}
+
+		EditorGUIUtility.labelWidth = oldLabelWidth;
 
 		return result;
 	}
