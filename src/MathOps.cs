@@ -23,9 +23,9 @@ namespace MathEx
 			return (MathTypeTag<T>)specs[typeof(T)];
 		}
 
-		public virtual T zero()
+		public virtual T zero
 		{
-			throw new NotImplementedException();
+			get { throw new NotImplementedException(); }
 		}
 
 		public virtual T sum(params T[] v)
@@ -57,13 +57,18 @@ namespace MathEx
 		{
 			throw new NotImplementedException();
 		}
+
+		public virtual bool eq_zero(T a)
+		{
+			return eq(a, zero);
+		}
 	}
 
 	public class MathTypeTagFloat : MathTypeTag<float>
 	{
-		public override float zero()
+		public override float zero
 		{
-			return 0;
+			get { return 0; }
 		}
 
 		public override float sum(params float[] v)
@@ -102,9 +107,9 @@ namespace MathEx
 
 	public class MathTypeTagVec2 : MathTypeTag<vec2>
 	{
-		public override vec2 zero()
+		public override vec2 zero
 		{
-			return vec2.zero;
+			get { return vec2.zero; }
 		}
 
 		public override vec2 sum(params vec2[] v)
@@ -143,9 +148,9 @@ namespace MathEx
 
 	public class MathTypeTagVec3 : MathTypeTag<vec3>
 	{
-		public override vec3 zero()
+		public override vec3 zero
 		{
-			return vec3.zero;
+			get { return vec3.zero; }
 		}
 
 		public override vec3 sum(params vec3[] v)
@@ -185,9 +190,9 @@ namespace MathEx
 #if UNITY || UNITY_5_3_OR_NEWER
 	public class MathTypeTagVector3 : MathTypeTag<UnityEngine.Vector3>
 	{
-		public override UnityEngine.Vector3 zero()
+		public override UnityEngine.Vector3 zero
 		{
-			return UnityEngine.Vector3.zero;
+			get { return UnityEngine.Vector3.zero; }
 		}
 
 		public override UnityEngine.Vector3 sum(params UnityEngine.Vector3[] v)

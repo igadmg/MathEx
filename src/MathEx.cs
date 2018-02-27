@@ -1,8 +1,13 @@
-﻿namespace MathEx
+﻿using System.Collections.Generic;
+
+namespace MathEx
 {
 	public static class MathEx
 	{
 		public static readonly float PI = 3.1415927f;
+
+		public static int ToInt(this bool v) { return v ? 1 : 0; }
+		public static int ToInt(this bool v, int t, int f) { return v ? t : f; }
 
 		public static int Sign(this int v) { return v > 0 ? 1 : v < 0 ? -1 : 0; }
 		public static int Signi(this float v) { return v > 0 ? 1 : v < 0 ? -1 : 0; }
@@ -137,6 +142,16 @@
 			return t - length;
 		}
 
+		public static IEnumerable<float> Range(this float delta, float min, float max)
+		{
+			int steps = ((max - min) / delta).Round();
+
+			for (int i = 0; i <= steps; i++)
+			{
+				yield return min + delta * i;
+			}
+		}
+
 		public static float Pow(this float v, float p)
 		{
 			return UnityEngine.Mathf.Pow(v, p);
@@ -182,6 +197,27 @@
 		public static float Acos(this float ar)
 		{
 			return UnityEngine.Mathf.Acos(ar);
+		}
+
+		public static float Atan2(this float y, float x)
+		{
+			return UnityEngine.Mathf.Atan2(y, x);
+		}
+
+		public static bool IsZero(this float[] a)
+		{
+			for (int i = 0; i < a.Length; i++)
+				if (a[i] != 0) return false;
+
+			return true;
+		}
+
+		public static bool IsEmpty(this float[] a)
+		{
+			for (int i = 0; i < a.Length; i++)
+				if (float.IsNaN(a[i])) return true;
+
+			return false;
 		}
 	}
 }

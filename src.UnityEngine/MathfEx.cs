@@ -32,7 +32,7 @@ namespace MathEx
 			return Mathf.Repeat(t, length);
 		}
 
-		public static float Cbrt(float v)
+		public static float Cbrt(this float v)
 		{
 			if (v >= 0) {
 				return Mathf.Pow(v, 1/3.0f);
@@ -42,7 +42,17 @@ namespace MathEx
 			}
 		}
 
-		public static Vector2 Clamp01(Vector2 value)
+		public static bool InRange(this float v, float min, float max)
+		{
+			return v >= min && v <= max;
+		}
+
+		public static bool InRange(this float v, Vector2 range)
+		{
+			return v >= range.x && v <= range.y;
+		}
+
+		public static Vector2 Clamp01(this Vector2 value)
 		{
 			return new Vector2(
 				Mathf.Clamp(value.x, 0, 1),
@@ -50,7 +60,7 @@ namespace MathEx
 				);
 		}
 
-		public static Vector2 Clamp11(Vector2 value)
+		public static Vector2 Clamp11(this Vector2 value)
 		{
 			return new Vector2(
 				Mathf.Clamp(value.x, -1, 1),
@@ -58,7 +68,7 @@ namespace MathEx
 				);
 		}
 
-		public static Vector2 Clamp(Vector2 value, Vector2 min, Vector2 max)
+		public static Vector2 Clamp(this Vector2 value, Vector2 min, Vector2 max)
 		{
 			return new Vector2(
 				Mathf.Clamp(value.x, min.x, max.x),
@@ -66,7 +76,7 @@ namespace MathEx
 				);
 		}
 
-		public static Vector3 Clamp01(Vector3 value)
+		public static Vector3 Clamp01(this Vector3 value)
 		{
 			return new Vector3(
 				Mathf.Clamp(value.x, 0, 1),
@@ -75,7 +85,7 @@ namespace MathEx
 				);
 		}
 
-		public static Vector3 Clamp11(Vector3 value)
+		public static Vector3 Clamp11(this Vector3 value)
 		{
 			return new Vector3(
 				Mathf.Clamp(value.x, -1, 1),
@@ -84,7 +94,7 @@ namespace MathEx
 				);
 		}
 
-		public static Vector3 Clamp(Vector3 value, Vector3 min, Vector3 max)
+		public static Vector3 Clamp(this Vector3 value, Vector3 min, Vector3 max)
 		{
 			return new Vector3(
 				Mathf.Clamp(value.x, min.x, max.x),

@@ -267,7 +267,16 @@ namespace MathEx
 		{
 			return (v - ab.x) / (ab.y - ab.x);
 		}
-		
+
+		public static float Lerp(this float t, Vector2 ab)
+		{
+			return Mathf.Lerp(ab.x, ab.y, t);
+		}
+
+		public static float InvLerp(this float v, Vector2 ab)
+		{
+			return (v - ab.x) / (ab.y - ab.x);
+		}
 
 		public static int Clamp(this Vector2 v, int f)
 		{
@@ -277,36 +286,6 @@ namespace MathEx
 		public static float Clamp(this Vector2 v, float f)
 		{
 			return Mathf.Clamp(f, v.x, v.y);
-		}
-
-		public static Vector2 Clamp01(this Vector2 v)
-		{
-			return MathfEx.Clamp01(v);
-		}
-
-		public static Vector2 Clamp11(this Vector2 v)
-		{
-			return MathfEx.Clamp11(v);
-		}
-
-		public static Vector2 Clamp(this Vector2 v, Vector2 min, Vector2 max)
-		{
-			return MathfEx.Clamp(v, min, max);
-		}
-
-		public static Vector3 Clamp01(this Vector3 v)
-		{
-			return MathfEx.Clamp01(v);
-		}
-
-		public static Vector3 Clamp11(this Vector3 v)
-		{
-			return MathfEx.Clamp11(v);
-		}
-
-		public static Vector3 Clamp(this Vector3 v, Vector3 min, Vector3 max)
-		{
-			return MathfEx.Clamp(v, min, max);
 		}
 
 		#region Vector enumrators

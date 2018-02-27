@@ -74,14 +74,6 @@ namespace MathEx
 			return new vec3(v.x, v.y, z);
 		}
 
-		public static vec3[] xyz(this vec2[] vs, float z)
-		{
-			var r = new vec3[vs.Length];
-			for (int i = 0; i < vs.Length; i++)
-				r[i] = vs[i].xyz(z);
-			return r;
-		}
-
 		public static vec3 xzy(this vec2 v, float z)
 		{
 			return new vec3(v.x, z, v.y);
@@ -95,6 +87,11 @@ namespace MathEx
 		public static vec3 yxz(this vec2 v, float z)
 		{
 			return new vec3(v.y, v.x, z);
+		}
+
+		public static vec3 yzx(this vec2 v, float z)
+		{
+			return new vec3(v.y, z, v.x);
 		}
 
 		public static vec2i xy(this vec3i v) { return new vec2i(v.x, v.y); }

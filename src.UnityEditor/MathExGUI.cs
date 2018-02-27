@@ -2,72 +2,90 @@ using MathEx;
 using UnityEditor;
 using UnityEngine;
 
-public static class MathExGUI
+namespace MathEx
 {
-	public static float vecLabelWidth = 12f;
-
-	public static vec2 vec2Field(Rect position, string label, vec2 value, bool showLength)
+	public static class MathExGUI
 	{
-		float oldLabelWidth = EditorGUIUtility.labelWidth;
+		public static float vecLabelWidth = 12f;
 
-		vec2 result = value;
-
-		if (!string.IsNullOrEmpty(label))
+		public static vec2 vec2Field(Rect position, string label, vec2 value, bool showLength = false)
 		{
-			EditorGUI.LabelField(position, label);
-			position.x += EditorGUIUtility.labelWidth;
-			position.width -= EditorGUIUtility.labelWidth;
-		}
+			float oldLabelWidth = EditorGUIUtility.labelWidth;
 
-		position.width *= showLength ? 0.25f : 0.33f;
+			vec2 result = value;
 
-		EditorGUIUtility.labelWidth = vecLabelWidth;
-		result.x = EditorGUI.FloatField(position, new GUIContent("X"), value.x);
-		position.x += position.width;
-		result.y = EditorGUI.FloatField(position, new GUIContent("Y"), value.y);
-		position.x += position.width;
+			if (!string.IsNullOrEmpty(label))
+			{
+				EditorGUI.LabelField(position, label);
+				position.x += EditorGUIUtility.labelWidth;
+				position.width -= EditorGUIUtility.labelWidth;
+			}
 
-		if (showLength)
-		{
+			position.width *= showLength ? 0.25f : 0.33f;
+
+			EditorGUIUtility.labelWidth = vecLabelWidth;
+			result.x = EditorGUI.FloatField(position, new GUIContent("X"), value.x);
 			position.x += position.width;
-			EditorGUI.FloatField(position, new GUIContent("l"), value.length);
+			result.y = EditorGUI.FloatField(position, new GUIContent("Y"), value.y);
+			position.x += position.width;
+
+			if (showLength)
+			{
+				position.x += position.width;
+				EditorGUI.FloatField(position, new GUIContent("l"), value.length);
+			}
+
+			EditorGUIUtility.labelWidth = oldLabelWidth;
+
+			return result;
 		}
 
-		EditorGUIUtility.labelWidth = oldLabelWidth;
+		public static vec3 vec3Field(Rect position, string label, vec3 value, bool showLength = false)
+		{
+			float oldLabelWidth = EditorGUIUtility.labelWidth;
 
-		return result;
+			vec3 result = value;
+
+			if (!string.IsNullOrEmpty(label))
+			{
+				EditorGUI.LabelField(position, label);
+				position.x += EditorGUIUtility.labelWidth;
+				position.width -= EditorGUIUtility.labelWidth;
+			}
+
+			position.width *= showLength ? 0.25f : 0.33f;
+
+			EditorGUIUtility.labelWidth = vecLabelWidth;
+			result.x = EditorGUI.FloatField(position, new GUIContent("X"), value.x);
+			position.x += position.width;
+			result.y = EditorGUI.FloatField(position, new GUIContent("Y"), value.y);
+			position.x += position.width;
+			result.z = EditorGUI.FloatField(position, new GUIContent("Z"), value.z);
+			position.x += position.width;
+
+			if (showLength)
+			{
+				EditorGUI.FloatField(position, new GUIContent("l"), value.length);
+			}
+
+			EditorGUIUtility.labelWidth = oldLabelWidth;
+
+			return result;
+		}
 	}
 
-	public static vec3 vec3Field(Rect position, string label, vec3 value, bool showLength)
+	public static class MathExGUILayout
 	{
-		float oldLabelWidth = EditorGUIUtility.labelWidth;
+		internal static Rect s_LastRect;
 
-		vec3 result = value;
-
-		if (!string.IsNullOrEmpty(label))
+		public static vec2 vec2Field(string label, vec2 value, bool showLength = false, params GUILayoutOption[] options)
 		{
-			EditorGUI.LabelField(position, label);
-			position.x += EditorGUIUtility.labelWidth;
-			position.width -= EditorGUIUtility.labelWidth;
+			return MathExGUI.vec2Field(MathExGUILayout.s_LastRect = EditorGUILayout.GetControlRect(false, 16f, EditorStyles.numberField, options), label, value, showLength);
 		}
 
-		position.width *= showLength ? 0.25f : 0.33f;
-
-		EditorGUIUtility.labelWidth = vecLabelWidth;
-		result.x = EditorGUI.FloatField(position, new GUIContent("X"), value.x);
-		position.x += position.width;
-		result.y = EditorGUI.FloatField(position, new GUIContent("Y"), value.y);
-		position.x += position.width;
-		result.z = EditorGUI.FloatField(position, new GUIContent("Z"), value.z);
-		position.x += position.width;
-
-		if (showLength)
+		public static vec3 vec3Field(string label, vec3 value, bool showLength = false, params GUILayoutOption[] options)
 		{
-			EditorGUI.FloatField(position, new GUIContent("l"), value.length);
+			return MathExGUI.vec3Field(MathExGUILayout.s_LastRect = EditorGUILayout.GetControlRect(false, 16f, EditorStyles.numberField, options), label, value, showLength);
 		}
-
-		EditorGUIUtility.labelWidth = oldLabelWidth;
-
-		return result;
 	}
 }

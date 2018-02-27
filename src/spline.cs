@@ -200,7 +200,7 @@ namespace MathEx
 		public override T value(float t)
 		{
 			if (p == null)
-				return mtt.zero();
+				return mtt.zero;
 
 			int i = calculateT(ref t);
 
@@ -210,7 +210,7 @@ namespace MathEx
 		public override T velocity(float t)
 		{
 			if (p == null)
-				return mtt.zero();
+				return mtt.zero;
 
 			int i = calculateT(ref t);
 
@@ -220,7 +220,7 @@ namespace MathEx
 		public override T value(int i, float t)
 		{
 			if (p == null || i >= numberOfNodes - 1)
-				return mtt.zero();
+				return mtt.zero;
 
 			return interpolator.value(t, p, i);
 		}
@@ -228,7 +228,7 @@ namespace MathEx
 		public override T velocity(int i, float t)
 		{
 			if (p == null || i >= numberOfNodes - 1)
-				return mtt.zero();
+				return mtt.zero;
 
 			return interpolator.derivative(t, p, i);
 		}
@@ -395,7 +395,7 @@ namespace MathEx
 		public override T value(float t)
 		{
 			if (p == null)
-				return mtt.zero();
+				return mtt.zero;
 
 			int i = calculateT(ref t);
 
@@ -405,7 +405,7 @@ namespace MathEx
 		public override T velocity(float t)
 		{
 			if (p == null)
-				return mtt.zero();
+				return mtt.zero;
 
 			int i = calculateT(ref t);
 
@@ -415,7 +415,7 @@ namespace MathEx
 		public override T value(int i, float t)
 		{
 			if (p == null || i >= numberOfNodes - 1)
-				return mtt.zero();
+				return mtt.zero;
 
 			return interpolator.value(t, p, i);
 		}
@@ -423,7 +423,7 @@ namespace MathEx
 		public override T velocity(int i, float t)
 		{
 			if (p == null || i >= numberOfNodes - 1)
-				return mtt.zero();
+				return mtt.zero;
 
 			return interpolator.derivative(t, p, i);
 		}
