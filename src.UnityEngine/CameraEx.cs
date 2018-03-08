@@ -8,6 +8,47 @@ namespace MathEx
 {
 	public static class CameraEx
 	{
+		private static float GetGameViewAspectRatio()
+		{
+			return Screen.width / Screen.height;
+		}
+
+		public static float GetFrustumAspectRatio(this Camera camera)
+		{
+			Rect rect = camera.rect;
+			if (rect.width <= 0 || rect.height <= 0)
+				return -1f;
+			return GetGameViewAspectRatio() * (rect.width / rect.height);
+		}
+
+		public static bool GetFrustum(this Camera camera, Vector3[] near, Vector3[] far, out float frustumAspect)
+		{
+			frustumAspect = camera.GetFrustumAspectRatio();
+			if (frustumAspect < 0)
+				return false;
+
+			if (far != null)
+			{
+				far[0] = new Vector3(0.0f, 0.0f, camera.farClipPlane);
+				far[1] = new Vector3(0.0f, 1f, camera.farClipPlane);
+				far[2] = new Vector3(1f, 1f, camera.farClipPlane);
+				far[3] = new Vector3(1f, 0.0f, camera.farClipPlane);
+				for (int index = 0; index < 4; ++index)
+					far[index] = camera.ViewportToWorldPoint(far[index]);
+			}
+			if (near != null)
+			{
+				near[0] = new Vector3(0.0f, 0.0f, camera.nearClipPlane);
+				near[1] = new Vector3(0.0f, 1f, camera.nearClipPlane);
+				near[2] = new Vector3(1f, 1f, camera.nearClipPlane);
+				near[3] = new Vector3(1f, 0.0f, camera.nearClipPlane);
+				for (int index = 0; index < 4; ++index)
+					near[index] = camera.ViewportToWorldPoint(near[index]);
+			}
+
+			return true;
+		}
+
 		public static IEnumerator<Ray> EnumCornerRays(this Camera c)
 		{
 			yield return c.ScreenPointToRay(new Vector2(0, 0));

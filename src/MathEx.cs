@@ -63,9 +63,40 @@ namespace MathEx
 			return a * (1 - t) + b * t;
 		}
 
+		public static float Lerp(this float t, float a, float b, params float[] o)
+		{
+			int count = 1 + o.Length;
+			t = t * count;
+
+			if (t <= 1)
+				return t.Lerp(a, b);
+			if (t <= 2)
+				return (t - 1).Lerp(b, o[0]);
+
+			float floor = (float)System.Math.Floor(t);
+			if (t == floor)
+				return o[(int)floor - 2];
+
+			return (t - floor).Lerp(o[(int)floor - 2], o[(int)floor - 1]);
+		}
+
 		public static float InvLerp(this float v, float a, float b)
 		{
 			return (v - a) / (b - a);
+		}
+
+		public static float InvLerp(this float v, params float[] o)
+		{
+			if (o == null || o.Length < 2)
+				return float.NaN;
+
+			for (int i = 0; i < o.Length; i++)
+			{
+				if (v <= o[i + 1] || o.Length == i + 1)
+					return (i + v.InvLerp(o[i], o[i + 1])) / (o.Length - 1);
+			}
+
+			return float.NaN;
 		}
 
 		public static vec2 Lerp(this float t, vec2 a, vec2 b)
@@ -212,10 +243,26 @@ namespace MathEx
 			return true;
 		}
 
+		public static bool IsZero(this IEnumerable<float> a)
+		{
+			foreach (float f in a)
+				if (f != 0) return false;
+
+			return true;
+		}
+
 		public static bool IsEmpty(this float[] a)
 		{
 			for (int i = 0; i < a.Length; i++)
 				if (float.IsNaN(a[i])) return true;
+
+			return false;
+		}
+
+		public static bool IsEmpty(this IEnumerable<float> a)
+		{
+			foreach (float f in a)
+				if (float.IsNaN(f)) return true;
 
 			return false;
 		}

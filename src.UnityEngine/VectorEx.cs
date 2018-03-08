@@ -115,7 +115,7 @@ namespace MathEx
 		{
 			return new Vector3(v.x, v.z, v.y);
 		}
-		
+
 		public static Vector2 xy(this Vector3 v)
 		{
 			return new Vector2(v.x, v.y);
@@ -286,6 +286,23 @@ namespace MathEx
 		public static float Clamp(this Vector2 v, float f)
 		{
 			return Mathf.Clamp(f, v.x, v.y);
+		}
+
+
+
+		public static float Dot(this Vector2 a, Vector2 b)
+		{
+			return Vector2.Dot(a, b);
+		}
+
+		public static float Dot(this Vector3 a, Vector3 b)
+		{
+			return Vector3.Dot(a, b);
+		}
+
+		public static Vector3 Cross(this Vector3 a, Vector3 b)
+		{
+			return Vector3.Cross(a, b);
 		}
 
 		#region Vector enumrators

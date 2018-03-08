@@ -52,6 +52,7 @@
     <Compile Include="src.UnityEditor\PropertyDrawer_line3_segment.cs" />
     <Compile Include="src.UnityEditor\PropertyDrawer_vec2i.cs" />
     <Compile Include="src.UnityEditor\PropertyDrawer_vec2.cs" />
+    <Compile Include="src.UnityEditor\PropertyDrawer_Quaternion.cs" />
     <Compile Include="src.UnityEditor\PropertyDrawer_vec3i.cs" />
     <Compile Include="src.UnityEditor\PropertyDrawer_vec3.cs" />
   </ItemGroup>
