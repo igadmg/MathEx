@@ -27,7 +27,7 @@ namespace MathEx
 		{
 			float det = (a.x - b.x) * (b.y - c.y) - (b.x - c.x) * (a.y - b.y);
 
-			if (MathEx.Abs(det) < float.Epsilon)
+			if (MathExOps.Abs(det) < float.Epsilon)
 			{
 				o = vec2.empty;
 				r = 0f;
@@ -74,7 +74,7 @@ namespace MathEx
 
 		public vec2 value(float t)
 		{
-			float a = t * 2 * MathEx.PI;
+			float a = t * 2 * MathExOps.PI;
 			return new vec2(r * a.Cos(), r * a.Sin()) + o;
 		}
 	}

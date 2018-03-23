@@ -82,6 +82,7 @@
     <Compile Include="src\polygon.cs" />
     <Compile Include="src\polyline.cs" />
     <Compile Include="src\project.cs" />
+    <Compile Include="src\quaternion.cs" />
     <Compile Include="src\svec3.cs" />
     <Compile Include="src\QuadTree.cs" />
     <Compile Include="src\random.cs" />

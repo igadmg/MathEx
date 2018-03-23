@@ -14,10 +14,10 @@
  * attribution is appreciated.
  *
  * Update by NightCabbage (2013-11-05) NightCabbage@gmail.com
- * 
+ *
  * Working with Stefan (thanks!) I have compiled all of the
  * improvements I could find and put them into this code.
- * 
+ *
  * Note that for corner contribution I have made the decision here to
  * use 0.6 instead of 0.5, as I believe it looks a bit better for 2d
  * purposes (0.5 made it a bit more grey, and also had more pulsating for

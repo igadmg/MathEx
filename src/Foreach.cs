@@ -203,13 +203,13 @@ namespace MathEx
 				yield break;
 
 			float dA0 = 0;
-			float dA = 2f * MathEx.PI / sectors;
+			float dA = 2f * MathExOps.PI / sectors;
 			for (int i = 0; i <= sectors; i++)
 			{
 				Foreach.CurveIterator<vec2> ci = new Foreach.CurveIterator<vec2>();
 				float a = dA0 + i * dA;
 				ci.t = ((float)i) / sectors;
-				ci.value = c.o + c.r * (new vec2(MathEx.Cos(a), MathEx.Sin(a)));
+				ci.value = c.o + c.r * (new vec2(MathExOps.Cos(a), MathExOps.Sin(a)));
 				yield return ci;
 			}
 			yield break;
@@ -237,8 +237,8 @@ namespace MathEx
 				if (t == 1)
 					yield break;
 
-				float dt = MathEx.Clamp(MathTypeTag<T>.Get().scalar(i.velocity) * islsl * stepMultiplier, islsl, 1);
-				t = MathEx.Clamp01(t + dt);
+				float dt = MathExOps.Clamp(MathTypeTag<T>.Get().scalar(i.velocity) * islsl * stepMultiplier, islsl, 1);
+				t = MathExOps.Clamp01(t + dt);
 			}
 		}
 
@@ -260,7 +260,7 @@ namespace MathEx
 				if (cd == length)
 					yield break;
 
-				cd = MathEx.Clamp(cd + delta, 0, length);
+				cd = MathExOps.Clamp(cd + delta, 0, length);
 			}
 		}
 	}

@@ -268,16 +268,6 @@ namespace MathEx
 			return (v - ab.x) / (ab.y - ab.x);
 		}
 
-		public static float Lerp(this float t, Vector2 ab)
-		{
-			return Mathf.Lerp(ab.x, ab.y, t);
-		}
-
-		public static float InvLerp(this float v, Vector2 ab)
-		{
-			return (v - ab.x) / (ab.y - ab.x);
-		}
-
 		public static int Clamp(this Vector2 v, int f)
 		{
 			return Mathf.Clamp(f, (int)v.x, (int)v.y);

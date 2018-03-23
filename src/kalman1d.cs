@@ -2,7 +2,7 @@
 {
 	/// <summary>
 	/// Kalman 1D w/ velocity estimation.
-	/// 
+	///
 	/// froma a KalmnaDemo http://www.codeproject.com/Articles/326657/KalmanDemo by HoshiKata
 	/// </summary>
 	public class Kalman1D

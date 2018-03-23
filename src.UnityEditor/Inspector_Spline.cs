@@ -16,7 +16,7 @@ public class Inspector_Spline : Editor
 		instance = this;
 		iChangedNode = -1;
 
-		Spline spline = target as Spline; 
+		Spline spline = target as Spline;
 		Transform handleTransform = spline.transform;
 
 		CubicBezierCurveController splineController = spline.splineController;

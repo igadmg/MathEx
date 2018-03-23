@@ -107,7 +107,7 @@ namespace MathEx
 		{
 			n.allocate(normalize(i), 2);
 
-			
+
 
 			return this;
 		}

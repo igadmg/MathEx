@@ -13,7 +13,7 @@ namespace MathEx
 
 		float pa, pb, pc, pd;
 
-		public vec3 normal { get { return new vec3(pa, pb, pc); } }
+		public vec3 normal { get { return new vec3(pa, pb, pc).normalized; } }
 		public float a { get { return pa; } }
 		public float b { get { return pb; } }
 		public float c { get { return pc; } }
@@ -38,6 +38,11 @@ namespace MathEx
 			pb = n.y;
 			pc = n.z;
 			pd = d;
+		}
+
+		public static float Angle(plane a, plane b)
+		{
+			return vec3.Angle(a.normal, b.normal);
 		}
 
 		public vec3 cast(ray r)

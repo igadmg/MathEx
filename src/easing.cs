@@ -33,13 +33,13 @@ namespace MathEx
 		public static float easeExpoIn(float t)
 		{
 			return t == 0f ? 0f
-				: MathEx.Pow(2f, 10f * (t - 1f));
+				: MathExOps.Pow(2f, 10f * (t - 1f));
 		}
 
 		public static float easeExpoOut(float t)
 		{
 			return t == 1f ? 1f
-				: 1f - MathEx.Pow(2f, -10f * t);
+				: 1f - MathExOps.Pow(2f, -10f * t);
 		}
 
 		public static float easeExpoInOut(float t)
@@ -47,8 +47,8 @@ namespace MathEx
 			if (t == 0f) return 0f;
 			if (t == 1f) return 1f;
 			t *= 2f;
-			if (t < 1f) return 0.5f * MathEx.Pow(2f, 10f * (t - 1f));
-			return 1f - 0.5f * MathEx.Pow(2f, -10f * (t - 1f));
+			if (t < 1f) return 0.5f * MathExOps.Pow(2f, 10f * (t - 1f));
+			return 1f - 0.5f * MathExOps.Pow(2f, -10f * (t - 1f));
 		}
 
 		public static float easeMirror(float t, Func<float, float> eFn)

@@ -52,6 +52,21 @@ namespace MathEx
 			return v >= range.x && v <= range.y;
 		}
 
+		public static float Lerp(this float t, Vector2 ab)
+		{
+			return Mathf.Lerp(ab.x, ab.y, t);
+		}
+
+		public static Rect Lerp(this float t, Rect a, Rect b)
+		{
+			return new Rect(t.Lerp(a.position, b.position), t.Lerp(a.size, b.size));
+		}
+
+		public static float InvLerp(this float v, Vector2 ab)
+		{
+			return (v - ab.x) / (ab.y - ab.x);
+		}
+
 		public static Vector2 Clamp01(this Vector2 value)
 		{
 			return new Vector2(

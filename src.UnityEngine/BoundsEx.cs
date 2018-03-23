@@ -5,7 +5,7 @@ namespace MathEx
 	public static class BoundsEx
 	{
 		public static Bounds Empty = new Bounds(VectorEx.empty3, VectorEx.empty3);
-		
+
 		public static bool IsEmpty(this Bounds bounds)
 		{
 			return bounds.center.IsEmpty() || bounds.size.IsEmpty();
@@ -23,7 +23,7 @@ namespace MathEx
 		{
 			if (bounds.IsEmpty())
 				return VectorEx.empty3;
-			
+
 			return v.Clamp(bounds.min, bounds.max);
 		}
 

@@ -49,7 +49,7 @@ namespace MathEx
 				else {
 					var cr = UnityEngine.Random.insideUnitCircle;
 					var lcr = cr.magnitude;
-					var r = MathEx.Sqrt(-2.0f * MathEx.Log(lcr) / lcr);
+					var r = MathExOps.Sqrt(-2.0f * MathExOps.Log(lcr) / lcr);
 
 					second = r * cr.x;
 					ready = true;

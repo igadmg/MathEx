@@ -30,7 +30,7 @@ namespace MathEx
 		public bool isZero { get { return x == 0 && y == 0 && z == 0; } }
 
 		public int product { get { return x * y * z; } }
-		public float length { get { return MathEx.Sqrt(magnitude); } }
+		public float length { get { return MathExOps.Sqrt(magnitude); } }
 		public float magnitude { get { return x * x + y * y + z * z; } }
 		//public vec2 normalized { get { return this / length; } }
 

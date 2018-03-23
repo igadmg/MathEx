@@ -5,7 +5,7 @@ namespace MathEx
 	public static class RectEx
 	{
 		public static Rect Empty = new Rect(float.NaN, float.NaN, float.NaN, float.NaN);
-		
+
 
 		public static bool IsEmpty(this Rect rect)
 		{

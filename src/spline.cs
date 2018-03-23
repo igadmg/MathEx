@@ -112,7 +112,7 @@ namespace MathEx
 			}
 			else
 			{
-				t = MathEx.Clamp(t, 0, 1) * (numberOfNodes - 1);
+				t = MathExOps.Clamp(t, 0, 1) * (numberOfNodes - 1);
 				i = (int)t;
 				t -= i;
 				i *= 3;
@@ -307,7 +307,7 @@ namespace MathEx
 			}
 			else
 			{
-				t = MathEx.Clamp(t, 0, 1) * (numberOfNodes - 1);
+				t = MathExOps.Clamp(t, 0, 1) * (numberOfNodes - 1);
 				i = (int)t;
 				t -= i;
 				i *= 3;
@@ -582,7 +582,7 @@ namespace MathEx
 			for (i = 1; i < ps.Length - 1; i++) {
 				dx = ps[i + 1].x - ps[i].x;
 				dy = ps[i + 1].y - ps[i].y;
-				//float dx1 = 
+				//float dx1 =
 
 				a[i] = 1 / dx;
 				b[i] = 2 / dx;
@@ -635,7 +635,7 @@ namespace MathEx
 		{
 			/* unsigned integer of same size as pointer */
 			int i;
-   
+
 			/*
 			 solves Ax = v where A is a tridiagonal matrix consisting of vectors a, b, c
 			 note that contents of input vector c will be modified, making this a one-time-use function
@@ -645,17 +645,17 @@ namespace MathEx
 			 b[] - the main diagonal, indexed from [0, ..., N - 1]
 			 c[] - superdiagonal (means it is the diagonal above the main diagonal) -- indexed from [0, ..., N - 2]
 			 */
-   
+
 			c[0] = c[0] / b[0];
 			x[0] = x[0] / b[0];
-   
+
 			/* loop from 1 to N - 1 inclusive */
 			for (i = 1; i < x.Length; i++) {
 				float m = 1.0f / (b[i] - a[i] * c[i - 1]);
 				c[i] = c[i] * m;
 				x[i] = (x[i] - a[i] * x[i - 1]) * m;
 			}
-   
+
 			/* loop from N - 2 to 0 inclusive, safely testing loop end condition */
 			for (i = x.Length - 1; i-- > 0; )
 				x[i] = x[i] - c[i] * x[i + 1];

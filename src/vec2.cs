@@ -26,7 +26,7 @@ namespace MathEx
 		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y); } }
 		public bool isZero { get { return x == 0 && y == 0; } }
 
-		public float length { get { return MathEx.Sqrt(magnitude); } set { float l = value / length; x *= l; y *= l; } }
+		public float length { get { return MathExOps.Sqrt(magnitude); } set { float l = value / length; x *= l; y *= l; } }
 		public float magnitude { get { return x * x + y * y; } }
 		public vec2 normalized { get { return isZero ? this : this / length; } }
 
@@ -104,6 +104,14 @@ namespace MathEx
 		}
 
 		public static float Dot(vec2 l, vec2 r) { return l.x * r.x + l.y * r.y; }
+
+		public static float Angle(vec2 a, vec2 b)
+		{
+			float cos = Dot(a, b);
+			float sin = -vec3.Cross(a.xyz(0), b.xyz(0)).z;
+
+			return cos.Acos() * sin.Sign();
+		}
 
 
 		public override string ToString() { return string.Format("({0},{1})", x, y); }

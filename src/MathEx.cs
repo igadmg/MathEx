@@ -2,9 +2,12 @@
 
 namespace MathEx
 {
-	public static class MathEx
+	public static class MathExOps
 	{
-		public static readonly float PI = 3.1415927f;
+		public const float PI = 3.1415927f;
+		public const float _2PI = 2.0f * PI;
+		public const float Deg2Rad = 0.0174532924F;
+		public const float Rad2Deg = 57.29578F;
 
 		public static int ToInt(this bool v) { return v ? 1 : 0; }
 		public static int ToInt(this bool v, int t, int f) { return v ? t : f; }

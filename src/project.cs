@@ -1,6 +1,6 @@
 namespace MathEx
 {
-	public static class ProjectEx	
+	public static class ProjectEx
 	{
 		public static vec3 project(this plane pl, vec3 p)
 		{

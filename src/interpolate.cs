@@ -160,15 +160,15 @@ namespace MathEx
 		private static float bezier_p20(float t) { return  1f/3f * t*t*t - t*t + t; }
 		private static float bezier_p21(float t) { return -2f/3f * t*t*t + t*t; }
 		private static float bezier_p22(float t) { return  1f/3f * t*t*t; }
-		
+
 		private static float bezier_20(float t) { return       t*t - 2f * t + 1f; }  // (1-t)^2
 		private static float bezier_21(float t) { return -2f * t*t + 2f * t; }       // 2 * t * (1-t)
 		private static float bezier_22(float t) { return       t*t; }                // t^2
-		
+
 		private static float bezier_d20(float t) { return  2f * t - 2f; }
 		private static float bezier_d21(float t) { return -4f * t + 2f; }
 		private static float bezier_d22(float t) { return  2f * t; }
-		
+
 
 		public static int Size = 3;
 
@@ -354,5 +354,5 @@ namespace MathEx
 
 			}
 		}
-	}	
+	}
 }

@@ -27,7 +27,7 @@ namespace MathEx
 		public bool isZero { get { return x == 0 && y == 0 && z == 0 && w == 0; } }
 		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z) || float.IsNaN(w); } }
 
-		public float length { get { return MathEx.Sqrt(magnitude); } set { float l = value / length; x *= l; y *= l; z *= l; w *= l; } }
+		public float length { get { return MathExOps.Sqrt(magnitude); } set { float l = value / length; x *= l; y *= l; z *= l; w *= l; } }
 		public float magnitude { get { return x*x + y*y + z*z + w*w; } }
 		public vec4 normalized { get { return isZero ? this : this / length; } }
 
@@ -54,12 +54,25 @@ namespace MathEx
 		public static vec4 operator +(vec4 a, vec4 b) { return new vec4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w); }
 		public static vec4 operator -(vec4 a, vec4 b) { return new vec4(a.x - b.x, a.y - b.y, a.y - b.y, a.w - b.w); }
 
+		public static float operator *(vec4 a, vec4 b) { return Dot(a, b); }
+		public static vec4 operator %(vec4 a, vec4 b) { return Hamilton(a, b); }
+
 		public vec4(float x, float y, float z, float w)
 		{
 			this.x = x;
 			this.y = y;
 			this.z = z;
 			this.w = w;
+		}
+
+		public static float Dot(vec4 l, vec4 r) { return l.x * r.x + l.y * r.y + l.z * r.z + l.w * l.z; }
+		public static vec4 Hamilton(vec4 l, vec4 r)
+		{
+			return new vec4(
+				l.w * r.x + l.x * r.w + l.y * r.z - l.z * r.y,
+				l.w * r.y - l.x * r.z + l.y * r.w + l.z * r.x,
+				l.w * r.z + l.x * r.y - l.y * r.x + l.z * r.w,
+				l.w * r.w - l.x * r.x - l.y * r.y - l.z * r.z);
 		}
 
 		public override string ToString() { return string.Format("({0},{1},{2},{3})", x, y, z, w); }
