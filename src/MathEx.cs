@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace MathEx
 {
@@ -146,6 +147,18 @@ namespace MathEx
 			return ((a * Cos(theta)) + (r * Sin(theta)));
 		}
 
+		public static Tuple<int, int, float> IntRangeAndT(this float f)
+		{
+			int i = (int)f;
+			if (i == f)
+			{
+				return Tuple.Create(i, i, 0.0f);
+			}
+
+			int a = UnityEngine.Mathf.FloorToInt(f);
+			int b = UnityEngine.Mathf.CeilToInt(f);
+			return Tuple.Create(a, b, f.InvLerp(a, b));
+		}
 
 		/// <summary>
 		/// Repeat value in range [0..length] similar to mod operator. Works for negative values.
