@@ -27,8 +27,8 @@ namespace MathEx
 			{
 				if (edge.a == ri || edge.b == ri)
 					continue;
-				if (edge.a > ri) edge.Item1--;
-				if (edge.b > ri) edge.Item2--;
+				if (edge.a > ri) edge.a--;
+				if (edge.b > ri) edge.b--;
 
 				nedges.Add(edge);
 			}
@@ -86,9 +86,8 @@ namespace MathEx
 
 	public class Edge : Tuple<long, long>
 	{
-		public long a { get { return Item1; } }
-
-		public long b { get { return Item2; } }
+        public long a;
+        public long b;
 
 		public Edge(long a, long b)
 			: base(a, b)
