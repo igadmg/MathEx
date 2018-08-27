@@ -1,0 +1,11 @@
+{
+    "name": "MathEx.UnityEngine",
+    "references": [
+        "SystemEx",
+        "MathEx"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true
+}

@@ -6,6 +6,7 @@ namespace MathEx.Test
 	{
 		public static int Main(string[] args)
 		{
+			/*
 			spline_curve<float, CubicBezierSpline<float>> c = new spline_curve<float, CubicBezierSpline<float>>();
 			c.value(0);
 
@@ -16,6 +17,7 @@ namespace MathEx.Test
 			foreach (var i in vec3i.zero.Line(new vec3i(20, 0, 10))) {
 				Console.WriteLine(i);
 			}
+			*/
 
 			return 0;
 		}

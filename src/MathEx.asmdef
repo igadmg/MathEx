@@ -1,0 +1,10 @@
+{
+    "name": "MathEx",
+    "references": [
+        "SystemEx"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true
+}
