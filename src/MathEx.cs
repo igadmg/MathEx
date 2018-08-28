@@ -96,7 +96,7 @@ namespace MathEx
 
 			for (int i = 0; i < o.Length; i++)
 			{
-				if (v <= o[i + 1] || o.Length == i + 1)
+				if (o.Length == i + 1 || v <= o[i + 1])
 					return (i + v.InvLerp(o[i], o[i + 1])) / (o.Length - 1);
 			}
 
