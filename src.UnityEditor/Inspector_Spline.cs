@@ -30,7 +30,7 @@ public class Inspector_Spline : Editor
 			if (EditorGUI.EndChangeCheck())
 			{
 				Undo.RecordObject(spline, "Curve Point Moved");
-				spline.spline.p[i] = handleTransform.InverseTransformPoint(p);
+				spline.splineController.setP(i, handleTransform.InverseTransformPoint(p));
 			}
 
 			if (i > 0)

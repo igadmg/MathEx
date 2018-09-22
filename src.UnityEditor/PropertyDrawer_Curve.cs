@@ -111,10 +111,25 @@ namespace MathEx.UnityEditor
 							bIsDirty = true;
 							Undo.RecordObject(property.serializedObject.targetObject, "Curve Point Added");
 
+							int nni = obj.getIndexNode(i);
+							float nnit = obj.getNodeTime(nni);
+							vec3 nni0v = obj.velocity(nnit);
+							int ni = nni - 1;
+							float nit = ni < 0 ? 0 : obj.getNodeTime(ni);
+							vec3 ni1v = obj.velocity(nit);
+
+							float init = (nit + nnit) / 2f;
+							float dt = (nnit - nit) / 2f;
+							vec3 inv = obj.value(init);
+							vec3 in0v = inv - obj.velocity(init) * dt;
+							vec3 in1v = inv + obj.velocity(init) * dt;
+
+							obj.p[obj.getNodeIndex(ni) + 1] = obj.value(nit) + ni1v * dt;
+							obj.p[obj.getNodeIndex(nni) - 1] = obj.value(nnit) - nni0v * dt;
 							if (objController != null)
-								objController.insert(i / (obj.chunkSize - 1));
+								objController.insert(nni, in0v, inv, in1v);
 							else
-								obj.insert(i / (obj.chunkSize - 1));
+								obj.insert(nni, in0v, inv, in1v);
 						}
 						if (GUI.Button(removeRect, "-"))
 						{

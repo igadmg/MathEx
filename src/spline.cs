@@ -12,7 +12,14 @@ namespace MathEx
 		public abstract int chunkSize { get; }
 		public abstract float length { get; }
 
-		public abstract int getNodeIndex(int nodeIndex);
+		public int getIndexNode(int index)
+		{
+			return index / (chunkSize - 1);
+		}
+		public int getNodeIndex(int nodeIndex)
+		{
+			return nodeIndex * (chunkSize - 1);
+		}
 	}
 
 	public abstract class curve<T> : curve
@@ -26,6 +33,7 @@ namespace MathEx
 
 		public abstract T getNodeValue(int nodeIndex);
 		public abstract T getNodeTangent(int nodeIndex);
+		public float getNodeTime(int nodeIndex) { return getNodeTime(nodeIndex, 0); }
 		public abstract float getNodeTime(int nodeIndex, float segmentTime);
 
 		public abstract T value(float t);
@@ -33,7 +41,8 @@ namespace MathEx
 		public abstract T value(int i, float t);
 		public abstract T velocity(int i, float t);
 
-		public abstract int insert(int nodeIndex);
+		public int insert(int nodeIndex) { return insert(nodeIndex, new T[chunkSize]); }
+		public abstract int insert(int nodeIndex, params T[] values);
 		public abstract int remove(int nodeIndex);
 	}
 
@@ -121,22 +130,22 @@ namespace MathEx
 			return i;
 		}
 
-		public override int insert(int nodeIndex)
+		public override int insert(int nodeIndex, params T[] values)
 		{
 			int i = getNodeIndex(nodeIndex);
 			List<T> pl = new List<T>(p);
 
 			if (i <= 0)
 			{
-				pl.InsertRange(0, new T[interpolator.size - 1]);
+				pl.InsertRange(0, values);
 			}
 			else if (i >= p.Length - 1)
 			{
-				pl.InsertRange(p.Length, new T[interpolator.size - 1]);
+				pl.InsertRange(p.Length, values);
 			}
 			else
 			{
-				pl.InsertRange(i - (interpolator.size - 1) / 2, new T[interpolator.size - 1]);
+				pl.InsertRange(i - (interpolator.size - 1) / 2, values);
 			}
 
 			p = pl.ToArray();
@@ -165,11 +174,6 @@ namespace MathEx
 			p = pl.ToArray();
 
 			return nodeIndex;
-		}
-
-		public override int getNodeIndex(int nodeIndex)
-		{
-			return nodeIndex * (interpolator.size - 1);
 		}
 
 		public override T getNodeValue(int nodeIndex)
@@ -316,22 +320,22 @@ namespace MathEx
 			return i;
 		}
 
-		public override int insert(int nodeIndex)
+		public override int insert(int nodeIndex, params T[] values)
 		{
 			int i = getNodeIndex(nodeIndex);
 			List<T> pl = new List<T>(p);
 
 			if (i <= 0)
 			{
-				pl.InsertRange(0, new T[interpolator.size - 1]);
+				pl.InsertRange(0, values);
 			}
 			else if (i >= p.Length - 1)
 			{
-				pl.InsertRange(p.Length, new T[interpolator.size - 1]);
+				pl.InsertRange(p.Length, values);
 			}
 			else
 			{
-				pl.InsertRange(i - (interpolator.size - 1) / 2, new T[interpolator.size - 1]);
+				pl.InsertRange(i - (interpolator.size - 1) / 2, values);
 			}
 
 			p = pl.ToArray();
@@ -360,11 +364,6 @@ namespace MathEx
 			p = pl.ToArray();
 
 			return nodeIndex;
-		}
-
-		public override int getNodeIndex(int nodeIndex)
-		{
-			return nodeIndex * (interpolator.size - 1);
 		}
 
 		public override T getNodeValue(int nodeIndex)
@@ -514,9 +513,14 @@ namespace MathEx
 			modes = new CurveMode[c.numberOfNodes];
 		}
 
-		public int insert(int nodeIndex)
+		public void setP(int pi, T value)
 		{
-			nodeIndex = c.insert(nodeIndex);
+
+		}
+
+		public int insert(int nodeIndex, params T[] values)
+		{
+			nodeIndex = c.insert(nodeIndex, values);
 
 			List<CurveMode> ml = new List<CurveMode>(modes);
 			ml.Insert(nodeIndex, CurveMode.Auto);

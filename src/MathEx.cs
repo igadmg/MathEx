@@ -67,6 +67,18 @@ namespace MathEx
 			return a * (1 - t) + b * t;
 		}
 
+		public static float Lerp(this float t, vec3 abc)
+		{
+			return t.Lerp(abc.x, abc.y, abc.z);
+		}
+
+#if UNITY || UNITY_5_3_OR_NEWER
+		public static float Lerp(this float t, UnityEngine.Vector3 abc)
+		{
+			return t.Lerp(abc.x, abc.y, abc.z);
+		}
+#endif
+
 		public static float Lerp(this float t, float a, float b, params float[] o)
 		{
 			int count = 1 + o.Length;
