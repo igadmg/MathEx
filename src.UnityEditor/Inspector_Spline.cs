@@ -36,7 +36,7 @@ public class Inspector_Spline : Editor
 			if (i > 0)
 			{
 				Handles.color = Color.white;
-				Vector3 p0 = handleTransform.TransformPoint(spline.spline.p[i-1]);
+				Vector3 p0 = handleTransform.TransformPoint(spline.spline.p[i - 1]);
 				Handles.DrawLine(p0, p);
 			}
 		}
@@ -50,5 +50,22 @@ public class Inspector_Spline : Editor
 		}
 		Handles.color = Color.white;
 		Handles.DrawPolyLine(points.points.ToArray());
+	}
+
+	private bool HasFrameBounds() { return true; }
+
+	private Bounds OnGetFrameBounds()
+	{
+		Bounds bounds = new Bounds();
+
+		Spline spline = target as Spline;
+
+		bounds.center = spline.transform.position;
+		foreach (vec3 p in spline.spline.p)
+		{
+			bounds.Encapsulate(spline.transform.TransformPoint(p));
+		}
+
+		return bounds;
 	}
 }
