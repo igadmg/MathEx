@@ -551,6 +551,26 @@ namespace MathEx
 
 			return vCosX > xCos && vCosY > yCos;
 		}
+
+		public static Vector2 ToVector2(this float[] v)
+		{
+			return new Vector2(v[0], v[1]);
+		}
+
+		public static Vector2 ToVector2(this float[] v, int i)
+		{
+			return new Vector2(v[i+0], v[i+1]);
+		}
+
+		public static Vector3 ToVector3(this float[] v)
+		{
+			return new Vector3(v[0], v[1], v[2]);
+		}
+
+		public static Vector3 ToVector3(this float[] v, int i)
+		{
+			return new Vector3(v[i + 0], v[i + 1], v[i + 2]);
+		}
 	}
 }
 

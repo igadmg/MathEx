@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SystemEx;
 
 namespace MathEx
 {
@@ -21,6 +22,8 @@ namespace MathEx
 
 		public static float Min(this float a, float b) { return UnityEngine.Mathf.Min(a, b); }
 		public static float Max(this float a, float b) { return UnityEngine.Mathf.Max(a, b); }
+
+		public static float[] mul(this float[] a, float s) { return a.Modify(i => i * s); }
 
 		public static int Clamp(this int f, int p1, int p2)
 		{
