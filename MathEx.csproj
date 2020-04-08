@@ -1,137 +1,36 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <Import Project="$(SolutionDir)\Common.props" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8D8A06E5-ABFB-49A8-851A-070FCF5339AA}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MathEx</RootNamespace>
-    <AssemblyName>MathEx</AssemblyName>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>$(SolutionDir)bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>$(SolutionDir)bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Unity v3.5|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>$(SolutionDir)bin\Debug.UnityEx\Assemblies\</OutputPath>
-    <DefineConstants>UNITY;TRACE;DEBUG;</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Unity v3.5|AnyCPU'">
-    <OutputPath>$(SolutionDir)bin\Release.UnityEx\Assemblies\</OutputPath>
-    <DefineConstants>UNITY;TRACE;</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Unity|AnyCPU'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>$(SolutionDir)bin\Debug.UnityEx\Assemblies\</OutputPath>
-    <DefineConstants>UNITY;TRACE;DEBUG;</DefineConstants>
-    <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Unity|AnyCPU'">
-    <OutputPath>$(SolutionDir)bin\Release.UnityEx\Assemblies\</OutputPath>
-    <DefineConstants>UNITY;TRACE;</DefineConstants>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Compile Remove="src.Test\**" />
+    <Compile Remove="src.UnityEditor\**" />
+    <Compile Remove="src.UnityEngine\**" />
+    <EmbeddedResource Remove="src.Test\**" />
+    <EmbeddedResource Remove="src.UnityEditor\**" />
+    <EmbeddedResource Remove="src.UnityEngine\**" />
+    <None Remove="src.Test\**" />
+    <None Remove="src.UnityEditor\**" />
+    <None Remove="src.UnityEngine\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)\Libraries\SystemEx\SystemEx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="UnityEngine">
-      <HintPath>$(UNITYEDITORDATA_PATH)\Managed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
+      <HintPath>$(UnityEngineDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(UnityEngineCoreModuleDll)</HintPath>
+      <Private>false</Private>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="src\aabb.cs" />
-    <Compile Include="src\aabbi.cs" />
-    <Compile Include="src\BinaryTree.cs" />
-    <Compile Include="src\circle.cs" />
-    <Compile Include="src\color.cs" />
-    <Compile Include="src\CoordinateSystem.cs" />
-    <Compile Include="src\easing.cs" />
-    <Compile Include="src\ellipse.cs" />
-    <Compile Include="src\Foreach.cs" />
-    <Compile Include="src\Graph.cs" />
-    <Compile Include="src\grid3.cs" />
-    <Compile Include="src\Grid.cs" />
-    <Compile Include="src\interpolate.cs" />
-    <Compile Include="src\Intersect.cs" />
-    <Compile Include="src\kalman1d.cs" />
-    <Compile Include="src\line3.cs" />
-    <Compile Include="src\MathEx.cs" />
-    <Compile Include="src\MathOps.cs" />
-    <Compile Include="src\Noize.cs" />
-    <Compile Include="src\plane.cs" />
-    <Compile Include="src\polygon.cs" />
-    <Compile Include="src\polyline.cs" />
-    <Compile Include="src\project.cs" />
-    <Compile Include="src\quaternion.cs" />
-    <Compile Include="src\svec3.cs" />
-    <Compile Include="src\QuadTree.cs" />
-    <Compile Include="src\random.cs" />
-    <Compile Include="src\ray.cs" />
-    <Compile Include="src\Set.cs" />
-    <Compile Include="src\spline.cs" />
-    <Compile Include="src\triangle.cs" />
-    <Compile Include="src\vec2.cs" />
-    <Compile Include="src\vec3i.cs" />
-    <Compile Include="src\vec2i.cs" />
-    <Compile Include="src\vec3.cs" />
-    <Compile Include="src\vec4.cs" />
-    <Compile Include="src\vecEx.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)\Libraries\SystemEx\SystemEx.csproj">
-      <Project>{0271e27f-e614-4b0f-af16-05d2d2781b7f}</Project>
-      <Name>SystemEx</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

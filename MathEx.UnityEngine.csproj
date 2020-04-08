@@ -1,100 +1,41 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <Import Project="$(SolutionDir)\Common.props" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D707C31E-1C84-42A1-9790-3EBBF75EA645}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MathEx.UnityEngine</RootNamespace>
-    <AssemblyName>MathEx.UnityEngine</AssemblyName>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug v3.5|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>$(SolutionDir)bin\Debug.UnityEx\Assemblies\</OutputPath>
-    <DefineConstants>UNITY;DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release v3.5|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>$(SolutionDir)bin\Release.UnityEx\Assemblies\</OutputPath>
-    <DefineConstants>UNITY;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>$(SolutionDir)bin\Debug.UnityEx\Assemblies\</OutputPath>
-    <DefineConstants>UNITY;DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>$(SolutionDir)bin\Release.UnityEx\Assemblies\</OutputPath>
-    <DefineConstants>UNITY;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <Compile Remove="src\**" />
+    <Compile Remove="src.Test\**" />
+    <Compile Remove="src.UnityEditor\**" />
+    <EmbeddedResource Remove="src\**" />
+    <EmbeddedResource Remove="src.Test\**" />
+    <EmbeddedResource Remove="src.UnityEditor\**" />
+    <None Remove="src\**" />
+    <None Remove="src.Test\**" />
+    <None Remove="src.UnityEditor\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)\Libraries\MathEx\MathEx.csproj" />
+    <ProjectReference Include="$(SolutionDir)\Libraries\SystemEx\SystemEx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="UnityEngine">
-      <HintPath>$(UNITYEDITORDATA_PATH)\Managed\UnityEngine.dll</HintPath>
+      <HintPath>$(UnityEngineDll)</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>$(UnityEngineCoreModuleDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>$(UnityEnginePhysicsModuleDll)</HintPath>
+      <Private>false</Private>
+    </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.UnityEngine.cs" />
-    <Compile Include="src.UnityEngine\CameraEx.cs" />
-    <Compile Include="src.UnityEngine\TransformEx.cs" />
-    <Compile Include="src.UnityEngine\BoundsEx.cs" />
-    <Compile Include="src.UnityEngine\BoxColliderEx.cs" />
-    <Compile Include="src.UnityEngine\ColorEx.cs" />
-    <Compile Include="src.UnityEngine\Convert.cs" />
-    <Compile Include="src.UnityEngine\MathfEx.cs" />
-    <Compile Include="src.UnityEngine\Matrix4x4Ex.cs" />
-    <Compile Include="src.UnityEngine\PlaneEx.cs" />
-    <Compile Include="src.UnityEngine\PolarVector.cs" />
-    <Compile Include="src.UnityEngine\QuaternionEx.cs" />
-    <Compile Include="src.UnityEngine\RayEx.cs" />
-    <Compile Include="src.UnityEngine\RectEx.cs" />
-    <Compile Include="src.UnityEngine\RectTransformEx.cs" />
-    <Compile Include="src.UnityEngine\Spline.cs" />
-    <Compile Include="src.UnityEngine\VectorEx.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)\Libraries\SystemEx\SystemEx.csproj">
-      <Project>{0271e27f-e614-4b0f-af16-05d2d2781b7f}</Project>
-      <Name>SystemEx</Name>
-      <Private>False</Private>
-    </ProjectReference>
-    <ProjectReference Include="MathEx.csproj">
-      <Project>{8d8a06e5-abfb-49a8-851a-070fcf5339aa}</Project>
-      <Name>MathEx</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
