@@ -88,6 +88,9 @@ namespace MathEx
 			return new Vector3(v.x, v.y, v.z + dz);
 		}
 
+		public static Vector3 xxx(this float x)
+			=> new Vector3(x, x, x);
+
 		public static Vector3 xyz(this Vector2 v, float z)
 		{
 			return new Vector3(v.x, v.y, z);
