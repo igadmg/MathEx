@@ -30,6 +30,11 @@ namespace MathEx
 			return UnityEngine.Mathf.Clamp(f, p1, p2);
 		}
 
+		public static float ClampMin(this float f, float min)
+		{
+			return UnityEngine.Mathf.Clamp(f, min, f);
+		}
+
 		public static float Clamp(this float f, float p1, float p2)
 		{
 			return UnityEngine.Mathf.Clamp(f, p1, p2);
