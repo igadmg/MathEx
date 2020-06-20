@@ -33,9 +33,9 @@ namespace MathEx
 					return 1;
 			else
 				if (v.y < 0)
-					return 2;
-				else
-					return 3;
+				return 2;
+			else
+				return 3;
 		}
 
 		public static Vector2 X(this Vector2 v, float x)
@@ -302,7 +302,8 @@ namespace MathEx
 
 		public static IEnumerable<Vector3> Line(this Vector3 v, Vector3 Direction, float Step, float Distance)
 		{
-			for (float d = 0; d < Distance; d += Step) {
+			for (float d = 0; d < Distance; d += Step)
+			{
 				yield return v + Direction * d;
 			}
 			yield return v + Direction * Distance;
@@ -317,7 +318,8 @@ namespace MathEx
 		public static IEnumerable<Vector2> Circle(this Vector2 v, float Radius, int Sectors, float dA0)
 		{
 			float dA = 2 * Mathf.PI / Sectors;
-			for (int i = 0; i < Sectors; i++) {
+			for (int i = 0; i < Sectors; i++)
+			{
 				float a = dA0 + i * dA;
 				yield return v + Radius * (new Vector2(Mathf.Cos(a), Mathf.Sin(a)));
 			}
@@ -332,7 +334,8 @@ namespace MathEx
 		public static IEnumerable<Vector3> Circle(this Vector3 v, float Radius, int Sectors, float dA0)
 		{
 			float dA = 2 * Mathf.PI / Sectors;
-			for (int i = 0; i < Sectors; i++) {
+			for (int i = 0; i < Sectors; i++)
+			{
 				float a = dA0 + i * dA;
 				yield return v + Radius * (new Vector3(Mathf.Cos(a), Mathf.Sin(a), 0));
 			}
@@ -347,7 +350,8 @@ namespace MathEx
 		public static IEnumerable<Vector2> Ellipse(this Vector2 v, Vector2 Radius, int Sectors, float dA0)
 		{
 			float dA = 2 * Mathf.PI / Sectors;
-			for (int i = 0; i < Sectors; i++) {
+			for (int i = 0; i < Sectors; i++)
+			{
 				float a = dA0 + i * dA;
 				yield return v + new Vector2(Mathf.Cos(a), Mathf.Sin(a)).Mul(Radius);
 			}
@@ -362,7 +366,8 @@ namespace MathEx
 		public static IEnumerable<Vector3> Ellipse(this Vector3 v, Vector2 Radius, int Sectors, float dA0)
 		{
 			float dA = 2 * Mathf.PI / Sectors;
-			for (int i = 0; i < Sectors; i++) {
+			for (int i = 0; i < Sectors; i++)
+			{
 				float a = dA0 + i * dA;
 				yield return v + new Vector3(Mathf.Cos(a), Mathf.Sin(a), 0).Mul(Radius);
 			}
@@ -372,7 +377,8 @@ namespace MathEx
 		public static IEnumerable<Vector2> Lerp(this Vector2 a, Vector2 b, float dT)
 		{
 			float t = 0;
-			while (t < 1) {
+			while (t < 1)
+			{
 				yield return Vector2.Lerp(a, b, t); t += dT;
 			}
 			yield return Vector2.Lerp(a, b, 1);
@@ -382,7 +388,8 @@ namespace MathEx
 		public static IEnumerable<Vector3> Lerp(this Vector3 a, Vector3 b, float dT)
 		{
 			float t = 0;
-			while (t < 1) {
+			while (t < 1)
+			{
 				yield return Vector3.Lerp(a, b, t); t += dT;
 			}
 			yield return Vector3.Lerp(a, b, 1);
@@ -392,7 +399,8 @@ namespace MathEx
 		public static IEnumerable<Vector4> Lerp(this Vector4 a, Vector4 b, float dT)
 		{
 			float t = 0;
-			while (t < 1) {
+			while (t < 1)
+			{
 				yield return Vector4.Lerp(a, b, t); t += dT;
 			}
 			yield return Vector4.Lerp(a, b, 1);
@@ -402,7 +410,8 @@ namespace MathEx
 		public static IEnumerable<Vector3> Slerp(this Vector3 a, Vector3 b, float dT)
 		{
 			float t = 0;
-			while (t < 1) {
+			while (t < 1)
+			{
 				yield return Vector3.Slerp(a, b, t); t += dT;
 			}
 			yield return Vector3.Slerp(a, b, 1);
@@ -439,7 +448,8 @@ namespace MathEx
 		public static Vector2 RandomOnCircle(this Vector2 v)
 		{
 			Vector2 rv = UnityEngine.Random.insideUnitCircle;
-			while (rv.x == 0 && rv.y == 0) {
+			while (rv.x == 0 && rv.y == 0)
+			{
 				rv = UnityEngine.Random.insideUnitCircle;
 			}
 
@@ -473,7 +483,8 @@ namespace MathEx
 
 		public static IEnumerable<Vector3> Spline(this ICollection<Vector3> ps, int steps)
 		{
-			for (int i = 0; i < steps; i++) {
+			for (int i = 0; i < steps; i++)
+			{
 
 			}
 
@@ -494,19 +505,19 @@ namespace MathEx
 			return v;
 		}
 
-        public static float Angle(this Vector2 from, Vector2 to)
-        {
-            float cos = Vector2.Dot(from, to);
-            float sin = -Vector3.Cross(from, to).z;
+		public static float Angle(this Vector2 from, Vector2 to)
+		{
+			float cos = Vector2.Dot(from, to);
+			float sin = -Vector3.Cross(from, to).z;
 
-            return Mathf.Acos(cos) * Mathf.Sign(sin);
-        }
+			return Mathf.Acos(cos) * Mathf.Sign(sin);
+		}
 
 		public static Vector2 ToBarycentric(this Vector2 v, Vector2 a, Vector2 b, Vector2 c)
 		{
-			float d = (b.y - c.y)*(a.x - c.x) + (b.x - c.x)*(a.y - c.y);
-			float x = ((b.y - c.y)*(v.x - c.x) + (b.x - c.x)*(v.y - c.y)) / d;
-			float y = ((c.y - a.y)*(v.x - c.x) + (c.x - a.x)*(v.y - c.y)) / d;
+			float d = (b.y - c.y) * (a.x - c.x) + (b.x - c.x) * (a.y - c.y);
+			float x = ((b.y - c.y) * (v.x - c.x) + (b.x - c.x) * (v.y - c.y)) / d;
+			float y = ((c.y - a.y) * (v.x - c.x) + (c.x - a.x) * (v.y - c.y)) / d;
 			return new Vector2(x, y);
 		}
 
@@ -562,7 +573,7 @@ namespace MathEx
 
 		public static Vector2 ToVector2(this float[] v, int i)
 		{
-			return new Vector2(v[i+0], v[i+1]);
+			return new Vector2(v[i + 0], v[i + 1]);
 		}
 
 		public static Vector3 ToVector3(this float[] v)

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MathEx.Test
+﻿namespace MathEx.Test
 {
 	public static class Program
 	{

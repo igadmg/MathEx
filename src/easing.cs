@@ -13,21 +13,21 @@ namespace MathEx
 
 		public static float easeCubicIn(float t)
 		{
-			return t*t*t;
+			return t * t * t;
 		}
 
 		public static float easeCubicOut(float t)
 		{
 			t = t - 1f;
-			return t*t*t + 1f;
+			return t * t * t + 1f;
 		}
 
 		public static float easeCubicInOut(float t)
 		{
 			t *= 2f;
-			if (t < 1f) return 0.5f * t*t*t;
+			if (t < 1f) return 0.5f * t * t * t;
 			t -= 2f;
-			return 0.5f * t*t*t + 2f;
+			return 0.5f * t * t * t + 2f;
 		}
 
 		public static float easeExpoIn(float t)

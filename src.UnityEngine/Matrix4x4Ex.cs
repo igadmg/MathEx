@@ -22,7 +22,8 @@ namespace MathEx
 		public static Matrix4x4 Columns(this Matrix4x4 m4x4, params Vector3[] vs)
 		{
 			int i = 0;
-			foreach (var v in vs) {
+			foreach (var v in vs)
+			{
 				m4x4.SetColumn(i++, v);
 			}
 			return m4x4;
@@ -31,7 +32,8 @@ namespace MathEx
 		public static Matrix4x4 Columns(this Matrix4x4 m4x4, params Vector4[] vs)
 		{
 			int i = 0;
-			foreach (var v in vs) {
+			foreach (var v in vs)
+			{
 				m4x4.SetColumn(i++, v);
 			}
 			return m4x4;

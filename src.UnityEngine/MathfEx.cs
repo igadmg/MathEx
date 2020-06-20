@@ -34,11 +34,13 @@ namespace MathEx
 
 		public static float Cbrt(this float v)
 		{
-			if (v >= 0) {
-				return Mathf.Pow(v, 1/3.0f);
+			if (v >= 0)
+			{
+				return Mathf.Pow(v, 1 / 3.0f);
 			}
-			else {
-				return -Mathf.Pow(-v, 1/3.0f);
+			else
+			{
+				return -Mathf.Pow(-v, 1 / 3.0f);
 			}
 		}
 

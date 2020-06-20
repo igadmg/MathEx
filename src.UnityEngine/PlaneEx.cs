@@ -9,8 +9,10 @@ namespace MathEx
 			Vector3 dir = b - a;
 			float dirm = dir.magnitude;
 
-			if (plane.Raycast(new Ray(a, dir), out d)) {
-				if (d <= dirm) {
+			if (plane.Raycast(new Ray(a, dir), out d))
+			{
+				if (d <= dirm)
+				{
 					d /= dirm;
 					r = Vector3.Lerp(a, b, d);
 					return true;

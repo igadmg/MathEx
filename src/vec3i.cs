@@ -34,8 +34,7 @@ namespace MathEx
 		public float magnitude { get { return x * x + y * y + z * z; } }
 		//public vec2 normalized { get { return this / length; } }
 
-		public int quad
-		{
+		public int quad {
 			get {
 				if (x > 0)
 					if (y > 0)
@@ -44,9 +43,9 @@ namespace MathEx
 						return 1;
 				else
 					if (y < 0)
-						return 2;
-					else
-						return 3;
+					return 2;
+				else
+					return 3;
 			}
 		}
 
@@ -96,7 +95,8 @@ namespace MathEx
 		public static vec3i Parse(string s)
 		{
 			var match = new Regex(@"\((\d+),(\d+)\)", RegexOptions.IgnoreCase).Match(s);
-			if (match.Success) {
+			if (match.Success)
+			{
 				return new vec3i(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value), int.Parse(match.Groups[3].Value));
 			}
 			return vec3i.empty;
@@ -104,7 +104,8 @@ namespace MathEx
 		public static vec3i Parse(string s, out int length)
 		{
 			var match = new Regex(@"\((\d+),(\d+)\)", RegexOptions.IgnoreCase).Match(s);
-			if (match.Success) {
+			if (match.Success)
+			{
 				length = match.Length;
 				return new vec3i(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value), int.Parse(match.Groups[3].Value));
 			}

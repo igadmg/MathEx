@@ -30,8 +30,7 @@ namespace MathEx
 		public float magnitude { get { return x * x + y * y; } }
 		public vec2 normalized { get { return isZero ? this : this / length; } }
 
-		public int quad
-		{
+		public int quad {
 			get {
 				if (x > 0)
 					if (y > 0)
@@ -40,15 +39,14 @@ namespace MathEx
 						return 1;
 				else
 					if (y < 0)
-						return 2;
-					else
-						return 3;
+					return 2;
+				else
+					return 3;
 			}
 		}
 
-		public float middle
-		{
-			get { return (x + y)/2.0f; }
+		public float middle {
+			get { return (x + y) / 2.0f; }
 		}
 
 		//

@@ -25,7 +25,8 @@ namespace MathEx
 		public static IEnumerable<Quaternion> LerpStep(this float dT, Quaternion a, Quaternion b)
 		{
 			float t = 0;
-			while (t < 1) {
+			while (t < 1)
+			{
 				yield return Quaternion.Lerp(a, b, t); t += dT;
 			}
 			yield return Quaternion.Lerp(a, b, 1);
@@ -35,7 +36,8 @@ namespace MathEx
 		public static IEnumerable<Quaternion> SlerpStep(this float dT, Quaternion a, Quaternion b)
 		{
 			float t = 0;
-			while (t < 1) {
+			while (t < 1)
+			{
 				yield return Quaternion.Slerp(a, b, t); t += dT;
 			}
 			yield return Quaternion.Slerp(a, b, 1);

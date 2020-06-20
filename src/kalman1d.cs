@@ -35,8 +35,7 @@
 		/// The last updated value, can also be set if filter gets
 		/// sudden absolute measurement data for the latest update.
 		/// </summary>
-		public double Value
-		{
+		public double Value {
 			get { return m_x[0]; }
 			set { m_x[0] = value; }
 		}
@@ -44,8 +43,7 @@
 		/// <summary>
 		/// How fast the value is changing.
 		/// </summary>
-		public double Velocity
-		{
+		public double Velocity {
 			get { return m_x[1]; }
 		}
 

@@ -39,8 +39,7 @@ namespace MathEx
 		/// ---+---
 		///  2 | 3
 		/// </summary>
-		public int quad
-		{
+		public int quad {
 			get {
 				if (x > 0)
 					if (y > 0)
@@ -49,9 +48,9 @@ namespace MathEx
 						return 3;
 				else
 					if (y > 0)
-						return 1;
-					else
-						return 2;
+					return 1;
+				else
+					return 2;
 			}
 		}
 
@@ -63,32 +62,36 @@ namespace MathEx
 		///  4/|\7
 		///  /5|6\
 		/// </summary>
-		public int oct
-		{
-			get
-			{
-				if (x > 0) {
-					if (y > 0) {
+		public int oct {
+			get {
+				if (x > 0)
+				{
+					if (y > 0)
+					{
 						if (x > y)
 							return 0;
 						else
 							return 1;
 					}
-					else {
+					else
+					{
 						if (x > -y)
 							return 7;
 						else
 							return 6;
 					}
 				}
-				else {
-					if (y > 0) {
+				else
+				{
+					if (y > 0)
+					{
 						if (-x > y)
 							return 3;
 						else
 							return 2;
 					}
-					else {
+					else
+					{
 						if (-x > -y)
 							return 4;
 						else
@@ -147,7 +150,8 @@ namespace MathEx
 		public static vec2i Parse(string s)
 		{
 			var match = new Regex(@"\((\d+),(\d+)\)", RegexOptions.IgnoreCase).Match(s);
-			if (match.Success) {
+			if (match.Success)
+			{
 				return new vec2i(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value));
 			}
 			return vec2i.empty;
@@ -155,7 +159,8 @@ namespace MathEx
 		public static vec2i Parse(string s, out int length)
 		{
 			var match = new Regex(@"\((\d+),(\d+)\)", RegexOptions.IgnoreCase).Match(s);
-			if (match.Success) {
+			if (match.Success)
+			{
 				length = match.Length;
 				return new vec2i(int.Parse(match.Groups[1].Value), int.Parse(match.Groups[2].Value));
 			}

@@ -25,7 +25,8 @@ namespace MathEx
 		public static IntersectResult intersect(this aabb2 aabb, triangle<vec2> tri)
 		{
 			int siflags = 0x000000;
-			for (int i = 0; i < tri.p.Length; i++) {
+			for (int i = 0; i < tri.p.Length; i++)
+			{
 				var r = aabb.intersect(tri.p[i]);
 				siflags = (int)(r) << (i << 8);
 			}
@@ -83,13 +84,14 @@ namespace MathEx
 		{
 			float d = pl.normal * -r.direction;
 
-			if (d == 0) { // line is parallel to plane
+			if (d == 0)
+			{ // line is parallel to plane
 				return vec3.empty;
 			}
 
 			float n = pl.d + (pl.normal * r.origin);
 
-			return r.origin + r.direction * (n/d);
+			return r.origin + r.direction * (n / d);
 		}
 
 		public static line3_segment intersect(this ray a, ray b)

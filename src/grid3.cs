@@ -22,14 +22,12 @@ namespace MathEx
 		}
 
 
-		public T this[int x, int y, int z]
-		{
+		public T this[int x, int y, int z] {
 			get { return cells_[x, y, z]; }
 			set { cells_[x, y, z] = value; }
 		}
 
-		public T this[vec3i p]
-		{
+		public T this[vec3i p] {
 			get { return cells_[p.x, p.y, p.z]; }
 			set { cells_[p.x, p.y, p.z] = value; }
 		}

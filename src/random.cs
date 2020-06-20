@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace MathEx
 {
@@ -18,17 +16,15 @@ namespace MathEx
 		/// <summary>
 		/// Returns next random value in the range of 0..1.
 		/// </summary>
-		public static float Next
-		{
+		public static float Next {
 			get { return (float)rnd.NextDouble(); }
 		}
 
 		/// <summary>
 		/// Returns next normally distributed value int he range -0.5..0.5.
 		/// </summary>
-		public static float NextNormal
-		{
-			get	{
+		public static float NextNormal {
+			get {
 				float r = 0;
 				for (int i = 0; i < 12; i++)
 					r += Next;
@@ -41,12 +37,15 @@ namespace MathEx
 			bool ready = false;
 			float second = 0.0f;
 
-			while (true) {
-				if (ready) {
+			while (true)
+			{
+				if (ready)
+				{
 					ready = false;
 					yield return second;
 				}
-				else {
+				else
+				{
 					var cr = UnityEngine.Random.insideUnitCircle;
 					var lcr = cr.magnitude;
 					var r = MathExOps.Sqrt(-2.0f * MathExOps.Log(lcr) / lcr);
@@ -70,15 +69,12 @@ namespace MathEx
 			this.rnd = rnd;
 		}
 
-		public float Next
-		{
+		public float Next {
 			get { return (float)rnd.NextDouble(); }
 		}
 
-		public float NextNormal
-		{
-			get
-			{
+		public float NextNormal {
+			get {
 				float r = 0;
 				for (int i = 0; i < 12; i++)
 					r += Next;
@@ -86,8 +82,7 @@ namespace MathEx
 			}
 		}
 
-		public svec3 NextSVec3
-		{
+		public svec3 NextSVec3 {
 			get { return new svec3(1.0f, (Next - 0.5f) * 2 * UnityEngine.Mathf.PI, Next * 2 * UnityEngine.Mathf.PI); }
 		}
 	}

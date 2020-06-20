@@ -34,7 +34,7 @@
 		public vec2 project(vec2 point)
 		{
 			return origin + direction * projection(point);
-        }
+		}
 	}
 
 	public class ray

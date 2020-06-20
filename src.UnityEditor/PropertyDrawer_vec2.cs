@@ -1,5 +1,4 @@
-﻿using SystemEx;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 
 namespace MathEx.UnityEditor

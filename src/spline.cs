@@ -74,20 +74,16 @@ namespace MathEx
 		}
 
 		// return length of spline curve in segments.
-		public override int numberOfNodes
-		{
+		public override int numberOfNodes {
 			get { return 1 + p.Length / (interpolator.size - 1); }
 		}
 
-		public override int chunkSize
-		{
+		public override int chunkSize {
 			get { return interpolator.size; }
 		}
 
-		public override float length
-		{
-			get
-			{
+		public override float length {
+			get {
 				float result = 0;
 				for (int i = 0; i < numberOfNodes - 1; i++)
 				{
@@ -264,20 +260,16 @@ namespace MathEx
 		}
 
 		// return length of spline curve in segments.
-		public override int numberOfNodes
-		{
+		public override int numberOfNodes {
 			get { return 1 + p.Length / (interpolator.size - 1); }
 		}
 
-		public override int chunkSize
-		{
+		public override int chunkSize {
 			get { return interpolator.size; }
 		}
 
-		public override float length
-		{
-			get
-			{
+		public override float length {
+			get {
 				float result = 0;
 				for (int i = 0; i < numberOfNodes - 1; i++)
 				{
@@ -444,8 +436,7 @@ namespace MathEx
 			update();
 		}
 
-		public float length
-		{
+		public float length {
 			get { return d[d.Length - 1].Item2; }
 		}
 

@@ -23,8 +23,7 @@ namespace MathEx
 			return (MathTypeTag<T>)specs[typeof(T)];
 		}
 
-		public virtual T zero
-		{
+		public virtual T zero {
 			get { throw new NotImplementedException(); }
 		}
 
@@ -66,8 +65,7 @@ namespace MathEx
 
 	public class MathTypeTagFloat : MathTypeTag<float>
 	{
-		public override float zero
-		{
+		public override float zero {
 			get { return 0; }
 		}
 
@@ -107,8 +105,7 @@ namespace MathEx
 
 	public class MathTypeTagVec2 : MathTypeTag<vec2>
 	{
-		public override vec2 zero
-		{
+		public override vec2 zero {
 			get { return vec2.zero; }
 		}
 
@@ -148,8 +145,7 @@ namespace MathEx
 
 	public class MathTypeTagVec3 : MathTypeTag<vec3>
 	{
-		public override vec3 zero
-		{
+		public override vec3 zero {
 			get { return vec3.zero; }
 		}
 
@@ -190,8 +186,7 @@ namespace MathEx
 #if UNITY || UNITY_5_3_OR_NEWER
 	public class MathTypeTagVector3 : MathTypeTag<UnityEngine.Vector3>
 	{
-		public override UnityEngine.Vector3 zero
-		{
+		public override UnityEngine.Vector3 zero {
 			get { return UnityEngine.Vector3.zero; }
 		}
 

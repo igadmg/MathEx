@@ -32,15 +32,15 @@ namespace MathEx
 				this.p = p;
 			}
 
-			public T this[int i]
-			{
+			public T this[int i] {
 				get { return c.cells_[p][i]; }
 			}
 
 			public static GridIterator operator +(GridIterator i, T v)
 			{
 				List<T> l;
-				if (!i.c.cells_.TryGetValue(i.p, out l)) {
+				if (!i.c.cells_.TryGetValue(i.p, out l))
+				{
 					l = new List<T>(1);
 					i.c.cells_.Add(i.p, l);
 				}
@@ -52,7 +52,8 @@ namespace MathEx
 			public static GridIterator operator -(GridIterator i, T v)
 			{
 				List<T> l;
-				if (!i.c.cells_.TryGetValue(i.p, out l)) {
+				if (!i.c.cells_.TryGetValue(i.p, out l))
+				{
 					return i;
 				}
 				l.Remove(v);
@@ -61,14 +62,12 @@ namespace MathEx
 			}
 		}
 
-		public GridIterator this[float x, float y]
-		{
+		public GridIterator this[float x, float y] {
 			get { return new GridIterator(this, new vec2(x, y)); }
 			set { }
 		}
 
-		public GridIterator this[vec2 p]
-		{
+		public GridIterator this[vec2 p] {
 			get { return new GridIterator(this, p); }
 			set { }
 		}

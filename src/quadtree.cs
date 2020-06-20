@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-
 namespace MathEx
 {
 	public class QuadTree
@@ -11,7 +8,8 @@ namespace MathEx
 
 		public QuadTreeIterator put(vec2 i, object o)
 		{
-			if (root == null) {
+			if (root == null)
+			{
 				center = i;
 				size = new vec2(128, 128);
 				root = new QuadTreeIterator(new QuadTreeNode(null), center, size);
@@ -62,7 +60,8 @@ namespace MathEx
 
 		public QuadTreeNode allocate(vec2 i, int depth)
 		{
-			if (depth == 0) {
+			if (depth == 0)
+			{
 				return this;
 			}
 

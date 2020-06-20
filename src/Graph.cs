@@ -86,8 +86,8 @@ namespace MathEx
 
 	public class Edge : Tuple<long, long>
 	{
-        public long a;
-        public long b;
+		public long a;
+		public long b;
 
 		public Edge(long a, long b)
 			: base(a, b)

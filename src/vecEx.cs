@@ -60,7 +60,7 @@ namespace MathEx
 
 		public static vec3 dX(this vec3 v, float dx) { return new vec3(v.x + dx, v.y, v.z); }
 		public static vec3 dY(this vec3 v, float dy) { return new vec3(v.x, v.y + dy, v.z); }
-		public static vec3 dZ(this vec3 v, float dz) { return new vec3(v.x, v.y, v.z + dz);	}
+		public static vec3 dZ(this vec3 v, float dz) { return new vec3(v.x, v.y, v.z + dz); }
 
 		public static vec2 iX(this vec2 v) { return new vec2(-v.x, v.y); }
 		public static vec2 iY(this vec2 v) { return new vec2(v.x, -v.y); }
