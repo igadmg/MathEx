@@ -56,13 +56,5 @@ namespace MathEx
 				m_SplineController.c = m_Spline;
 			}
 		}
-
-		void Start()
-		{
-		}
-
-		void Update()
-		{
-		}
 	}
 }
