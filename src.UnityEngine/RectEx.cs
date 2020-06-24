@@ -90,6 +90,16 @@ namespace MathEx
 
 			return res;
 		}
+
+		public static Rect SetHeight(this Rect rect, float height)
+		{
+			return new Rect(rect.x, rect.y, rect.width, height);
+		}
+
+		public static Rect DeltaTop(this Rect rect, float dtop)
+		{
+			return new Rect(rect.x, rect.y + dtop, rect.width, rect.height - dtop);
+		}
 	}
 }
 
