@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -588,6 +589,18 @@ namespace MathEx
 		{
 			return new Vector3(v[i + 0], v[i + 1], v[i + 2]);
 		}
+
+		public static float Distance<TC>(this ValueTuple<TC, Vector3> v)
+			where TC : Component
+			=> (v.Item1.transform.position - v.Item2).magnitude;
+
+		public static float Distance<TC1, TC2>(this ValueTuple<TC1, TC2> v)
+			where TC1 : Component
+			where TC2 : Component
+			=> (v.Item1.transform.position - v.Item2.transform.position).magnitude;
+
+		public static float Distance(this ValueTuple<GameObject, GameObject> v)
+			=> (v.Item1.transform.position - v.Item2.transform.position).magnitude;
 	}
 }
 
