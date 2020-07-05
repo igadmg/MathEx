@@ -589,6 +589,29 @@ namespace MathEx
 			return new Vector3(v[i + 0], v[i + 1], v[i + 2]);
 		}
 
+		public static Vector3 Cross(this ValueTuple<Vector3, Vector3> v)
+			=> Vector3.Cross(v.Item1, v.Item2);
+
+		public static float Dot(this ValueTuple<Vector3, Vector3> v)
+			=> Vector3.Dot(v.Item1, v.Item2);
+
+		public static float PlaneDistance(this (Vector3 forward, Vector3 normal) v)
+			=> (v.normal, v.forward - Vector3.zero).Dot();
+
+		public static Vector3 PlaneIntersect(this (Vector3 origin, Vector3 forward, Vector3 normal) v)
+			=> v.origin + v.forward * ((Vector3.zero - v.origin, v.normal).Dot()
+							/ (v.forward, v.normal).Dot());
+
+		public static Vector3 Plane(this (Vector3 origin, Vector3 normal) v)
+			=> v.origin + v.normal * (v.normal, Vector3.zero - v.origin).Dot();
+
+		public static Vector3 Vector<TC>(this ValueTuple<Vector3, TC> v)
+			where TC : Component
+			=> (v.Item2.transform.position - v.Item1);
+
+		public static float Distance(this ValueTuple<Vector3, Vector3> v)
+			=> (v.Item1 - v.Item2).magnitude;
+
 		public static float Distance<TC>(this ValueTuple<TC, Vector3> v)
 			where TC : Component
 			=> (v.Item1.transform.position - v.Item2).magnitude;
