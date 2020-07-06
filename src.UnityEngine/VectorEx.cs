@@ -602,6 +602,17 @@ namespace MathEx
 			=> v.origin + v.forward * ((Vector3.zero - v.origin, v.normal).Dot()
 							/ (v.forward, v.normal).Dot());
 
+		public static Vector3 PlaneIntersect(this (Ray ray, Vector3 normal) v)
+			=> (v.ray.origin, v.ray.direction, v.normal).PlaneIntersect();
+
+		public static Vector3 Intersect(this (Ray ray, Plane plane) v)
+		{
+			if (v.plane.Raycast(v.ray, out float t))
+				return v.ray.GetPoint(t);
+
+			return empty3;
+		}
+
 		public static Vector3 Plane(this (Vector3 origin, Vector3 normal) v)
 			=> v.origin + v.normal * (v.normal, Vector3.zero - v.origin).Dot();
 
