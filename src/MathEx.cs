@@ -8,6 +8,7 @@ namespace MathEx
 	{
 		public const float PI = 3.1415927f;
 		public const float _2PI = 2.0f * PI;
+		public const float PHI = 1.6180339887f;
 		public const float Deg2Rad = 0.0174532924F;
 		public const float Rad2Deg = 57.29578F;
 
@@ -85,6 +86,14 @@ namespace MathEx
 		{
 			return t.Lerp(abc.x, abc.y, abc.z);
 		}
+
+		public static UnityEngine.Vector2 Lerp(this UnityEngine.Vector2 t, UnityEngine.Rect ab)
+		{
+			return new UnityEngine.Vector2(
+				t.x.Lerp(ab.xMin, ab.xMax)
+				, t.y.Lerp(ab.yMin, ab.yMax));
+		}
+
 #endif
 
 		public static float Lerp(this float t, float a, float b, params float[] o)

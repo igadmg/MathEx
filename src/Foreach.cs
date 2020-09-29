@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using SystemEx;
-
-
+using UnityEngine;
 
 namespace MathEx
 {
@@ -60,6 +59,22 @@ namespace MathEx
 					yield return d.Mul(x, y);
 
 			yield break;
+		}
+
+		public static IEnumerable<vec2> VogelSpiral(vec2 o, float phi, float c)
+		{
+			int n = 0;
+			float phi2 = phi * phi;
+
+			while (true)
+			{
+				float r = c * Mathf.Sqrt(n);
+				float theta = MathExOps._2PI / phi2 * n;
+
+				yield return new vec2(r * Mathf.Cos(theta), r * Mathf.Sin(theta));
+
+				n++;
+			}
 		}
 
 		private static Func<vec2i, vec2i>[] octTransforms = new Func<vec2i, vec2i>[] {
