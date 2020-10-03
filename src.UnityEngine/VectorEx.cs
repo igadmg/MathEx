@@ -89,8 +89,14 @@ namespace MathEx
 			return new Vector3(v.x, v.y, v.z + dz);
 		}
 
-		public static Vector3 xxx(this float x)
-			=> new Vector3(x, x, x);
+		public static vec2 xx(this float x)
+			=> new vec2(x, x);
+
+		public static vec3 x3(this float x)
+			=> new vec3(x, 0, 0);
+
+		public static vec3 xxx(this float x)
+			=> new vec3(x, x, x);
 
 		public static Vector3 xyz(this Vector2 v, float z)
 		{
@@ -114,6 +120,20 @@ namespace MathEx
 		{
 			return new Vector3(z, v.x, v.y);
 		}
+
+		public static Vector2 nx(this Vector2 v) => v.X(-v.x);
+		public static Vector2 ny(this Vector2 v) => v.Y(-v.y);
+
+		public static Vector3 nx(this Vector3 v) => v.X(-v.x);
+		public static Vector3 ny(this Vector3 v) => v.Y(-v.y);
+		public static Vector3 nz(this Vector3 v) => v.Z(-v.z);
+
+		public static vec2 nx(this vec2 v) => v.X(-v.x);
+		public static vec2 ny(this vec2 v) => v.Y(-v.y);
+
+		public static vec3 nx(this vec3 v) => v.X(-v.x);
+		public static vec3 ny(this vec3 v) => v.Y(-v.y);
+		public static vec3 nz(this vec3 v) => v.Z(-v.z);
 
 		public static Vector3 xzy(this Vector3 v)
 		{
@@ -534,25 +554,15 @@ namespace MathEx
 				);
 		}
 
-		public static Ray ScreenPointToRay(this Vector2 v)
-		{
-			return Camera.main.ScreenPointToRay(v);
-		}
+		public static Ray ScreenPointToRay(this Vector2 v) => Camera.main.ScreenPointToRay(v);
+		public static Ray ScreenPointToRay(this Vector2 v, Camera camera) => camera.ScreenPointToRay(v);
+		public static Ray ScreenPointToRay(this Vector3 v) => Camera.main.ScreenPointToRay(v);
+		public static Ray ScreenPointToRay(this Vector3 v, Camera camera) => camera.ScreenPointToRay(v);
 
-		public static Ray ScreenPointToRay(this Vector2 v, Camera camera)
-		{
-			return camera.ScreenPointToRay(v);
-		}
+		public static Vector3 WorldToScreenPoint(this Vector3 v) => Camera.main.WorldToScreenPoint(v);
+		public static Vector3 WorldToScreenPoint(this Vector3 v, Camera camera) => camera.WorldToScreenPoint(v);
 
-		public static Ray ScreenPointToRay(this Vector3 v)
-		{
-			return Camera.main.ScreenPointToRay(v);
-		}
-
-		public static Ray ScreenPointToRay(this Vector3 v, Camera camera)
-		{
-			return camera.ScreenPointToRay(v);
-		}
+		public static Rect SetSize(this Rect r, Vector2 size) => new Rect(r.position, size);
 
 		public static bool IsInFrustum(this Vector3 v, float fov, float aspect, float zNear, float zFar)
 		{
