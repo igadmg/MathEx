@@ -32,6 +32,11 @@ namespace MathEx
 			return Mathf.Repeat(t, length);
 		}
 
+		public static bool SameSign(float a, float b)
+		{
+			return (Mathf.Sign(a) + Mathf.Sign(b)) != 0;
+		}
+
 		public static float Cbrt(this float v)
 		{
 			if (v >= 0)
