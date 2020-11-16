@@ -14,8 +14,10 @@ namespace MathEx
 		public vec2 o;
 		public float r;
 
-		public bool isEmpty { get { return o.isEmpty || float.IsNaN(r); } }
-		public bool isZero { get { return o.isZero && r == 0; } }
+		public bool isEmpty => o.isEmpty || float.IsNaN(r);
+		public bool isZero => o.isZero && r == 0;
+
+		public aabb2 bound => new aabb2(o - r.xx(), o + r.xx());
 
 		public circle(vec2 o, float r)
 		{

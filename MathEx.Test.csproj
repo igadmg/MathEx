@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.Test.cs" />
+    <Compile Include="src.Test\BVHTest.cs" />
     <Compile Include="src.Test\Program.cs" />
   </ItemGroup>
   <ItemGroup>

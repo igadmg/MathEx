@@ -89,15 +89,6 @@ namespace MathEx
 			return new Vector3(v.x, v.y, v.z + dz);
 		}
 
-		public static vec2 xx(this float x)
-			=> new vec2(x, x);
-
-		public static vec3 x3(this float x)
-			=> new vec3(x, 0, 0);
-
-		public static vec3 xxx(this float x)
-			=> new vec3(x, x, x);
-
 		public static Vector3 xyz(this Vector2 v, float z)
 		{
 			return new Vector3(v.x, v.y, z);
@@ -127,13 +118,6 @@ namespace MathEx
 		public static Vector3 nx(this Vector3 v) => v.X(-v.x);
 		public static Vector3 ny(this Vector3 v) => v.Y(-v.y);
 		public static Vector3 nz(this Vector3 v) => v.Z(-v.z);
-
-		public static vec2 nx(this vec2 v) => v.X(-v.x);
-		public static vec2 ny(this vec2 v) => v.Y(-v.y);
-
-		public static vec3 nx(this vec3 v) => v.X(-v.x);
-		public static vec3 ny(this vec3 v) => v.Y(-v.y);
-		public static vec3 nz(this vec3 v) => v.Z(-v.z);
 
 		public static Vector3 xzy(this Vector3 v)
 		{
@@ -629,6 +613,9 @@ namespace MathEx
 		public static Vector3 Vector<TC>(this ValueTuple<Vector3, TC> v)
 			where TC : Component
 			=> (v.Item2.transform.position - v.Item1);
+
+		public static float Distance(this ValueTuple<Vector2, Vector2> v)
+			=> (v.Item1 - v.Item2).magnitude;
 
 		public static float Distance(this ValueTuple<Vector3, Vector3> v)
 			=> (v.Item1 - v.Item2).magnitude;

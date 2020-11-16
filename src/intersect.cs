@@ -10,6 +10,23 @@ namespace MathEx
 
 	public static class IntersectEx
 	{
+		public static IntersectResult intersect(this aabb2 aabb, aabb2 v)
+		{
+			int resA = aabb.Position(v.a);
+			int resB = aabb.Position(v.b);
+
+			if ((resA & resB) != 0)
+				return IntersectResult.None;
+
+			if (resA == 0 && resB == 0)
+				return IntersectResult.Contain1;
+
+			if ((resA | resB) == 15)
+				return IntersectResult.Contain2;
+
+			return IntersectResult.Intersect;
+		}
+
 		public static IntersectResult intersect(this aabb2 aabb, vec2 v)
 		{
 			if (v.x < aabb.a.x && v.x > aabb.b.x)
@@ -105,6 +122,11 @@ namespace MathEx
 			plane pb = new plane(b.origin, (b.direction % d).normalized);
 
 			return new line3_segment(pa.intersect(b), pb.intersect(a));
+		}
+
+		public static bool intersect(this circle a, vec2 v)
+		{
+			return (a.o, v).DistanceSq() < a.r * a.r;
 		}
 	}
 }

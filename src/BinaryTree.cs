@@ -2,7 +2,7 @@ namespace MathEx
 {
 	public class BinaryTree
 	{
-		QuadTreeNode root = null;
+		BinaryTreeNode root = null;
 	}
 
 	public class BinaryTreeNode

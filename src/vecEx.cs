@@ -1,3 +1,5 @@
+using System;
+
 namespace MathEx
 {
 	public static class vecEc
@@ -66,6 +68,19 @@ namespace MathEx
 		public static vec2 iY(this vec2 v) { return new vec2(v.x, -v.y); }
 
 
+		public static vec2 nx(this vec2 v) => v.X(-v.x);
+		public static vec2 ny(this vec2 v) => v.Y(-v.y);
+
+		public static vec3 nx(this vec3 v) => v.X(-v.x);
+		public static vec3 ny(this vec3 v) => v.Y(-v.y);
+		public static vec3 nz(this vec3 v) => v.Z(-v.z);
+
+
+		public static vec2 x2(this float x) => new vec2(x, 0);
+		public static vec2 xx(this float x) => new vec2(x, x);
+		public static vec3 x3(this float x)	=> new vec3(x, 0, 0);
+		public static vec3 xxx(this float x) => new vec3(x, x, x);
+
 		public static vec3i xyz(this vec2i v, int z) { return new vec3i(v.x, v.y, z); }
 		public static vec3i zxy(this vec2i v, int z) { return new vec3i(z, v.x, v.y); }
 		public static vec3i yzx(this vec2i v, int z) { return new vec3i(v.y, z, v.x); }
@@ -92,5 +107,11 @@ namespace MathEx
 
 		public static vec3 xyz(this vec4 v) { return new vec3(v.x, v.y, v.z); }
 		public static vec2 xy(this vec4 v) { return new vec2(v.x, v.y); }
+
+		public static float Distance(this ValueTuple<vec2, vec2> v) => (v.Item1 - v.Item2).length;
+		public static float Distance(this ValueTuple<vec3, vec3> v) => (v.Item1 - v.Item2).length;
+
+		public static float DistanceSq(this ValueTuple<vec2, vec2> v) => (v.Item1 - v.Item2).magnitude;
+		public static float DistanceSq(this ValueTuple<vec3, vec3> v) => (v.Item1 - v.Item2).magnitude;
 	}
 }
