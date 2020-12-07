@@ -381,6 +381,9 @@ namespace MathEx
 			yield break;
 		}
 
+		public static Vector2 Lerp(this float t, Vector2 a, Vector2 b)
+			=> Vector2.Lerp(a, b, t);
+
 		public static IEnumerable<Vector2> Lerp(this Vector2 a, Vector2 b, float dT)
 		{
 			float t = 0;
@@ -391,6 +394,9 @@ namespace MathEx
 			yield return Vector2.Lerp(a, b, 1);
 			yield break;
 		}
+
+		public static Vector3 Lerp(this float t, Vector3 a, Vector3 b)
+			=> Vector3.Lerp(a, b, t);
 
 		public static IEnumerable<Vector3> Lerp(this Vector3 a, Vector3 b, float dT)
 		{

@@ -26,6 +26,11 @@ namespace MathEx
 
 		public static float[] mul(this float[] a, float s) { return a.Modify(i => i * s); }
 
+
+		public static int Asum(this int n, int a, int d = 1)
+			=> (2 * a + d * (n - 1)) * n / 2;
+
+
 		public static int Clamp(this int f, int p1, int p2)
 		{
 			return UnityEngine.Mathf.Clamp(f, p1, p2);
