@@ -101,6 +101,10 @@ namespace MathEx
 		{
 			return a == b;
 		}
+
+		public static bool eq(float a, float b, float eps) => MathExOps.Abs(a - b) <= eps;
+		public static bool gt(float a, float b, float eps) => (a - b) > eps;
+		public static bool lt(float a, float b, float eps) => (b - a) > eps;
 	}
 
 	public class MathTypeTagVec2 : MathTypeTag<vec2>

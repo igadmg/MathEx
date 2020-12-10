@@ -3,7 +3,7 @@
 namespace MathEx
 {
 	[Serializable]
-	public struct vec3 : IFormattable
+	public struct vec3 : IComparable<vec3>, IFormattable
 	{
 		//
 		// Fields
@@ -40,11 +40,31 @@ namespace MathEx
 		// Operators
 		//
 
+
+		public bool Equals(vec3 other, float eps) => MathTypeTagFloat.eq(x, other.x, eps) && MathTypeTagFloat.eq(y, other.y, eps) && MathTypeTagFloat.eq(z, other.z, eps);
 		public static bool operator ==(vec3 a, vec3 b) { return a.x == b.x && a.y == b.y && a.z == b.z; }
 		public static bool operator !=(vec3 a, vec3 b) { return a.x != b.x || a.y != b.y | a.z != b.z; }
 		public bool Equals(vec3 obj) { return obj == this; }
 		public override bool Equals(object obj) { return obj is vec3 ? Equals((vec3)obj) : false; }
 		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode(); }
+		public int CompareTo(vec3 other)
+		{
+			return x > other.x ? 1
+				: x == other.x ? y > other.y ? 1
+					: y == other.y ? z > other.z ? 1
+						: z == other.z ? 0 : -1
+					: -1
+				: -1;
+		}
+		public int CompareTo(vec3 other, float eps)
+		{
+			return MathTypeTagFloat.gt(x, other.x, eps) ? 1
+				: MathTypeTagFloat.eq(x, other.x, eps) ? MathTypeTagFloat.gt(y, other.y, eps) ? 1
+					: MathTypeTagFloat.eq(y, other.y, eps) ? MathTypeTagFloat.gt(z, other.z, eps) ? 1
+						: MathTypeTagFloat.eq(z, other.z, eps) ? 0 : -1
+					: -1
+				: -1;
+		}
 
 		public static vec3 operator *(vec3 a, int d) { return new vec3(a.x * d, a.y * d, a.z * d); }
 		public static vec3 operator /(vec3 a, int d) { return new vec3(a.x / d, a.y / d, a.z / d); }
