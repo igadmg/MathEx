@@ -2,6 +2,7 @@
 /.vs
 /packages
 /bin
+/[Dd]ebug
 /[Ll]ibrary
 /[Tt]emp
 /[Oo]bj
