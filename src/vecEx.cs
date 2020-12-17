@@ -108,6 +108,9 @@ namespace MathEx
 		public static vec3 xyz(this vec4 v) { return new vec3(v.x, v.y, v.z); }
 		public static vec2 xy(this vec4 v) { return new vec2(v.x, v.y); }
 
+		public static aabb3 xyz(this aabb2 aabb, vec2 z) => new aabb3(aabb.a.xyz(z.x), aabb.b.xyz(z.y));
+		public static aabb3 xzy(this aabb2 aabb, vec2 z) => new aabb3(aabb.a.xzy(z.x), aabb.b.xzy(z.y));
+
 		public static float Distance(this ValueTuple<vec2, vec2> v) => (v.Item1 - v.Item2).length;
 		public static float Distance(this ValueTuple<vec3, vec3> v) => (v.Item1 - v.Item2).length;
 

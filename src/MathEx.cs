@@ -159,19 +159,19 @@ namespace MathEx
 
 		static vec2 Slerp(this float t, vec2 a, vec2 b)
 		{
-			float d = a * b;
+			float d = a ^ b;
 
 			d = Clamp(d, -1, 1);
 
 			float theta = Acos(d) * t;
-			var r = (b - a * d).normalized;
+			var r = (b - (a * d)).normalized;
 
 			return ((a * Cos(theta)) + (r * Sin(theta)));
 		}
 
 		public static vec3 Slerp(this float t, vec3 a, vec3 b)
 		{
-			float d = a * b;
+			float d = a ^ b;
 
 			d = Clamp(d, -1, 1);
 

@@ -24,7 +24,7 @@
 			pa = n.x;
 			pb = n.y;
 			pc = n.z;
-			pd = -(o * n);
+			pd = -(o ^ n);
 		}
 
 		public plane(vec3 n, float d)
@@ -49,12 +49,12 @@
 
 		public vec3 cast(ray r, out float d)
 		{
-			d = normal * r.direction;
+			d = normal ^ r.direction;
 
 			if (d == 0)
 				return vec3.empty;
 
-			d = -(r.origin * normal + pd) / d;
+			d = -((r.origin ^ normal) + pd) / d;
 
 			if (d < 0)
 				return vec3.empty;

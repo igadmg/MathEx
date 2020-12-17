@@ -71,7 +71,7 @@ namespace MathEx
 
 
 
-		public static float operator *(vec2 a, vec2 b) { return Dot(a, b); }
+		public static float operator ^(vec2 a, vec2 b) { return Dot(a, b); }
 
 
 

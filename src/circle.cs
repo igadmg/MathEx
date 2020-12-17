@@ -36,9 +36,9 @@ namespace MathEx
 			}
 			else
 			{
-				float offset = b * b;
-				float bc = (a * a - offset) / 2f;
-				float cd = (offset - c * c) / 2f;
+				float offset = b ^ b;
+				float bc = ((a ^ a) - offset) / 2f;
+				float cd = (offset - (c ^ c)) / 2f;
 
 				float idet = 1f / det;
 

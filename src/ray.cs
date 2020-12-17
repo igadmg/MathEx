@@ -28,7 +28,7 @@
 
 		public float projection(vec2 point)
 		{
-			return direction * (point - origin);
+			return direction ^ (point - origin);
 		}
 
 		public vec2 project(vec2 point)
@@ -65,7 +65,7 @@
 
 		public float projection(vec3 point)
 		{
-			return direction * (point - origin);
+			return direction ^ (point - origin);
 		}
 
 		public vec3 project(vec3 point)

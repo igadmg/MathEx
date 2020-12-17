@@ -99,14 +99,14 @@ namespace MathEx
 
 		public static vec3 intersect(this plane pl, ray r)
 		{
-			float d = pl.normal * -r.direction;
+			float d = pl.normal ^ -r.direction;
 
 			if (d == 0)
 			{ // line is parallel to plane
 				return vec3.empty;
 			}
 
-			float n = pl.d + (pl.normal * r.origin);
+			float n = pl.d + (pl.normal ^ r.origin);
 
 			return r.origin + r.direction * (n / d);
 		}

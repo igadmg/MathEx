@@ -616,9 +616,11 @@ namespace MathEx
 		public static Vector3 Plane(this (Vector3 origin, Vector3 normal) v)
 			=> v.origin + v.normal * (v.normal, Vector3.zero - v.origin).Dot();
 
-		public static Vector3 Vector<TC>(this ValueTuple<Vector3, TC> v)
-			where TC : Component
+		public static Vector3 Vector(this ValueTuple<Vector3, Component> v)
 			=> (v.Item2.transform.position - v.Item1);
+
+		public static Vector3 Vector(this ValueTuple<Component, Component> v)
+			=> (v.Item2.transform.position - v.Item1.transform.position);
 
 		public static float Distance(this ValueTuple<Vector2, Vector2> v)
 			=> (v.Item1 - v.Item2).magnitude;
@@ -626,17 +628,20 @@ namespace MathEx
 		public static float Distance(this ValueTuple<Vector3, Vector3> v)
 			=> (v.Item1 - v.Item2).magnitude;
 
-		public static float Distance<TC>(this ValueTuple<TC, Vector3> v)
-			where TC : Component
+		public static float Distance(this ValueTuple<Component, Vector3> v)
 			=> (v.Item1.transform.position - v.Item2).magnitude;
 
-		public static float Distance<TC1, TC2>(this ValueTuple<TC1, TC2> v)
-			where TC1 : Component
-			where TC2 : Component
+		public static float Distance(this ValueTuple<Component, Component> v)
 			=> (v.Item1.transform.position - v.Item2.transform.position).magnitude;
 
 		public static float Distance(this ValueTuple<GameObject, GameObject> v)
 			=> (v.Item1.transform.position - v.Item2.transform.position).magnitude;
+
+		public static float DistanceSquared(this ValueTuple<Component, Component> v)
+			=> (v.Item1.transform.position - v.Item2.transform.position).sqrMagnitude;
+
+		public static float DistanceSquared(this ValueTuple<GameObject, GameObject> v)
+			=> (v.Item1.transform.position - v.Item2.transform.position).sqrMagnitude;
 	}
 }
 

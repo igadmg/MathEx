@@ -66,21 +66,23 @@ namespace MathEx
 				: -1;
 		}
 
-		public static vec3 operator *(vec3 a, int d) { return new vec3(a.x * d, a.y * d, a.z * d); }
-		public static vec3 operator /(vec3 a, int d) { return new vec3(a.x / d, a.y / d, a.z / d); }
-		public static vec3 operator *(vec3 a, float d) { return new vec3(a.x * d, a.y * d, a.z * d); }
-		public static vec3 operator /(vec3 a, float d) { return new vec3(a.x / d, a.y / d, a.z / d); }
-		public static vec3 operator *(int d, vec3 a) { return new vec3(a.x * d, a.y * d, a.z * d); }
-		public static vec3 operator /(int d, vec3 a) { return new vec3(a.x / d, a.y / d, a.z / d); }
-		public static vec3 operator *(float d, vec3 a) { return new vec3(a.x * d, a.y * d, a.z * d); }
-		public static vec3 operator /(float d, vec3 a) { return new vec3(a.x / d, a.y / d, a.z / d); }
+		public static vec3 operator *(vec3 a, int d) => new vec3(a.x * d, a.y * d, a.z * d);
+		public static vec3 operator /(vec3 a, int d) => new vec3(a.x / d, a.y / d, a.z / d);
+		public static vec3 operator *(vec3 a, float d) => new vec3(a.x * d, a.y * d, a.z * d);
+		public static vec3 operator /(vec3 a, float d) => new vec3(a.x / d, a.y / d, a.z / d);
+		public static vec3 operator *(int d, vec3 a) => new vec3(a.x * d, a.y * d, a.z * d);
+		public static vec3 operator /(int d, vec3 a) => new vec3(a.x / d, a.y / d, a.z / d);
+		public static vec3 operator *(float d, vec3 a) => new vec3(a.x * d, a.y * d, a.z * d);
+		public static vec3 operator /(float d, vec3 a) => new vec3(a.x / d, a.y / d, a.z / d);
+		public static vec3 operator *(vec3 a, vec3 b) => new vec3(a.x * b.x, a.y * b.y, a.z * b.z);
+		public static vec3 operator /(vec3 a, vec3 b) => new vec3(a.x / b.x, a.y / b.y, a.z / b.z);
 
 		public static vec3 operator -(vec3 a) { return new vec3(-a.x, -a.y, -a.z); }
 		public static vec3 operator +(vec3 a, vec3 b) { return new vec3(a.x + b.x, a.y + b.y, a.z + b.z); }
 		public static vec3 operator -(vec3 a, vec3 b) { return new vec3(a.x - b.x, a.y - b.y, a.z - b.z); }
 		public static vec3 operator *(vec3 a, vec3i b) { return new vec3(a.x * b.x, a.y * b.y, a.z * b.z); }
 		public static vec3 operator *(vec3i a, vec3 b) { return new vec3(a.x * b.x, a.y * b.y, a.z * b.z); }
-		public static float operator *(vec3 a, vec3 b) { return Dot(a, b); }
+		public static float operator ^(vec3 a, vec3 b) { return Dot(a, b); }
 		public static vec3 operator %(vec3 a, vec3 b) { return Cross(a, b); }
 
 		public vec3(float x, float y, float z)
