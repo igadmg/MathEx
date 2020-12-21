@@ -21,8 +21,11 @@ namespace MathEx
 		public static float Abs(this float v) { return v > 0 ? v : -v; }
 		public static float Sign(this float v) { return v > 0 ? 1.0f : v < 0 ? -1.0f : 0; }
 
-		public static float Min(this float a, float b) { return UnityEngine.Mathf.Min(a, b); }
-		public static float Max(this float a, float b) { return UnityEngine.Mathf.Max(a, b); }
+		public static float Min(this float a, float b) => a < b ? a : b;
+		public static float Min(this ValueTuple<float, float> v) => v.Item1 < v.Item2 ? v.Item1 : v.Item2;
+		public static float Max(this float a, float b) => a > b ? a : b;
+		public static float Max(this ValueTuple<float, float> v) => v.Item1 > v.Item2 ? v.Item1 : v.Item2;
+
 
 		public static float[] mul(this float[] a, float s) { return a.Modify(i => i * s); }
 

@@ -14,6 +14,8 @@ namespace MathEx
 
 		public static vec2 Adc(this vec2 v, float th) { return new vec2(MathExOps.Abs(v.x) < th ? 0 : MathExOps.Sign(v.x), MathExOps.Abs(v.y) < th ? 0 : MathExOps.Sign(v.y)); }
 
+		public static float Min(this vec2 v) => (v.x, v.y).Min();
+
 		public static vec2 Add(this vec2 l, float x, float y) { return new vec2(l.x + x, l.y + y); }
 		public static vec2 Add(this vec2 l, vec2 r) { return new vec2(l.x + r.x, l.y + r.y); }
 		public static vec2 Sub(this vec2 l, float x, float y) { return new vec2(l.x - x, l.y - y); }

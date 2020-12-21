@@ -41,18 +41,18 @@ namespace MathEx
 			yield break;
 		}
 
-		public static IEnumerable<vec2> Cell(vec2 d, vec2i s)
+		public static IEnumerable<aabb2> Cell(vec2i s, vec2 d)
 		{
 			vec2 sp = -d.Mul(s).Div(2.0f).Sub(d.Div(2));
 			vec2 p = sp;
 			for (int y = 0; y < s.y; y++, p = p.Add(0, d.y).X(sp.x))
 				for (int x = 0; x < s.x; x++, p = p.Add(d.x, 0))
-					yield return p;
+					yield return new aabb2(p - d / 2, p + d / 2);
 
 			yield break;
 		}
 
-		public static IEnumerable<vec2> Cell(vec2 d, aabb2i s)
+		public static IEnumerable<vec2> Cell(aabb2i s, vec2 d)
 		{
 			for (int y = s.a.y; y < s.b.y; y++)
 				for (int x = s.a.x; x < s.b.x; x++)

@@ -168,6 +168,28 @@ namespace MathEx
 			length = 0;
 			return vec2i.empty;
 		}
+
+#if UNITY || UNITY_5_3_OR_NEWER
+		public static implicit operator UnityEngine.Vector2(vec2i v)
+		{
+			return new UnityEngine.Vector2(v.x, v.y);
+		}
+
+		public static implicit operator UnityEngine.Vector2Int(vec2i v)
+		{
+			return new UnityEngine.Vector2Int(v.x, v.y);
+		}
+
+		public static implicit operator vec2i(UnityEngine.Vector2 v)
+		{
+			return new vec2i((int)v.x, (int)v.y);
+		}
+
+		public static implicit operator vec2i(UnityEngine.Vector2Int v)
+		{
+			return new vec2i(v.x, v.y);
+		}
+#endif
 	}
 }
 
