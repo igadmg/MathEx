@@ -79,10 +79,11 @@ namespace MathEx
 				);
 		}
 
+		public static int Lerp(this float t, int a, int b)
+			=> (a * (1 - t) + b * t).Round();
+
 		public static float Lerp(this float t, float a, float b)
-		{
-			return a * (1 - t) + b * t;
-		}
+			=> a * (1 - t) + b * t;
 
 		public static float Lerp(this float t, vec3 abc)
 		{

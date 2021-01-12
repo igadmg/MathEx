@@ -180,6 +180,11 @@ namespace MathEx
 			return new UnityEngine.Vector2Int(v.x, v.y);
 		}
 
+		public static implicit operator vec2i(vec2 v)
+		{
+			return new vec2i((int)v.x, (int)v.y);
+		}
+
 		public static implicit operator vec2i(UnityEngine.Vector2 v)
 		{
 			return new vec2i((int)v.x, (int)v.y);

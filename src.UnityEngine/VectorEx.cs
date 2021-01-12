@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 namespace MathEx
@@ -272,6 +273,15 @@ namespace MathEx
 			return Quaternion.Euler(euler) * v;
 		}
 
+
+		public static bool InRange(this Vector2 r, float t)
+			=> t >= r.x && t <= r.y;
+
+		public static Vector2 Intersect(this Vector2 r, Vector2 v)
+			=> new Vector2(v.x.Max(r.x), v.y.Min(r.y));
+
+		public static Vector2 Extend(this Vector2 r, Vector2 v)
+			=> new Vector2(v.x.Min(r.x), v.y.Max(r.y));
 
 		public static float Lerp(this Vector2 ab, float t)
 		{
@@ -624,6 +634,13 @@ namespace MathEx
 		public static Vector3 Vector(this ValueTuple<Vector3, Component> v)
 			=> (v.Item2.transform.position - v.Item1);
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static Vector3 Vector(this ValueTuple<Matrix4x4, Vector3> v)
+			=> v.Item2 - v.Item1.GetTranslation();
+
+		public static Vector3 Vector(this ValueTuple<Matrix4x4, Component> v)
+			=> v.Item2.transform.position - v.Item1.GetTranslation();
+
 		public static Vector3 Vector(this ValueTuple<Component, Component> v)
 			=> (v.Item2.transform.position - v.Item1.transform.position);
 
@@ -641,6 +658,19 @@ namespace MathEx
 
 		public static float Distance(this ValueTuple<GameObject, GameObject> v)
 			=> (v.Item1.transform.position - v.Item2.transform.position).magnitude;
+
+		public static float DistancSquarede(this ValueTuple<Vector2, Vector2> v)
+			=> (v.Item1 - v.Item2).sqrMagnitude;
+
+		public static float DistanceSquared(this ValueTuple<Vector3, Vector3> v)
+			=> (v.Item1 - v.Item2).sqrMagnitude;
+
+		public static float DistanceSquared(this ValueTuple<Matrix4x4, Transform> v)
+			=> (v.Item1.GetTranslation() - v.Item2.position).sqrMagnitude;
+
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
+		public static float DistanceSquared(this ValueTuple<Matrix4x4, Component> v)
+			=> (v.Item1.GetTranslation() - v.Item2.transform.position).sqrMagnitude;
 
 		public static float DistanceSquared(this ValueTuple<Component, Component> v)
 			=> (v.Item1.transform.position - v.Item2.transform.position).sqrMagnitude;

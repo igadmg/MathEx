@@ -240,5 +240,12 @@ namespace MathEx
 
 			return value / divisor;
 		}
+
+
+		public static float GetNoise(vec3 p)
+			=> GetNoise(p.x, p.y, p.z);
+
+		public static float GetOctaveNoise(vec3 p, int pOctaves)
+			=> GetOctaveNoise(p.x, p.y, p.z, pOctaves);
 	}
 }
