@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using SystemEx;
-using UnityEngine;
 
 namespace MathEx
 {
@@ -68,10 +67,10 @@ namespace MathEx
 
 			while (true)
 			{
-				float r = c * Mathf.Sqrt(n);
+				float r = c * n.Sqrt();
 				float theta = MathExOps._2PI / phi2 * n;
 
-				yield return new vec2(r * Mathf.Cos(theta), r * Mathf.Sin(theta));
+				yield return new vec2(r * theta.Cos(), r * theta.Sin());
 
 				n++;
 			}

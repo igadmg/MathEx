@@ -26,6 +26,34 @@ namespace MathEx
 		public static float Max(this float a, float b) => a > b ? a : b;
 		public static float Max(this ValueTuple<float, float> v) => v.Item1 > v.Item2 ? v.Item1 : v.Item2;
 
+		public static float Floor(this float v)
+#if UNITY
+			=> UnityEngine.Mathf.Floor(v);
+#else
+			=> MathF.Floor(v);
+#endif
+
+		public static int FloorToInt(this float v)
+#if UNITY
+			=> UnityEngine.Mathf.FloorToInt(v);
+#else
+			=> (int)MathF.Floor(v);
+#endif
+
+		public static float Ceil(this float v)
+#if UNITY
+			=> UnityEngine.Mathf.Ceil(v);
+#else
+			=> MathF.Ceiling(v);
+#endif
+
+		public static int CeilToInt(this float v)
+#if UNITY
+			=> UnityEngine.Mathf.CeilToInt(v);
+#else
+			=> (int)MathF.Ceiling(v);
+#endif
+
 
 		public static float[] mul(this float[] a, float s) { return a.Modify(i => i * s); }
 
@@ -35,24 +63,28 @@ namespace MathEx
 
 
 		public static int Clamp(this int f, int p1, int p2)
-		{
-			return UnityEngine.Mathf.Clamp(f, p1, p2);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Clamp(f, p1, p2);
+#else
+			=> f < p1 ? p1 : f > p2 ? p2 : f;
+#endif
 
 		public static float ClampMin(this float f, float min)
-		{
-			return UnityEngine.Mathf.Clamp(f, min, f);
-		}
+			=> f.Clamp(min, float.MaxValue);
 
 		public static float Clamp(this float f, float p1, float p2)
-		{
-			return UnityEngine.Mathf.Clamp(f, p1, p2);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Clamp(f, p1, p2);
+#else
+			=> f < p1 ? p1 : f > p2 ? p2 : f;
+#endif
 
 		public static float Clamp01(this float f)
-		{
-			return UnityEngine.Mathf.Clamp01(f);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Clamp01(f);
+#else
+			=> f.Clamp(0, 1);
+#endif
 
 		public static vec2 Clamp(vec2 value, vec2 min, vec2 max)
 		{
@@ -115,7 +147,7 @@ namespace MathEx
 			if (t <= 2)
 				return (t - 1).Lerp(b, o[0]);
 
-			float floor = (float)System.Math.Floor(t);
+			float floor = t.Floor();
 			if (t == floor)
 				return o[(int)floor - 2];
 
@@ -193,8 +225,8 @@ namespace MathEx
 				return Tuple.Create(i, i, 0.0f);
 			}
 
-			int a = UnityEngine.Mathf.FloorToInt(f);
-			int b = UnityEngine.Mathf.CeilToInt(f);
+			int a = f.FloorToInt();
+			int b = f.CeilToInt();
 			return Tuple.Create(a, b, f.InvLerp(a, b));
 		}
 
@@ -238,14 +270,25 @@ namespace MathEx
 		}
 
 		public static float Pow(this float v, float p)
-		{
-			return UnityEngine.Mathf.Pow(v, p);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Pow(v, p);
+#else
+			=> MathF.Pow(v, p);
+#endif
+
+		public static float Sqrt(this int v)
+#if UNITY
+			=> UnityEngine.Mathf.Sqrt(v);
+#else
+			=> MathF.Sqrt(v);
+#endif
 
 		public static float Sqrt(this float v)
-		{
-			return UnityEngine.Mathf.Sqrt(v);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Sqrt(v);
+#else
+			=> MathF.Sqrt(v);
+#endif
 
 		public static float Cbrt(this float v)
 		{
@@ -260,9 +303,11 @@ namespace MathEx
 		}
 
 		public static float Log(this float v)
-		{
-			return UnityEngine.Mathf.Log(v);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Log(v);
+#else
+			=> MathF.Log(v);
+#endif
 
 		public static int Round(this float f)
 		{
@@ -270,24 +315,32 @@ namespace MathEx
 		}
 
 		public static float Cos(this float ar)
-		{
-			return UnityEngine.Mathf.Cos(ar);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Cos(ar);
+#else
+			=> MathF.Cos(ar);
+#endif
 
 		public static float Sin(this float ar)
-		{
-			return UnityEngine.Mathf.Sin(ar);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Sin(ar);
+#else
+			=> MathF.Sin(ar);
+#endif
 
 		public static float Acos(this float ar)
-		{
-			return UnityEngine.Mathf.Acos(ar);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Acos(ar);
+#else
+			=> MathF.Acos(ar);
+#endif
 
 		public static float Atan2(this float y, float x)
-		{
-			return UnityEngine.Mathf.Atan2(y, x);
-		}
+#if UNITY
+			=> UnityEngine.Mathf.Atan2(y, x);
+#else
+			=> MathF.Atan2(y, x);
+#endif
 
 		public static bool IsZero(this float[] a)
 		{

@@ -41,7 +41,7 @@ namespace MathEx
 
 		public static vec2 Floor(this vec2 v)
 		{
-			return new vec2(UnityEngine.Mathf.Floor(v.x), UnityEngine.Mathf.Floor(v.y));
+			return new vec2(v.x.Floor(), v.y.Floor());
 		}
 
 
@@ -92,6 +92,8 @@ namespace MathEx
 		public static vec3 zxy(this vec2 v, float z) { return new vec3(z, v.x, v.y); }
 		public static vec3 yxz(this vec2 v, float z) { return new vec3(v.y, v.x, z); }
 		public static vec3 yzx(this vec2 v, float z) { return new vec3(v.y, z, v.x); }
+
+		public static vec4 xyzw(this vec2 v, float z, float w) { return new vec4(v.x, v.y, z, w); }
 
 		public static vec2i xy(this vec3i v) { return new vec2i(v.x, v.y); }
 		public static vec2i yz(this vec3i v) { return new vec2i(v.y, v.z); }
