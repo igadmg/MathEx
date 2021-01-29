@@ -90,10 +90,8 @@ namespace MathEx
 			this.y = y;
 		}
 
-		public static explicit operator vec2(vec2i v)
-		{
-			return new vec2(v.x, v.y);
-		}
+		public static implicit operator vec2(ValueTuple<float, float> v) => new vec2(v.Item1, v.Item2);
+		public static explicit operator vec2(vec2i v) => new vec2(v.x, v.y);
 
 		public static vec2 Min(vec2 a, vec2 b)
 		{

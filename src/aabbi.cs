@@ -1,5 +1,10 @@
+using System;
+using System.Runtime.InteropServices;
+
 namespace MathEx
 {
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public class aabb2i
 	{
 		public static readonly aabb2i empty = new aabb2i(vec2i.empty, vec2i.empty);
@@ -60,6 +65,8 @@ namespace MathEx
 		}
 	}
 
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public class aabb3i
 	{
 		public vec3i a;

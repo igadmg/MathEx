@@ -1,5 +1,10 @@
+using System;
+using System.Runtime.InteropServices;
+
 namespace MathEx
 {
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct aabb2
 	{
 		public static readonly aabb2 empty = new aabb2(vec2.empty, vec2.empty);
@@ -9,17 +14,30 @@ namespace MathEx
 		public vec2 a;
 		public vec2 b;
 
-		public vec2 o { get { return (a + b) / 2; } }
-		public float x { get { return b.x - a.x; } }
-		public float y { get { return b.y - a.y; } }
-		public vec2 size { get { return b - a; } }
-		public vec2[] vertices { get { return new vec2[] { a, new vec2(a.x, b.y), b, new vec2(b.x, a.y) }; } }
+		public vec2 size {
+			get => b - a;
+			set => b = a + value;
+		}
+
+
+		public float x => a.x;
+		public float y => a.y;
+		public float width => size.x;
+		public float height => size.y;
+		public vec2 o => (a + b) / 2;
+		public vec2[] vertices => new vec2[] { a, new vec2(a.x, a.y + size.y), b, new vec2(a.x + size.x, a.y) };
+
 
 		public aabb2(vec2 a, vec2 b)
 		{
 			this.a = a;
 			this.b = b;
 		}
+
+		public static aabb2 xywh(float x, float y, float w, float h)
+			=> new aabb2(new vec2(x, y), new vec2(x + w, y + h));
+		public static aabb2 xywh(vec2 a, vec2 s)
+			=> new aabb2(a, a + s);
 
 		public bool isEmpty { get { return a.isEmpty || b.isEmpty; } }
 
@@ -60,13 +78,7 @@ namespace MathEx
 			return new aabb2(min, max);
 		}
 
-		public vec2[] ToArray()
-		{
-			return new vec2[4] {
-				a, new vec2(a.x, b.y),
-				b, new vec2(b.x, a.y)
-			};
-		}
+		public vec2[] ToArray() => vertices;
 
 		public override string ToString()
 		{
@@ -79,6 +91,8 @@ namespace MathEx
 		}
 	}
 
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct aabb3
 	{
 		public vec3 a;

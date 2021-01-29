@@ -26,6 +26,12 @@ namespace MathEx
 		public static float Max(this float a, float b) => a > b ? a : b;
 		public static float Max(this ValueTuple<float, float> v) => v.Item1 > v.Item2 ? v.Item1 : v.Item2;
 
+		public static float Normalized(this byte v, byte m = byte.MaxValue)
+			=> v / (float)m;
+
+		public static byte DenormalizeByte(this float v)
+			=> (byte)(v.Clamp01() * byte.MaxValue);
+
 		public static float Floor(this float v)
 #if UNITY
 			=> UnityEngine.Mathf.Floor(v);

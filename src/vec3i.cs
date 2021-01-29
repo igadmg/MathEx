@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using SystemEx;
 
 namespace MathEx
 {
 	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct vec3i
 	{
 		//
