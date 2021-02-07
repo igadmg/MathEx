@@ -28,30 +28,20 @@ namespace MathEx
 			=> parent;
 
 
-		public static vec2 operator %(vec2 a, TransformStack b)
-			=> (a.xyzw(0, 0) * b.currentTransform).xy();
+		public static vec4 operator *(vec4 a, TransformStack b) => a * b.currentTransform;
+		public static vec2 operator *(vec2 a, TransformStack b) => (a.xyzw(0, 1) * b.currentTransform).xy();
+		public static vec2 operator *(vec2i a, TransformStack b) => (a.xyzw(0, 1) * b.currentTransform).xy();
 
-		public static vec2 operator %(vec2i a, TransformStack b)
-			=> (a.xyzw(0, 0) * b.currentTransform).xy();
-
-		public static vec2 operator *(vec2 a, TransformStack b)
-			=> (a.xyzw(0, 1) * b.currentTransform).xy();
-
-		public static vec2 operator *(vec2i a, TransformStack b)
-			=> (a.xyzw(0, 1) * b.currentTransform).xy();
+		public static vec2 operator %(vec2 a, TransformStack b) => (a.xyzw(0, 0) * b.currentTransform).xy();
+		public static vec2 operator %(vec2i a, TransformStack b) => (a.xyzw(0, 0) * b.currentTransform).xy();
 
 
-		public static vec2 operator %(TransformStack a, vec2 b)
-			=> (b.xyzw(0, 0) * a.inverseTransform).xy();
+		public static vec4 operator *(TransformStack a, vec4 b) => b * a.inverseTransform;
+		public static vec2 operator *(TransformStack a, vec2 b) => (b.xyzw(0, 1) * a.inverseTransform).xy();
+		public static vec2 operator *(TransformStack a, vec2i b) => (b.xyzw(0, 1) * a.inverseTransform).xy();
 
-		public static vec2 operator %(TransformStack a, vec2i b)
-			=> (b.xyzw(0, 0) * a.inverseTransform).xy();
-
-		public static vec2 operator *(TransformStack a, vec2 b)
-			=> (b.xyzw(0, 1) * a.inverseTransform).xy();
-
-		public static vec2 operator *(TransformStack a, vec2i b)
-			=> (b.xyzw(0, 1) * a.inverseTransform).xy();
+		public static vec2 operator %(TransformStack a, vec2 b) => (b.xyzw(0, 0) * a.inverseTransform).xy();
+		public static vec2 operator %(TransformStack a, vec2i b) => (b.xyzw(0, 0) * a.inverseTransform).xy();
 	}
 
 	public class TrasformStackCursor

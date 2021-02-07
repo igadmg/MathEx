@@ -35,5 +35,7 @@ namespace MathEx
 		public static rect2 xywh(vec2 xy, vec2i wh) => new rect2(xy, (vec2)wh);
 		public static rect2 xywh(vec2i xy, vec2 wh) => new rect2((vec2)xy, wh);
 		public static rect2 xywh(vec2i xy, vec2i wh) => new rect2((vec2)xy, (vec2)wh);
+
+		public static rect2 ab(vec2 a, vec2 b) => new rect2(a, b - a);
 	}
 }
