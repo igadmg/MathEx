@@ -14,6 +14,8 @@ namespace MathEx
 			set => size = value - a;
 		}
 
+		public vec2 xy => a;
+
 		public rect2(vec2 xy, vec2 wh)
 		{
 			a = xy;

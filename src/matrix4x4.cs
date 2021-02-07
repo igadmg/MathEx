@@ -257,5 +257,11 @@ namespace MathEx
 
 			return result;
 		}
+
+		public static vec4 operator *(vec2 a, matrix4x4 b)
+			=> (a.xyzw() * b);
+
+		public static vec4 operator *(vec2i a, matrix4x4 b)
+			=> (a.xyzw() * b);
 	}
 }

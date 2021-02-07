@@ -61,6 +61,7 @@ namespace MathEx
 
 		public static vec2 dX(this vec2 v, float dx) { return new vec2(v.x + dx, v.y); }
 		public static vec2 dY(this vec2 v, float dy) { return new vec2(v.x, v.y + dy); }
+		public static vec2 dXY(this vec2 v, float dx, float dy) { return new vec2(v.x + dx, v.y + dy); }
 
 		public static vec3 dX(this vec3 v, float dx) { return new vec3(v.x + dx, v.y, v.z); }
 		public static vec3 dY(this vec3 v, float dy) { return new vec3(v.x, v.y + dy, v.z); }
@@ -87,13 +88,16 @@ namespace MathEx
 		public static vec3i zxy(this vec2i v, int z) { return new vec3i(z, v.x, v.y); }
 		public static vec3i yzx(this vec2i v, int z) { return new vec3i(v.y, z, v.x); }
 
+		public static vec4 xyzw(this vec2i v, float z = 0, float w = 0) { return new vec4(v.x, v.y, z, w); }
+
+
 		public static vec3 xyz(this vec2 v, float z) { return new vec3(v.x, v.y, z); }
 		public static vec3 xzy(this vec2 v, float z) { return new vec3(v.x, z, v.y); }
 		public static vec3 zxy(this vec2 v, float z) { return new vec3(z, v.x, v.y); }
 		public static vec3 yxz(this vec2 v, float z) { return new vec3(v.y, v.x, z); }
 		public static vec3 yzx(this vec2 v, float z) { return new vec3(v.y, z, v.x); }
 
-		public static vec4 xyzw(this vec2 v, float z, float w) { return new vec4(v.x, v.y, z, w); }
+		public static vec4 xyzw(this vec2 v, float z = 0, float w = 0) { return new vec4(v.x, v.y, z, w); }
 
 		public static vec2i xy(this vec3i v) { return new vec2i(v.x, v.y); }
 		public static vec2i yz(this vec3i v) { return new vec2i(v.y, v.z); }
