@@ -22,6 +22,10 @@ namespace MathEx
 			size = wh;
 		}
 
+		public rect2 normalized =>
+			rect2.xywh(size.x >= 0 ? a.x : a.x + size.x, size.y >= 0 ? a.y : a.y + size.y
+				, size.x >= 0 ? size.x : -size.x, size.y >= 0 ? size.y : -size.y);
+
 		public static rect2 wh(float w, float h) => new rect2(vec2.zero, (w, h));
 		public static rect2 wh(vec2 wh)	=> new rect2(vec2.zero, wh);
 		public static rect2 wh(vec2i wh) => new rect2(vec2.zero, (vec2)wh);

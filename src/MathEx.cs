@@ -25,6 +25,8 @@ namespace MathEx
 		public static float Min(this ValueTuple<float, float> v) => v.Item1 < v.Item2 ? v.Item1 : v.Item2;
 		public static float Max(this float a, float b) => a > b ? a : b;
 		public static float Max(this ValueTuple<float, float> v) => v.Item1 > v.Item2 ? v.Item1 : v.Item2;
+		public static float Max(this ValueTuple<int, float> v) => v.Item1 > v.Item2 ? v.Item1 : v.Item2;
+		public static float Max(this ValueTuple<float, int> v) => v.Item1 > v.Item2 ? v.Item1 : v.Item2;
 
 		public static float Normalized(this byte v, byte m = byte.MaxValue)
 			=> v / (float)m;

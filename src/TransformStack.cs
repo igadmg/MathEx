@@ -32,10 +32,16 @@ namespace MathEx
 		}
 
 
+		public static vec2 operator %(vec2 a, TransformStack b)
+			=> (a.xyzw(0, 0) * b.currentTransform).xy();
+
+		public static vec2 operator %(vec2i a, TransformStack b)
+			=> (a.xyzw(0, 0) * b.currentTransform).xy();
+
 		public static vec2 operator *(vec2 a, TransformStack b)
-			=> (a.xyzw() * b.currentTransform).xy();
+			=> (a.xyzw(0, 1) * b.currentTransform).xy();
 
 		public static vec2 operator *(vec2i a, TransformStack b)
-			=> (a.xyzw() * b.currentTransform).xy();
+			=> (a.xyzw(0, 1) * b.currentTransform).xy();
 	}
 }
