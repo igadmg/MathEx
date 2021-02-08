@@ -29,11 +29,11 @@ namespace MathEx
 
 		public static IntersectResult intersect(this aabb2 aabb, vec2 v)
 		{
-			if (v.x < aabb.a.x && v.x > aabb.b.x)
+			if (v.x < aabb.a.x || v.x > aabb.b.x)
 				return IntersectResult.None;
-			if (v.y < aabb.a.y && v.y > aabb.b.y)
+			if (v.y < aabb.a.y || v.y > aabb.b.y)
 				return IntersectResult.None;
-			if ((v.x == aabb.a.x || v.x == aabb.b.x) && (v.y == aabb.a.y && v.y == aabb.b.y))
+			if ((v.x == aabb.a.x || v.x == aabb.b.x) || (v.y == aabb.a.y || v.y == aabb.b.y))
 				return IntersectResult.Intersect;
 
 			return IntersectResult.Contain1;
@@ -52,6 +52,21 @@ namespace MathEx
 				return IntersectResult.Contain1;
 
 			return IntersectResult.None;
+		}
+
+		public static bool contain(this rect2 rect, vec2 v)
+			=> rect.intersect(v) != IntersectResult.None;
+
+		public static IntersectResult intersect(this rect2 rect, vec2 v)
+		{
+			if (v.x < rect.a.x || v.x > rect.b.x)
+				return IntersectResult.None;
+			if (v.y < rect.a.y || v.y > rect.b.y)
+				return IntersectResult.None;
+			if ((v.x == rect.a.x || v.x == rect.b.x) || (v.y == rect.a.y || v.y == rect.b.y))
+				return IntersectResult.Intersect;
+
+			return IntersectResult.Contain1;
 		}
 
 		public static ray intersect(this plane a, plane b)
