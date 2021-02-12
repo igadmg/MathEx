@@ -13,6 +13,12 @@ namespace MathEx
 		public float x;
 		public float y;
 
+		public struct Dto
+		{
+			public float x;
+			public float y;
+		}
+
 		//
 		// Static Properties
 		//

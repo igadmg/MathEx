@@ -9,6 +9,13 @@ namespace MathEx
 	{
 		public vec2 a;
 		public vec2 size;
+
+		public struct Dto
+		{
+			public vec2.Dto a;
+			public vec2.Dto size;
+		}
+
 		public vec2 b {
 			get => a + size;
 			set => size = value - a;
