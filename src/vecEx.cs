@@ -122,10 +122,8 @@ namespace MathEx
 
 		public static rect2 X(this rect2 r, float x) => rect2.xywh(r.a.X(x), r.size);
 		public static rect2 Y(this rect2 r, float y) => rect2.xywh(r.a.Y(y), r.size);
-
 		public static rect2 XY(this rect2 r, float x, float y) => rect2.xywh((x, y), r.size);
 		public static rect2 XY(this rect2 r, vec2 xy) => rect2.xywh(xy, r.size);
-
 		public static rect2 WH(this rect2 r, float width, float height) => rect2.xywh(r.a, (width, height));
 		public static rect2 WH(this rect2 r, vec2 wh) => rect2.xywh(r.a, wh);
 
@@ -134,6 +132,8 @@ namespace MathEx
 		public static rect2 dY(this rect2 r, float y) => rect2.xywh(r.a.dY(y), r.size);
 		public static rect2 dXY(this rect2 r, float x, float y) => rect2.xywh(r.a + (x, y), r.size);
 		public static rect2 dXY(this rect2 r, vec2 xy) => rect2.xywh(r.a + xy, r.size);
+		public static rect2 dWH(this rect2 r, float width, float height) => rect2.xywh(r.a, r.size + (width, height));
+		public static rect2 dWH(this rect2 r, vec2 wh) => rect2.xywh(r.a, r.size + wh);
 
 
 		public static float Distance(this ValueTuple<vec2, vec2> v) => (v.Item1 - v.Item2).length;
