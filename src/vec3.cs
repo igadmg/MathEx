@@ -85,7 +85,7 @@ namespace MathEx
 		public static vec3 operator *(vec3 a, vec3i b) { return new vec3(a.x * b.x, a.y * b.y, a.z * b.z); }
 		public static vec3 operator *(vec3i a, vec3 b) { return new vec3(a.x * b.x, a.y * b.y, a.z * b.z); }
 		public static float operator ^(vec3 a, vec3 b) { return Dot(a, b); }
-		public static vec3 operator %(vec3 a, vec3 b) { return Cross(a, b); }
+		public static vec3 operator |(vec3 a, vec3 b) { return Cross(a, b); }
 
 		public vec3(float x, float y, float z)
 		{
@@ -93,6 +93,8 @@ namespace MathEx
 			this.y = y;
 			this.z = z;
 		}
+
+		public static implicit operator vec3(ValueTuple<float, float, float> v) => new vec3(v.Item1, v.Item2, v.Item3);
 
 		public static float Dot(vec3 l, vec3 r) { return l.x * r.x + l.y * r.y + l.z * r.z; }
 		public static vec3 Cross(vec3 l, vec3 r) { return new vec3(l.y * r.z - l.z * r.y, l.z * r.x - l.x * r.z, l.x * r.y - l.y * r.x); }

@@ -15,6 +15,12 @@ namespace MathEx
 		public static vec2 Adc(this vec2 v, float th) { return new vec2(MathExOps.Abs(v.x) < th ? 0 : MathExOps.Sign(v.x), MathExOps.Abs(v.y) < th ? 0 : MathExOps.Sign(v.y)); }
 
 		public static float Min(this vec2 v) => (v.x, v.y).Min();
+		public static vec2 Min(this vec2 a, vec2 b) => ((a.x, b.x).Min(), (a.y, b.y).Min());
+
+		public static float Max(this vec2 v) => (v.x, v.y).Max();
+		public static vec2 Max(this vec2 a, vec2 b) => ((a.x, b.x).Max(), (a.y, b.y).Max());
+		public static vec3 Max(this vec3 a, vec3 b) => ((a.x, b.x).Max(), (a.y, b.y).Max(), (a.z, b.z).Max());
+		public static vec4 Max(this vec4 a, vec4 b) => ((a.x, b.x).Max(), (a.y, b.y).Max(), (a.z, b.z).Max(), (a.w, b.w).Max());
 
 		public static vec2 Add(this vec2 l, float x, float y) { return new vec2(l.x + x, l.y + y); }
 		public static vec2 Add(this vec2 l, vec2 r) { return new vec2(l.x + r.x, l.y + r.y); }
@@ -59,6 +65,16 @@ namespace MathEx
 		public static vec3 Y(this vec3 v, float y) { return new vec3(v.x, y, v.z); }
 		public static vec3 Z(this vec3 v, float z) { return new vec3(v.x, v.y, z); }
 
+		public static vec4 X(this vec4 v, float x) { return new vec4(x, v.y, v.z, v.w); }
+		public static vec4 Y(this vec4 v, float y) { return new vec4(v.x, y, v.z, v.w); }
+		public static vec4 Z(this vec4 v, float z) { return new vec4(v.x, v.y, z, v.w); }
+		public static vec4 W(this vec4 v, float w) { return new vec4(v.x, v.y, v.x, w); }
+
+		public static vec4 T(this vec4 v, float x) { return vec4.trbl(x, v.r, v.b, v.l); }
+		public static vec4 R(this vec4 v, float y) { return vec4.trbl(v.t, y, v.b, v.l); }
+		public static vec4 B(this vec4 v, float z) { return vec4.trbl(v.t, v.r, z, v.l); }
+		public static vec4 L(this vec4 v, float w) { return vec4.trbl(v.t, v.r, v.b, w); }
+
 		public static vec2 dX(this vec2 v, float dx) { return new vec2(v.x + dx, v.y); }
 		public static vec2 dY(this vec2 v, float dy) { return new vec2(v.x, v.y + dy); }
 		public static vec2 dXY(this vec2 v, float dx, float dy) { return new vec2(v.x + dx, v.y + dy); }
@@ -77,6 +93,9 @@ namespace MathEx
 		public static vec3 nx(this vec3 v) => v.X(-v.x);
 		public static vec3 ny(this vec3 v) => v.Y(-v.y);
 		public static vec3 nz(this vec3 v) => v.Z(-v.z);
+
+		public static vec2 maxX(this vec2 v, float x) => v.X(v.x.Max(x));
+		public static vec2 maxY(this vec2 v, float y) => v.Y(v.y.Max(y));
 
 
 		public static vec2 x2(this float x) => new vec2(x, 0);
@@ -115,6 +134,13 @@ namespace MathEx
 
 		public static vec3 xyz(this vec4 v) { return new vec3(v.x, v.y, v.z); }
 		public static vec2 xy(this vec4 v) { return new vec2(v.x, v.y); }
+		public static vec2 zw(this vec4 v) { return new vec2(v.z, v.w); }
+
+		public static vec2 rl(this vec4 v) { return new vec2(v.r, v.l); }
+		public static vec2 tb(this vec4 v) { return new vec2(v.t, v.b); }
+		public static vec2 lt(this vec4 v) { return new vec2(v.l, v.t); }
+		public static vec2 rb(this vec4 v) { return new vec2(v.r, v.b); }
+
 
 		public static aabb3 xyz(this aabb2 aabb, vec2 z) => new aabb3(aabb.a.xyz(z.x), aabb.b.xyz(z.y));
 		public static aabb3 xzy(this aabb2 aabb, vec2 z) => new aabb3(aabb.a.xzy(z.x), aabb.b.xzy(z.y));

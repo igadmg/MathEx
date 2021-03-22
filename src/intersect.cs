@@ -71,7 +71,7 @@ namespace MathEx
 
 		public static ray intersect(this plane a, plane b)
 		{
-			vec3 dir = a.normal % b.normal;
+			vec3 dir = a.normal | b.normal;
 
 			if (dir.isZero)
 				return ray.empty;
@@ -128,13 +128,13 @@ namespace MathEx
 
 		public static line3_segment intersect(this ray a, ray b)
 		{
-			vec3 d = a.direction % b.direction;
+			vec3 d = a.direction | b.direction;
 
 			if (d.isZero)
 				return line3_segment.empty;
 
-			plane pa = new plane(a.origin, (a.direction % d).normalized);
-			plane pb = new plane(b.origin, (b.direction % d).normalized);
+			plane pa = new plane(a.origin, (a.direction | d).normalized);
+			plane pb = new plane(b.origin, (b.direction | d).normalized);
 
 			return new line3_segment(pa.intersect(b), pb.intersect(a));
 		}

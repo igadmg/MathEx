@@ -83,12 +83,18 @@ namespace MathEx
 
 		public static float operator ^(vec2 a, vec2 b) { return Dot(a, b); }
 
+		public static float operator %(vec2 a, float b) { return b.Lerp(a.x, a.y); }
+		public static vec2 operator %(vec2 a, vec2 b) { return vec2.xy(b.x.Lerp(0, a.x), b.y.Lerp(0, a.y)); }
+
 
 
 		public static vec2 operator -(vec2 a) { return new vec2(-a.x, -a.y); }
 		public static vec2 operator +(vec2 a, vec2 b) { return new vec2(a.x + b.x, a.y + b.y); }
 		public static vec2 operator -(vec2 a, vec2 b) { return new vec2(a.x - b.x, a.y - b.y); }
 
+
+		public static vec2 xy(float xy) => new vec2(xy, xy);
+		public static vec2 xy(float x, float y) => new vec2(x, y);
 
 		public vec2(float x, float y)
 		{

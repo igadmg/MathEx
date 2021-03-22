@@ -26,6 +26,11 @@ namespace MathEx
 		public static readonly vec4 forward = new vec4(0, 0, 1, 0);
 
 
+		public float t => y;
+		public float r => x;
+		public float b => w;
+		public float l => z;
+
 		public bool isZero { get { return x == 0 && y == 0 && z == 0 && w == 0; } }
 		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z) || float.IsNaN(w); } }
 
@@ -59,6 +64,12 @@ namespace MathEx
 		public static float operator *(vec4 a, vec4 b) { return Dot(a, b); }
 		public static vec4 operator %(vec4 a, vec4 b) { return Hamilton(a, b); }
 
+
+		public static vec4 xyzw(float v) => new vec4(v, v, v, v);
+		public static vec4 trbl(float v) => new vec4(v, v, v, v);
+		public static vec4 trbl(float tb, float rl) => new vec4(rl, tb, rl, tb);
+		public static vec4 trbl(float t, float r, float b, float l) => new vec4(r, t, l, b);
+
 		public vec4(float x, float y, float z, float w)
 		{
 			this.x = x;
@@ -66,6 +77,8 @@ namespace MathEx
 			this.z = z;
 			this.w = w;
 		}
+
+		public static implicit operator vec4(ValueTuple<float, float, float, float> v) => new vec4(v.Item1, v.Item2, v.Item3, v.Item4);
 
 		public static float Dot(vec4 l, vec4 r) { return l.x * r.x + l.y * r.y + l.z * r.z + l.w * l.z; }
 		public static vec4 Hamilton(vec4 l, vec4 r)
