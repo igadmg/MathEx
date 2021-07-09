@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using SystemEx;
 
@@ -148,6 +149,8 @@ namespace MathEx
 	[Serializable]
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct colorb
+		: IComparable<colorb>
+		, IEquatable<colorb>
 	{
 		public byte r;
 		public byte g;
@@ -199,10 +202,26 @@ namespace MathEx
 			this.a = Convert.ToByte(a);
 		}
 
+		public colorb(Span<byte> c)
+			: this(c[0], c[1], c[2], c[3])
+		{
+		}
+
+		public static bool operator ==(colorb l, colorb r) => l.Equals(r);
+		public static bool operator !=(colorb l, colorb r) => !(l == r);
+
 		public override string ToString()
 		{
 			return string.Concat(r.ToString(), " ", g.ToString(), " ", b.ToString(), " ", a.ToString());
 		}
+
+		public int CompareTo([AllowNull] colorb other)
+		{
+			return this == other ? 0 : -1;
+		}
+		public bool Equals([AllowNull] colorb other) => r == other.r && g == other.g && b == other.b && a == other.a;
+		public override bool Equals(object obj) => obj is colorb && Equals((colorb)obj);
+		public override int GetHashCode() => ObjectEx.GetHashCode(r, g, b, a);
 
 		public static explicit operator colorb(color c)
 			=> new colorb(c.r.DenormalizeByte(), c.g.DenormalizeByte(), c.b.DenormalizeByte(), c.a.DenormalizeByte());

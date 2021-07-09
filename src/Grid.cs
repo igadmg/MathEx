@@ -1,75 +1,37 @@
-﻿using System.Collections.Generic;
-
-namespace MathEx
+﻿namespace MathEx
 {
 	public class Grid<T>
 	{
 		private vec2i size_;
-		private Dictionary<vec2, List<T>> cells_ = null;
+		private T[] cells_ = null;
 
-		public vec2i size { get { return size_; } }
-
-		public Grid(int x, int y)
-			: this(new vec2i(x, y))
-		{
-		}
+		public vec2i size => size_;
+		public T[] cells => cells_;
 
 		public Grid(vec2i size)
 		{
 			size_ = size;
-			cells_ = new Dictionary<vec2, List<T>>(size.product);
+			cells_ = new T[size.product];
 		}
 
-
-		public class GridIterator
+		public Grid(vec2i size, T[] data)
 		{
-			public Grid<T> c;
-			public vec2 p;
-
-			public GridIterator(Grid<T> c, vec2 p)
-			{
-				this.c = c;
-				this.p = p;
-			}
-
-			public T this[int i] {
-				get { return c.cells_[p][i]; }
-			}
-
-			public static GridIterator operator +(GridIterator i, T v)
-			{
-				List<T> l;
-				if (!i.c.cells_.TryGetValue(i.p, out l))
-				{
-					l = new List<T>(1);
-					i.c.cells_.Add(i.p, l);
-				}
-				l.Add(v);
-
-				return i;
-			}
-
-			public static GridIterator operator -(GridIterator i, T v)
-			{
-				List<T> l;
-				if (!i.c.cells_.TryGetValue(i.p, out l))
-				{
-					return i;
-				}
-				l.Remove(v);
-
-				return i;
-			}
+			size_ = size;
+			cells_ = data;
 		}
 
-		public GridIterator this[float x, float y] {
-			get { return new GridIterator(this, new vec2(x, y)); }
-			set { }
+		public bool isValidIndex(vec2i i)
+			=> i.x >= 0 && i.x < size.x
+			&& i.y >= 0 && i.y < size.y;
+
+		public T this[int x, int y] {
+			get { return cells_[x + y * size_.x]; }
+			set { cells_[x + y * size_.x] = value; }
 		}
 
-		public GridIterator this[vec2 p] {
-			get { return new GridIterator(this, p); }
-			set { }
+		public T this[vec2i p] {
+			get => this[p.x, p.y];
+			set { this[p.x, p.y] = value; }
 		}
 	}
 }

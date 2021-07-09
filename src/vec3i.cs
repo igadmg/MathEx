@@ -59,7 +59,7 @@ namespace MathEx
 		public static bool operator !=(vec3i a, vec3i b) { return a.x != b.x || a.y != b.y || a.z != b.z; }
 		public bool Equals(vec3i obj) { return obj == this; }
 		public override bool Equals(object obj) { return obj is vec3i ? Equals((vec3i)obj) : false; }
-		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode(); }
+		public override int GetHashCode() => ObjectEx.GetHashCode(x, y, z);
 
 
 		public static vec3i operator *(vec3i a, int d) { return new vec3i(a.x * d, a.y * d, a.z * d); }

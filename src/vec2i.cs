@@ -111,7 +111,7 @@ namespace MathEx
 		public static bool operator !=(vec2i a, vec2i b) { return a.x != b.x || a.y != b.y; }
 		public bool Equals(vec2i obj) { return obj == this; }
 		public override bool Equals(object obj) { return obj is vec2i ? Equals((vec2i)obj) : false; }
-		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode(); }
+		public override int GetHashCode() => ObjectEx.GetHashCode(x, y);
 
 
 		public static vec2i operator *(vec2i a, int d) { return new vec2i(a.x * d, a.y * d); }
@@ -129,12 +129,16 @@ namespace MathEx
 		public static vec2i operator *(vec2i a, vec2i b) { return new vec2i(a.x * b.x, a.y * b.y); }
 		public static vec2i operator /(vec2i a, vec2i b) { return new vec2i(a.x / b.x, a.y / b.y); }
 
+		public static vec2i xy(int xy) => new vec2i(xy, xy);
+		public static vec2i xy(int x, int y) => new vec2i(x, y);
 
 		public vec2i(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
 		}
+
+		public static implicit operator vec2i(ValueTuple<int, int> v) => vec2i.xy(v.Item1, v.Item2);
 
 		public static vec2i Min(vec2i a, vec2i b)
 		{

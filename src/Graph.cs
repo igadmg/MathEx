@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using SystemEx;
 
 namespace MathEx
 {
@@ -99,9 +100,6 @@ namespace MathEx
 			return e != null ? (e.a == a) && (e.b == b) : base.Equals(obj);
 		}
 
-		public override int GetHashCode()
-		{
-			return a.GetHashCode() ^ b.GetHashCode();
-		}
+		public override int GetHashCode() => ObjectEx.GetHashCode(a.GetHashCode(), b.GetHashCode());
 	}
 }

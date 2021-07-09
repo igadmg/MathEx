@@ -30,6 +30,20 @@ namespace MathEx
 			yield break;
 		}
 
+		public static IEnumerable<vec2i> Grid(vec2i s)
+		{
+			for (int y = 0; y < s.y; y++)
+				for (int x = 0; x < s.x; x++)
+					yield return (x, y);
+		}
+
+		public static IEnumerable<vec2i> Grid(vec2i o, vec2i s)
+		{
+			for (int y = 0; y < s.y; y++)
+				for (int x = 0; x < s.x; x++)
+					yield return o + (x, y);
+		}
+
 		public static IEnumerable<aabb2> Cell(vec2i s)
 		{
 			vec2 sp = -((vec2)s).Div(2.0f);

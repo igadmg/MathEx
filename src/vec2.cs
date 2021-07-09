@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using SystemEx;
 
 namespace MathEx
 {
@@ -64,20 +65,23 @@ namespace MathEx
 		public static bool operator !=(vec2 a, vec2 b) { return a.x != b.x || a.y != b.y; }
 		public bool Equals(vec2 obj) { return obj == this; }
 		public override bool Equals(object obj) { return obj is vec2 ? Equals((vec2)obj) : false; }
-		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode(); }
+		public override int GetHashCode() => ObjectEx.GetHashCode(x.GetHashCode(), y.GetHashCode());
 
 
 
-		public static vec2 operator *(vec2 a, int d) { return new vec2(a.x * d, a.y * d); }
-		public static vec2 operator /(vec2 a, int d) { return new vec2(a.x / d, a.y / d); }
-		public static vec2 operator *(vec2 a, float d) { return new vec2(a.x * d, a.y * d); }
-		public static vec2 operator /(vec2 a, float d) { return new vec2(a.x / d, a.y / d); }
-		public static vec2 operator *(vec2 a, vec2i b) { return new vec2(a.x * b.x, a.y * b.y); }
-		public static vec2 operator /(vec2 a, vec2i b) { return new vec2(a.x / b.x, a.y / b.y); }
-		public static vec2 operator *(int d, vec2 a) { return new vec2(a.x * d, a.y * d); }
-		public static vec2 operator /(int d, vec2 a) { return new vec2(a.x / d, a.y / d); }
-		public static vec2 operator *(float d, vec2 a) { return new vec2(a.x * d, a.y * d); }
-		public static vec2 operator /(float d, vec2 a) { return new vec2(a.x / d, a.y / d); }
+		public static vec2 operator *(vec2 a, int d) => new vec2(a.x * d, a.y * d);
+		public static vec2 operator /(vec2 a, int d) => new vec2(a.x / d, a.y / d);
+		public static vec2 operator *(vec2 a, float d) => new vec2(a.x * d, a.y * d);
+		public static vec2 operator /(vec2 a, float d) => new vec2(a.x / d, a.y / d);
+		public static vec2 operator *(vec2 a, vec2i b) => new vec2(a.x * b.x, a.y * b.y);
+		public static vec2 operator /(vec2 a, vec2i b) => new vec2(a.x / b.x, a.y / b.y);
+		public static vec2 operator *(int d, vec2 a) => new vec2(a.x * d, a.y * d);
+		public static vec2 operator /(int d, vec2 a) => new vec2(a.x / d, a.y / d);
+		public static vec2 operator *(float d, vec2 a) => new vec2(a.x * d, a.y * d);
+		public static vec2 operator /(float d, vec2 a) => new vec2(a.x / d, a.y / d);
+		public static vec2 operator *(vec2i a, vec2 b) => new vec2(a.x * b.x, a.y * b.y);
+		public static vec2 operator /(vec2i a, vec2 b) => new vec2(a.x / b.x, a.y / b.y);
+
 
 
 
@@ -102,8 +106,8 @@ namespace MathEx
 			this.y = y;
 		}
 
-		public static implicit operator vec2(ValueTuple<float, float> v) => new vec2(v.Item1, v.Item2);
-		public static explicit operator vec2(vec2i v) => new vec2(v.x, v.y);
+		public static implicit operator vec2(ValueTuple<float, float> v) => vec2.xy(v.Item1, v.Item2);
+		public static explicit operator vec2(vec2i v) => vec2.xy(v.x, v.y);
 
 		public static vec2 Min(vec2 a, vec2 b)
 		{
