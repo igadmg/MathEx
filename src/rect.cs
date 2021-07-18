@@ -7,12 +7,18 @@ namespace MathEx
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct rect2
 	{
-		public vec2 a;
+		public vec2 xy;
 		public vec2 size;
+
 		public struct Dto
 		{
-			public vec2.Dto a;
+			public vec2.Dto xy;
 			public vec2.Dto size;
+		}
+
+		public vec2 a {
+			get => xy;
+			set { var d = value - xy; xy = value; size -= d; }
 		}
 
 		public vec2 b {
@@ -20,7 +26,7 @@ namespace MathEx
 			set => size = value - a;
 		}
 
-		public vec2 xy => a;
+		public vec2 center => xy + size / 2;
 
 
 		public static readonly rect2 empty = xywh(vec2.empty, vec2.empty);
@@ -31,6 +37,7 @@ namespace MathEx
 
 		public static vec4 operator %(rect2 a, vec4 b) { return vec4.trbl(b.t.Lerp(a.a.y, a.b.y), b.r.Lerp(a.a.x, a.b.x), b.b.Lerp(a.a.y, a.b.y), b.l.Lerp(a.a.x, a.b.x)); }
 
+		public static rect2 operator +(rect2 a, vec2 b) => a.dXY(b);
 
 		public static rect2 wh(float w, float h) => new rect2(vec2.zero, (w, h));
 		public static rect2 wh(vec2 wh) => new rect2(vec2.zero, wh);
@@ -44,9 +51,12 @@ namespace MathEx
 
 		public static rect2 ab(vec2 a, vec2 b) => new rect2(a, b - a);
 
+		public static rect2 tlrb(vec4 tlrb) => ab(tlrb.lt(), tlrb.rb());
+		public static rect2 tlrb(vec2 tl, vec2 rb) => ab(tl, rb);
+
 		public rect2(vec2 xy, vec2 wh)
 		{
-			a = xy;
+			this.xy = xy;
 			size = wh;
 		}
 
@@ -60,5 +70,7 @@ namespace MathEx
 
 			return xywh(a.Min(point), size.Max(dp));
 		}
+
+		public override string ToString() { return string.Format("({0},{1}):{2}", a, b, size); }
 	}
 }

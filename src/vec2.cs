@@ -81,6 +81,8 @@ namespace MathEx
 		public static vec2 operator /(float d, vec2 a) => new vec2(a.x / d, a.y / d);
 		public static vec2 operator *(vec2i a, vec2 b) => new vec2(a.x * b.x, a.y * b.y);
 		public static vec2 operator /(vec2i a, vec2 b) => new vec2(a.x / b.x, a.y / b.y);
+		public static vec2 operator *(vec2 a, vec2 b) => new vec2(a.x * b.x, a.y * b.y);
+		public static vec2 operator /(vec2 a, vec2 b) => new vec2(a.x / b.x, a.y / b.y);
 
 
 
