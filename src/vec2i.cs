@@ -15,6 +15,20 @@ namespace MathEx
 		public int x;
 		public int y;
 
+		public struct Dto
+		{
+			public int x;
+			public int y;
+		}
+
+		public vec2i(Dto dto)
+		{
+			this.x = dto.x;
+			this.y = dto.y;
+		}
+
+		public Dto ToDto() => new Dto { x = x, y = y };
+
 		//
 		// Static Properties
 		//

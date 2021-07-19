@@ -1,4 +1,6 @@
-﻿namespace MathEx
+﻿using SystemEx;
+
+namespace MathEx
 {
 	public class Grid<T>
 	{
@@ -12,6 +14,12 @@
 		{
 			size_ = size;
 			cells_ = new T[size.product];
+		}
+
+		public Grid(vec2i size, T data)
+		{
+			size_ = size;
+			cells_ = new T[size.product].Initialize(data);
 		}
 
 		public Grid(vec2i size, T[] data)

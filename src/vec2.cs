@@ -20,6 +20,14 @@ namespace MathEx
 			public float y;
 		}
 
+		public vec2(Dto dto)
+		{
+			this.x = dto.x;
+			this.y = dto.y;
+		}
+
+		public Dto ToDto() => new Dto { x = x, y = y };
+
 		//
 		// Static Properties
 		//

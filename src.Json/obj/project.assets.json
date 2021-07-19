@@ -1,0 +1,349 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Microsoft.CodeAnalysis.NetAnalyzers/5.0.3": {
+        "type": "package",
+        "build": {
+          "build/Microsoft.CodeAnalysis.NetAnalyzers.props": {},
+          "build/Microsoft.CodeAnalysis.NetAnalyzers.targets": {}
+        }
+      },
+      "Newtonsoft.Json/13.0.1": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "MathEx/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "dependencies": {
+          "SystemEx": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/MathEx.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MathEx.dll": {}
+        }
+      },
+      "SystemEx/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/SystemEx.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/SystemEx.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.CodeAnalysis.NetAnalyzers/5.0.3": {
+      "sha512": "7rw0JUPSAVGR0HPekQiQvwGPor44p/Ek21+wZABraG4bVYNrSkx98ZZsxSxG5jJ4oqjACJxea8E62UO0dsKDBw==",
+      "type": "package",
+      "path": "microsoft.codeanalysis.netanalyzers/5.0.3",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "EULA.rtf",
+        "ThirdPartyNotices.rtf",
+        "analyzers/dotnet/cs/Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll",
+        "analyzers/dotnet/cs/Microsoft.CodeAnalysis.NetAnalyzers.dll",
+        "analyzers/dotnet/cs/cs/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/de/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/es/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/fr/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/it/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/ja/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/ko/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/pl/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/pt-BR/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/ru/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/tr/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/zh-Hans/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/cs/zh-Hant/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/Microsoft.CodeAnalysis.NetAnalyzers.dll",
+        "analyzers/dotnet/vb/Microsoft.CodeAnalysis.VisualBasic.NetAnalyzers.dll",
+        "analyzers/dotnet/vb/cs/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/de/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/es/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/fr/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/it/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/ja/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/ko/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/pl/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/pt-BR/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/ru/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/tr/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/zh-Hans/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "analyzers/dotnet/vb/zh-Hant/Microsoft.CodeAnalysis.NetAnalyzers.resources.dll",
+        "build/DisableNETAnalyzersForNuGetPackage.props",
+        "build/Microsoft.CodeAnalysis.NetAnalyzers.props",
+        "build/Microsoft.CodeAnalysis.NetAnalyzers.targets",
+        "build/config/AnalysisLevelDesign_5_all.editorconfig",
+        "build/config/AnalysisLevelDesign_5_default.editorconfig",
+        "build/config/AnalysisLevelDesign_5_minimum.editorconfig",
+        "build/config/AnalysisLevelDesign_5_none.editorconfig",
+        "build/config/AnalysisLevelDesign_5_recommended.editorconfig",
+        "build/config/AnalysisLevelDocumentation_5_all.editorconfig",
+        "build/config/AnalysisLevelDocumentation_5_default.editorconfig",
+        "build/config/AnalysisLevelDocumentation_5_minimum.editorconfig",
+        "build/config/AnalysisLevelDocumentation_5_none.editorconfig",
+        "build/config/AnalysisLevelDocumentation_5_recommended.editorconfig",
+        "build/config/AnalysisLevelGlobalization_5_all.editorconfig",
+        "build/config/AnalysisLevelGlobalization_5_default.editorconfig",
+        "build/config/AnalysisLevelGlobalization_5_minimum.editorconfig",
+        "build/config/AnalysisLevelGlobalization_5_none.editorconfig",
+        "build/config/AnalysisLevelGlobalization_5_recommended.editorconfig",
+        "build/config/AnalysisLevelInteroperability_5_all.editorconfig",
+        "build/config/AnalysisLevelInteroperability_5_default.editorconfig",
+        "build/config/AnalysisLevelInteroperability_5_minimum.editorconfig",
+        "build/config/AnalysisLevelInteroperability_5_none.editorconfig",
+        "build/config/AnalysisLevelInteroperability_5_recommended.editorconfig",
+        "build/config/AnalysisLevelMaintainability_5_all.editorconfig",
+        "build/config/AnalysisLevelMaintainability_5_default.editorconfig",
+        "build/config/AnalysisLevelMaintainability_5_minimum.editorconfig",
+        "build/config/AnalysisLevelMaintainability_5_none.editorconfig",
+        "build/config/AnalysisLevelMaintainability_5_recommended.editorconfig",
+        "build/config/AnalysisLevelNaming_5_all.editorconfig",
+        "build/config/AnalysisLevelNaming_5_default.editorconfig",
+        "build/config/AnalysisLevelNaming_5_minimum.editorconfig",
+        "build/config/AnalysisLevelNaming_5_none.editorconfig",
+        "build/config/AnalysisLevelNaming_5_recommended.editorconfig",
+        "build/config/AnalysisLevelPerformance_5_all.editorconfig",
+        "build/config/AnalysisLevelPerformance_5_default.editorconfig",
+        "build/config/AnalysisLevelPerformance_5_minimum.editorconfig",
+        "build/config/AnalysisLevelPerformance_5_none.editorconfig",
+        "build/config/AnalysisLevelPerformance_5_recommended.editorconfig",
+        "build/config/AnalysisLevelPublish_5_all.editorconfig",
+        "build/config/AnalysisLevelPublish_5_default.editorconfig",
+        "build/config/AnalysisLevelPublish_5_minimum.editorconfig",
+        "build/config/AnalysisLevelPublish_5_none.editorconfig",
+        "build/config/AnalysisLevelPublish_5_recommended.editorconfig",
+        "build/config/AnalysisLevelReliability_5_all.editorconfig",
+        "build/config/AnalysisLevelReliability_5_default.editorconfig",
+        "build/config/AnalysisLevelReliability_5_minimum.editorconfig",
+        "build/config/AnalysisLevelReliability_5_none.editorconfig",
+        "build/config/AnalysisLevelReliability_5_recommended.editorconfig",
+        "build/config/AnalysisLevelSecurity_5_all.editorconfig",
+        "build/config/AnalysisLevelSecurity_5_default.editorconfig",
+        "build/config/AnalysisLevelSecurity_5_minimum.editorconfig",
+        "build/config/AnalysisLevelSecurity_5_none.editorconfig",
+        "build/config/AnalysisLevelSecurity_5_recommended.editorconfig",
+        "build/config/AnalysisLevelUsage_5_all.editorconfig",
+        "build/config/AnalysisLevelUsage_5_default.editorconfig",
+        "build/config/AnalysisLevelUsage_5_minimum.editorconfig",
+        "build/config/AnalysisLevelUsage_5_none.editorconfig",
+        "build/config/AnalysisLevelUsage_5_recommended.editorconfig",
+        "build/config/AnalysisLevel_5_all.editorconfig",
+        "build/config/AnalysisLevel_5_default.editorconfig",
+        "build/config/AnalysisLevel_5_minimum.editorconfig",
+        "build/config/AnalysisLevel_5_none.editorconfig",
+        "build/config/AnalysisLevel_5_recommended.editorconfig",
+        "documentation/Analyzer Configuration.md",
+        "documentation/Microsoft.CodeAnalysis.NetAnalyzers.md",
+        "documentation/Microsoft.CodeAnalysis.NetAnalyzers.sarif",
+        "editorconfig/AllRulesDefault/.editorconfig",
+        "editorconfig/AllRulesDisabled/.editorconfig",
+        "editorconfig/AllRulesEnabled/.editorconfig",
+        "editorconfig/DataflowRulesDefault/.editorconfig",
+        "editorconfig/DataflowRulesEnabled/.editorconfig",
+        "editorconfig/DesignRulesDefault/.editorconfig",
+        "editorconfig/DesignRulesEnabled/.editorconfig",
+        "editorconfig/DocumentationRulesDefault/.editorconfig",
+        "editorconfig/DocumentationRulesEnabled/.editorconfig",
+        "editorconfig/GlobalizationRulesDefault/.editorconfig",
+        "editorconfig/GlobalizationRulesEnabled/.editorconfig",
+        "editorconfig/InteroperabilityRulesDefault/.editorconfig",
+        "editorconfig/InteroperabilityRulesEnabled/.editorconfig",
+        "editorconfig/MaintainabilityRulesDefault/.editorconfig",
+        "editorconfig/MaintainabilityRulesEnabled/.editorconfig",
+        "editorconfig/NamingRulesDefault/.editorconfig",
+        "editorconfig/NamingRulesEnabled/.editorconfig",
+        "editorconfig/PerformanceRulesDefault/.editorconfig",
+        "editorconfig/PerformanceRulesEnabled/.editorconfig",
+        "editorconfig/PortedFromFxCopRulesDefault/.editorconfig",
+        "editorconfig/PortedFromFxCopRulesEnabled/.editorconfig",
+        "editorconfig/PublishRulesDefault/.editorconfig",
+        "editorconfig/PublishRulesEnabled/.editorconfig",
+        "editorconfig/ReliabilityRulesDefault/.editorconfig",
+        "editorconfig/ReliabilityRulesEnabled/.editorconfig",
+        "editorconfig/SecurityRulesDefault/.editorconfig",
+        "editorconfig/SecurityRulesEnabled/.editorconfig",
+        "editorconfig/UsageRulesDefault/.editorconfig",
+        "editorconfig/UsageRulesEnabled/.editorconfig",
+        "microsoft.codeanalysis.netanalyzers.5.0.3.nupkg.sha512",
+        "microsoft.codeanalysis.netanalyzers.nuspec",
+        "rulesets/AllRulesDefault.ruleset",
+        "rulesets/AllRulesDisabled.ruleset",
+        "rulesets/AllRulesEnabled.ruleset",
+        "rulesets/DataflowRulesDefault.ruleset",
+        "rulesets/DataflowRulesEnabled.ruleset",
+        "rulesets/DesignRulesDefault.ruleset",
+        "rulesets/DesignRulesEnabled.ruleset",
+        "rulesets/DocumentationRulesDefault.ruleset",
+        "rulesets/DocumentationRulesEnabled.ruleset",
+        "rulesets/GlobalizationRulesDefault.ruleset",
+        "rulesets/GlobalizationRulesEnabled.ruleset",
+        "rulesets/InteroperabilityRulesDefault.ruleset",
+        "rulesets/InteroperabilityRulesEnabled.ruleset",
+        "rulesets/MaintainabilityRulesDefault.ruleset",
+        "rulesets/MaintainabilityRulesEnabled.ruleset",
+        "rulesets/NamingRulesDefault.ruleset",
+        "rulesets/NamingRulesEnabled.ruleset",
+        "rulesets/PerformanceRulesDefault.ruleset",
+        "rulesets/PerformanceRulesEnabled.ruleset",
+        "rulesets/PortedFromFxCopRulesDefault.ruleset",
+        "rulesets/PortedFromFxCopRulesEnabled.ruleset",
+        "rulesets/PublishRulesDefault.ruleset",
+        "rulesets/PublishRulesEnabled.ruleset",
+        "rulesets/ReliabilityRulesDefault.ruleset",
+        "rulesets/ReliabilityRulesEnabled.ruleset",
+        "rulesets/SecurityRulesDefault.ruleset",
+        "rulesets/SecurityRulesEnabled.ruleset",
+        "rulesets/UsageRulesDefault.ruleset",
+        "rulesets/UsageRulesEnabled.ruleset",
+        "tools/install.ps1",
+        "tools/uninstall.ps1"
+      ]
+    },
+    "Newtonsoft.Json/13.0.1": {
+      "sha512": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
+      "type": "package",
+      "path": "newtonsoft.json/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "newtonsoft.json.13.0.1.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "MathEx/1.0.0": {
+      "type": "project",
+      "path": "../MathEx.core.csproj",
+      "msbuildProject": "../MathEx.core.csproj"
+    },
+    "SystemEx/1.0.0": {
+      "type": "project",
+      "path": "../../SystemEx/SystemEx.core.csproj",
+      "msbuildProject": "../../SystemEx/SystemEx.core.csproj"
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "MathEx >= 1.0.0",
+      "Microsoft.CodeAnalysis.NetAnalyzers >= 5.0.3",
+      "Newtonsoft.Json >= 13.0.1",
+      "SystemEx >= 1.0.0"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\iga\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "D:\\workspace\\CelluralAutomata\\Libraries\\MathEx\\src.Json\\MathEx.Json.core.csproj",
+      "projectName": "MathEx.Json",
+      "projectPath": "D:\\workspace\\CelluralAutomata\\Libraries\\MathEx\\src.Json\\MathEx.Json.core.csproj",
+      "packagesPath": "C:\\Users\\iga\\.nuget\\packages\\",
+      "outputPath": "D:\\workspace\\CelluralAutomata\\Libraries\\MathEx\\src.Json\\obj\\",
+      "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\iga\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
+          "projectReferences": {
+            "D:\\workspace\\CelluralAutomata\\Libraries\\MathEx\\MathEx.core.csproj": {
+              "projectPath": "D:\\workspace\\CelluralAutomata\\Libraries\\MathEx\\MathEx.core.csproj"
+            },
+            "D:\\workspace\\CelluralAutomata\\Libraries\\SystemEx\\SystemEx.core.csproj": {
+              "projectPath": "D:\\workspace\\CelluralAutomata\\Libraries\\SystemEx\\SystemEx.core.csproj"
+            }
+          }
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
+        "dependencies": {
+          "Microsoft.CodeAnalysis.NetAnalyzers": {
+            "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+            "suppressParent": "All",
+            "target": "Package",
+            "version": "[5.0.3, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[13.0.1, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.302\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}

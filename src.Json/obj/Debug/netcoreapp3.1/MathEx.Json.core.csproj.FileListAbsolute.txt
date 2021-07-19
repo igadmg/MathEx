@@ -1,0 +1,15 @@
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\bin\Debug\netcoreapp3.1\MathEx.dll
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\bin\Debug\netcoreapp3.1\MathEx.pdb
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\bin\Debug\netcoreapp3.1\SystemEx.dll
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\bin\Debug\netcoreapp3.1\SystemEx.pdb
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\obj\Debug\netcoreapp3.1\MathEx.Json.core.csproj.AssemblyReference.cache
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\obj\Debug\netcoreapp3.1\MathEx.Json.core.GeneratedMSBuildEditorConfig.editorconfig
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\obj\Debug\netcoreapp3.1\MathEx.Json.core.AssemblyInfoInputs.cache
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\obj\Debug\netcoreapp3.1\MathEx.Json.core.AssemblyInfo.cs
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\obj\Debug\netcoreapp3.1\MathEx.Json.core.csproj.CoreCompileInputs.cache
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\obj\Debug\netcoreapp3.1\MathEx.Json.core.csproj.CopyComplete
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\bin\Debug\netcoreapp3.1\MathEx.Json.deps.json
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\bin\Debug\netcoreapp3.1\MathEx.Json.dll
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\bin\Debug\netcoreapp3.1\MathEx.Json.pdb
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\obj\Debug\netcoreapp3.1\MathEx.Json.dll
+D:\workspace\CelluralAutomata\Libraries\MathEx\src.Json\obj\Debug\netcoreapp3.1\MathEx.Json.pdb
