@@ -1,11 +1,11 @@
 .DS_Store
 /.vs
 /packages
-/bin
+bin
 /[Dd]ebug
 /[Ll]ibrary
 /[Tt]emp
-/[Oo]bj
+[Oo]bj
 
 obj.meta
 

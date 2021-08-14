@@ -19,7 +19,7 @@ namespace MathEx
 		public Grid(vec2i size, T data)
 		{
 			size_ = size;
-			cells_ = new T[size.product].Initialize(data);
+			cells_ = new T[size.product].Fill(data);
 		}
 
 		public Grid(vec2i size, T[] data)
