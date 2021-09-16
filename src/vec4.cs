@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using SystemEx;
 
@@ -31,6 +32,9 @@ namespace MathEx
 		public float r => x;
 		public float b => w;
 		public float l => z;
+
+		public vec2 lt => vec2.xy(l, t);
+		public vec2 br => vec2.xy(b, r);
 
 		public bool isZero { get { return x == 0 && y == 0 && z == 0 && w == 0; } }
 		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z) || float.IsNaN(w); } }
@@ -91,8 +95,8 @@ namespace MathEx
 				l.w * r.w - l.x * r.x - l.y * r.y - l.z * r.z);
 		}
 
-		public override string ToString() { return string.Format("({0},{1},{2},{3})", x, y, z, w); }
-		public string ToString(string f) { return string.Format("({0},{1},{2},{3})", x.ToString(f), y.ToString(f), z.ToString(f), w.ToString(f)); }
+		public override string ToString() => "{0}, {1}, {2}, {3}".format(CultureInfo.InvariantCulture, x, y, z, w);
+		public string ToString(string f) => "{0}, {1}, {2}, {3}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f), z.ToString(f), w.ToString(f));
 	}
 }
 

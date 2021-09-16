@@ -30,7 +30,7 @@ namespace MathEx
 			yield break;
 		}
 
-		public static IEnumerable<vec2i> Grid(vec2i s)
+		public static IEnumerable<vec2i> Grid(this vec2i s)
 		{
 			for (int y = 0; y < s.y; y++)
 				for (int x = 0; x < s.x; x++)

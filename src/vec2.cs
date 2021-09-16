@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using SystemEx;
 
@@ -100,11 +101,34 @@ namespace MathEx
 		public static float operator %(vec2 a, float b) { return b.Lerp(a.x, a.y); }
 		public static vec2 operator %(vec2 a, vec2 b) { return vec2.xy(b.x.Lerp(0, a.x), b.y.Lerp(0, a.y)); }
 
+		public static bool operator <(vec2 a, vec2 b)
+			=> a.y < b.y
+			|| (a.x < b.x && !(a.y > b.x));
+
+		public static bool operator >(vec2 a, vec2 b)
+			=> a.y < b.y || a.x < b.x
+			|| !(a.y > b.y);
+
+		public bool le(vec2 r)
+			=> r.x > x && r.y > y;
+
+		public bool ge(vec2 r)
+			=> r.x < x && r.y < y;
 
 
 		public static vec2 operator -(vec2 a) { return new vec2(-a.x, -a.y); }
 		public static vec2 operator +(vec2 a, vec2 b) { return new vec2(a.x + b.x, a.y + b.y); }
 		public static vec2 operator -(vec2 a, vec2 b) { return new vec2(a.x - b.x, a.y - b.y); }
+
+
+		public vec2 this[float a, float b]
+		{
+			get => xy(x.Clamp(a, b), y.Clamp(a, b));
+		}
+
+		public vec2 this[vec2 ab] {
+			get => xy(x.Clamp(ab.x, ab.y), y.Clamp(ab.x, ab.y));
+		}
 
 
 		public static vec2 xy(float xy) => new vec2(xy, xy);
@@ -129,7 +153,7 @@ namespace MathEx
 			return new vec2(Math.Max(a.x, b.x), Math.Max(a.y, b.y));
 		}
 
-		public static float Dot(vec2 l, vec2 r) { return l.x * r.x + l.y * r.y; }
+		public static float Dot(vec2 l, vec2 r) => l.x * r.x + l.y * r.y;
 
 		public static float Angle(vec2 a, vec2 b)
 		{
@@ -140,10 +164,10 @@ namespace MathEx
 		}
 
 
-		public override string ToString() { return string.Format("({0},{1})", x, y); }
-		public string ToString(string f) { return string.Format("({0},{1})", x.ToString(f), y.ToString(f)); }
+		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, x, y);
+		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f));
 
-		public vec2i ToVec2i() { return new vec2i((int)x, (int)y); }
+		public vec2i ToVec2i() => new vec2i((int)x, (int)y);
 
 
 #if UNITY || UNITY_5_3_OR_NEWER

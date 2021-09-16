@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
+using SystemEx;
 
 namespace MathEx
 {
@@ -43,8 +45,8 @@ namespace MathEx
 
 		public vec3 ToVec3() { return (vec3)this; }
 
-		public override string ToString() { return string.Format("({0},{1},{2})", r, i, a); }
-		public string ToString(string f) { return string.Format("({0},{1},{2})", r.ToString(f), i.ToString(f), a.ToString(f)); }
+		public override string ToString() => "{0}, {1}, {2}".format(CultureInfo.InvariantCulture, r, i, a);
+		public string ToString(string f) => "{0}, {1}, {2}".format(CultureInfo.InvariantCulture, r.ToString(f), i.ToString(f), a.ToString(f));
 	}
 }
 

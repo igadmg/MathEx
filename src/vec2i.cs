@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using SystemEx;
@@ -164,8 +165,8 @@ namespace MathEx
 			return new vec2i(Math.Max(a.x, b.x), Math.Max(a.y, b.y));
 		}
 
-		public override string ToString() { return "({0},{1})".format(x, y); }
-		public string ToString(string f) { return "({0},{1})".format(x.ToString(f), y.ToString(f)); }
+		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, x, y);
+		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f));
 
 		public static vec2i Parse(string s)
 		{

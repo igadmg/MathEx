@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
 using SystemEx;
 
@@ -110,9 +111,9 @@ namespace MathEx
 		}
 
 
-		public override string ToString() { return string.Format("({0},{1},{2})", x, y, z); }
-		public string ToString(string f) { return string.Format("({0},{1},{2})", x.ToString(f), y.ToString(f), z.ToString(f)); }
-		public string ToString(string f, IFormatProvider p) { return string.Format("({0},{1},{2})", x.ToString(f, p), y.ToString(f, p), z.ToString(f, p)); }
+		public override string ToString() => "{0}, {1}, {2}".format(CultureInfo.InvariantCulture, x, y, z);
+		public string ToString(string f) => "{0}, {1}, {2}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f), z.ToString(f));
+		public string ToString(string f, IFormatProvider p) => "{0}, {1}, {2}".format(x.ToString(f, p), y.ToString(f, p), z.ToString(f, p));
 
 #if UNITY || UNITY_5_3_OR_NEWER
 		public static implicit operator UnityEngine.Vector3(vec3 v)

@@ -1,5 +1,7 @@
 using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
+using SystemEx;
 
 namespace MathEx
 {
@@ -80,15 +82,8 @@ namespace MathEx
 
 		public vec2[] ToArray() => vertices;
 
-		public override string ToString()
-		{
-			return string.Format("({0}, {1})", a, b);
-		}
-
-		public string ToString(string f)
-		{
-			return string.Format("({0}, {1})", a.ToString(f), b.ToString(f));
-		}
+		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, a, b);
+		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, a.ToString(f), b.ToString(f));
 	}
 
 	[Serializable]

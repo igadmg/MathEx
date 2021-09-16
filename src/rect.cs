@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Runtime.InteropServices;
+using SystemEx;
 
 namespace MathEx
 {
@@ -16,6 +18,8 @@ namespace MathEx
 			public vec2.Dto size;
 		}
 
+		public Dto ToDto() => new Dto { xy = xy.ToDto(), size = size.ToDto() };
+
 		public vec2 a {
 			get => xy;
 			set { var d = value - xy; xy = value; size -= d; }
@@ -31,11 +35,15 @@ namespace MathEx
 
 		public static readonly rect2 empty = xywh(vec2.empty, vec2.empty);
 		public static readonly rect2 zero = xywh(vec2.zero, vec2.zero);
+		public static readonly rect2 one = rect2.ab(vec2.zero, vec2.one);
 
 
 		public bool isEmpty => a.isEmpty || size.isEmpty;
 
 		public static vec4 operator %(rect2 a, vec4 b) { return vec4.trbl(b.t.Lerp(a.a.y, a.b.y), b.r.Lerp(a.a.x, a.b.x), b.b.Lerp(a.a.y, a.b.y), b.l.Lerp(a.a.x, a.b.x)); }
+
+		public static bool operator &(rect2 a, vec2 b)
+			=> b.ge(a.xy) && b.le(a.b);
 
 		public static rect2 operator +(rect2 a, vec2 b) => a.dXY(b);
 
@@ -71,6 +79,13 @@ namespace MathEx
 			return xywh(a.Min(point), size.Max(dp));
 		}
 
-		public override string ToString() { return string.Format("({0},{1}):{2}", a, b, size); }
+		public static vec2 operator %(rect2 rect, vec2 position) // Project
+		{
+			vec2 translated = position - rect.xy;
+			vec2 scaled = (translated / rect.size);
+			return scaled;
+		}
+
+		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, a, b);
 	}
 }
