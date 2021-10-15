@@ -35,28 +35,28 @@ namespace MathEx
 			=> (byte)(v.Clamp01() * byte.MaxValue);
 
 		public static float Floor(this float v)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Floor(v);
 #else
 			=> MathF.Floor(v);
 #endif
 
 		public static int FloorToInt(this float v)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.FloorToInt(v);
 #else
 			=> (int)MathF.Floor(v);
 #endif
 
 		public static float Ceil(this float v)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Ceil(v);
 #else
 			=> MathF.Ceiling(v);
 #endif
 
 		public static int CeilToInt(this float v)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.CeilToInt(v);
 #else
 			=> (int)MathF.Ceiling(v);
@@ -71,7 +71,7 @@ namespace MathEx
 
 
 		public static int Clamp(this int f, int p1, int p2)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Clamp(f, p1, p2);
 #else
 			=> f < p1 ? p1 : f > p2 ? p2 : f;
@@ -81,14 +81,14 @@ namespace MathEx
 			=> f.Clamp(min, float.MaxValue);
 
 		public static float Clamp(this float f, float p1, float p2)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Clamp(f, p1, p2);
 #else
 			=> f < p1 ? p1 : f > p2 ? p2 : f;
 #endif
 
 		public static float Clamp01(this float f)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Clamp01(f);
 #else
 			=> f.Clamp(0, 1);
@@ -130,7 +130,7 @@ namespace MathEx
 			return t.Lerp(abc.x, abc.y, abc.z);
 		}
 
-#if UNITY || UNITY_5_3_OR_NEWER
+#if UNITY || UNITY_64 || UNITY_5_3_OR_NEWER
 		public static float Lerp(this float t, UnityEngine.Vector3 abc)
 		{
 			return t.Lerp(abc.x, abc.y, abc.z);
@@ -278,21 +278,21 @@ namespace MathEx
 		}
 
 		public static float Pow(this float v, float p)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Pow(v, p);
 #else
 			=> MathF.Pow(v, p);
 #endif
 
 		public static float Sqrt(this int v)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Sqrt(v);
 #else
 			=> MathF.Sqrt(v);
 #endif
 
 		public static float Sqrt(this float v)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Sqrt(v);
 #else
 			=> MathF.Sqrt(v);
@@ -311,7 +311,7 @@ namespace MathEx
 		}
 
 		public static float Log(this float v)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Log(v);
 #else
 			=> MathF.Log(v);
@@ -323,28 +323,28 @@ namespace MathEx
 		}
 
 		public static float Cos(this float ar)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Cos(ar);
 #else
 			=> MathF.Cos(ar);
 #endif
 
 		public static float Sin(this float ar)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Sin(ar);
 #else
 			=> MathF.Sin(ar);
 #endif
 
 		public static float Acos(this float ar)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Acos(ar);
 #else
 			=> MathF.Acos(ar);
 #endif
 
 		public static float Atan2(this float y, float x)
-#if UNITY
+#if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Atan2(y, x);
 #else
 			=> MathF.Atan2(y, x);
