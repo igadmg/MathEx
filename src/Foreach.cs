@@ -41,6 +41,16 @@ namespace MathEx
 			yield break;
 		}
 
+		public static int CellIndex(vec2i s, vec2 d, aabb2 p)
+			=> CellIndex(s, d, p.o);
+
+		public static int CellIndex(vec2i s, vec2 d, vec2 p)
+		{
+			vec2 sp = -d.Mul(s).Div(2.0f).Sub(d.Div(2));
+
+			return 0;
+		}
+
 		public static IEnumerable<aabb2> Cell(vec2i s, vec2 d)
 		{
 			vec2 sp = -d.Mul(s).Div(2.0f).Sub(d.Div(2));
