@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using SystemEx;
-using UnityEngine;
 
 namespace MathEx
 {
@@ -29,6 +28,20 @@ namespace MathEx
 			}
 
 			yield break;
+		}
+
+		public static IEnumerable<vec2i> Grid(this vec2i s)
+		{
+			for (int y = 0; y < s.y; y++)
+				for (int x = 0; x < s.x; x++)
+					yield return (x, y);
+		}
+
+		public static IEnumerable<vec2i> Grid(vec2i o, vec2i s)
+		{
+			for (int y = 0; y < s.y; y++)
+				for (int x = 0; x < s.x; x++)
+					yield return o + (x, y);
 		}
 
 		public static IEnumerable<aabb2> Cell(vec2i s)
@@ -78,10 +91,10 @@ namespace MathEx
 
 			while (true)
 			{
-				float r = c * Mathf.Sqrt(n);
+				float r = c * n.Sqrt();
 				float theta = MathExOps._2PI / phi2 * n;
 
-				yield return new vec2(r * Mathf.Cos(theta), r * Mathf.Sin(theta));
+				yield return new vec2(r * theta.Cos(), r * theta.Sin());
 
 				n++;
 			}

@@ -6,13 +6,18 @@ namespace MathEx
 		vec2 size;
 		QuadTreeIterator root = null;
 
+		public void init(vec2 center, vec2 size)
+		{
+			this.center = center;
+			this.size = size;
+			root = new QuadTreeIterator(new QuadTreeNode(null), center, size);
+		}
+
 		public QuadTreeIterator put(vec2 i, object o)
 		{
 			if (root == null)
 			{
-				center = i;
-				size = new vec2(128, 128);
-				root = new QuadTreeIterator(new QuadTreeNode(null), center, size);
+				init(i, (128, 128));
 			}
 
 			return root.prepare(i).put(o);
@@ -58,20 +63,15 @@ namespace MathEx
 			return null;
 		}
 
-		public QuadTreeNode allocate(vec2 i, int depth)
+		public QuadTreeNode allocate(vec2 i)
 		{
-			if (depth == 0)
-			{
-				return this;
-			}
-
 			if (child == null)
 				child = new QuadTreeNode[4] { null, null, null, null };
 
 			var iq = i.quad;
 			child[iq] = child[iq] ?? new QuadTreeNode(this);
 
-			return child[iq].allocate((i + tr[iq]) * 2.0f, depth - 1);
+			return child[iq];
 		}
 	}
 
@@ -104,8 +104,11 @@ namespace MathEx
 
 		public QuadTreeIterator prepare(vec2 i)
 		{
-			n.allocate(normalize(i), 2);
+			if (node.o == null)
+				return this;
 
+			var subnode = n.allocate(normalize(i));
+			//subnode.
 
 
 			return this;

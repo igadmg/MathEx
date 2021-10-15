@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using SystemEx;
 
 namespace MathEx
 {
 	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct vec2i
 	{
 		//
@@ -12,6 +15,20 @@ namespace MathEx
 		//
 		public int x;
 		public int y;
+
+		public struct Dto
+		{
+			public int x;
+			public int y;
+		}
+
+		public vec2i(Dto dto)
+		{
+			this.x = dto.x;
+			this.y = dto.y;
+		}
+
+		public Dto ToDto() => new Dto { x = x, y = y };
 
 		//
 		// Static Properties
@@ -109,7 +126,7 @@ namespace MathEx
 		public static bool operator !=(vec2i a, vec2i b) { return a.x != b.x || a.y != b.y; }
 		public bool Equals(vec2i obj) { return obj == this; }
 		public override bool Equals(object obj) { return obj is vec2i ? Equals((vec2i)obj) : false; }
-		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode(); }
+		public override int GetHashCode() => ObjectEx.GetHashCode(x, y);
 
 
 		public static vec2i operator *(vec2i a, int d) { return new vec2i(a.x * d, a.y * d); }
@@ -127,12 +144,16 @@ namespace MathEx
 		public static vec2i operator *(vec2i a, vec2i b) { return new vec2i(a.x * b.x, a.y * b.y); }
 		public static vec2i operator /(vec2i a, vec2i b) { return new vec2i(a.x / b.x, a.y / b.y); }
 
+		public static vec2i xy(int xy) => new vec2i(xy, xy);
+		public static vec2i xy(int x, int y) => new vec2i(x, y);
 
 		public vec2i(int x, int y)
 		{
 			this.x = x;
 			this.y = y;
 		}
+
+		public static implicit operator vec2i(ValueTuple<int, int> v) => vec2i.xy(v.Item1, v.Item2);
 
 		public static vec2i Min(vec2i a, vec2i b)
 		{
@@ -144,8 +165,8 @@ namespace MathEx
 			return new vec2i(Math.Max(a.x, b.x), Math.Max(a.y, b.y));
 		}
 
-		public override string ToString() { return "({0},{1})".format(x, y); }
-		public string ToString(string f) { return "({0},{1})".format(x.ToString(f), y.ToString(f)); }
+		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, x, y);
+		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f));
 
 		public static vec2i Parse(string s)
 		{

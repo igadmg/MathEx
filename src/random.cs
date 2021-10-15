@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace MathEx
 {
+#if false
 	public static class random
 	{
 		static Random rnd = new Random();
@@ -86,4 +87,5 @@ namespace MathEx
 			get { return new svec3(1.0f, (Next - 0.5f) * 2 * UnityEngine.Mathf.PI, Next * 2 * UnityEngine.Mathf.PI); }
 		}
 	}
+#endif
 }

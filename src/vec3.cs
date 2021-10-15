@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using SystemEx;
 
 namespace MathEx
 {
 	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct vec3 : IComparable<vec3>, IFormattable
 	{
 		//
@@ -46,7 +50,7 @@ namespace MathEx
 		public static bool operator !=(vec3 a, vec3 b) { return a.x != b.x || a.y != b.y | a.z != b.z; }
 		public bool Equals(vec3 obj) { return obj == this; }
 		public override bool Equals(object obj) { return obj is vec3 ? Equals((vec3)obj) : false; }
-		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode(); }
+		public override int GetHashCode() => ObjectEx.GetHashCode(x.GetHashCode(), y.GetHashCode(), z.GetHashCode());
 		public int CompareTo(vec3 other)
 		{
 			return x > other.x ? 1
@@ -83,7 +87,7 @@ namespace MathEx
 		public static vec3 operator *(vec3 a, vec3i b) { return new vec3(a.x * b.x, a.y * b.y, a.z * b.z); }
 		public static vec3 operator *(vec3i a, vec3 b) { return new vec3(a.x * b.x, a.y * b.y, a.z * b.z); }
 		public static float operator ^(vec3 a, vec3 b) { return Dot(a, b); }
-		public static vec3 operator %(vec3 a, vec3 b) { return Cross(a, b); }
+		public static vec3 operator |(vec3 a, vec3 b) { return Cross(a, b); }
 
 		public vec3(float x, float y, float z)
 		{
@@ -91,6 +95,8 @@ namespace MathEx
 			this.y = y;
 			this.z = z;
 		}
+
+		public static implicit operator vec3(ValueTuple<float, float, float> v) => new vec3(v.Item1, v.Item2, v.Item3);
 
 		public static float Dot(vec3 l, vec3 r) { return l.x * r.x + l.y * r.y + l.z * r.z; }
 		public static vec3 Cross(vec3 l, vec3 r) { return new vec3(l.y * r.z - l.z * r.y, l.z * r.x - l.x * r.z, l.x * r.y - l.y * r.x); }
@@ -105,9 +111,9 @@ namespace MathEx
 		}
 
 
-		public override string ToString() { return string.Format("({0},{1},{2})", x, y, z); }
-		public string ToString(string f) { return string.Format("({0},{1},{2})", x.ToString(f), y.ToString(f), z.ToString(f)); }
-		public string ToString(string f, IFormatProvider p) { return string.Format("({0},{1},{2})", x.ToString(f, p), y.ToString(f, p), z.ToString(f, p)); }
+		public override string ToString() => "{0}, {1}, {2}".format(CultureInfo.InvariantCulture, x, y, z);
+		public string ToString(string f) => "{0}, {1}, {2}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f), z.ToString(f));
+		public string ToString(string f, IFormatProvider p) => "{0}, {1}, {2}".format(x.ToString(f, p), y.ToString(f, p), z.ToString(f, p));
 
 #if UNITY || UNITY_5_3_OR_NEWER
 		public static implicit operator UnityEngine.Vector3(vec3 v)

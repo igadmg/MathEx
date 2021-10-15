@@ -29,11 +29,11 @@ namespace MathEx
 
 		public static IntersectResult intersect(this aabb2 aabb, vec2 v)
 		{
-			if (v.x < aabb.a.x && v.x > aabb.b.x)
+			if (v.x < aabb.a.x || v.x > aabb.b.x)
 				return IntersectResult.None;
-			if (v.y < aabb.a.y && v.y > aabb.b.y)
+			if (v.y < aabb.a.y || v.y > aabb.b.y)
 				return IntersectResult.None;
-			if ((v.x == aabb.a.x || v.x == aabb.b.x) && (v.y == aabb.a.y && v.y == aabb.b.y))
+			if ((v.x == aabb.a.x || v.x == aabb.b.x) || (v.y == aabb.a.y || v.y == aabb.b.y))
 				return IntersectResult.Intersect;
 
 			return IntersectResult.Contain1;
@@ -54,9 +54,24 @@ namespace MathEx
 			return IntersectResult.None;
 		}
 
+		public static bool contain(this rect2 rect, vec2 v)
+			=> rect.intersect(v) != IntersectResult.None;
+
+		public static IntersectResult intersect(this rect2 rect, vec2 v)
+		{
+			if (v.x < rect.a.x || v.x > rect.b.x)
+				return IntersectResult.None;
+			if (v.y < rect.a.y || v.y > rect.b.y)
+				return IntersectResult.None;
+			if ((v.x == rect.a.x || v.x == rect.b.x) || (v.y == rect.a.y || v.y == rect.b.y))
+				return IntersectResult.Intersect;
+
+			return IntersectResult.Contain1;
+		}
+
 		public static ray intersect(this plane a, plane b)
 		{
-			vec3 dir = a.normal % b.normal;
+			vec3 dir = a.normal | b.normal;
 
 			if (dir.isZero)
 				return ray.empty;
@@ -113,13 +128,13 @@ namespace MathEx
 
 		public static line3_segment intersect(this ray a, ray b)
 		{
-			vec3 d = a.direction % b.direction;
+			vec3 d = a.direction | b.direction;
 
 			if (d.isZero)
 				return line3_segment.empty;
 
-			plane pa = new plane(a.origin, (a.direction % d).normalized);
-			plane pb = new plane(b.origin, (b.direction % d).normalized);
+			plane pa = new plane(a.origin, (a.direction | d).normalized);
+			plane pb = new plane(b.origin, (b.direction | d).normalized);
 
 			return new line3_segment(pa.intersect(b), pb.intersect(a));
 		}

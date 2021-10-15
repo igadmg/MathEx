@@ -1,10 +1,10 @@
 using System;
-
-
+using System.Runtime.InteropServices;
 
 namespace MathEx
 {
 	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct quaternion
 	{
 		public float x;

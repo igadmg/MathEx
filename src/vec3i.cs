@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using SystemEx;
 
 namespace MathEx
 {
 	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct vec3i
 	{
 		//
@@ -57,7 +60,7 @@ namespace MathEx
 		public static bool operator !=(vec3i a, vec3i b) { return a.x != b.x || a.y != b.y || a.z != b.z; }
 		public bool Equals(vec3i obj) { return obj == this; }
 		public override bool Equals(object obj) { return obj is vec3i ? Equals((vec3i)obj) : false; }
-		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode(); }
+		public override int GetHashCode() => ObjectEx.GetHashCode(x, y, z);
 
 
 		public static vec3i operator *(vec3i a, int d) { return new vec3i(a.x * d, a.y * d, a.z * d); }
@@ -89,8 +92,8 @@ namespace MathEx
 			return new vec3i(Math.Max(a.x, b.x), Math.Max(a.y, b.y), Math.Min(a.z, b.z));
 		}
 
-		public override string ToString() { return "({0},{1},{2})".format(x, y, z); }
-		public string ToString(string f) { return "({0},{1},{2})".format(x.ToString(f), y.ToString(f), z.ToString(f)); }
+		public override string ToString() => "{0},{1},{2}".format(CultureInfo.InvariantCulture, x, y, z);
+		public string ToString(string f) => "{0},{1},{2}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f), z.ToString(f));
 
 		public static vec3i Parse(string s)
 		{

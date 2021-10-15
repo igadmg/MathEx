@@ -1,8 +1,12 @@
 ﻿using System;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using SystemEx;
 
 namespace MathEx
 {
 	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct vec4
 	{
 		//
@@ -24,6 +28,14 @@ namespace MathEx
 		public static readonly vec4 forward = new vec4(0, 0, 1, 0);
 
 
+		public float t => y;
+		public float r => x;
+		public float b => w;
+		public float l => z;
+
+		public vec2 lt => vec2.xy(l, t);
+		public vec2 br => vec2.xy(b, r);
+
 		public bool isZero { get { return x == 0 && y == 0 && z == 0 && w == 0; } }
 		public bool isEmpty { get { return float.IsNaN(x) || float.IsNaN(y) || float.IsNaN(z) || float.IsNaN(w); } }
 
@@ -39,7 +51,7 @@ namespace MathEx
 		public static bool operator !=(vec4 a, vec4 b) { return a.x != b.x || a.y != b.y || a.z != b.z || a.w != b.w; }
 		public bool Equals(vec4 obj) { return obj == this; }
 		public override bool Equals(object obj) { return obj is vec4 ? Equals((vec4)obj) : false; }
-		public override int GetHashCode() { return x.GetHashCode() ^ y.GetHashCode() ^ z.GetHashCode() ^ w.GetHashCode(); }
+		public override int GetHashCode() => ObjectEx.GetHashCode(x.GetHashCode(), y.GetHashCode(), z.GetHashCode(), w.GetHashCode());
 
 
 		public static vec4 operator *(vec4 a, int d) { return new vec4(a.x * d, a.y * d, a.z * d, a.w * d); }
@@ -57,6 +69,12 @@ namespace MathEx
 		public static float operator *(vec4 a, vec4 b) { return Dot(a, b); }
 		public static vec4 operator %(vec4 a, vec4 b) { return Hamilton(a, b); }
 
+
+		public static vec4 xyzw(float v) => new vec4(v, v, v, v);
+		public static vec4 trbl(float v) => new vec4(v, v, v, v);
+		public static vec4 trbl(float tb, float rl) => new vec4(rl, tb, rl, tb);
+		public static vec4 trbl(float t, float r, float b, float l) => new vec4(r, t, l, b);
+
 		public vec4(float x, float y, float z, float w)
 		{
 			this.x = x;
@@ -64,6 +82,8 @@ namespace MathEx
 			this.z = z;
 			this.w = w;
 		}
+
+		public static implicit operator vec4(ValueTuple<float, float, float, float> v) => new vec4(v.Item1, v.Item2, v.Item3, v.Item4);
 
 		public static float Dot(vec4 l, vec4 r) { return l.x * r.x + l.y * r.y + l.z * r.z + l.w * l.z; }
 		public static vec4 Hamilton(vec4 l, vec4 r)
@@ -75,8 +95,8 @@ namespace MathEx
 				l.w * r.w - l.x * r.x - l.y * r.y - l.z * r.z);
 		}
 
-		public override string ToString() { return string.Format("({0},{1},{2},{3})", x, y, z, w); }
-		public string ToString(string f) { return string.Format("({0},{1},{2},{3})", x.ToString(f), y.ToString(f), z.ToString(f), w.ToString(f)); }
+		public override string ToString() => "{0}, {1}, {2}, {3}".format(CultureInfo.InvariantCulture, x, y, z, w);
+		public string ToString(string f) => "{0}, {1}, {2}, {3}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f), z.ToString(f), w.ToString(f));
 	}
 }
 

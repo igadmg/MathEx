@@ -1,5 +1,12 @@
+using System;
+using System.Globalization;
+using System.Runtime.InteropServices;
+using SystemEx;
+
 namespace MathEx
 {
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public class aabb2i
 	{
 		public static readonly aabb2i empty = new aabb2i(vec2i.empty, vec2i.empty);
@@ -49,17 +56,12 @@ namespace MathEx
 			};
 		}
 
-		public override string ToString()
-		{
-			return string.Format("({0}, {1})", a, b);
-		}
-
-		public string ToString(string f)
-		{
-			return string.Format("({0}, {1})", a.ToString(f), b.ToString(f));
-		}
+		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, a, b);
+		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, a.ToString(f), b.ToString(f));
 	}
 
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public class aabb3i
 	{
 		public vec3i a;

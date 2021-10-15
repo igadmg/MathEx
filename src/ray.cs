@@ -60,7 +60,7 @@
 
 		public float distance(vec3 point)
 		{
-			return (direction % (point - origin)).magnitude;
+			return (direction | (point - origin)).magnitude;
 		}
 
 		public float projection(vec3 point)

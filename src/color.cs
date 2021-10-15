@@ -1,9 +1,15 @@
+using System;
+using System.Diagnostics.CodeAnalysis;
+using System.Globalization;
+using System.Runtime.InteropServices;
 using SystemEx;
 
 
 
 namespace MathEx
 {
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct color
 	{
 		public float r;
@@ -86,6 +92,9 @@ namespace MathEx
 			return color.empty;
 		}
 
+		public static explicit operator color(colorb cb)
+			=> new color(cb.r.Normalized(), cb.g.Normalized(), cb.b.Normalized(), cb.a.Normalized());
+
 		public static explicit operator color(color_hsv hsv)
 		{
 			if (hsv.s == 0.0f)
@@ -138,6 +147,83 @@ namespace MathEx
 #endif
 	};
 
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
+	public struct colorb
+		: IComparable<colorb>
+		, IEquatable<colorb>
+	{
+		public byte r;
+		public byte g;
+		public byte b;
+		public byte a;
+
+		// Example - Color.RED instead of RED
+		// Custom raylib color palette for amazing visuals
+		public readonly static colorb LIGHTGRAY = new colorb(200, 200, 200, 255);
+		public readonly static colorb GRAY = new colorb(130, 130, 130, 255);
+		public readonly static colorb DARKGRAY = new colorb(80, 80, 80, 255);
+		public readonly static colorb YELLOW = new colorb(253, 249, 0, 255);
+		public readonly static colorb GOLD = new colorb(255, 203, 0, 255);
+		public readonly static colorb ORANGE = new colorb(255, 161, 0, 255);
+		public readonly static colorb PINK = new colorb(255, 109, 194, 255);
+		public readonly static colorb RED = new colorb(230, 41, 55, 255);
+		public readonly static colorb MAROON = new colorb(190, 33, 55, 255);
+		public readonly static colorb GREEN = new colorb(0, 228, 48, 255);
+		public readonly static colorb LIME = new colorb(0, 158, 47, 255);
+		public readonly static colorb DARKGREEN = new colorb(0, 117, 44, 255);
+		public readonly static colorb SKYBLUE = new colorb(102, 191, 255, 255);
+		public readonly static colorb BLUE = new colorb(0, 121, 241, 255);
+		public readonly static colorb DARKBLUE = new colorb(0, 82, 172, 255);
+		public readonly static colorb PURPLE = new colorb(200, 122, 255, 255);
+		public readonly static colorb VIOLET = new colorb(135, 60, 190, 255);
+		public readonly static colorb DARKPURPLE = new colorb(112, 31, 126, 255);
+		public readonly static colorb BEIGE = new colorb(211, 176, 131, 255);
+		public readonly static colorb BROWN = new colorb(127, 106, 79, 255);
+		public readonly static colorb DARKBROWN = new colorb(76, 63, 47, 255);
+		public readonly static colorb WHITE = new colorb(255, 255, 255, 255);
+		public readonly static colorb BLACK = new colorb(0, 0, 0, 255);
+		public readonly static colorb BLANK = new colorb(0, 0, 0, 0);
+		public readonly static colorb MAGENTA = new colorb(255, 0, 255, 255);
+		public readonly static colorb RAYWHITE = new colorb(245, 245, 245, 255);
+
+		public colorb(byte r, byte g, byte b, byte a)
+		{
+			this.r = r;
+			this.g = g;
+			this.b = b;
+			this.a = a;
+		}
+
+		public colorb(int r, int g, int b, int a)
+		{
+			this.r = Convert.ToByte(r);
+			this.g = Convert.ToByte(g);
+			this.b = Convert.ToByte(b);
+			this.a = Convert.ToByte(a);
+		}
+
+		public colorb(Span<byte> c)
+			: this(c[0], c[1], c[2], c[3])
+		{
+		}
+
+		public static bool operator ==(colorb l, colorb r) => l.Equals(r);
+		public static bool operator !=(colorb l, colorb r) => !(l == r);
+
+		public override string ToString() => "{0}, {1}, {2}, {3}".format(CultureInfo.InvariantCulture, r, g, b, a);
+
+		public int CompareTo([AllowNull] colorb other) => this == other ? 0 : -1;
+		public bool Equals([AllowNull] colorb other) => r == other.r && g == other.g && b == other.b && a == other.a;
+		public override bool Equals(object obj) => obj is colorb && Equals((colorb)obj);
+		public override int GetHashCode() => ObjectEx.GetHashCode(r, g, b, a);
+
+		public static explicit operator colorb(color c)
+			=> new colorb(c.r.DenormalizeByte(), c.g.DenormalizeByte(), c.b.DenormalizeByte(), c.a.DenormalizeByte());
+	}
+
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct color_hsl
 	{
 		public float h;
@@ -216,6 +302,8 @@ namespace MathEx
 		}
 	};
 
+	[Serializable]
+	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct color_hsv
 	{
 		public float h;
@@ -293,4 +381,6 @@ namespace MathEx
 			return this;
 		}
 	};
+
+
 }
