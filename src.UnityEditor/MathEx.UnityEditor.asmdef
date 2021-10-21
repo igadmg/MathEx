@@ -1,14 +1,21 @@
 {
     "name": "MathEx.UnityEditor",
+    "rootNamespace": "",
     "references": [
         "SystemEx",
         "MathEx",
-        "MathEx.UnityEngine"
+        "MathEx.UnityEngine",
+        "UnityEditorEx"
     ],
-    "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"
     ],
     "excludePlatforms": [],
-    "allowUnsafeCode": true
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

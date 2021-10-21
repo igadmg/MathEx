@@ -113,23 +113,41 @@ namespace MathEx.UnityEditor
 
 							int nni = obj.getIndexNode(i);
 							float nnit = obj.getNodeTime(nni);
-							vec3 nni0v = obj.velocity(nnit);
-							int ni = nni - 1;
-							float nit = ni < 0 ? 0 : obj.getNodeTime(ni);
-							vec3 ni1v = obj.velocity(nit);
 
-							float init = (nit + nnit) / 2f;
-							float dt = (nnit - nit) / 2f;
-							vec3 inv = obj.value(init);
-							vec3 in0v = inv - obj.velocity(init) * dt;
-							vec3 in1v = inv + obj.velocity(init) * dt;
+							if (nni == obj.numberOfNodes - 1)
+							{
+								vec3 nniv = obj.value(nnit);
+								vec3 nni0v = obj.velocity(nnit);
 
-							obj.p[obj.getNodeIndex(ni) + 1] = obj.value(nit) + ni1v * dt;
-							obj.p[obj.getNodeIndex(nni) - 1] = obj.value(nnit) - nni0v * dt;
-							if (objController != null)
-								objController.insert(nni, in0v, inv, in1v);
+								vec3 inv = nniv + nni0v * 4;
+								vec3 invv = inv - nni0v;
+
+								if (objController != null)
+									objController.insert(nni, nni0v, inv, invv);
+								else
+									obj.insert(nni, nni0v, inv, invv);
+							}
 							else
-								obj.insert(nni, in0v, inv, in1v);
+							{
+								int ni = nni - 1;
+								float nit = ni < 0 ? 0 : obj.getNodeTime(ni);
+
+								vec3 nni0v = obj.velocity(nnit);
+								vec3 ni1v = obj.velocity(nit);
+
+								float init = (nit + nnit) / 2f;
+								float dt = (nnit - nit) / 2f;
+								vec3 inv = obj.value(init);
+								vec3 in0v = inv - obj.velocity(init) * dt;
+								vec3 in1v = inv + obj.velocity(init) * dt;
+
+								obj.p[obj.getNodeIndex(ni) + 1] = obj.value(nit) + ni1v * dt;
+								obj.p[obj.getNodeIndex(nni) - 1] = obj.value(nnit) - nni0v * dt;
+								if (objController != null)
+									objController.insert(nni, in0v, inv, in1v);
+								else
+									obj.insert(nni, in0v, inv, in1v);
+							}
 						}
 						if (GUI.Button(removeRect, "-"))
 						{

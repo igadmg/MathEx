@@ -180,6 +180,9 @@ namespace MathEx
 		{
 			return new vec2(v.x, v.y);
 		}
+
+		public static vec2 operator *(UnityEngine.Vector2 a, vec2 b) => new vec2(a.x * b.x, a.y * b.y);
+		public static vec2 operator /(UnityEngine.Vector2 a, vec2 b) => new vec2(a.x / b.x, a.y / b.y);
 #endif
 	}
 }

@@ -31,6 +31,8 @@ namespace MathEx
 		public distance_type distance { get { return new distance_type(this); } }
 		public controller_type controller { get { return new controller_type(this); } }
 
+		public abstract T this[int i] { get; set; }
+
 		public abstract T getNodeValue(int nodeIndex);
 		public abstract T getNodeTangent(int nodeIndex);
 		public float getNodeTime(int nodeIndex) { return getNodeTime(nodeIndex, 0); }
@@ -170,6 +172,13 @@ namespace MathEx
 			p = pl.ToArray();
 
 			return nodeIndex;
+		}
+
+		public override T this[int i] {
+			get => p[i];
+			set {
+				p[i] = value;
+			}
 		}
 
 		public override T getNodeValue(int nodeIndex)
@@ -358,6 +367,13 @@ namespace MathEx
 			return nodeIndex;
 		}
 
+		public override T this[int i] {
+			get => p[i];
+			set {
+				p[i] = value;
+			}
+		}
+
 		public override T getNodeValue(int nodeIndex)
 		{
 			int i = getNodeIndex(nodeIndex);
@@ -374,6 +390,9 @@ namespace MathEx
 
 		public override float getNodeTime(int nodeIndex, float segmentTime)
 		{
+			if (nodeIndex == 0)
+				return 0.0f;
+
 			if (nodeIndex == numberOfNodes - 1)
 				return 1.0f;
 
@@ -388,6 +407,9 @@ namespace MathEx
 			if (p == null)
 				return mtt.zero;
 
+			if (p.Length == 1)
+				return p[0];
+
 			int i = calculateT(ref t);
 
 			return interpolator.value(t, p, i);
@@ -397,6 +419,9 @@ namespace MathEx
 		{
 			if (p == null)
 				return mtt.zero;
+
+			if (p.Length == 1)
+				return mtt.forward;
 
 			int i = calculateT(ref t);
 
@@ -506,7 +531,7 @@ namespace MathEx
 
 		public void setP(int pi, T value)
 		{
-
+			c[pi] = value;
 		}
 
 		public int insert(int nodeIndex, params T[] values)
