@@ -1,5 +1,6 @@
 using MathEx;
 using UnityEditor;
+using UnityEditorEx;
 using UnityEngine;
 
 
@@ -7,6 +8,8 @@ using UnityEngine;
 [CustomEditor(typeof(Spline))]
 public class Inspector_Spline : Editor
 {
+	static int s_SplineHandleHash = "SplineHandleHash".GetHashCode();
+
 	public static Inspector_Spline instance = null;
 
 	public int iChangedNode = -1;
@@ -14,7 +17,6 @@ public class Inspector_Spline : Editor
 	private void OnSceneGUI()
 	{
 		instance = this;
-		iChangedNode = -1;
 
 		Spline spline = target as Spline;
 		Transform handleTransform = spline.transform;
@@ -24,20 +26,29 @@ public class Inspector_Spline : Editor
 		for (int i = 0; i < spline.spline.p.Length; i++)
 		{
 			Vector3 p = handleTransform.TransformPoint(spline.spline.p[i]);
-			EditorGUI.BeginChangeCheck();
-			p = Handles.DoPositionHandle(p, handleTransform.rotation);
-			//Debug.Log(GUIUtility.GetControlID(FocusType.Passive));
-			if (EditorGUI.EndChangeCheck())
+
+			float pointSize = HandleUtility.GetHandleSize(p) / 10;
+			if (Handles.Button(p, Quaternion.identity, pointSize, pointSize, Handles.SphereHandleCap))
 			{
-				Undo.RecordObject(spline, "Curve Point Moved");
-				spline.splineController.setP(i, handleTransform.InverseTransformPoint(p));
+				iChangedNode = i;
 			}
 
-			if (i > 0)
+			if (iChangedNode == i)
 			{
-				Handles.color = Color.white;
-				Vector3 p0 = handleTransform.TransformPoint(spline.spline.p[i - 1]);
-				Handles.DrawLine(p0, p);
+				EditorGUIEx.ChangeCheck(() => Handles.DoPositionHandle(p, handleTransform.rotation)
+					, p => {
+						Undo.RecordObject(spline, "Curve Point Moved");
+						spline.splineController.setP(i, handleTransform.InverseTransformPoint(p));
+					});
+
+#if false
+				if (i > 0)
+				{
+					Handles.color = Color.white;
+					Vector3 p0 = handleTransform.TransformPoint(spline.spline.p[i - 1]);
+					Handles.DrawLine(p0, p);
+				}
+#endif
 			}
 		}
 

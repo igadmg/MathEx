@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using SystemEx;
+using UnityEditor;
 using UnityEngine;
 
 namespace MathEx.UnityEditor
@@ -10,7 +11,7 @@ namespace MathEx.UnityEditor
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
-			Quaternion obj = (Quaternion)fieldInfo.GetValue(property.serializedObject.targetObject);
+			Quaternion obj = fieldInfo.GetValue<Quaternion>(property.serializedObject.targetObject);
 			Vector3 ea = obj.eulerAngles;
 
 			Rect labelPosition = new Rect(position.x + EditorGUI.indentLevel * 15f, position.y, EditorGUIUtility.labelWidth - EditorGUI.indentLevel * 15f, 16f);
