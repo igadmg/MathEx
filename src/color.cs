@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using SystemEx;
@@ -213,8 +212,8 @@ namespace MathEx
 
 		public override string ToString() => "{0}, {1}, {2}, {3}".format(CultureInfo.InvariantCulture, r, g, b, a);
 
-		public int CompareTo([AllowNull] colorb other) => this == other ? 0 : -1;
-		public bool Equals([AllowNull] colorb other) => r == other.r && g == other.g && b == other.b && a == other.a;
+		public int CompareTo(colorb other) => this == other ? 0 : -1;
+		public bool Equals(colorb other) => r == other.r && g == other.g && b == other.b && a == other.a;
 		public override bool Equals(object obj) => obj is colorb && Equals((colorb)obj);
 		public override int GetHashCode() => ObjectEx.GetHashCode(r, g, b, a);
 
