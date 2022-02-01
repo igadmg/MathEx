@@ -71,6 +71,7 @@ namespace MathEx
 
 
 		public static vec4 xyzw(float v) => new vec4(v, v, v, v);
+		public static vec4 xyzw(float x, float y, float z, float w) => new vec4(x, y, z, w);
 		public static vec4 trbl(float v) => new vec4(v, v, v, v);
 		public static vec4 trbl(float tb, float rl) => new vec4(rl, tb, rl, tb);
 		public static vec4 trbl(float t, float r, float b, float l) => new vec4(r, t, l, b);
