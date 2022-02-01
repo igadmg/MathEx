@@ -261,6 +261,9 @@ namespace MathEx
 		public static IEnumerable<CurveIterator<T>> Iterate<T>(this curve<T> c, float stepMultiplier)
 		{
 			float sl = c.length;
+			if (sl == 0)
+				yield break;
+
 			float islsl = 1 / (sl * sl);
 
 			float t = 0;
