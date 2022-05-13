@@ -6,23 +6,23 @@ namespace MathEx
 {
 	public static class Easing
 	{
-		public static float easeLinear(float t)
+		public static float easeLinear(this float t)
 		{
 			return t;
 		}
 
-		public static float easeCubicIn(float t)
+		public static float easeCubicIn(this float t)
 		{
 			return t * t * t;
 		}
 
-		public static float easeCubicOut(float t)
+		public static float easeCubicOut(this float t)
 		{
 			t = t - 1f;
 			return t * t * t + 1f;
 		}
 
-		public static float easeCubicInOut(float t)
+		public static float easeCubicInOut(this float t)
 		{
 			t *= 2f;
 			if (t < 1f) return 0.5f * t * t * t;
@@ -30,19 +30,19 @@ namespace MathEx
 			return 0.5f * t * t * t + 2f;
 		}
 
-		public static float easeExpoIn(float t)
+		public static float easeExpoIn(this float t)
 		{
 			return t == 0f ? 0f
 				: MathExOps.Pow(2f, 10f * (t - 1f));
 		}
 
-		public static float easeExpoOut(float t)
+		public static float easeExpoOut(this float t)
 		{
 			return t == 1f ? 1f
 				: 1f - MathExOps.Pow(2f, -10f * t);
 		}
 
-		public static float easeExpoInOut(float t)
+		public static float easeExpoInOut(this float t)
 		{
 			if (t == 0f) return 0f;
 			if (t == 1f) return 1f;
@@ -51,7 +51,7 @@ namespace MathEx
 			return 1f - 0.5f * MathExOps.Pow(2f, -10f * (t - 1f));
 		}
 
-		public static float easeMirror(float t, Func<float, float> eFn)
+		public static float easeMirror(this float t, Func<float, float> eFn)
 		{
 			t *= 2f;
 			if (t < 1f) return eFn(t);

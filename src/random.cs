@@ -3,10 +3,16 @@ using System.Collections.Generic;
 
 namespace MathEx
 {
+	public static class RandomEx
+	{
+		static Random rnd_ = new Random();
+
+		public static int rnd(this (int min, int max) range)
+			=> rnd_.Next(range.min, range.max);
+	}
 #if false
 	public static class random
 	{
-		static Random rnd = new Random();
 
 
 		public static RandomGenerator Create(int seed)

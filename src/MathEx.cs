@@ -78,6 +78,9 @@ namespace MathEx
 			=> (2 * a + d * (n - 1)) * n / 2;
 
 
+		public static int ClampMin(this int f, int min)
+			=> f.Clamp(min, int.MaxValue);
+
 		public static int Clamp(this int f, int p1, int p2)
 #if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Clamp(f, p1, p2);

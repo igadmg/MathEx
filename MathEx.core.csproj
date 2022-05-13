@@ -3,7 +3,7 @@
   <Import Project="$(SolutionDir)\Common.props" Condition="Exists('$(SolutionDir)\Common.props')" />
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFrameworks>netstandard2.1;net50;net60</TargetFrameworks>
     <AssemblyName>MathEx</AssemblyName>
     <RootNamespace>MathEx</RootNamespace>
   </PropertyGroup>
@@ -36,7 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)\Libraries\SystemEx\SystemEx.core.csproj" />
+    <ProjectReference Include="..\SystemEx\SystemEx.csproj" />
   </ItemGroup>
 
 </Project>
