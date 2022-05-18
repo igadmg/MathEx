@@ -279,7 +279,7 @@ namespace MathEx
 					yield break;
 
 				float dt = MathExOps.Clamp(MathTypeTag<T>.Get().scalar(i.velocity) * islsl * stepMultiplier, islsl, 1);
-				t = MathExOps.Clamp01(t + dt);
+				t = MathExOps.Clamp(t + dt);
 			}
 		}
 

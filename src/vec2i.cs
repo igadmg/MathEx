@@ -42,12 +42,13 @@ namespace MathEx
 		public static readonly vec2i down = new vec2i(0, -1);
 
 
-		public bool isEmpty { get { return x == int.MinValue && y == int.MinValue; } }
-		public bool isZero { get { return x == 0 && y == 0; } }
+		public bool isEmpty => x == int.MinValue && y == int.MinValue;
+		public bool isZero => x == 0 && y == 0;
 
-		public int product { get { return x * y; } }
-		public float length { get { return MathExOps.Sqrt(magnitude); } }
-		public float magnitude { get { return x * x + y * y; } }
+		public int product => x * y;
+		public float aspect => (float)x / y;
+		public float length => MathExOps.Sqrt(magnitude);
+		public float magnitude => x * x + y * y;
 		//public vec2 normalized { get { return this / length; } }
 
 		/// <summary>

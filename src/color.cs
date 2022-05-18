@@ -186,6 +186,8 @@ namespace MathEx
 		public readonly static colorb MAGENTA = new colorb(255, 0, 255, 255);
 		public readonly static colorb RAYWHITE = new colorb(245, 245, 245, 255);
 
+		public readonly static colorb TRANSPARENT = new colorb(0, 0, 0, 0);
+
 		public colorb(byte r, byte g, byte b, byte a)
 		{
 			this.r = r;

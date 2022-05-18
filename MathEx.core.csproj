@@ -6,6 +6,8 @@
     <TargetFrameworks>netstandard2.1;net50;net60</TargetFrameworks>
     <AssemblyName>MathEx</AssemblyName>
     <RootNamespace>MathEx</RootNamespace>
+
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>

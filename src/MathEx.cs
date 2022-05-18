@@ -40,7 +40,7 @@ namespace MathEx
 			=> v / (float)m;
 
 		public static byte DenormalizeByte(this float v)
-			=> (byte)(v.Clamp01() * byte.MaxValue);
+			=> (byte)(v.Clamp() * byte.MaxValue);
 
 		public static float Floor(this float v)
 #if UNITY || UNITY_64
@@ -78,31 +78,30 @@ namespace MathEx
 			=> (2 * a + d * (n - 1)) * n / 2;
 
 
-		public static int ClampMin(this int f, int min)
+		public static int Clamp0(this int f, int min = 0)
 			=> f.Clamp(min, int.MaxValue);
 
-		public static int Clamp(this int f, int p1, int p2)
+		public static int Clamp1(this int f, int max = 1)
+			=> f.Clamp(int.MaxValue, max);
+
+		public static int Clamp(this int f, int p1 = 0, int p2 = 1)
 #if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Clamp(f, p1, p2);
 #else
 			=> f < p1 ? p1 : f > p2 ? p2 : f;
 #endif
 
-		public static float ClampMin(this float f, float min)
+		public static float Clamp0(this float f, float min = 0f)
 			=> f.Clamp(min, float.MaxValue);
 
-		public static float Clamp(this float f, float p1, float p2)
+		public static float Clamp1(this float f, float max = 1f)
+			=> f.Clamp(float.MinValue, max);
+
+		public static float Clamp(this float f, float p1 = 0f, float p2 = 1f)
 #if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Clamp(f, p1, p2);
 #else
 			=> f < p1 ? p1 : f > p2 ? p2 : f;
-#endif
-
-		public static float Clamp01(this float f)
-#if UNITY || UNITY_64
-			=> UnityEngine.Mathf.Clamp01(f);
-#else
-			=> f.Clamp(0, 1);
 #endif
 
 		public static vec2 Clamp(vec2 value, vec2 min, vec2 max)
