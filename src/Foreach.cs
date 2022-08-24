@@ -4,6 +4,9 @@ using SystemEx;
 
 namespace MathEx
 {
+	using vec2 = vec2t<float>;
+	using aabb2 = aabb2t<float>;
+
 	public static class Foreach
 	{
 		public static IEnumerable<float> Fit(this float distance, int steps, float minDistance)
@@ -46,7 +49,7 @@ namespace MathEx
 
 		public static IEnumerable<aabb2> Cell(vec2i s)
 		{
-			vec2 sp = -((vec2)s).Div(2.0f);
+			vec2 sp = -vec2.xy(s.x, s.y).Div(2.0f);
 			for (int y = 0; y < s.y; y++)
 				for (int x = 0; x < s.x; x++)
 					yield return new aabb2(sp + new vec2(x, y), sp + new vec2(x + 1, y + 1));

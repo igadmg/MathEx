@@ -1,5 +1,8 @@
 namespace MathEx
 {
+	using vec2 = vec2t<float>;
+	using aabb2 = aabb2t<float>;
+
 	public static class ProjectEx
 	{
 		public static vec3 project(this plane pl, vec3 p)

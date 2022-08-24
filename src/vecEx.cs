@@ -2,6 +2,9 @@ using System;
 
 namespace MathEx
 {
+	using vec2 = vec2t<float>;
+	using aabb2 = aabb2t<float>;
+
 	public static class vecEc
 	{
 		public static int Clamp(this vec2 v, int f) { return MathExOps.Clamp(f, (int)v.x, (int)v.y); }
