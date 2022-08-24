@@ -130,6 +130,8 @@ namespace MathEx
 		public override int GetHashCode() => ObjectEx.GetHashCode(x, y);
 
 
+		public static vec2i operator +(vec2i a, int d) { return new vec2i(a.x + d, a.y + d); }
+
 		public static vec2i operator *(vec2i a, int d) { return new vec2i(a.x * d, a.y * d); }
 		public static vec2i operator /(vec2i a, int d) { return new vec2i(a.x / d, a.y / d); }
 		public static vec2i operator *(int d, vec2i a) { return new vec2i(a.x * d, a.y * d); }
