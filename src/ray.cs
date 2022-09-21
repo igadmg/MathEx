@@ -1,8 +1,5 @@
 ﻿namespace MathEx
 {
-	using vec2 = vec2t<float>;
-	using aabb2 = aabb2t<float>;
-
 	public class ray2
 	{
 		public static readonly ray2 empty = new ray2(vec2.empty, vec2.empty);

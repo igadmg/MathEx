@@ -104,12 +104,11 @@ namespace MathEx
 			=> f < p1 ? p1 : f > p2 ? p2 : f;
 #endif
 
-		public static vec2t<T> Clamp<T>(this vec2t<T> value, vec2t<T> min, vec2t<T> max)
-			where T : IFloatingPoint<T>
+		public static vec2 Clamp(vec2 value, vec2 min, vec2 max)
 		{
-			return new vec2t<T>(
-				T.Clamp(value.x, min.x, max.x),
-				T.Clamp(value.y, min.y, max.y)
+			return new vec2(
+				Clamp(value.x, min.x, max.x),
+				Clamp(value.y, min.y, max.y)
 				);
 		}
 
@@ -192,9 +191,10 @@ namespace MathEx
 			return float.NaN;
 		}
 
-		public static vec2t<T> Lerp<T>(this T t, vec2t<T> a, vec2t<T> b)
-			where T : IFloatingPoint<T>
-			=> a * (T.One - t) + b * t;
+		public static vec2 Lerp(this float t, vec2 a, vec2 b)
+		{
+			return a * (1 - t) + b * t;
+		}
 
 		public static vec3 Lerp(this float t, vec3 a, vec3 b)
 		{
@@ -211,17 +211,16 @@ namespace MathEx
 			return new color_hsl(t.Lerp(a.h, b.h), t.Lerp(a.s, b.s), t.Lerp(a.l, b.l), t.Lerp(a.a, b.a));
 		}
 
-		static vec2t<T> Slerp<T>(this T t, vec2t<T> a, vec2t<T> b)
-			where T : IFloatingPoint<T>
+		static vec2 Slerp(this float t, vec2 a, vec2 b)
 		{
-			T d = a ^ b;
+			float d = a ^ b;
 
-			d = T.Clamp(d, -T.One, T.One);
+			d = Clamp(d, -1, 1);
 
-			T theta = T.Acos(d) * t;
+			float theta = Acos(d) * t;
 			var r = (b - (a * d)).normalized;
 
-			return ((a * T.Cos(theta)) + (r * T.Sin(theta)));
+			return ((a * Cos(theta)) + (r * Sin(theta)));
 		}
 
 		public static vec3 Slerp(this float t, vec3 a, vec3 b)

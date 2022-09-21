@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace MathEx
 {
-	using vec2 = vec2t<float>;
-	using aabb2 = aabb2t<float>;
-
 	public class MathTypeTag
 	{
 		protected static Dictionary<Type, MathTypeTag> specs = new Dictionary<Type, MathTypeTag>

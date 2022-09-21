@@ -2,9 +2,6 @@
 
 namespace MathEx
 {
-	using vec2 = vec2t<float>;
-	using aabb2 = aabb2t<float>;
-
 	public static class TransfromStackEx
 	{
 		public static vec2 local2(this ValueTuple<vec4, TransformStack> p) => p.Item1.xy();

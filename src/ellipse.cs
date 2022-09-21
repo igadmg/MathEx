@@ -1,8 +1,5 @@
 ﻿namespace MathEx
 {
-	using vec2 = vec2t<float>;
-	using aabb2 = aabb2t<float>;
-
 	public class ellipse2
 	{
 		vec2 center;

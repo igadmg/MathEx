@@ -5,9 +5,6 @@ using SystemEx;
 
 namespace MathEx
 {
-	using vec2 = vec2t<float>;
-	using aabb2 = aabb2t<float>;
-
 	[Serializable]
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct rect2
@@ -54,7 +51,7 @@ namespace MathEx
 		public static rect2 wh(vec2 wh) => new rect2(vec2.zero, wh);
 		public static rect2 wh(vec2i wh) => new rect2(vec2.zero, (vec2)wh);
 
-		public static rect2 xywh(float x, float y, float w, float h) => new rect2(vec2.xy(x, y), vec2.xy(w, h));
+		public static rect2 xywh(float x, float y, float w, float h) => new rect2((x, y), (w, h));
 		public static rect2 xywh(vec2 xy, vec2 wh) => new rect2(xy, wh);
 		public static rect2 xywh(vec2 xy, vec2i wh) => new rect2(xy, (vec2)wh);
 		public static rect2 xywh(vec2i xy, vec2 wh) => new rect2((vec2)xy, wh);
