@@ -1,5 +1,8 @@
 namespace MathEx
 {
+	using vec2 = vec2t<float>;
+	using aabb2 = aabb2t<float>;
+
 	public class line2
 	{
 		public float a;

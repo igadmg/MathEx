@@ -16,9 +16,17 @@ namespace MathEx
 		public vec2i a;
 		public vec2i b;
 
+		public vec2i size {
+			get => b - a;
+			set => b = a + value;
+		}
+
 		public int x { get { return b.x - a.x; } }
 		public int y { get { return b.y - a.y; } }
-		public vec2i size { get { return b - a; } }
+		public int width => size.x;
+		public int height => size.y;
+
+		public static aabb2i xywh(vec2i xy, vec2i wh) => new aabb2i(xy, xy + wh);
 
 		public aabb2i(vec2i a, vec2i b)
 		{

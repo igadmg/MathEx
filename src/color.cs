@@ -212,6 +212,10 @@ namespace MathEx
 		public static bool operator ==(colorb l, colorb r) => l.Equals(r);
 		public static bool operator !=(colorb l, colorb r) => !(l == r);
 
+
+		public float median => (r / 255f + g / 255f + b / 255f + a / 255f) / 4.0f;
+		public float intencity => ((0.21f * r) / 255f + (0.72f * g) / 255f + (0.07f * b) / 255f) * (a / 255f);
+
 		public override string ToString() => "{0}, {1}, {2}, {3}".format(CultureInfo.InvariantCulture, r, g, b, a);
 
 		public int CompareTo(colorb other) => this == other ? 0 : -1;

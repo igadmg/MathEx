@@ -7,52 +7,54 @@ namespace MathEx
 {
 	[Serializable]
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
-	public struct aabb2
+	public struct aabb2t<T>
+		where T : IFloatingPoint<T>
 	{
-		public static readonly aabb2 empty = new aabb2(vec2.empty, vec2.empty);
-		public static readonly aabb2 zero = new aabb2(vec2.zero, vec2.zero);
-		public static readonly aabb2 one = new aabb2(vec2.zero, vec2.one);
+		public static readonly aabb2t<T> empty = ab(vec2t<T>.empty, vec2t<T>.empty);
+		public static readonly aabb2t<T> zero = ab(vec2t<T>.zero, vec2t<T>.zero);
+		public static readonly aabb2t<T> one = ab(vec2t<T>.zero, vec2t<T>.one);
 
-		public vec2 a;
-		public vec2 b;
+		public vec2t<T> a;
+		public vec2t<T> b;
 
-		public vec2 size {
+		public vec2t<T> size {
 			get => b - a;
 			set => b = a + value;
 		}
 
 
-		public float x => a.x;
-		public float y => a.y;
-		public float width => size.x;
-		public float height => size.y;
-		public vec2 o => (a + b) / 2;
-		public vec2[] vertices => new vec2[] { a, new vec2(a.x, a.y + size.y), b, new vec2(a.x + size.x, a.y) };
+		public T x => a.x;
+		public T y => a.y;
+		public T width => size.x;
+		public T height => size.y;
+		public vec2t<T> o => (a + b) / (T.One + T.One);
+		public vec2t<T>[] vertices => new vec2t<T>[] { a, new vec2t<T>(a.x, a.y + size.y), b, new vec2t<T>(a.x + size.x, a.y) };
 
 
-		public aabb2(vec2 a, vec2 b)
+		public aabb2t(vec2t<T> a, vec2t<T> b)
 		{
 			this.a = a;
 			this.b = b;
 		}
 
-		public static aabb2 xywh(float x, float y, float w, float h)
-			=> new aabb2(new vec2(x, y), new vec2(x + w, y + h));
-		public static aabb2 xywh(vec2 a, vec2 s)
-			=> new aabb2(a, a + s);
+		public static aabb2t<T> ab(vec2t<T> a, vec2t<T> b) => new aabb2t<T>(a, b);
+		public static aabb2t<T> xywh(T x, T y, T w, T h)
+			=> new aabb2t<T>(new vec2t<T>(x, y), new vec2t<T>(x + w, y + h));
+		public static aabb2t<T> xywh(vec2t<T> a, vec2t<T> s)
+			=> new aabb2t<T>(a, a + s);
 
-		public bool isEmpty { get { return a.isEmpty || b.isEmpty; } }
+		public bool isEmpty => a.isEmpty || b.isEmpty;
 
 
 		//
 		// Operators
 		//
-		public static aabb2 operator +(aabb2 a, vec2 v) { return new aabb2(a.a + v, a.b + v); }
-		public static aabb2 operator -(aabb2 a, vec2 v) { return new aabb2(a.a - v, a.b - v); }
-		public static aabb2 operator *(aabb2 a, vec2 v) { return new aabb2(a.a.Mul(v), a.b.Mul(v)); }
+		public static aabb2t<T> operator +(aabb2t<T> a, vec2t<T> v) { return new aabb2t<T>(a.a + v, a.b + v); }
+		public static aabb2t<T> operator -(aabb2t<T> a, vec2t<T> v) { return new aabb2t<T>(a.a - v, a.b - v); }
+		public static aabb2t<T> operator *(aabb2t<T> a, vec2t<T> v) { return new aabb2t<T>(a.a * v, a.b * v); }
 
 
-		public int Position(vec2 v)
+		public int Position(vec2t<T> v)
 		{
 			int res = 0;
 
@@ -69,18 +71,18 @@ namespace MathEx
 			return res;
 		}
 
-		public aabb2 Extend(vec2 p)
+		public aabb2t<T> Extend(vec2t<T> p)
 		{
 			if (isEmpty)
-				return new aabb2(p, p);
+				return new aabb2t<T>(p, p);
 
-			var min = vec2.Min(a, p);
-			var max = vec2.Max(b, p);
+			var min = vec2t<T>.Min(a, p);
+			var max = vec2t<T>.Max(b, p);
 
-			return new aabb2(min, max);
+			return new aabb2t<T>(min, max);
 		}
 
-		public vec2[] ToArray() => vertices;
+		public vec2t<T>[] ToArray() => vertices;
 
 		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, a, b);
 		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, a.ToString(f), b.ToString(f));

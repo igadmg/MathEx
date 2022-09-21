@@ -6,6 +6,9 @@ using SystemEx;
 
 namespace MathEx
 {
+	using vec2 = vec2t<float>;
+	using aabb2 = aabb2t<float>;
+
 	[Serializable]
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct vec2i
@@ -149,6 +152,7 @@ namespace MathEx
 
 		public static vec2i xy(int xy) => new vec2i(xy, xy);
 		public static vec2i xy(int x, int y) => new vec2i(x, y);
+		public aabb2i hw(vec2i _) => new aabb2i(this, this + _);
 
 		public vec2i(int x, int y)
 		{

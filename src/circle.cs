@@ -1,9 +1,10 @@
 using System;
 
-
-
 namespace MathEx
 {
+	using vec2 = vec2t<float>;
+	using aabb2 = aabb2t<float>;
+
 	[Serializable]
 	public class circle
 	{

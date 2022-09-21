@@ -3,12 +3,12 @@
   <Import Project="$(SolutionDir)\Common.props" Condition="Exists('$(SolutionDir)\Common.props')" />
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net50;net60</TargetFrameworks>
+    <TargetFrameworks>net60</TargetFrameworks>
     <AssemblyName>MathEx</AssemblyName>
     <RootNamespace>MathEx</RootNamespace>
 
-    <Platforms>AnyCPU;x64</Platforms>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>preview</LangVersion>
+    <EnablePreviewFeatures>True</EnablePreviewFeatures>
   </PropertyGroup>
 
   <ItemGroup>
@@ -40,6 +40,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SystemEx\SystemEx.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net60'">
+    <PackageReference Include="System.Runtime.Experimental">
+      <Version>6.0.2</Version>
+    </PackageReference>
   </ItemGroup>
 
 </Project>
