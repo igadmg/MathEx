@@ -56,6 +56,14 @@ namespace MathEx
 			=> (int)MathF.Floor(v);
 #endif
 
+		public static vec2i FloorToInt(this vec2 v)
+#if UNITY || UNITY_64
+			=> UnityEngine.Mathf.FloorToInt(v);
+#else
+	=> vec2i.xy((int)MathF.Floor(v.x), (int)MathF.Floor(v.y));
+#endif
+
+
 		public static float Ceil(this float v)
 #if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Ceil(v);
@@ -70,6 +78,19 @@ namespace MathEx
 			=> (int)MathF.Ceiling(v);
 #endif
 
+		public static vec2 Ceil(this vec2 v)
+#if UNITY || UNITY_64
+			=> UnityEngine.Mathf.Ceil(v);
+#else
+			=> vec2.xy(MathF.Ceiling(v.x), MathF.Ceiling(v.y));
+#endif
+
+		public static vec2i CeilToInt(this vec2 v)
+#if UNITY || UNITY_64
+			=> UnityEngine.Mathf.CeilToInt(v);
+#else
+			=> vec2i.xy((int)MathF.Ceiling(v.x), (int)MathF.Ceiling(v.y));
+#endif
 
 		public static float[] mul(this float[] a, float s) { return a.Modify(i => i * s); }
 
