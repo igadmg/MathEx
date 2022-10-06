@@ -131,6 +131,7 @@ namespace MathEx
 
 
 		public static vec2i operator +(vec2i a, int d) { return new vec2i(a.x + d, a.y + d); }
+		public static vec2i operator -(vec2i a, int d) { return new vec2i(a.x - d, a.y - d); }
 
 		public static vec2i operator *(vec2i a, int d) { return new vec2i(a.x * d, a.y * d); }
 		public static vec2i operator /(vec2i a, int d) { return new vec2i(a.x / d, a.y / d); }
@@ -147,8 +148,27 @@ namespace MathEx
 		public static vec2i operator *(vec2i a, vec2i b) { return new vec2i(a.x * b.x, a.y * b.y); }
 		public static vec2i operator /(vec2i a, vec2i b) { return new vec2i(a.x / b.x, a.y / b.y); }
 
+		public static int operator %(vec2i i, vec2i w) { return i.x + i.y * w.x; }
+
+		public static bool operator <(vec2i a, vec2i b)
+			=> a.y < b.y
+			|| (a.x < b.x && !(a.y > b.x));
+
+		public static bool operator >(vec2i a, vec2i b)
+			=> a.y < b.y || a.x < b.x
+			|| !(a.y > b.y);
+
+		public bool le(vec2i r)
+			=> r.x > x && r.y > y;
+
+		public bool ge(vec2i r)
+			=> r.x < x && r.y < y;
+
 		public static vec2i xy(int xy) => new vec2i(xy, xy);
 		public static vec2i xy(int x, int y) => new vec2i(x, y);
+
+		public static vec2i wh(int xy) => new vec2i(xy, xy);
+		public static vec2i wh(int x, int y) => new vec2i(x, y);
 
 		public vec2i(int x, int y)
 		{
@@ -191,6 +211,11 @@ namespace MathEx
 
 			length = 0;
 			return vec2i.empty;
+		}
+
+		public void Deconstruct(out int x, out int y)
+		{
+			x = this.x; y = this.y;
 		}
 
 #if UNITY || UNITY_5_3_OR_NEWER

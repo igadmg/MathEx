@@ -45,6 +45,12 @@ namespace MathEx
 		public static aabb2i operator *(aabb2i a, vec2i v) { return new aabb2i(a.a * v, a.b * v); }
 
 
+		public static bool operator <=(vec2i p, aabb2i a) => !(p < a.a) && !(p > a.b);
+		public static bool operator >=(vec2i p, aabb2i a) => !(p > a.a) && !(p < a.b);
+
+		public bool Contain(vec2i p)
+			=> !(p < a) && !(p > b);
+
 		public aabb2i Extend(vec2i p)
 		{
 			if (isEmpty)

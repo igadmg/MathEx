@@ -188,6 +188,9 @@ namespace MathEx
 
 		public readonly static colorb TRANSPARENT = new colorb(0, 0, 0, 0);
 
+		public static colorb rgba(float r, float g, float b, float a)
+			=> new colorb((byte)(r * 255.99f), (byte)(g * 255.99f), (byte)(b * 255.99f), (byte)(a * 255.99f));
+
 		public colorb(byte r, byte g, byte b, byte a)
 		{
 			this.r = r;
