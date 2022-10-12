@@ -26,6 +26,7 @@ namespace MathEx
 		public int width => size.x;
 		public int height => size.y;
 
+		public static aabb2i ab(vec2i a, vec2i b) => new aabb2i(a, b);
 		public static aabb2i xywh(vec2i xy, vec2i wh) => new aabb2i(xy, xy + wh);
 
 		public aabb2i(vec2i a, vec2i b)
@@ -43,10 +44,16 @@ namespace MathEx
 		public static aabb2i operator +(aabb2i a, vec2i v) { return new aabb2i(a.a + v, a.b + v); }
 		public static aabb2i operator -(aabb2i a, vec2i v) { return new aabb2i(a.a - v, a.b - v); }
 		public static aabb2i operator *(aabb2i a, vec2i v) { return new aabb2i(a.a * v, a.b * v); }
+		public static aabb2i operator *(aabb2i a, int v) => xywh(a.a * v, a.size * v);
+		public static aabb2i operator *(aabb2i a, float v) => xywh((vec2i)(a.a * v), (vec2i)(a.size * v));
 
 
-		public static bool operator <=(vec2i p, aabb2i a) => !(p < a.a) && !(p > a.b);
-		public static bool operator >=(vec2i p, aabb2i a) => !(p > a.a) && !(p < a.b);
+		public static bool operator <=(vec2i p, aabb2i a)
+			=> (p.x >= a.a.x && p.y >= a.a.y)
+			&& (p.x <= a.b.x && p.y <= a.b.y);
+		public static bool operator >=(vec2i p, aabb2i a)
+			=> (p.x <= a.a.x || p.y <= a.a.y)
+			|| (p.x >= a.b.x || p.y >= a.b.y);
 
 		public bool Contain(vec2i p)
 			=> !(p < a) && !(p > b);

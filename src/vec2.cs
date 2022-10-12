@@ -140,9 +140,6 @@ namespace MathEx
 			this.y = y;
 		}
 
-		public static implicit operator vec2(ValueTuple<float, float> v) => vec2.xy(v.Item1, v.Item2);
-		public static explicit operator vec2(vec2i v) => vec2.xy(v.x, v.y);
-
 		public static vec2 Min(vec2 a, vec2 b)
 		{
 			return new vec2(Math.Min(a.x, b.x), Math.Min(a.y, b.y));
@@ -167,8 +164,19 @@ namespace MathEx
 		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, x, y);
 		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f));
 
-		public vec2i ToVec2i() => new vec2i((int)x, (int)y);
+		public static explicit operator vec2i(vec2 v) => vec2i.xy(v.x.Round(), v.y.Round());
+		public static implicit operator vec2(ValueTuple<float, float> v) => vec2.xy(v.Item1, v.Item2);
+		public static implicit operator vec2(vec2i v) => xy(v.x, v.y);
 
+		public void Deconstruct(out float x, out float y)
+		{
+			x = this.x; y = this.y;
+		}
+
+		public void Deconstruct(out int x, out int y)
+		{
+			x = this.x.Round(); y = this.y.Round();
+		}
 
 #if UNITY || UNITY_5_3_OR_NEWER
 		public static implicit operator UnityEngine.Vector2(vec2 v)

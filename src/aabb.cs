@@ -36,10 +36,16 @@ namespace MathEx
 			this.b = b;
 		}
 
+		public static aabb2 ab(vec2 a, vec2 b)
+			=> new aabb2(a, b);
 		public static aabb2 xywh(float x, float y, float w, float h)
 			=> new aabb2(new vec2(x, y), new vec2(x + w, y + h));
 		public static aabb2 xywh(vec2 a, vec2 s)
 			=> new aabb2(a, a + s);
+		public static aabb2 or(vec2 o, vec2 r)
+			=> new aabb2(o - r, o + r);
+		public static aabb2 od(vec2 o, vec2 d)
+			=> new aabb2(o - d / 2, o + d / 2);
 
 		public bool isEmpty { get { return a.isEmpty || b.isEmpty; } }
 
@@ -50,6 +56,9 @@ namespace MathEx
 		public static aabb2 operator +(aabb2 a, vec2 v) { return new aabb2(a.a + v, a.b + v); }
 		public static aabb2 operator -(aabb2 a, vec2 v) { return new aabb2(a.a - v, a.b - v); }
 		public static aabb2 operator *(aabb2 a, vec2 v) { return new aabb2(a.a.Mul(v), a.b.Mul(v)); }
+		public static aabb2 operator *(aabb2 a, float v) { return new aabb2(a.a * v, a.b * v); }
+
+		public static explicit operator aabb2i(aabb2 v) => aabb2i.ab(v.a.FloorToInt(), v.b.CeilToInt());
 
 
 		public int Position(vec2 v)
