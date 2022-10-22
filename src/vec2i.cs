@@ -49,7 +49,7 @@ namespace MathEx
 		public int product => x * y;
 		public float aspect => (float)x / y;
 		public float length => MathExOps.Sqrt(magnitude);
-		public float magnitude => x * x + y * y;
+		public int magnitude => x * x + y * y;
 		//public vec2 normalized { get { return this / length; } }
 
 		/// <summary>
@@ -170,6 +170,9 @@ namespace MathEx
 
 		public static vec2i wh(int xy) => new vec2i(xy, xy);
 		public static vec2i wh(int x, int y) => new vec2i(x, y);
+
+		public (vec2i, vec2i) w(int y) => (xy(0, y), xy(x, y)); // bad
+		public (vec2i, vec2i) h(int x) => (xy(x, 0), xy(x, y)); // bad
 
 		public vec2i(int x, int y)
 		{

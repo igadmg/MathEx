@@ -28,6 +28,7 @@ namespace MathEx
 
 		public static aabb2i ab(vec2i a, vec2i b) => new aabb2i(a, b);
 		public static aabb2i xywh(vec2i xy, vec2i wh) => new aabb2i(xy, xy + wh);
+		public static aabb2i wh(vec2i wh) => xywh(vec2i.zero, wh);
 
 		public aabb2i(vec2i a, vec2i b)
 		{
@@ -58,6 +59,8 @@ namespace MathEx
 		public bool Contain(vec2i p)
 			=> !(p < a) && !(p > b);
 
+		public vec2i Projection(vec2i v) => v - a;
+
 		public aabb2i Extend(vec2i p)
 		{
 			if (isEmpty)
@@ -69,12 +72,21 @@ namespace MathEx
 			return new aabb2i(min, max);
 		}
 
+		public aabb2i u(aabb2i v)
+			=> ab(a.Clamp(v.a, v.b), b.Clamp(v.a, v.b));
+
 		public vec2i[] ToArray()
 		{
 			return new vec2i[4] {
 				a, new vec2i(a.x, b.y),
 				b, new vec2i(b.x, a.y)
 			};
+		}
+
+		public static implicit operator aabb2i(ValueTuple<vec2i, vec2i> v) => aabb2i.ab(v.Item1, v.Item2);
+		public void Deconstruct(out vec2i a, out vec2i b)
+		{
+			a = this.a; b = this.b;
 		}
 
 		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, a, b);

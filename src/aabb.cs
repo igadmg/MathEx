@@ -61,6 +61,7 @@ namespace MathEx
 		public static explicit operator aabb2i(aabb2 v) => aabb2i.ab(v.a.FloorToInt(), v.b.CeilToInt());
 
 
+		// Encoded position of v - bitflags "sides"
 		public int Position(vec2 v)
 		{
 			int res = 0;
@@ -90,6 +91,12 @@ namespace MathEx
 		}
 
 		public vec2[] ToArray() => vertices;
+
+		public static implicit operator aabb2(ValueTuple<vec2, vec2> v) => aabb2.ab(v.Item1, v.Item2);
+		public void Deconstruct(out vec2 a, out vec2 b)
+		{
+			a = this.a; b = this.b;
+		}
 
 		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, a, b);
 		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, a.ToString(f), b.ToString(f));
