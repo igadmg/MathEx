@@ -39,6 +39,7 @@ namespace MathEx
 
 	public class MathTypeTagFloat : MathTypeTag<float>
 	{
+		public static MathTypeTagFloat _ = new MathTypeTagFloat();
 		public override float zero => 0.0f;
 		public override float one => 1.0f;
 		public override float forward => one;
@@ -65,6 +66,7 @@ namespace MathEx
 
 	public class MathTypeTagVec2 : MathTypeTag<vec2>
 	{
+		public static MathTypeTagVec2 _ = new MathTypeTagVec2();
 		public override vec2 zero => vec2.zero;
 		public override vec2 one => vec2.one;
 		public override vec2 forward => vec2.right;
@@ -87,6 +89,7 @@ namespace MathEx
 
 	public class MathTypeTagVec3 : MathTypeTag<vec3>
 	{
+		public static MathTypeTagVec3 _ = new MathTypeTagVec3();
 		public override vec3 zero => vec3.zero;
 		public override vec3 one => vec3.one;
 		public override vec3 forward => vec3.forward;

@@ -53,7 +53,7 @@ namespace MathEx
 		//public vec2 normalized { get { return this / length; } }
 
 		/// <summary>
-		///  Quads:
+		///  Quads: position in coordinate system [0, 0]
 		///  1 | 0
 		/// ---+---
 		///  2 | 3
@@ -74,7 +74,7 @@ namespace MathEx
 		}
 
 		/// <summary>
-		///  Octants:
+		///  Octants: position in coordinate system [0, 0]
 		///  \2|1/
 		///  3\|/0
 		/// ---+---
@@ -164,6 +164,9 @@ namespace MathEx
 
 		public bool ge(vec2i r)
 			=> r.x < x && r.y < y;
+
+		public bool cont(int v)
+			=> v >= x && v <= y;
 
 		public static vec2i xy(int xy) => new vec2i(xy, xy);
 		public static vec2i xy(int x, int y) => new vec2i(x, y);

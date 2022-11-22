@@ -11,6 +11,10 @@ namespace MathEx
 		public const float PHI = 1.6180339887f;
 		public const float Deg2Rad = 0.0174532924F;
 		public const float Rad2Deg = 57.29578F;
+		public const float Epsilon = 0.000_000_000_1f;
+
+		public static bool eq(this (float a, float b) v)
+			=> MathTypeTagFloat.eq(v.a, v.b, Epsilon);
 
 		public static int ToInt(this bool v) { return v ? 1 : 0; }
 		public static int ToInt(this bool v, int t, int f) { return v ? t : f; }
