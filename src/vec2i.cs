@@ -15,6 +15,7 @@ namespace MathEx
 		//
 		public int x;
 		public int y;
+		public int d => y - x;
 
 		public struct Dto
 		{
