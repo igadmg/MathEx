@@ -26,6 +26,7 @@ namespace MathEx
 		public int width => size.x;
 		public int height => size.y;
 
+		public static aabb2i wh(vec2i wh) => new aabb2i(vec2i.zero, wh);
 		public static aabb2i xywh(vec2i xy, vec2i wh) => new aabb2i(xy, xy + wh);
 
 		public aabb2i(vec2i a, vec2i b)

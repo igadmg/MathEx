@@ -1,44 +1,44 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="$(SolutionDir)\Common.props" Condition="Exists('$(SolutionDir)\Common.props')" />
+	<Import Project="$(SolutionDir)\Common.props" Condition="Exists('$(SolutionDir)\Common.props')" />
 
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;net50;net60</TargetFrameworks>
-    <AssemblyName>MathEx</AssemblyName>
-    <RootNamespace>MathEx</RootNamespace>
+	<PropertyGroup>
+		<TargetFrameworks>netstandard2.1;net50;net60</TargetFrameworks>
+		<AssemblyName>MathEx</AssemblyName>
+		<RootNamespace>MathEx</RootNamespace>
 
-    <LangVersion>latest</LangVersion>
-  </PropertyGroup>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Properties\**" />
-    <Compile Remove="src.Json\**" />
-    <Compile Remove="src.Test\**" />
-    <Compile Remove="src.UnityEditor\**" />
-    <Compile Remove="src.UnityEngine\**" />
-    <EmbeddedResource Remove="Properties\**" />
-    <EmbeddedResource Remove="src.Json\**" />
-    <EmbeddedResource Remove="src.Test\**" />
-    <EmbeddedResource Remove="src.UnityEditor\**" />
-    <EmbeddedResource Remove="src.UnityEngine\**" />
-    <None Remove="Properties\**" />
-    <None Remove="src.Json\**" />
-    <None Remove="src.Test\**" />
-    <None Remove="src.UnityEditor\**" />
-    <None Remove="src.UnityEngine\**" />
-    <None Remove="*.meta" />
-    <None Remove="**\*.meta" />
-  </ItemGroup>
+	<ItemGroup>
+		<Compile Remove="Properties\**" />
+		<Compile Remove="src.Json\**" />
+		<Compile Remove="src.Test\**" />
+		<Compile Remove="src.UnityEditor\**" />
+		<Compile Remove="src.UnityEngine\**" />
+		<EmbeddedResource Remove="Properties\**" />
+		<EmbeddedResource Remove="src.Json\**" />
+		<EmbeddedResource Remove="src.Test\**" />
+		<EmbeddedResource Remove="src.UnityEditor\**" />
+		<EmbeddedResource Remove="src.UnityEngine\**" />
+		<None Remove="Properties\**" />
+		<None Remove="src.Json\**" />
+		<None Remove="src.Test\**" />
+		<None Remove="src.UnityEditor\**" />
+		<None Remove="src.UnityEngine\**" />
+		<None Remove="*.meta" />
+		<None Remove="**\*.meta" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\SystemEx\SystemEx.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\SystemEx\SystemEx.csproj" />
+	</ItemGroup>
 
 </Project>
