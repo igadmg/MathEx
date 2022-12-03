@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
@@ -265,4 +265,3 @@ namespace MathEx
 #endif
 	}
 }
-
