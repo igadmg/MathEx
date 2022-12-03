@@ -185,6 +185,18 @@ namespace MathEx
 
 		public static implicit operator vec2i(ValueTuple<int, int> v) => vec2i.xy(v.Item1, v.Item2);
 
+		public aabb2i wh() => aabb2i.wh(this);
+
+
+		public static void order(ref vec2i a, ref vec2i b)
+		{
+			vec2i la = a;
+			vec2i lb = b;
+
+			a = Min(la, lb);
+			b = Max(la, lb);
+		}
+
 		public static vec2i Min(vec2i a, vec2i b)
 		{
 			return new vec2i(Math.Min(a.x, b.x), Math.Min(a.y, b.y));

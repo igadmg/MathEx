@@ -79,6 +79,10 @@ namespace MathEx
 		public static vec2 dY(this vec2 v, float dy) { return new vec2(v.x, v.y + dy); }
 		public static vec2 dXY(this vec2 v, float dx, float dy) { return new vec2(v.x + dx, v.y + dy); }
 
+		public static vec2i dX(this vec2i v, int dx) { return new vec2i(v.x + dx, v.y); }
+		public static vec2i dY(this vec2i v, int dy) { return new vec2i(v.x, v.y + dy); }
+		public static vec2i dXY(this vec2i v, int dx, int dy) { return new vec2i(v.x + dx, v.y + dy); }
+
 		public static vec3 dX(this vec3 v, float dx) { return new vec3(v.x + dx, v.y, v.z); }
 		public static vec3 dY(this vec3 v, float dy) { return new vec3(v.x, v.y + dy, v.z); }
 		public static vec3 dZ(this vec3 v, float dz) { return new vec3(v.x, v.y, v.z + dz); }
