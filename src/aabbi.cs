@@ -25,6 +25,7 @@ namespace MathEx
 		public int y { get { return b.y - a.y; } }
 		public int width => size.x;
 		public int height => size.y;
+		public vec2i center => (b - a) / 2;
 
 		public static aabb2i ab(vec2i a, vec2i b) => new aabb2i(a, b);
 		public static aabb2i xywh(vec2i xy, vec2i wh) => new aabb2i(xy, xy + wh);
@@ -49,11 +50,31 @@ namespace MathEx
 		public static aabb2i operator *(aabb2i a, float v) => xywh((vec2i)(a.a * v), (vec2i)(a.size * v));
 
 
+		public static vec2i operator -(vec2i v, aabb2i a)
+		{
+			var c = a.center;
+			var ov = v - c;
+
+			return vec2i.xy(
+					ov.x < 0 ? v.x - a.a.x : v.x - a.b.x + 1,
+					ov.y < 0 ? v.y - a.a.y : v.y - a.b.y + 1
+				);
+		}
+
+
+		public static bool operator <(vec2i p, aabb2i a)
+			=> (p.x >= a.a.x && p.y >= a.a.y)
+			&& (p.x < a.b.x && p.y < a.b.y);
+
+		public static bool operator >(vec2i p, aabb2i a)
+			=> (p.x < a.a.x && p.y < a.a.y)
+			&& (p.x > a.b.x && p.y > a.b.y);
+
 		public static bool operator <=(vec2i p, aabb2i a)
 			=> (p.x >= a.a.x && p.y >= a.a.y)
 			&& (p.x <= a.b.x && p.y <= a.b.y);
 		public static bool operator >=(vec2i p, aabb2i a)
-			=> (p.x <= a.a.x || p.y <= a.a.y)
+			=> (p.x < a.a.x || p.y < a.a.y)
 			|| (p.x >= a.b.x || p.y >= a.b.y);
 
 		public bool Contain(vec2i p)

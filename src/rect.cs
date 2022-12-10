@@ -89,6 +89,7 @@ namespace MathEx
 		public static explicit operator aabb2(rect2 r) => aabb2.xywh(r.xy, r.size);
 		public static explicit operator rect2(aabb2 r) => xywh(r.a, r.size);
 		public static explicit operator rect2(aabb2i r) => xywh(r.a, r.size);
+		public static explicit operator rect2(vec2i r) => wh(r);
 
 		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, a, b);
 	}
