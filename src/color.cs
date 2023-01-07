@@ -157,6 +157,8 @@ namespace MathEx
 		public byte b;
 		public byte a;
 
+		public float intencity => (0.2126f * r + 0.7152f * g + 0.0722f * b) * a;
+
 		// Example - Color.RED instead of RED
 		// Custom raylib color palette for amazing visuals
 		public readonly static colorb LIGHTGRAY = new colorb(200, 200, 200, 255);

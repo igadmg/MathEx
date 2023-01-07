@@ -117,6 +117,8 @@ namespace MathEx
 
 
 		public static vec2 operator -(vec2 a) { return new vec2(-a.x, -a.y); }
+		public static vec2 operator +(vec2 a, float b) { return new vec2(a.x + b, a.y + b); }
+		public static vec2 operator -(vec2 a, float b) { return new vec2(a.x - b, a.y - b); }
 		public static vec2 operator +(vec2 a, vec2 b) { return new vec2(a.x + b.x, a.y + b.y); }
 		public static vec2 operator -(vec2 a, vec2 b) { return new vec2(a.x - b.x, a.y - b.y); }
 

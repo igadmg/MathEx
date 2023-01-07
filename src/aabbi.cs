@@ -112,6 +112,9 @@ namespace MathEx
 
 		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, a, b);
 		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, a.ToString(f), b.ToString(f));
+
+		public vec2i clamp(vec2i position)
+			=> vec2i.xy(position.x.Clamp(a.x, b.x), position.y.Clamp(a.y, b.y));
 	}
 
 	[Serializable]

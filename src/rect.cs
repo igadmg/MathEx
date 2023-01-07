@@ -42,10 +42,15 @@ namespace MathEx
 
 		public static vec4 operator %(rect2 a, vec4 b) { return vec4.trbl(b.t.Lerp(a.a.y, a.b.y), b.r.Lerp(a.a.x, a.b.x), b.b.Lerp(a.a.y, a.b.y), b.l.Lerp(a.a.x, a.b.x)); }
 
+		//public static rect2 operator +(rect2 a, vec2 v) => xywh(a.xy + v, a.size);
+		//public static rect2 operator -(rect2 a, vec2 v) => xywh(a.xy - v, a.size);
+		public static rect2 operator *(rect2 a, int v) => xywh(a.xy * v, a.size * v);
+
 		public static bool operator &(rect2 a, vec2 b)
 			=> b.ge(a.xy) && b.le(a.b);
 
 		public static rect2 operator +(rect2 a, vec2 b) => a.dXY(b);
+		public static rect2 operator -(rect2 a, vec2 b) => a.dXY(-b);
 
 		public static rect2 wh(float w, float h) => new rect2(vec2.zero, (w, h));
 		public static rect2 wh(vec2 wh) => new rect2(vec2.zero, wh);
@@ -62,6 +67,8 @@ namespace MathEx
 		public static rect2 tlrb(vec4 tlrb) => ab(tlrb.lt(), tlrb.rb());
 		public static rect2 tlrb(vec2 tl, vec2 rb) => ab(tl, rb);
 
+		public rect2 pivot(vec2 pivot) => xywh(xy - size*pivot, size);
+
 		public rect2(vec2 xy, vec2 wh)
 		{
 			this.xy = xy;
@@ -71,6 +78,17 @@ namespace MathEx
 		public rect2 normalized =>
 			rect2.xywh(size.x >= 0 ? a.x : a.x + size.x, size.y >= 0 ? a.y : a.y + size.y
 				, size.x >= 0 ? size.x : -size.x, size.y >= 0 ? size.y : -size.y);
+
+		public rect2 grow(int v) => ab(a - v, b + v);
+		public rect2 grow(float v) => ab(a - v, b + v);
+
+		// Intersect - clamp one rect by other
+		public rect2 n(rect2 v)
+			=> ab(a.Clamp(v.a, v.b), b.Clamp(v.a, v.b));
+		// Union - extend rect
+		public rect2 u(rect2 v)
+			=> ab(a.Min(v.a), b.Max(v.b));
+
 
 		public rect2 Extend(vec2 point)
 		{
