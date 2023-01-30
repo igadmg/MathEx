@@ -46,6 +46,9 @@ namespace MathEx
 		public static byte DenormalizeByte(this float v)
 			=> (byte)(v.Clamp() * byte.MaxValue);
 
+		public static int Stretch(this float v, int max)
+			=> (int)(v.Clamp() * (1.0f - 1e-16) * max);
+
 		public static float Floor(this float v)
 #if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Floor(v);
