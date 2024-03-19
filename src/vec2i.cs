@@ -183,7 +183,8 @@ namespace MathEx
 			this.y = y;
 		}
 
-		public static implicit operator vec2i(ValueTuple<int, int> v) => vec2i.xy(v.Item1, v.Item2);
+		public static implicit operator vec2i(ValueTuple<int, int> v) => xy(v.Item1, v.Item2);
+		public static implicit operator vec2i(vec2 v) => xy(v.x.Round(), v.y.Round());
 
 		public aabb2i wh() => aabb2i.wh(this);
 
@@ -238,30 +239,10 @@ namespace MathEx
 		}
 
 #if UNITY || UNITY_5_3_OR_NEWER
-		public static implicit operator UnityEngine.Vector2(vec2i v)
-		{
-			return new UnityEngine.Vector2(v.x, v.y);
-		}
-
-		public static implicit operator UnityEngine.Vector2Int(vec2i v)
-		{
-			return new UnityEngine.Vector2Int(v.x, v.y);
-		}
-
-		public static implicit operator vec2i(vec2 v)
-		{
-			return new vec2i((int)v.x, (int)v.y);
-		}
-
-		public static implicit operator vec2i(UnityEngine.Vector2 v)
-		{
-			return new vec2i((int)v.x, (int)v.y);
-		}
-
-		public static implicit operator vec2i(UnityEngine.Vector2Int v)
-		{
-			return new vec2i(v.x, v.y);
-		}
+		public static implicit operator UnityEngine.Vector2(vec2i v) => new UnityEngine.Vector2(v.x, v.y);
+		public static implicit operator UnityEngine.Vector2Int(vec2i v) => new UnityEngine.Vector2Int(v.x, v.y);
+		public static implicit operator vec2i(UnityEngine.Vector2 v) => xy(v.x.Round(), v.y.Round());
+		public static implicit operator vec2i(UnityEngine.Vector2Int v) => xy(v.x, v.y);
 #endif
 	}
 }

@@ -320,6 +320,10 @@ namespace MathEx
 			return Vector3.Cross(a, b);
 		}
 
+		public static Vector3 Project(this Vector3 a, Vector3 n) {
+			return Vector3.Project(a, n);
+		}
+
 		#region Vector enumrators
 
 		public static IEnumerable<Vector3> Line(this Vector3 v, Vector3 Direction, float Step, float Distance)

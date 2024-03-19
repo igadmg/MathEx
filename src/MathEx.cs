@@ -1,11 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SystemEx;
 
-namespace MathEx
-{
-	public static class MathExOps
-	{
+namespace MathEx {
+	public static class MathExOps {
 		public const float PI = 3.1415927f;
 		public const float _2PI = 2.0f * PI;
 		public const float PHI = 1.6180339887f;
@@ -64,11 +62,7 @@ namespace MathEx
 #endif
 
 		public static vec2i FloorToInt(this vec2 v)
-#if UNITY || UNITY_64
-			=> UnityEngine.Mathf.FloorToInt(v);
-#else
-	=> vec2i.xy((int)MathF.Floor(v.x), (int)MathF.Floor(v.y));
-#endif
+			=> vec2i.xy(v.x.FloorToInt(), v.y.FloorToInt());
 
 
 		public static float Ceil(this float v)
@@ -86,18 +80,10 @@ namespace MathEx
 #endif
 
 		public static vec2 Ceil(this vec2 v)
-#if UNITY || UNITY_64
-			=> UnityEngine.Mathf.Ceil(v);
-#else
-			=> vec2.xy(MathF.Ceiling(v.x), MathF.Ceiling(v.y));
-#endif
+			=> vec2.xy(v.x.Ceil(), v.y.Ceil());
 
 		public static vec2i CeilToInt(this vec2 v)
-#if UNITY || UNITY_64
-			=> UnityEngine.Mathf.CeilToInt(v);
-#else
-			=> vec2i.xy((int)MathF.Ceiling(v.x), (int)MathF.Ceiling(v.y));
-#endif
+			=> vec2i.xy(v.x.CeilToInt(), v.y.CeilToInt());
 
 		public static float[] mul(this float[] a, float s) { return a.Modify(i => i * s); }
 
@@ -132,24 +118,21 @@ namespace MathEx
 			=> f < p1 ? p1 : f > p2 ? p2 : f;
 #endif
 
-		public static vec2 Clamp(vec2 value, vec2 min, vec2 max)
-		{
+		public static vec2 Clamp(vec2 value, vec2 min, vec2 max) {
 			return new vec2(
 				Clamp(value.x, min.x, max.x),
 				Clamp(value.y, min.y, max.y)
 				);
 		}
 
-		public static vec2i Clamp(vec2i value, vec2i min, vec2i max)
-		{
+		public static vec2i Clamp(vec2i value, vec2i min, vec2i max) {
 			return new vec2i(
 				Clamp(value.x, min.x, max.x),
 				Clamp(value.y, min.y, max.y)
 				);
 		}
 
-		public static vec3 Clamp(vec3 value, vec3 min, vec3 max)
-		{
+		public static vec3 Clamp(vec3 value, vec3 min, vec3 max) {
 			return new vec3(
 				Clamp(value.x, min.x, max.x),
 				Clamp(value.y, min.y, max.y),
@@ -163,19 +146,16 @@ namespace MathEx
 		public static float Lerp(this float t, float a, float b)
 			=> a * (1 - t) + b * t;
 
-		public static float Lerp(this float t, vec3 abc)
-		{
+		public static float Lerp(this float t, vec3 abc) {
 			return t.Lerp(abc.x, abc.y, abc.z);
 		}
 
 #if UNITY || UNITY_64 || UNITY_5_3_OR_NEWER
-		public static float Lerp(this float t, UnityEngine.Vector3 abc)
-		{
+		public static float Lerp(this float t, UnityEngine.Vector3 abc) {
 			return t.Lerp(abc.x, abc.y, abc.z);
 		}
 
-		public static UnityEngine.Vector2 Lerp(this UnityEngine.Vector2 t, UnityEngine.Rect ab)
-		{
+		public static UnityEngine.Vector2 Lerp(this UnityEngine.Vector2 t, UnityEngine.Rect ab) {
 			return new UnityEngine.Vector2(
 				t.x.Lerp(ab.xMin, ab.xMax)
 				, t.y.Lerp(ab.yMin, ab.yMax));
@@ -183,8 +163,7 @@ namespace MathEx
 
 #endif
 
-		public static float Lerp(this float t, float a, float b, params float[] o)
-		{
+		public static float Lerp(this float t, float a, float b, params float[] o) {
 			int count = 1 + o.Length;
 			t = t * count;
 
@@ -200,18 +179,15 @@ namespace MathEx
 			return (t - floor).Lerp(o[(int)floor - 2], o[(int)floor - 1]);
 		}
 
-		public static float InvLerp(this float v, float a, float b)
-		{
+		public static float InvLerp(this float v, float a, float b) {
 			return (v - a) / (b - a);
 		}
 
-		public static float InvLerp(this float v, params float[] o)
-		{
+		public static float InvLerp(this float v, params float[] o) {
 			if (o == null || o.Length < 2)
 				return float.NaN;
 
-			for (int i = 0; i < o.Length; i++)
-			{
+			for (int i = 0; i < o.Length; i++) {
 				if (o.Length == i + 1 || v <= o[i + 1])
 					return (i + v.InvLerp(o[i], o[i + 1])) / (o.Length - 1);
 			}
@@ -219,28 +195,23 @@ namespace MathEx
 			return float.NaN;
 		}
 
-		public static vec2 Lerp(this float t, vec2 a, vec2 b)
-		{
+		public static vec2 Lerp(this float t, vec2 a, vec2 b) {
 			return a * (1 - t) + b * t;
 		}
 
-		public static vec3 Lerp(this float t, vec3 a, vec3 b)
-		{
+		public static vec3 Lerp(this float t, vec3 a, vec3 b) {
 			return a * (1 - t) + b * t;
 		}
 
-		public static color_hsv Lerp(this float t, color_hsv a, color_hsv b)
-		{
+		public static color_hsv Lerp(this float t, color_hsv a, color_hsv b) {
 			return new color_hsv(t.Lerp(a.h, b.h), t.Lerp(a.s, b.s), t.Lerp(a.v, b.v), t.Lerp(a.a, b.a));
 		}
 
-		public static color_hsl Lerp(this float t, color_hsl a, color_hsl b)
-		{
+		public static color_hsl Lerp(this float t, color_hsl a, color_hsl b) {
 			return new color_hsl(t.Lerp(a.h, b.h), t.Lerp(a.s, b.s), t.Lerp(a.l, b.l), t.Lerp(a.a, b.a));
 		}
 
-		static vec2 Slerp(this float t, vec2 a, vec2 b)
-		{
+		static vec2 Slerp(this float t, vec2 a, vec2 b) {
 			float d = a ^ b;
 
 			d = Clamp(d, -1, 1);
@@ -251,8 +222,7 @@ namespace MathEx
 			return ((a * Cos(theta)) + (r * Sin(theta)));
 		}
 
-		public static vec3 Slerp(this float t, vec3 a, vec3 b)
-		{
+		public static vec3 Slerp(this float t, vec3 a, vec3 b) {
 			float d = a ^ b;
 
 			d = Clamp(d, -1, 1);
@@ -263,11 +233,9 @@ namespace MathEx
 			return ((a * Cos(theta)) + (r * Sin(theta)));
 		}
 
-		public static Tuple<int, int, float> IntRangeAndT(this float f)
-		{
+		public static Tuple<int, int, float> IntRangeAndT(this float f) {
 			int i = (int)f;
-			if (i == f)
-			{
+			if (i == f) {
 				return Tuple.Create(i, i, 0.0f);
 			}
 
@@ -282,8 +250,7 @@ namespace MathEx
 		/// <param name="t"></param>
 		/// <param name="length"></param>
 		/// <returns></returns>
-		public static int Repeat(this int t, int length)
-		{
+		public static int Repeat(this int t, int length) {
 			while (t < 0)
 				t += length;
 
@@ -296,8 +263,7 @@ namespace MathEx
 		/// <param name="t"></param>
 		/// <param name="length"></param>
 		/// <returns></returns>
-		public static float Repeat(this float t, float length)
-		{
+		public static float Repeat(this float t, float length) {
 			while (t < 0)
 				t += length;
 
@@ -305,12 +271,10 @@ namespace MathEx
 			return t - length;
 		}
 
-		public static IEnumerable<float> Range(this float delta, float min, float max)
-		{
+		public static IEnumerable<float> Range(this float delta, float min, float max) {
 			int steps = ((max - min) / delta).Round();
 
-			for (int i = 0; i <= steps; i++)
-			{
+			for (int i = 0; i <= steps; i++) {
 				yield return min + delta * i;
 			}
 		}
@@ -336,14 +300,11 @@ namespace MathEx
 			=> MathF.Sqrt(v);
 #endif
 
-		public static float Cbrt(this float v)
-		{
-			if (v >= 0)
-			{
+		public static float Cbrt(this float v) {
+			if (v >= 0) {
 				return Pow(v, 1 / 3.0f);
 			}
-			else
-			{
+			else {
 				return -Pow(-v, 1 / 3.0f);
 			}
 		}
@@ -355,8 +316,7 @@ namespace MathEx
 			=> MathF.Log(v);
 #endif
 
-		public static int Round(this float f)
-		{
+		public static int Round(this float f) {
 			return (int)(f + 0.5f);
 		}
 
@@ -385,35 +345,32 @@ namespace MathEx
 #if UNITY || UNITY_64
 			=> UnityEngine.Mathf.Atan2(y, x);
 #else
+
 			=> MathF.Atan2(y, x);
 #endif
 
-		public static bool IsZero(this float[] a)
-		{
+		public static bool IsZero(this float[] a) {
 			for (int i = 0; i < a.Length; i++)
 				if (a[i] != 0) return false;
 
 			return true;
 		}
 
-		public static bool IsZero(this IEnumerable<float> a)
-		{
+		public static bool IsZero(this IEnumerable<float> a) {
 			foreach (float f in a)
 				if (f != 0) return false;
 
 			return true;
 		}
 
-		public static bool IsEmpty(this float[] a)
-		{
+		public static bool IsEmpty(this float[] a) {
 			for (int i = 0; i < a.Length; i++)
 				if (float.IsNaN(a[i])) return true;
 
 			return false;
 		}
 
-		public static bool IsEmpty(this IEnumerable<float> a)
-		{
+		public static bool IsEmpty(this IEnumerable<float> a) {
 			foreach (float f in a)
 				if (float.IsNaN(f)) return true;
 

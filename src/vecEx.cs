@@ -103,8 +103,11 @@ namespace MathEx
 
 
 		public static vec2 x2(this float x) => new vec2(x, 0);
+		public static vec2 y2(this float x) => new vec2(0, x);
 		public static vec2 xx(this float x) => new vec2(x, x);
 		public static vec3 x3(this float x) => new vec3(x, 0, 0);
+		public static vec3 y3(this float x) => new vec3(0, x, 0);
+		public static vec3 z3(this float x) => new vec3(0, 0, x);
 		public static vec3 xxx(this float x) => new vec3(x, x, x);
 
 		public static vec3i xyz(this vec2i v, int z) { return new vec3i(v.x, v.y, z); }

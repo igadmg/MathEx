@@ -7,6 +7,10 @@ namespace MathEx
 {
 	public static class QuaternionEx
 	{
+		//public static Quaternion Opposite(this Quaternion q) {
+		//	return Quaternion.Euler(q.eulerAngles - new Vector3(180, 180, 180));
+		//}
+
 		public static Quaternion Inverse(this Quaternion q)
 		{
 			return Quaternion.Inverse(q);

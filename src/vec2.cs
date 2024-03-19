@@ -166,7 +166,6 @@ namespace MathEx
 		public override string ToString() => "{0}, {1}".format(CultureInfo.InvariantCulture, x, y);
 		public string ToString(string f) => "{0}, {1}".format(CultureInfo.InvariantCulture, x.ToString(f), y.ToString(f));
 
-		public static explicit operator vec2i(vec2 v) => vec2i.xy(v.x.Round(), v.y.Round());
 		public static implicit operator vec2(ValueTuple<float, float> v) => vec2.xy(v.Item1, v.Item2);
 		public static implicit operator vec2(vec2i v) => xy(v.x, v.y);
 

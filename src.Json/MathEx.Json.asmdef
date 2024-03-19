@@ -1,0 +1,13 @@
+{
+    "name": "MathEx.Json",
+    "rootNamespace": "",
+    "references": [
+        "SystemEx",
+        "MathEx",
+        "MathEx.UnityEngine",
+        "UnityEditorEx"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true
+}
