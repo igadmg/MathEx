@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace MathEx
 {
+#if MATHEX_CUSTOM_SPLINES
 	[Serializable]
 	public class CubicBezierCurve : spline_curve<vec3, CubicBezierSpline<vec3>>
 	{
@@ -57,4 +58,5 @@ namespace MathEx
 			}
 		}
 	}
+#endif
 }

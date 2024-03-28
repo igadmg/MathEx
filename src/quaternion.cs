@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace MathEx
 {
+#if MATHEX_OWN_QUATERNION
 	[Serializable]
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
 	public struct quaternion
@@ -70,4 +71,5 @@ namespace MathEx
 			return new quaternion(v.x, v.y, v.z, v.w);
 		}
 	};
+#endif
 }

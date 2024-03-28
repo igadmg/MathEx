@@ -20,6 +20,7 @@ namespace MathEx {
 		public static int Sign(this int v) { return v > 0 ? 1 : v < 0 ? -1 : 0; }
 		public static int Signi(this float v) { return v > 0 ? 1 : v < 0 ? -1 : 0; }
 
+		public static int Abs(this int v) { return v > 0 ? v : -v; }
 		public static float Abs(this float v) { return v > 0 ? v : -v; }
 		public static float Sign(this float v) { return v > 0 ? 1.0f : v < 0 ? -1.0f : 0; }
 
